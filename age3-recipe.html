@@ -412,14 +412,16 @@ footer{margin-top:26px;padding:16px 0 8px;border-top:1px solid var(--line);font-
   try{ var v = localStorage.getItem(EN_KEY); if(v==="0") showEn = false; }catch(e){}
 
   /* ---------- 一覧 ---------- */
+  /* 商品区分。データ側に group を持たせる。
+     "regular-sweets" = レギュラースイーツ / "regular-savory" = レギュラーセイボリー / "season" = シーズン
+     未指定は season。現行の登録品はすべてシーズン商品のため、既存データの変更は不要。 */
+  function group(r){ return r.group || "season"; }
+
   var FILTERS = [
-    { id:"all",     label:"すべて",   test:function(){ return true; } },
-    { id:"sweets",  label:"SWEETS",  test:function(r){ return r.kind==="sweets"; } },
-    { id:"savory",  label:"Savory",  test:function(r){ return r.kind==="savory"; } },
-    { id:"ice",     label:"アイス揚げサンド", test:function(r){ return r.series==="アイス揚げサンド"; } },
-    { id:"limited", label:"期間限定", test:function(r){ return !!r.limited; } },
-    { id:"end",     label:"8月末で終了", test:function(r){ return r.status && r.status.tone==="end"; } },
-    { id:"start",   label:"9月〜",     test:function(r){ return r.status && r.status.tone==="start"; } }
+    { id:"all",        label:"すべて",             test:function(){ return true; } },
+    { id:"reg-sweets", label:"レギュラースイーツ",   test:function(r){ return group(r)==="regular-sweets"; } },
+    { id:"reg-savory", label:"レギュラーセイボリー", test:function(r){ return group(r)==="regular-savory"; } },
+    { id:"season",     label:"シーズン",           test:function(r){ return group(r)==="season"; } }
   ];
   var filter = "all", query = "";
 
@@ -460,6 +462,7 @@ footer{margin-top:26px;padding:16px 0 8px;border-top:1px solid var(--line);font-
         '</span></button>';
     }).join("");
     $("#empty").hidden = list.length > 0;
+    $("#empty").textContent = q ? "見つかりませんでした。品名か材料名で探してみてください。" : "このカテゴリーにはまだレシピが登録されていません。";
     $("#count").textContent = list.length + "品" + (q || filter!=="all" ? "（全"+RECIPES.length+"品中）" : "");
   }
 

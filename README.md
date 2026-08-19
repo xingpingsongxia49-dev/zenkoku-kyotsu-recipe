@@ -25,3 +25,16 @@ Vercel の静的ホスティング（ビルド不要）。main への push で�
 
 Actions → import-source → Run workflow を実行すると、元アプリから再ダウンロードして同期する。
 
+
+## 商品区分の使い分け
+
+一覧のカテゴリーチップは `age3-recipe.html` の `FILTERS` で定義。判定は各レシピの `group` を見る。
+
+| group の値 | 表示カテゴリー |
+| --- | --- |
+| `regular-sweets` | レギュラースイーツ |
+| `regular-savory` | レギュラーセイボリー |
+| `season` または未指定 | シーズン |
+
+`age3-recipe-data.js` の各レシピに `group: 'regular-sweets'` のように追記するだけで振り分けが変わる。
+未指定はシーズン扱いなので、現行22品は変更不要。
