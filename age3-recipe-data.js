@@ -498,7 +498,7 @@ var RECIPES = [
 
 /* ------------------------------------------------------------------ AS-08 */
 {
-  id: 'as-08', code: 'AS-08', ver: '2.0', issued: '2026.08',
+  id: 'as-08-hokkaido', code: 'AS-08', ver: '2.0', issued: '2026.08',
   name: '北海道あんバター', en: 'Hokkaido Anko & Butter',
   serve: 'SWEETS 提供 / SERVE', category: '揚げサンド', limited: false,
   status: { tone: 'start', label: '9月〜',      detail: '秋の新商品。ビジュアルを変更し、材料も北海道餡に変更' },
@@ -711,39 +711,7 @@ var RECIPES = [
   ]
 },
 
-/* ------------------------------------------------ バナナブリュレ（旧フォーマット） */
-{
-  id: 'banana-brulee', code: null, ver: null, issued: null,
-  name: 'バナナブリュレ', en: 'Banana Brûlée',
-  serve: null, category: null, limited: false,
-  video: 'kIInFjR8Ww8',
-  yield: '1個分', kind: 'sweets', oldFormat: true,
-  ing: [
-    ['揚げたパン（半分）', 'Fried bread (half piece)', null, null],
-    ['カスタードクリーム', 'Custard cream', '60', 'g'],
-    ['クリミビット', 'custard cream', '20', 'g'],
-    ['バナナ', 'Banana', '1/2', '本'],
-    ['グラニュー糖', 'Granulated sugar', '10', 'g'],
-    ['キャラメルソース', 'Caramel sauce', '15', 'g'],
-    ['ミント', 'Mint', '1', '枚']
-  ],
-  steps: [
-    { jp: '図のようにバナナをカットする',
-      en: 'Cut the banana as shown.', point: null },
-    { jp: '揚げたパンにカスタードクリームを詰め、その上からクリミビットを全体に塗る',
-      en: 'Fill the fried bread with custard cream, then spread custard cream evenly over the top.', point: null },
-    { jp: 'パンの右側に輪切りのバナナを3つ乗せ、左側に斜めにカットしたバナナを乗せる。その上にグラニュー糖をかける',
-      en: 'Place three banana slices on the right side of the bread, and place diagonally cut banana on the left side. Sprinkle granulated sugar over the top.', point: null },
-    { jp: '表面をバーナーで炙りキャラメリゼした後、キャラメルソースをかけ、ミントを乗せて完成',
-      en: 'Torch the surface to caramelize, then drizzle caramel sauce and place a mint leaf on top to finish.', point: null }
-  ],
-  finish: null,
-  notes: [
-    '旧フォーマットの用紙。CODE・VER・完成基準の記載が無い。',
-    '材料欄で「クリミビット 20g」の英文が「custard cream 20 g」になっており、カスタードクリームと同じ英語表記になっている。原本のまま残している。',
-    'バナナの切り方は原本の図を見ること（「レシピカード原本」で確認できる）。'
-  ]
-},
+
 
 /* ------------------------------------------------ 追加分（写真は未登録） */
 {
@@ -967,5 +935,1040 @@ var RECIPES = [
     'カダイフミックスは仕込み（まとめて作る）。1個分に使うのは約35g。'
   ]
 }
+,
+
+/* ---------------------------------------------------------------- AS-01 */
+{
+  id: 'as-01', code: 'AS-01', ver: '1.0', issued: '2026.05',
+  name: 'ホイップ', en: 'Whipped Cream',
+  serve: 'SWEETS 提供 / SERVE', category: '揚げサンド', limited: false,
+  group: 'regular-sweets',
+  yield: '1個分', kind: 'sweets',
+  ing: [
+    ['揚げパン（半分）', 'Fried bread (half)', '1/2', '個'],
+    ['ホイップ', 'Whipped cream', '60', 'g']
+  ],
+  steps: [
+    { jp: 'パンにクリーム（約60g）を詰めて、表面を綺麗にならす。',
+      en: 'Fill the bread with cream (about 60g) and smooth out the surface evenly.',
+      point: { jp: 'パンの外側（側面）にクリームがつかないようにする。', en: 'Keep cream off the outer sides of the bread.' } }
+  ],
+  finish: { jp: '側面が汚れず、断面が真っ白',
+            en: 'Sides clean, cross-section pure white' }
+},
+/* ---------------------------------------------------------------- AS-02 */
+{
+  id: 'as-02', code: 'AS-02', ver: '1.0', issued: '2026.05',
+  name: 'ジャムいちご', en: 'Jam Strawberry',
+  serve: 'SWEETS 提供 / SERVE', category: '揚げサンド', limited: false,
+  group: 'regular-sweets',
+  yield: '1個分', kind: 'sweets',
+  ing: [
+    ['揚げパン（半分）', 'Fried bread (half)', '1/2', '個'],
+    ['ホイップ', 'Whipped cream', '80', 'g'],
+    ['いちご（ハート型カット）', 'Strawberry, heart-cut', '3〜4', '枚'],
+    ['いちごジャム', 'Strawberry jam', '15', 'g']
+  ],
+  steps: [
+    { jp: 'パンにクリーム（約80g）を詰める。',
+      en: 'Fill the bread with cream (about 80g).',
+      point: { jp: '側面にクリームをつけない。表面は平らにならす。', en: 'Keep cream off the sides and smooth the surface flat.' } },
+    { jp: 'いちごをハート型にカットし、3〜4枚を等間隔に縦に並べる。',
+      en: 'Cut strawberries into heart shapes and arrange 3–4 vertically, evenly spaced.',
+      point: { jp: 'ハートの向きと間隔をそろえる。断面が正面を向くように置く。', en: 'Align the heart shapes and spacing; face the cut sides forward.' } },
+    { jp: 'いちごジャム（15g）をかけて完成。',
+      en: 'Top with strawberry jam (15g) to finish.',
+      point: { jp: 'いちごの上を中心に置く。赤が見えるように残す。', en: 'Place mainly over the strawberries; keep the red visible.' } }
+  ],
+  finish: { jp: 'いちごが等間隔に見え、ソースが全体にかかっている',
+            en: 'Strawberries evenly spaced, sauce covering the whole top' }
+},
+/* ---------------------------------------------------------------- AS-03 */
+{
+  id: 'as-03', code: 'AS-03', ver: '1.0', issued: '2026.05',
+  name: 'チョコいちご', en: 'Chocolate Strawberry',
+  serve: 'SWEETS 提供 / SERVE', category: '揚げサンド', limited: false,
+  group: 'regular-sweets',
+  yield: '1個分', kind: 'sweets',
+  ing: [
+    ['揚げパン（半分）', 'Fried bread (half)', '1/2', '個'],
+    ['ホイップ', 'Whipped cream', '80', 'g'],
+    ['いちご（ハート型カット）', 'Strawberry, heart-cut', '3〜4', '枚'],
+    ['チョコソース', 'Chocolate sauce', '15', 'g']
+  ],
+  steps: [
+    { jp: 'パンにクリーム（約80g）を詰める。',
+      en: 'Fill the bread with cream (about 80g).',
+      point: { jp: '側面にクリームをつけない。表面は平らにならす。', en: 'Keep cream off the sides and smooth the surface flat.' } },
+    { jp: 'いちごをハート型にカットし、3〜4枚を等間隔に縦に並べる。',
+      en: 'Cut strawberries into heart shapes and arrange 3–4 vertically, evenly spaced.',
+      point: { jp: 'ハートの向きと間隔をそろえる。断面が正面を向くように置く。', en: 'Align the heart shapes and spacing; face the cut sides forward.' } },
+    { jp: 'チョコソース（15g）をかけて完成。',
+      en: 'Drizzle with chocolate sauce (15g) to finish.',
+      point: { jp: '全体に細く線状にかける。いちごの赤が見えるように残す。', en: 'Drizzle in thin lines; keep the red of the strawberries visible.' } }
+  ],
+  finish: { jp: 'いちごが等間隔に見え、チョコが全体にかかっている',
+            en: 'Strawberries evenly spaced, chocolate covering the whole top' }
+},
+/* ---------------------------------------------------------------- AS-04 */
+{
+  id: 'as-04', code: 'AS-04', ver: '1.0', issued: '2026.05',
+  name: 'チョコバナナ', en: 'Chocolate Banana',
+  serve: 'SWEETS 提供 / SERVE', category: '揚げサンド', limited: false,
+  group: 'regular-sweets',
+  yield: '1個分', kind: 'sweets',
+  ing: [
+    ['揚げパン（半分）', 'Fried bread (half)', '1/2', '個'],
+    ['ホイップ', 'Whipped cream', '80', 'g'],
+    ['バナナ（輪切り1cm幅）', 'Banana, sliced 1cm thick', '3', '枚'],
+    ['チョコソース', 'Chocolate sauce', '15', 'g']
+  ],
+  steps: [
+    { jp: 'パンにクリーム（約80g）を詰める。',
+      en: 'Fill the bread with cream (about 80g).',
+      point: { jp: '側面にクリームをつけない。表面は平らにならす。', en: 'Keep cream off the sides and smooth the surface flat.' } },
+    { jp: 'バナナを1cm幅の輪切りにし、3枚を等間隔に縦に並べる。',
+      en: 'Slice the banana into 1cm-thick rounds and arrange three vertically, evenly spaced.',
+      point: { jp: '間隔をそろえる。切り口が正面を向くように置く。', en: 'Keep the spacing even; face the cut sides forward.' } },
+    { jp: 'チョコソース（15g）をかけて完成。',
+      en: 'Drizzle with chocolate sauce (15g) to finish.',
+      point: { jp: '全体に細く線状にかける。バナナの黄が見えるように残す。', en: 'Drizzle in thin lines; keep the yellow of the banana visible.' } }
+  ],
+  finish: { jp: 'バナナが等間隔に見え、チョコが全体にかかっている',
+            en: 'Banana evenly spaced, chocolate covering the whole top' }
+},
+/* ---------------------------------------------------------------- AS-05 */
+{
+  id: 'as-05', code: 'AS-05', ver: '1.0', issued: '2026.06',
+  name: '生みかん', en: 'Mandarin Orange',
+  serve: 'SWEETS 提供 / SERVE', category: '揚げサンド', limited: false,
+  group: 'regular-sweets',
+  yield: '1個分', kind: 'sweets',
+  ing: [
+    ['揚げパン（半分）', 'Fried bread (half)', '1/2', '個'],
+    ['ホイップ', 'Whipped cream', '80', 'g'],
+    ['みかん（シロップ漬・房）', 'Mandarin segments (in syrup)', '7', '房'],
+    ['みかんソース', 'Mandarin sauce', '15', 'g']
+  ],
+  steps: [
+    { jp: 'パンにクリーム（約80g）を詰める。',
+      en: 'Fill the bread with cream (about 80g).',
+      point: { jp: '側面にクリームをつけない。表面は平らにならす。', en: 'Keep cream off the sides and smooth the surface flat.' } },
+    { jp: 'みかん（7房）を等間隔に縦に並べる。',
+      en: 'Arrange 7 mandarin segments vertically, evenly spaced.',
+      point: { jp: '向きと間隔をそろえる。断面が正面を向くように置く。水気を切ってから乗せる。', en: 'Align the direction and spacing; face the cut sides forward. Drain well before placing.' } },
+    { jp: 'みかんソース（15g）をかけて完成。',
+      en: 'Drizzle with mandarin sauce (15g) to finish.',
+      point: { jp: '全体に細く線状にかける。みかんのオレンジが見えるように残す。', en: 'Drizzle in thin lines; keep the orange of the mandarin visible.' } }
+  ],
+  finish: { jp: 'みかんが等間隔に見え、ソースが全体にかかっている',
+            en: 'Mandarin evenly spaced, sauce covering the whole top' }
+},
+/* ---------------------------------------------------------------- AS-06 */
+{
+  id: 'as-06', code: 'AS-06', ver: '1.0', issued: '2026.05',
+  name: 'ブルーベリー', en: 'Blueberry',
+  serve: 'SWEETS 提供 / SERVE', category: '揚げサンド', limited: false,
+  group: 'regular-sweets',
+  yield: '1個分', kind: 'sweets',
+  ing: [
+    ['揚げパン（半分）', 'Fried bread (half)', '1/2', '個'],
+    ['ホイップ', 'Whipped cream', '80', 'g'],
+    ['ブルーベリー', 'Blueberry', '15', 'g'],
+    ['ブルーベリーソース', 'Blueberry sauce', '15', 'g']
+  ],
+  steps: [
+    { jp: 'パンにクリーム（約80g）を詰める。',
+      en: 'Fill the bread with cream (about 80g).',
+      point: { jp: '側面にクリームをつけない。表面は平らにならす。', en: 'Keep cream off the sides and smooth the surface flat.' } },
+    { jp: 'ブルーベリーを約15g、中央に寄せて乗せる。',
+      en: 'Place about 15g of blueberries, gathered in the center.',
+      point: { jp: '乗せる前にブルーベリーにソースを少し混ぜ、まとわせておく。', en: 'Before placing, toss the blueberries with a little sauce to coat them.' } },
+    { jp: 'ブルーベリーソース（15g）をかけて完成。',
+      en: 'Drizzle with blueberry sauce (15g) to finish.',
+      point: { jp: '全体に行き渡らせる。粒が見えるように残す。', en: 'Spread over the whole top; keep the berries visible.' } }
+  ],
+  finish: { jp: 'ブルーベリーが中央にまとまり、ソースが全体にかかっている',
+            en: 'Blueberries gathered in the center, sauce covering the whole top' }
+},
+/* ---------------------------------------------------------------- AS-07 */
+{
+  id: 'as-07', code: 'AS-07', ver: '1.0', issued: '2026.05',
+  name: 'マンゴー', en: 'Mango',
+  serve: 'SWEETS 提供 / SERVE', category: '揚げサンド', limited: false,
+  group: 'regular-sweets',
+  yield: '1個分', kind: 'sweets',
+  ing: [
+    ['揚げパン（半分）', 'Fried bread (half)', '1/2', '個'],
+    ['ホイップ', 'Whipped cream', '80', 'g'],
+    ['冷凍マンゴー（カット済 1.5cm角）※海外はフレッシュ可', 'Frozen cut mango, 1.5cm/ fresh OK overseas', '3', '個'],
+    ['マンゴーソース', 'Mango sauce', '15', 'g']
+  ],
+  steps: [
+    { jp: 'パンにクリーム（約80g）を詰める。',
+      en: 'Fill the bread with cream (about 80g).',
+      point: { jp: '側面にクリームをつけない。表面は平らにならす。', en: 'Keep cream off the sides and smooth the surface flat.' } },
+    { jp: '半解凍のマンゴーを3個、等間隔に縦に並べる。',
+      en: 'Arrange three half-thawed mango cubes vertically, evenly spaced.',
+      point: { jp: '解凍しすぎない（ドロドロになる）。半解凍をキープ。乗せる前にソースをまとわせる。', en: 'Do not over-thaw (turns mushy); keep it half-thawed. Toss with a little sauce before placing.' } },
+    { jp: 'マンゴーソース（15g）をかけて完成。',
+      en: 'Drizzle with mango sauce (15g) to finish.',
+      point: { jp: '全体に行き渡らせる。マンゴーが見えるように残す。', en: 'Spread over the whole top; keep the mango visible.' } }
+  ],
+  finish: { jp: 'マンゴーが等間隔に見え、ソースが全体にかかっている',
+            en: 'Mango evenly spaced, sauce covering the whole top' }
+},
+/* ---------------------------------------------------------------- AS-08 */
+{
+  id: 'as-08', code: 'AS-08', ver: '1.0', issued: '2026.05',
+  name: 'あんバター', en: 'Red Bean & Butter',
+  serve: 'SWEETS 提供 / SERVE', category: '揚げサンド', limited: false,
+  group: 'regular-sweets',
+  yield: '1個分', kind: 'sweets',
+  ing: [
+    ['揚げパン（半分）', 'Fried bread (half)', '1/2', '個'],
+    ['ホイップ', 'Whipped cream', '80', 'g'],
+    ['あんこ', 'Red bean paste', '25', 'g'],
+    ['バター（スライス）', 'Butter, sliced', '1', '枚/10g']
+  ],
+  steps: [
+    { jp: 'パンにクリーム（約80g）を詰める。',
+      en: 'Fill the bread with cream (about 80g).',
+      point: { jp: '側面にクリームをつけない。表面は平らにならす。', en: 'Keep cream off the sides and smooth the surface flat.' } },
+    { jp: 'あんこ（25g）を絞り袋で中央に絞り、自然な形に整える。',
+      en: 'Pipe red bean paste (25g) into the center, then shape it naturally.',
+      point: { jp: '絞ったあと表面を軽くならし、絞り目を残さず自然な形に。', en: 'After piping, lightly smooth the surface so no piping lines remain.' } },
+    { jp: 'バター（スライス1枚 10g）をあんの右側のクリームに挿して完成。',
+      en: 'Insert one butter slice (10g) into the cream on the right side of the bean paste to finish.',
+      point: { jp: 'バターが半分見えるくらいの位置までクリームに挿す。', en: 'Insert into the cream until about half of the butter remains visible.' } }
+  ],
+  finish: { jp: 'あんが自然な形で中央にあり、バターが右側に挿さっている',
+            en: 'Bean paste sits naturally in the center, butter inserted on the right side' }
+},
+/* ---------------------------------------------------------------- AS-09 */
+{
+  id: 'as-09', code: 'AS-09', ver: '1.0', issued: '2026.05',
+  name: 'キャラメルビスケット', en: 'Caramel Biscuit',
+  serve: 'SWEETS 提供 / SERVE', category: '揚げサンド', limited: false,
+  group: 'regular-sweets',
+  yield: '1個分', kind: 'sweets',
+  ing: [
+    ['揚げパン（半分）', 'Fried bread (half)', '1/2', '個'],
+    ['ホイップ', 'Whipped cream', '80', 'g'],
+    ['キャラメルクランチ', 'Caramel crunch', '5', 'g'],
+    ['キャラメルソース', 'Caramel sauce', '15', 'g'],
+    ['ロータスビスケット', 'Lotus biscuit', '1', '枚']
+  ],
+  steps: [
+    { jp: 'パンにクリーム（約80g）を詰める。',
+      en: 'Fill the bread with cream (about 80g).',
+      point: { jp: '側面にクリームをつけない。表面は平らにならす。', en: 'Keep cream off the sides and smooth the surface flat.' } },
+    { jp: '容器にキャラメルクランチ（5g）を入れ、クリーム面を押し当ててまぶす。',
+      en: 'Put caramel crunch (5g) in a container; press the cream side onto it to coat.',
+      point: { jp: 'クリーム面全体に均一につける。押しつけすぎない。', en: 'Coat the whole cream surface evenly; do not press too hard.' } },
+    { jp: 'キャラメルソース（15g）をかける。',
+      en: 'Drizzle caramel sauce (15g) on top.',
+      point: { jp: '全体にかける。クランチが見える程度に残す。', en: 'Drizzle over the whole top; keep some crunch visible.' } },
+    { jp: 'ロータスビスケットを半分に折り、V字に挿して完成。',
+      en: 'Snap the Lotus biscuit in half and insert it in a V shape to finish.',
+      point: { jp: 'クリームに挿して立てる。倒れない深さまで。', en: 'Insert into the cream to stand; deep enough not to fall.' } }
+  ],
+  finish: { jp: 'クリーム面にクランチが均一につき、ビスケットがV字に立っている',
+            en: 'Crunch evenly coats the cream, biscuit standing in a V shape' }
+},
+/* ---------------------------------------------------------------- AS-10 */
+{
+  id: 'as-10', code: 'AS-10', ver: '1.0', issued: '2026.06',
+  name: 'モンブラン', en: 'Mont Blanc',
+  serve: 'SWEETS 提供 / SERVE', category: '揚げサンド', limited: false,
+  group: 'regular-sweets',
+  yield: '1個分', kind: 'sweets',
+  ing: [
+    ['揚げパン（半分）', 'Fried bread (half)', '1/2', '個'],
+    ['ホイップ', 'Whipped cream', '80', 'g'],
+    ['モンブランクリーム', 'Mont Blanc cream', '90', 'g'],
+    ['栗', 'Chestnut', '1', '個']
+  ],
+  steps: [
+    { jp: 'パンにクリーム（約80g）を詰める。',
+      en: 'Fill the bread with cream (about 80g).',
+      point: { jp: '側面にクリームをつけない。表面は平らにならす。', en: 'Keep cream off the sides and smooth the surface flat.' } },
+    { jp: 'モンブランクリーム（90g）を円を描くように絞る。',
+      en: 'Pipe the Mont Blanc cream (90g) in a circular motion.',
+      point: { jp: '白い部分が見えないように覆う。線が1本1本しっかり形に残るように絞る。', en: 'Cover so no white shows. Pipe so each strand keeps its distinct shape.' } },
+    { jp: '栗を真ん中に乗せて完成。',
+      en: 'Place a chestnut in the center to finish.',
+      point: null }
+  ],
+  finish: { jp: '白い部分が見えず、クリームの線が形を保ち、栗が中央にある',
+            en: 'No white showing, piped strands hold their shape, chestnut centered' }
+},
+/* ---------------------------------------------------------------- AS-11 */
+{
+  id: 'as-11', code: 'AS-11', ver: '1.0', issued: '2026.06',
+  name: 'クレームブリュレ', en: 'Crème Brûlée',
+  serve: 'SWEETS 提供 / SERVE', category: '揚げサンド', limited: false,
+  group: 'regular-sweets',
+  yield: '1個分', kind: 'sweets',
+  ing: [
+    ['揚げパン（半分）', 'Fried bread', '1/2', '個'],
+    ['カスタードホイップ', 'Custard whipped cream', '60', 'g'],
+    ['クリミビット', 'Kurimibit', '30', 'g'],
+    ['グラニュー糖（表面用）', 'Granulated sugar (for surface)', '5', 'g']
+  ],
+  steps: [
+    { jp: '揚げたパンにカスタードホイップを詰める。',
+      en: 'Put custard whipped cream inside the fried bread.',
+      point: null },
+    { jp: 'その上にクリミビットを塗る。',
+      en: 'Spread Kurimibit on top.',
+      point: { jp: 'クリミビット30gをムラなく覆う（薄い部分を作らない）。薄いと下のクリームに熱が伝わって溶け出す。', en: 'Cover evenly with 30g of Kurimibit — no thin spots. Thin areas let heat reach the cream below and melt it.' } },
+    { jp: '表面にグラニュー糖をまぶし、バーナーであぶって焦げ目をつけて完成。',
+      en: 'Coat the surface with granulated sugar, then heat with a burner to make it golden to finish.',
+      point: { jp: '全体がきつね色になるまで、バーナーであぶる。', en: 'Heat with a burner until golden all over.' } }
+  ],
+  finish: { jp: '表面はパリッと全体がきつね色／クリミビットが全面を覆い下のクリームが透',
+            en: 'Crisp golden surface; Kurimibit covers fully, cream not showing through' }
+},
+/* ---------------------------------------------------------------- AS-12 */
+{
+  id: 'as-12', code: 'AS-12', ver: '1.0', issued: '2026.06',
+  name: '大学芋', en: 'Candied Sweet Potato',
+  serve: 'SWEETS 提供 / SERVE', category: '揚げサンド', limited: false,
+  group: 'regular-sweets',
+  yield: '1個分', kind: 'sweets',
+  ing: [
+    ['揚げパン（半分）', 'Fried bread (half)', '1/2', '個'],
+    ['ホイップ', 'Whipped cream', '80', 'g'],
+    ['芋クリーム', 'Sweet potato cream', '10', 'g'],
+    ['大学芋（ピース）', 'Candied sweet potato pieces', '7', '個']
+  ],
+  steps: [
+    { jp: 'パンにクリーム（約80g）を詰める。',
+      en: 'Fill the bread with cream (about 80g).',
+      point: { jp: '側面にクリームをつけない。表面は平らにならす。', en: 'Keep cream off the sides and smooth the surface flat.' } },
+    { jp: '芋クリーム（10g）をクリームの中央に1本線を引くようにかける。',
+      en: 'Pipe the sweet potato cream (10g) in a single line down the center of the cream.',
+      point: null },
+    { jp: '大学芋を下に6個・上に1個乗せるように盛り付けて完成。',
+      en: 'Arrange the candied sweet potato — 6 on the bottom, 1 on top — to finish.',
+      point: null }
+  ],
+  finish: { jp: '中央に芋クリームの線が見え、大学芋が下6個・上1個に盛られている',
+            en: 'Center cream line visible; 6 pieces below and 1 on top' }
+},
+/* ---------------------------------------------------------------- AS-13 */
+{
+  id: 'as-13', code: 'AS-13', ver: '1.0', issued: '2026.06',
+  name: '黒蜜きなこ', en: 'Kuromitsu Kinako',
+  serve: 'SWEETS 提供 / SERVE', category: '揚げサンド', limited: false,
+  group: 'regular-sweets',
+  yield: '1個分', kind: 'sweets',
+  ing: [
+    ['揚げパン（半分）', 'Fried bread (half)', '1/2', '個'],
+    ['ホイップ', 'Whipped cream', '80', 'g'],
+    ['きなこ', 'Kinako (roasted soybean flour)', '5', 'g'],
+    ['黒蜜', 'Kuromitsu (brown sugar syrup)', '15', 'g']
+  ],
+  steps: [
+    { jp: 'パンにクリーム（約80g）を詰める。',
+      en: 'Fill the bread with cream (about 80g).',
+      point: { jp: '側面にクリームをつけない。表面は平らにならす。', en: 'Keep cream off the sides and smooth the surface flat.' } },
+    { jp: 'クリームの上に黒蜜（15g）をかける。',
+      en: 'Drizzle kuromitsu (15g) over the cream.',
+      point: null },
+    { jp: 'その上にきなこ（5g）をかけて完成。',
+      en: 'Dust kinako (5g) on top to finish.',
+      point: { jp: '必ず黒蜜が先、きなこが後。順番が逆だときなこが黒蜜を弾いてのらない。', en: 'Always kuromitsu first, kinako second. Reversed, the kinako is repelled and will not stick.' } }
+  ],
+  finish: { jp: '黒蜜が見え、きなこが全体にかかっている',
+            en: 'Kuromitsu visible, kinako dusted all over' }
+},
+/* ---------------------------------------------------------------- AS-14 */
+{
+  id: 'as-14', code: 'AS-14', ver: '1.0', issued: '2026.06',
+  name: '黒蜜たっぷりきな粉', en: 'Kuromitsu Extra Kinako',
+  serve: 'SWEETS 提供 / SERVE', category: '揚げサンド', limited: false,
+  group: 'regular-sweets',
+  yield: '1個分', kind: 'sweets',
+  ing: [
+    ['揚げパン（半分）', 'Fried bread (half)', '1/2', '個'],
+    ['ホイップ', 'Whipped cream', '80', 'g'],
+    ['きなこ', 'Kinako (roasted soybean flour)', '20', 'g'],
+    ['黒蜜', 'Kuromitsu (brown sugar syrup)', '30', 'g']
+  ],
+  steps: [
+    { jp: 'パンにホイップ（約80g）を詰める。',
+      en: 'Fill the bread with whipped cream (about 80g).',
+      point: { jp: '側面につけない。表面は平らにならす。', en: 'Keep cream off the sides; smooth the surface flat.' } },
+    { jp: 'クリームの上に黒蜜をかける（1回目）。',
+      en: 'Drizzle kuromitsu over the cream (1st time).',
+      point: null },
+    { jp: 'バーガー袋にサンドを入れ、きなこ（20g）を大量にかける。',
+      en: 'Put the sandwich in a burger bag and coat generously with kinako (20g).',
+      point: { jp: '袋の中で全体にたっぷりまぶす。これがエクストラの特徴。', en: 'Coat thoroughly inside the bag — this generous amount is what makes it "Extra".' } },
+    { jp: 'その上からもう一度黒蜜をかけて完成（2回目）。',
+      en: 'Drizzle kuromitsu once more on top to finish (2nd time).',
+      point: null }
+  ],
+  finish: { jp: 'きなこがたっぷり全体を覆い、黒蜜が2回かかっている',
+            en: 'Generously coated with kinako; kuromitsu drizzled twice' }
+},
+/* ---------------------------------------------------------------- AS-15 */
+{
+  id: 'as-15', code: 'AS-15', ver: '1.0', issued: '2026.06',
+  name: 'チョコベリーナッツ', en: 'Chocolate Cream Berry Nuts',
+  serve: 'SWEETS 提供 / SERVE', category: '揚げサンド', limited: false,
+  group: 'regular-sweets',
+  yield: '1個分', kind: 'sweets',
+  ing: [
+    ['揚げパン（半分）', 'Fried bread (half)', '1/2', '個'],
+    ['チョコホイップ', 'Chocolate whipped cream', '90', 'g'],
+    ['いちご（ハート型カット）', 'Strawberry, heart-cut', '3〜4', '枚'],
+    ['ナッツ', 'Nuts', '5', 'g'],
+    ['ココアパウダー', 'Cocoa powder', '1', 'g'],
+    ['ラズベリーソース', 'Raspberry sauce', '15', 'g']
+  ],
+  steps: [
+    { jp: 'パンにチョコホイップ（約90g）を詰める。',
+      en: 'Fill the bread with chocolate whipped cream (about 90g).',
+      point: { jp: '側面につけない。表面は平らにならす。', en: 'Keep cream off the sides; smooth the surface flat.' } },
+    { jp: 'ナッツ（5g）を全体にトッピングする。',
+      en: 'Top with nuts (5g) all over.',
+      point: null },
+    { jp: 'ココアパウダー（1g）を全体に薄くかける。',
+      en: 'Dust cocoa powder (1g) lightly over the whole surface.',
+      point: { jp: 'かけすぎない。下のクリームが少し見えるくらい。かけすぎるとソースを弾く。', en: 'Do not over-dust — let some cream show through. Too much repels the sauce.' } },
+    { jp: 'いちご（ハート型3〜4枚）を縦に並べる。',
+      en: 'Arrange heart-cut strawberries (3–4 pcs) vertically.',
+      point: null },
+    { jp: 'ラズベリーソース（15g）をかけて完成。',
+      en: 'Drizzle raspberry sauce (15g) to finish.',
+      point: null }
+  ],
+  finish: { jp: 'ココアが薄くかかり（かかりすぎず下のクリームが少し見える）、ハートいち',
+            en: 'Cocoa lightly dusted (not too much, cream slightly visible); 3–4 heart strawberries in a line; sauce drizzled' }
+},
+/* ---------------------------------------------------------------- AS-16 */
+{
+  id: 'as-16', code: 'AS-16', ver: '1.0', issued: '2026.06',
+  name: 'チョコクリームいちご', en: 'Chocolate Cream Strawberry',
+  serve: 'SWEETS 提供 / SERVE', category: '揚げサンド', limited: false,
+  group: 'regular-sweets',
+  yield: '1個分', kind: 'sweets',
+  ing: [
+    ['揚げパン（半分）', 'Fried bread (half)', '1/2', '個'],
+    ['チョコホイップ', 'Chocolate whipped cream', '90', 'g'],
+    ['いちご（ハート型カット）', 'Strawberry, heart-cut', '3〜4', '枚'],
+    ['チョコソース', 'Chocolate sauce', '15', 'g']
+  ],
+  steps: [
+    { jp: 'パンにチョコホイップ（約90g）を詰める。',
+      en: 'Fill the bread with chocolate whipped cream (about 90g).',
+      point: { jp: '側面にクリームをつけない。表面は平らにならす。', en: 'Keep cream off the sides and smooth the surface flat.' } },
+    { jp: 'いちごをハート型にカットし、3〜4枚を等間隔に縦に並べる。',
+      en: 'Cut strawberries into heart shapes and arrange 3–4 vertically, evenly spaced.',
+      point: { jp: 'ハートの向きと間隔をそろえる。断面が正面を向くように置く。', en: 'Align the heart shapes and spacing; face the cut sides forward.' } },
+    { jp: 'チョコソース（15g）をかけて完成。',
+      en: 'Drizzle chocolate sauce (15g) to finish.',
+      point: { jp: '全体に細く線状にかける。いちごの赤が見えるように残す。', en: 'Drizzle in thin lines; keep the red of the strawberries visible.' } }
+  ],
+  finish: { jp: 'いちごが等間隔に見え、チョコが全体にかかっている',
+            en: 'Strawberries evenly spaced, chocolate covering the whole top' }
+},
+/* ---------------------------------------------------------------- AS-17 */
+{
+  id: 'as-17', code: 'AS-17', ver: '1.0', issued: '2026.06',
+  name: 'チョコクリームバナナ', en: 'Chocolate Cream Banana',
+  serve: 'SWEETS 提供 / SERVE', category: '揚げサンド', limited: false,
+  group: 'regular-sweets',
+  yield: '1個分', kind: 'sweets',
+  ing: [
+    ['揚げパン（半分）', 'Fried bread (half)', '1/2', '個'],
+    ['チョコホイップ', 'Chocolate whipped cream', '90', 'g'],
+    ['バナナ（輪切り1cm幅）', 'Banana, sliced 1cm thick', '3', '枚'],
+    ['チョコソース', 'Chocolate sauce', '15', 'g']
+  ],
+  steps: [
+    { jp: 'パンにチョコホイップ（約90g）を詰める。',
+      en: 'Fill the bread with chocolate whipped cream (about 90g).',
+      point: { jp: '側面にクリームをつけない。表面は平らにならす。', en: 'Keep cream off the sides and smooth the surface flat.' } },
+    { jp: 'バナナを1cm幅の輪切りにし、3枚を等間隔に縦に並べる。',
+      en: 'Slice the banana into 1cm-thick rounds and arrange three vertically, evenly spaced.',
+      point: { jp: '間隔をそろえる。切り口が正面を向くように置く。', en: 'Keep the spacing even; face the cut sides forward.' } },
+    { jp: 'チョコソース（15g）をかけて完成。',
+      en: 'Drizzle with chocolate sauce (15g) to finish.',
+      point: { jp: '全体に細く線状にかける。バナナの黄が見えるように残す。', en: 'Drizzle in thin lines; keep the yellow of the banana visible.' } }
+  ],
+  finish: { jp: 'バナナが等間隔に見え、チョコが全体にかかっている',
+            en: 'Banana evenly spaced, chocolate covering the whole top' }
+},
+/* ---------------------------------------------------------------- AS-18 */
+{
+  id: 'as-18', code: 'AS-18', ver: '1.0', issued: '2026.06',
+  name: '生チョコチョコ', en: 'Ganache Chocolate',
+  serve: 'SWEETS 提供 / SERVE', category: '揚げサンド', limited: false,
+  group: 'regular-sweets',
+  yield: '1個分', kind: 'sweets',
+  ing: [
+    ['揚げパン（半分）', 'Fried bread (half)', '1/2', '個'],
+    ['チョコホイップ', 'Chocolate whipped cream', '90', 'g'],
+    ['生チョコ', 'Nama choco (ganache squares)', '10', '個'],
+    ['ココアパウダー', 'Cocoa powder', '1', 'g']
+  ],
+  steps: [
+    { jp: 'パンにチョコホイップ（約90g）を詰める。',
+      en: 'Fill the bread with chocolate whipped cream (about 90g).',
+      point: { jp: '側面にクリームをつけない。表面は平らにならす。', en: 'Keep cream off the sides and smooth the surface flat.' } },
+    { jp: '生チョコ10個を乗せる。上から3個・4個・3個の並びにする。',
+      en: 'Place 10 nama choco squares: 3, 4, then 3 from the top.',
+      point: { jp: '間隔をそろえて全体に広げる。崩さないように置く。', en: 'Space them evenly across the surface; place gently without breaking.' } },
+    { jp: 'ココアパウダーをかけて完成。',
+      en: 'Dust with cocoa powder to finish.',
+      point: { jp: 'クリーム部分が見えなくなるまで全体にかける。', en: 'Dust over the whole top until the cream is no longer visible.' } }
+  ],
+  finish: { jp: '生チョコが3・4・3で並び、ココアでクリームが見えない',
+            en: 'Nama choco set 3-4-3, cream fully hidden by cocoa' }
+},
+/* ---------------------------------------------------------------- AS-19 */
+{
+  id: 'as-19', code: 'AS-19', ver: '1.0', issued: '2026.06',
+  name: '生チョコ抹茶', en: 'Ganache Matcha',
+  serve: 'SWEETS 提供 / SERVE', category: '揚げサンド', limited: false,
+  group: 'regular-sweets',
+  yield: '1個分', kind: 'sweets',
+  ing: [
+    ['揚げパン（半分）', 'Fried bread (half)', '1/2', '個'],
+    ['抹茶ホイップ', 'Matcha whipped cream', '90', 'g'],
+    ['生チョコ', 'Nama choco (ganache squares)', '10', '個'],
+    ['抹茶パウダー', 'Matcha powder', '1', 'g']
+  ],
+  steps: [
+    { jp: 'パンに抹茶ホイップ（約90g）を詰める。',
+      en: 'Fill the bread with matcha whipped cream (about 90g).',
+      point: { jp: '側面にクリームをつけない。表面は平らにならす。', en: 'Keep cream off the sides and smooth the surface flat.' } },
+    { jp: '生チョコ10個を乗せる。上から3個・4個・3個の並びにする。',
+      en: 'Place 10 nama choco squares: 3, 4, then 3 from the top.',
+      point: { jp: '間隔をそろえて全体に広げる。崩さないように置く。', en: 'Space them evenly across the surface; place gently without breaking.' } },
+    { jp: '抹茶パウダーをかけて完成。',
+      en: 'Dust with matcha powder to finish.',
+      point: { jp: 'クリーム部分が見えなくなるまで全体にかける。', en: 'Dust over the whole top until the cream is no longer visible.' } }
+  ],
+  finish: { jp: '生チョコが3・4・3で並び、抹茶でクリームが見えない',
+            en: 'Ganache set 3-4-3, cream fully hidden by matcha' }
+},
+/* ---------------------------------------------------------------- AS-20 */
+{
+  id: 'as-20', code: 'AS-20', ver: '1.0', issued: '2026.06',
+  name: 'はちみつレアチーズ', en: 'Honey Rare Cheese',
+  serve: 'SWEETS 提供 / SERVE', category: '揚げサンド', limited: false,
+  group: 'regular-sweets',
+  yield: '1個分', kind: 'sweets',
+  ing: [
+    ['揚げパン（半分）', 'Fried bread (half)', '1/2', '個'],
+    ['チーズクリーム', 'Cheese cream', '90', 'g'],
+    ['寒天はちみつ', 'Agar honey', '20', 'g']
+  ],
+  steps: [
+    { jp: '揚げパンにチーズクリーム（90g）を詰める。',
+      en: 'Fill the bread with cheese cream (90g).',
+      point: { jp: '側面にクリームをつけない。表面は平らにならす。', en: 'Keep cream off the sides and smooth the surface flat.' } },
+    { jp: '寒天はちみつ（20g）を全体にかけて完成。',
+      en: 'Top with agar honey (20g) to finish.',
+      point: { jp: '中央に山形にのせる。垂らしすぎて白が消えないようにする。', en: 'Mound it in the center; don\'t cover all the white.' } }
+  ],
+  finish: { jp: '側面にクリームが付いておらず、はちみつが均一にかかっている',
+            en: 'No cream on the sides, honey evenly drizzled' }
+},
+/* ---------------------------------------------------------------- AS-21 */
+{
+  id: 'as-21', code: 'AS-21', ver: '1.0', issued: '2026.06',
+  name: 'ベリーピスタチオ', en: 'Berry Pistachio',
+  serve: 'SWEETS 提供 / SERVE', category: '揚げサンド', limited: false,
+  group: 'regular-sweets',
+  yield: '1個分', kind: 'sweets',
+  ing: [
+    ['揚げパン（半分）', 'Fried bread (half)', '1/2', '個'],
+    ['ピスタチオホイップ', 'Pistachio whipped cream', '90', 'g'],
+    ['ピスタチオクランチ', 'Pistachio crunch', '10', 'g'],
+    ['ラズベリーソース', 'Raspberry sauce', '15', 'g']
+  ],
+  steps: [
+    { jp: '揚げパンにピスタチオホイップ（90g）を詰める。',
+      en: 'Fill the bread with pistachio whipped cream (90g).',
+      point: { jp: '側面にクリームをつけない。表面は平らにならす。', en: 'Keep cream off the sides and smooth the surface flat.' } },
+    { jp: 'ピスタチオクランチ（10g）を全面につける。',
+      en: 'Coat the whole surface with pistachio crunch (10g).',
+      point: { jp: 'クリームが見えなくなるまで全面につける。', en: 'Cover the surface until the cream is no longer visible.' } },
+    { jp: 'ラズベリーソース（15g）をかけて完成。',
+      en: 'Drizzle with raspberry sauce (15g) to finish.',
+      point: { jp: '全体に細く線状にかける。緑が見えるように残す。', en: 'Drizzle in thin lines; keep the green visible.' } }
+  ],
+  finish: { jp: '全面がクランチで覆われ、ラズベリーソースが線状にかかっている',
+            en: 'Surface fully coated with crunch, raspberry sauce drizzled in lines' }
+},
+/* ---------------------------------------------------------------- AS-35 */
+{
+  id: 'as-35', code: 'AS-35', ver: '1.0', issued: '2026.06',
+  name: 'シナモンアップルパイ', en: 'Cinnamon Apple Pie',
+  serve: 'SWEETS 提供 / SERVE', category: '揚げサンド', limited: false,
+  group: 'regular-sweets',
+  yield: '1個分', kind: 'sweets',
+  ing: [
+    ['揚げパン（半分）', 'Fried bread (half)', '1/2', '個'],
+    ['カスタードホイップ', 'Custard whipped cream', '60', 'g'],
+    ['クリミビット', 'Kurimibit', '30', 'g'],
+    ['りんご', 'Apple slices', '3', '枚'],
+    ['砂糖（表面用）', 'Sugar (for surface)', '10', 'g'],
+    ['シナモンパウダー', 'Cinnamon powder', '0.5', 'g'],
+    ['キャラメルクランチ', 'Caramel crunch', '1', 'g']
+  ],
+  steps: [
+    { jp: '揚げパンにカスタードホイップを擦り切りで詰める。',
+      en: 'Fill the fried bread with custard whipped cream, level to the edge.',
+      point: null },
+    { jp: 'その上にクリミビット（30g）を塗る。',
+      en: 'Spread Kurimibit (30g) on top.',
+      point: { jp: 'クリミビット30gをムラなく覆う（薄い部分を作らない）。薄いと下のクリームに熱が伝わって溶け出す。', en: 'Cover evenly with 30g of Kurimibit — no thin spots. Thin areas let heat reach the cream below and melt it.' } },
+    { jp: 'りんご3枚を均等に上に置く。',
+      en: 'Place 3 apple slices evenly on top.',
+      point: null },
+    { jp: '砂糖をかけて全体に焼き目がつくようバーナーで炙る。',
+      en: 'Coat with sugar and torch until golden all over.',
+      point: { jp: '全体がきつね色になるまで、バーナーであぶる。', en: 'Heat with a burner until golden all over.' } },
+    { jp: 'キャラメルクランチとシナモンパウダーをかけて完成。',
+      en: 'Sprinkle caramel crunch and cinnamon powder to finish.',
+      point: null }
+  ],
+  finish: { jp: '表面がきつね色に焦げ、りんごが均等に見える',
+            en: 'Surface torched golden, apple slices evenly visible' }
+},
+/* ---------------------------------------------------------------- AS-36 */
+{
+  id: 'as-36', code: 'AS-36', ver: '1.0', issued: '2026.06',
+  name: 'バナナブリュレ', en: 'Banana Brûlée',
+  serve: 'SWEETS 提供 / SERVE', category: '揚げサンド', limited: false,
+  group: 'regular-sweets',
+  yield: '1個分', kind: 'sweets',
+  ing: [
+    ['揚げパン（半分）', 'Fried bread (half)', '1/2', '個'],
+    ['カスタードホイップ', 'Custard whipped cream', '60', 'g'],
+    ['クリミビット', 'Kurimibit', '30', 'g'],
+    ['バナナ', 'Banana', '1/2', '本'],
+    ['グラニュー糖（表面用）', 'Granulated sugar (for surface)', '10', 'g'],
+    ['キャラメルソース', 'Caramel sauce', '15', 'g'],
+    ['ミント', 'Mint', '1', '枚']
+  ],
+  steps: [
+    { jp: 'バナナを厚さ1cmの輪切り3枚と斜め切りにカットする。',
+      en: 'Cut the banana into 3 rounds (1cm thick) and diagonal slices.',
+      point: null },
+    { jp: '揚げパンにカスタードホイップを擦り切りで詰め、上にクリミビット（30g）を全体に塗る。',
+      en: 'Fill the fried bread with custard whipped cream level to the edge, then spread Kurimibit (30g) over the top.',
+      point: { jp: 'クリミビット30gをムラなく覆う（薄い部分を作らない）。薄いと下のクリームに熱が伝わって溶け出す。', en: 'Cover evenly with 30g of Kurimibit — no thin spots. Thin areas let heat reach the cream below and melt it.' } },
+    { jp: '右側に輪切りバナナ3枚、左側に斜め切りバナナを乗せ、グラニュー糖をかける。',
+      en: 'Place 3 banana rounds on the right, diagonal slices on the left, then coat with granulated sugar.',
+      point: null },
+    { jp: '表面をバーナーで炙りキャラメリゼする。',
+      en: 'Torch the surface to caramelize.',
+      point: { jp: '同じところに火を当てすぎてバナナを焦がさない。全体を均一に動かしながら炙る。', en: 'Don\'t hold the flame on one spot — keep it moving so the banana doesn\'t burn.' } },
+    { jp: 'キャラメルソースをかけ、ミントを乗せて完成。',
+      en: 'Drizzle caramel sauce and place a mint leaf to finish.',
+      point: null }
+  ],
+  finish: { jp: '焦げている箇所がなく、表面がキャラメリゼされきつね色',
+            en: 'No burnt spots, surface caramelized golden' }
+},
+/* ---------------------------------------------------------------- AS-22 */
+{
+  id: 'as-22', code: 'AS-22', ver: '1.0', issued: '2026.06',
+  name: '月見照り焼き', en: 'Tsukimi Teriyaki',
+  serve: 'Savory 提供 / SERVE', category: '揚げサンド', limited: false,
+  group: 'regular-savory',
+  yield: '1個分', kind: 'savory',
+  ing: [
+    ['揚げパン（半分）', 'Fried bread (half)', '1/2', '個'],
+    ['パティ', 'Patty', '1', '枚'],
+    ['照り焼きソース', 'Teriyaki sauce', '10', 'g'],
+    ['目玉焼き', 'Fried egg', '1', '個'],
+    ['レタス', 'Lettuce', '1', '枚'],
+    ['マヨネーズ', 'Mayonnaise', '20', 'g']
+  ],
+  steps: [
+    { jp: '揚げパンの内側にマヨネーズ（10g）を全体に塗り、レタスを差し込む。',
+      en: 'Spread mayonnaise (10g) inside the bread and tuck in the lettuce.',
+      point: null },
+    { jp: '揚げたパティを半分に切り、照り焼きソース（10g）にくぐらせ、断面を下に向けて入れる。',
+      en: 'Halve the fried patty, coat in teriyaki sauce (10g), and insert cut-side down.',
+      point: { jp: '断面を下に向け、パティが2枚に見えるように入れる。', en: 'Place cut-side down so the patty looks like two pieces.' } },
+    { jp: '揚げた目玉焼きをパティの脇に差し込む。',
+      en: 'Tuck the fried egg in beside the patty.',
+      point: { jp: '黄身が正面から見えるように差し込む。', en: 'Insert so the yolk faces forward.' } },
+    { jp: 'マヨネーズ（10g）をかけて完成。',
+      en: 'Drizzle with mayonnaise (10g) to finish.',
+      point: { jp: '全体に細く線状にかける。具が見えるように残す。', en: 'Drizzle in thin lines; keep the fillings visible.' } }
+  ],
+  finish: { jp: 'パティが2枚に見え、黄身とレタスが正面から見えている',
+            en: 'Patty looks like two pieces; yolk and lettuce visible from the front' }
+},
+/* ---------------------------------------------------------------- AS-23 */
+{
+  id: 'as-23', code: 'AS-23', ver: '1.0', issued: '2026.06',
+  name: 'ポテトサラダ', en: 'Potato Salad',
+  serve: 'Savory 提供 / SERVE', category: '揚げサンド', limited: false,
+  group: 'regular-savory',
+  yield: '1個分', kind: 'savory',
+  ing: [
+    ['揚げパン（半分）', 'Fried bread (half)', '1/2', '個'],
+    ['ポテトサラダ', 'Potato salad', '110', 'g'],
+    ['スライス玉子', 'Sliced egg', '1', '枚'],
+    ['パセリ', 'Parsley', '0.2', 'g']
+  ],
+  steps: [
+    { jp: '揚げパンにポテトサラダ（110g）を詰める。',
+      en: 'Fill the fried bread with potato salad (110g).',
+      point: { jp: 'パンの端まで詰める。隙間を作らない。', en: 'Fill all the way to the edges — no gaps.' } },
+    { jp: 'スライス玉子を中央に乗せる。',
+      en: 'Place the sliced egg in the center.',
+      point: { jp: '黄身が正面から見えるように置く。', en: 'Set it so the yolk faces forward.' } },
+    { jp: 'パセリ（0.2g）をかけて完成。',
+      en: 'Sprinkle parsley (0.2g) to finish.',
+      point: { jp: '玉子と全体に軽く散らす。かけすぎない。', en: 'Scatter lightly over the egg and the whole top; don\'t overdo it.' } }
+  ],
+  finish: { jp: 'サラダが端まで詰まり、中央の玉子とパセリが見えている',
+            en: 'Salad fills to the edges; egg and parsley visible in the center' }
+},
+/* ---------------------------------------------------------------- AS-24 */
+{
+  id: 'as-24', code: 'AS-24', ver: '1.0', issued: '2026.06',
+  name: 'タマゴサラダ', en: 'Egg Salad',
+  serve: 'Savory 提供 / SERVE', category: '揚げサンド', limited: false,
+  group: 'regular-savory',
+  yield: '1個分', kind: 'savory',
+  ing: [
+    ['揚げパン（半分）', 'Fried bread (half)', '1/2', '個'],
+    ['タマゴサラダ', 'Egg salad', '110', 'g'],
+    ['パセリ', 'Parsley', '0.2', 'g']
+  ],
+  steps: [
+    { jp: '揚げパンにタマゴサラダ（110g）を詰める。',
+      en: 'Fill the fried bread with egg salad (110g).',
+      point: { jp: 'パンの端までしっかり詰める。隙間を作らない。', en: 'Fill firmly all the way to the edges — no gaps.' } },
+    { jp: 'パセリ（0.2g）をかけて完成。',
+      en: 'Sprinkle parsley (0.2g) to finish.',
+      point: { jp: '中央に軽く散らす。かけすぎない。', en: 'Scatter lightly in the center; don\'t overdo it.' } }
+  ],
+  finish: { jp: 'サラダが端まで詰まり、パセリが中央に見えている',
+            en: 'Salad fills to the edges; parsley visible in the center' }
+},
+/* ---------------------------------------------------------------- AS-25 */
+{
+  id: 'as-25', code: 'AS-25', ver: '1.0', issued: '2026.06',
+  name: 'ツナマヨネーズ', en: 'Tuna Mayonnaise',
+  serve: 'Savory 提供 / SERVE', category: '揚げサンド', limited: false,
+  group: 'regular-savory',
+  yield: '1個分', kind: 'savory',
+  ing: [
+    ['揚げパン（半分）', 'Fried bread (half)', '1/2', '個'],
+    ['ツナ', 'Tuna', '110', 'g'],
+    ['レタス', 'Lettuce', '1', '枚'],
+    ['パセリ', 'Parsley', '0.2', 'g'],
+    ['粗挽き胡椒', 'Coarse black pepper', '0.3', 'g']
+  ],
+  steps: [
+    { jp: '揚げパンにレタスを差し込む。',
+      en: 'Tuck the lettuce into the fried bread.',
+      point: null },
+    { jp: 'ツナマヨネーズ（110g）を詰める。',
+      en: 'Fill with tuna mayonnaise (110g).',
+      point: { jp: 'パンの端までしっかり詰める。隙間を作らない。', en: 'Fill firmly all the way to the edges — no gaps.' } },
+    { jp: '粗挽き胡椒（0.3g）とパセリ（0.2g）をかけて完成。',
+      en: 'Sprinkle coarse black pepper (0.3g) and parsley (0.2g) to finish.',
+      point: { jp: '全体に軽く散らす。かけすぎない。', en: 'Scatter lightly over the top; don\'t overdo it.' } }
+  ],
+  finish: { jp: 'ツナが端まで詰まり、レタスの緑と胡椒・パセリが見えている',
+            en: 'Tuna fills to the edges; green lettuce, pepper and parsley visible' }
+},
+/* ---------------------------------------------------------------- AS-26 */
+{
+  id: 'as-26', code: 'AS-26', ver: '1.0', issued: '2026.06',
+  name: '焼きチーズクリームシチュー', en: 'Grilled Cheese Cream Stew',
+  serve: 'Savory 提供 / SERVE', category: '揚げサンド', limited: false,
+  group: 'regular-savory',
+  yield: '1個分', kind: 'savory',
+  ing: [
+    ['揚げパン（半分）', 'Fried bread (half)', '1/2', '個'],
+    ['シチュー', 'Cream stew', '110', 'g'],
+    ['チーズ', 'Cheese', '10', 'g'],
+    ['パセリ', 'Parsley', '0.2', 'g']
+  ],
+  steps: [
+    { jp: '揚げパンにシチュー（110g）を詰める。',
+      en: 'Fill the fried bread with cream stew (110g).',
+      point: { jp: 'シチューがしっかり温まっているか必ず確認する。', en: 'Always check the stew is fully heated through.' } },
+    { jp: 'チーズ（10g）を全体に乗せる。',
+      en: 'Top evenly with cheese (10g).',
+      point: null },
+    { jp: 'チーズを溶かすように炙り、焼き目をつける。',
+      en: 'Torch the cheese to melt it and brown the top.',
+      point: { jp: '遠火で炙る。焦げすぎないようにする。', en: 'Torch from a distance; don\'t let it burn.' } },
+    { jp: 'パセリ（0.2g）をかけて完成。',
+      en: 'Sprinkle parsley (0.2g) to finish.',
+      point: { jp: '中央に集めてかける。全体には散らさない。', en: 'Concentrate it in the center; don\'t spread it all over.' } }
+  ],
+  finish: { jp: 'チーズが溶けて焼き目がつき、パセリが中央に見えている',
+            en: 'Cheese melted and browned; parsley visible in the center' }
+},
+/* ---------------------------------------------------------------- AS-27 */
+{
+  id: 'as-27', code: 'AS-27', ver: '1.0', issued: '2026.06',
+  name: '焼きキーマカレー', en: 'Baked Keema Curry',
+  serve: 'Savory 提供 / SERVE', category: '揚げサンド', limited: false,
+  group: 'regular-savory',
+  yield: '1個分', kind: 'savory',
+  ing: [
+    ['揚げパン（半分）', 'Fried bread (half)', '1/2', '個'],
+    ['カレー', 'Keema curry', '110', 'g'],
+    ['チーズ', 'Cheese', '10', 'g'],
+    ['パセリ', 'Parsley', '0.2', 'g']
+  ],
+  steps: [
+    { jp: '揚げパンにカレー（110g）を詰める。',
+      en: 'Fill the fried bread with curry (110g).',
+      point: { jp: 'カレーがしっかり温まっているか必ず確認する。', en: 'Always check the curry is fully heated through.' } },
+    { jp: 'チーズ（10g）を全体に乗せる。',
+      en: 'Top evenly with cheese (10g).',
+      point: null },
+    { jp: 'チーズを溶かすように炙り、焼き目をつける。',
+      en: 'Torch the cheese to melt it and brown the top.',
+      point: { jp: '遠火で炙る。焦げすぎないようにする。', en: 'Torch from a distance; don\'t let it burn.' } },
+    { jp: 'パセリ（0.2g）をかけて完成。',
+      en: 'Sprinkle parsley (0.2g) to finish.',
+      point: { jp: '中央に軽く散らす。かけすぎない。', en: 'Scatter lightly in the center; don\'t overdo it.' } }
+  ],
+  finish: { jp: 'チーズが溶けて焼き目がついている',
+            en: 'Cheese melted and browned' }
+},
+/* ---------------------------------------------------------------- AS-28 */
+{
+  id: 'as-28', code: 'AS-28', ver: '1.0', issued: '2026.06',
+  name: '激辛！焼きキーマカレー', en: 'Hot Grill Keema Curry',
+  serve: 'Savory 提供 / SERVE', category: '揚げサンド', limited: false,
+  group: 'regular-savory',
+  yield: '1個分', kind: 'savory',
+  ing: [
+    ['揚げパン（半分）', 'Fried bread (half)', '1/2', '個'],
+    ['カレー', 'Keema curry', '110', 'g'],
+    ['チーズ', 'Cheese', '10', 'g'],
+    ['チリパウダー', 'Chili powder', '0.2', 'g'],
+    ['パセリ', 'Parsley', '0.2', 'g']
+  ],
+  steps: [
+    { jp: '揚げパンにカレー（110g）を詰める。',
+      en: 'Fill the fried bread with curry (110g).',
+      point: { jp: 'カレーがしっかり温まっているか必ず確認する。', en: 'Always check the curry is fully heated through.' } },
+    { jp: 'チーズ（10g）を全体に乗せる。',
+      en: 'Top evenly with cheese (10g).',
+      point: null },
+    { jp: 'チーズを溶かすように炙り、焼き目をつける。',
+      en: 'Torch the cheese to melt it and brown the top.',
+      point: { jp: '遠火で炙る。焦げすぎないようにする。', en: 'Torch from a distance; don\'t let it burn.' } },
+    { jp: 'チリパウダー（0.2g）をかける。',
+      en: 'Sprinkle chili powder (0.2g).',
+      point: { jp: '中央に集めてかける。全体には散らさない。', en: 'Concentrate it in the center; don\'t spread it all over.' } },
+    { jp: 'パセリ（0.2g）をかけて完成。',
+      en: 'Sprinkle parsley (0.2g) to finish.',
+      point: null }
+  ],
+  finish: { jp: 'チーズが溶けて焼き目がつき、中央に赤いチリパウダーが見えている',
+            en: 'Cheese melted and browned; red chili powder visible in the center' }
+},
+/* ---------------------------------------------------------------- AS-29 */
+{
+  id: 'as-29', code: 'AS-29', ver: '1.0', issued: '2026.06',
+  name: 'とろたまナポリタン', en: 'Egg + Napolitan',
+  serve: 'Savory 提供 / SERVE', category: '揚げサンド', limited: false,
+  group: 'regular-savory',
+  yield: '1個分', kind: 'savory',
+  ing: [
+    ['揚げパン（半分）', 'Fried bread (half)', '1/2', '個'],
+    ['目玉焼き（冷凍）', 'Fried egg (frozen)', '1', '個'],
+    ['ナポリタン', 'Napolitan pasta', '110', 'g'],
+    ['ザネッティチーズ', 'Zanetti cheese', '5', 'g']
+  ],
+  steps: [
+    { jp: '揚げパンに、揚げた目玉焼き（1個）を入れる。',
+      en: 'Place the fried egg (1) inside the fried bread.',
+      point: { jp: '黄身を割らないように静かに入れる。', en: 'Place it gently so the yolk doesn\'t break.' } },
+    { jp: 'ナポリタン（110g）を詰める。',
+      en: 'Fill with Napolitan pasta (110g).',
+      point: { jp: 'ナポリタンがしっかり温まっているか必ず確認する。', en: 'Always check the pasta is fully heated through.' } },
+    { jp: 'ザネッティチーズ（5g）を上から削りかける。',
+      en: 'Grate Zanetti cheese (5g) over the top.',
+      point: { jp: '中央に山高く削る。全体に散らさない。', en: 'Pile it high in the center; don\'t spread it all over.' } }
+  ],
+  finish: { jp: '麺が外にはみ出ていない',
+            en: 'No pasta sticking out from the bread' }
+},
+/* ---------------------------------------------------------------- AS-30 */
+{
+  id: 'as-30', code: 'AS-30', ver: '1.0', issued: '2026.06',
+  name: 'とろたまナポリタン 追いチーズ', en: 'Egg + Napolitan Extra Cheese',
+  serve: 'Savory 提供 / SERVE', category: '揚げサンド', limited: false,
+  group: 'regular-savory',
+  yield: '1個分', kind: 'savory',
+  ing: [
+    ['揚げパン（半分）', 'Fried bread (half)', '1/2', '個'],
+    ['目玉焼き（冷凍）', 'Fried egg (frozen)', '1', '個'],
+    ['ナポリタン', 'Napolitan pasta', '110', 'g'],
+    ['ザネッティチーズ', 'Zanetti cheese', '15', 'g']
+  ],
+  steps: [
+    { jp: '揚げパンに、揚げた目玉焼き（1個）を入れる。',
+      en: 'Place the fried egg (1) inside the fried bread.',
+      point: { jp: '黄身を割らないように静かに入れる。', en: 'Place it gently so the yolk doesn\'t break.' } },
+    { jp: 'ナポリタン（110g）を詰める。',
+      en: 'Fill with Napolitan pasta (110g).',
+      point: { jp: 'ナポリタンがしっかり温まっているか必ず確認する。', en: 'Always check the pasta is fully heated through.' } },
+    { jp: 'ザネッティチーズ（15g）を上から削りかける。',
+      en: 'Grate Zanetti cheese (15g) over the top.',
+      point: { jp: '麺が見えなくなるまで全体を覆う。', en: 'Cover the whole surface until the pasta is hidden.' } }
+  ],
+  finish: { jp: '麺が外にはみ出ていない／麺が見えなくなるようにチーズをかける',
+            en: 'No pasta sticking out; cheese covers the pasta completely' }
+},
+/* ---------------------------------------------------------------- AS-31 */
+{
+  id: 'as-31', code: 'AS-31', ver: '1.0', issued: '2026.06',
+  name: 'とろタマ焼きそば', en: 'Egg + Fried Noodle',
+  serve: 'Savory 提供 / SERVE', category: '揚げサンド', limited: false,
+  group: 'regular-savory',
+  yield: '1個分', kind: 'savory',
+  ing: [
+    ['揚げパン（半分）', 'Fried bread (half)', '1/2', '個'],
+    ['目玉焼き（冷凍）', 'Fried egg (frozen)', '1', '個'],
+    ['焼きそば', 'Yakisoba noodles', '110', 'g'],
+    ['中濃ソース', 'Tonkatsu-style sauce', '15', 'g'],
+    ['紅生姜', 'Pickled red ginger', '5', 'g'],
+    ['青のり', 'Green seaweed flakes', '0.2', 'g']
+  ],
+  steps: [
+    { jp: '揚げパンの内側に中濃ソース（5g）をかけ、揚げた目玉焼き（1個）を入れる。',
+      en: 'Brush sauce (5g) inside the fried bread, then place the fried egg (1).',
+      point: { jp: '黄身を割らないように静かに入れる。', en: 'Place it gently so the yolk doesn\'t break.' } },
+    { jp: '焼きそば（110g）を詰め、中濃ソース（10g）を上からかける。',
+      en: 'Fill with yakisoba (110g), then drizzle sauce (10g) over the top.',
+      point: { jp: '焼きそばがしっかり温まっているか必ず確認する。', en: 'Always check the yakisoba is fully heated through.' } },
+    { jp: '紅生姜（5g）・青のり（0.2g）をかけて完成。',
+      en: 'Top with pickled red ginger (5g) and green seaweed (0.2g) to finish.',
+      point: { jp: '中央に集めてかける。全体には散らさない。', en: 'Concentrate it in the center; don\'t spread it all over.' } }
+  ],
+  finish: { jp: '麺が外にはみ出ていない／中央に紅生姜と青のりが見えている',
+            en: 'No noodles sticking out; red ginger and green seaweed visible in the center' }
+},
+/* ---------------------------------------------------------------- AS-32 */
+{
+  id: 'as-32', code: 'AS-32', ver: '1.0', issued: '2026.06',
+  name: '旨だれ牛カルビ焼肉', en: 'Beef Short Rib Yakiniku with Special BBQ Sauce',
+  serve: 'Savory 提供 / SERVE', category: '揚げサンド', limited: false,
+  group: 'regular-savory',
+  yield: '1個分', kind: 'savory',
+  ing: [
+    ['揚げパン（半分）', 'Fried bread (half)', '1/2', '個'],
+    ['レタス', 'Lettuce', '1', '枚'],
+    ['ポテトサラダ', 'Potato salad', '80', 'g'],
+    ['焼肉（牛カルビ）', 'Beef short rib yakiniku', '1', 'pc'],
+    ['半熟タマゴ', 'Soft-boiled egg', '1', '個'],
+    ['白胡麻', 'White sesame seeds', '1', 'g']
+  ],
+  steps: [
+    { jp: '揚げパンにレタス（1枚）を入れ、ポテトサラダ（80g）を詰める。',
+      en: 'Place lettuce (1) in the fried bread and fill with potato salad (80g).',
+      point: { jp: 'レタスは3〜5cm外に出す。', en: 'Let the lettuce stick out 3–5cm.' } },
+    { jp: '焼肉（1パック）をポテトサラダの上に盛り付ける。',
+      en: 'Arrange the yakiniku (1 pack) on top of the potato salad.',
+      point: { jp: '中央を窪ませ、卵が乗せやすいようにする。焼肉の汁は入れすぎない。パンに染みてふやけるため。', en: 'Make a hollow in the center for the egg. Don\'t add too much sauce — it soaks the bread and makes it soggy.' } },
+    { jp: '半熟タマゴをのせて少し割り、白胡麻（1g）を振って完成。',
+      en: 'Place the soft-boiled egg, cut it slightly, and sprinkle white sesame (1g) to finish.',
+      point: { jp: '卵は必ず包丁で切れ目を入れる。箸や指で割らない。', en: 'Always cut the egg with a knife — never break it with chopsticks or fingers.' } }
+  ],
+  finish: { jp: '卵に切れ目が入り、黄身がとろり、レタスの緑が見えている',
+            en: 'Egg cut with runny yolk; green lettuce visible' }
+},
+/* ---------------------------------------------------------------- AS-33 */
+{
+  id: 'as-33', code: 'AS-33', ver: '1.0', issued: '2026.06',
+  name: 'チキン南蛮', en: 'Chicken Nanban',
+  serve: 'Savory 提供 / SERVE', category: '揚げサンド', limited: false,
+  group: 'regular-savory',
+  yield: '1個分', kind: 'savory',
+  ing: [
+    ['揚げパン（半分）', 'Fried bread (half)', '1/2', '個'],
+    ['レタス', 'Lettuce', '1', '枚'],
+    ['タマゴサラダ', 'Egg salad', '80', 'g'],
+    ['唐揚げ', 'Fried chicken', '3', '個'],
+    ['甘酢', 'Sweet vinegar sauce', '10', 'g'],
+    ['タルタルソース', 'Tartar sauce', '15', 'g'],
+    ['パセリ', 'Parsley', '0.2', 'g']
+  ],
+  steps: [
+    { jp: '揚げパンにレタス（1枚）を入れる。',
+      en: 'Place lettuce (1) in the fried bread.',
+      point: { jp: 'レタスは3〜5cm外に出す。', en: 'Let the lettuce stick out 3–5cm.' } },
+    { jp: 'タマゴサラダ（80g）を詰める。',
+      en: 'Fill with egg salad (80g).',
+      point: null },
+    { jp: '唐揚げ（3個）を均等に並べる。',
+      en: 'Arrange the fried chicken (3 pieces) evenly.',
+      point: null },
+    { jp: '甘酢（10g）をかけ、タルタルソース（15g）を乗せる。',
+      en: 'Drizzle sweet vinegar sauce (10g), then top with tartar sauce (15g).',
+      point: { jp: '甘酢が先、タルタルは後。順番を守る。', en: 'Sweet vinegar first, tartar second — keep the order.' } },
+    { jp: 'パセリ（0.2g）をかけて完成。',
+      en: 'Sprinkle parsley (0.2g) to finish.',
+      point: null }
+  ],
+  finish: { jp: '唐揚げが均一に並び、甘酢が全体・タルタルが中央・パセリが全体にかかって',
+            en: 'Chicken evenly arranged; sweet vinegar over all, tartar in the center, parsley over all' }
+},
+/* ---------------------------------------------------------------- AS-34 */
+{
+  id: 'as-34', code: 'AS-34', ver: '1.0', issued: '2026.06',
+  name: '炙りチーズスモークサーモン', en: 'Grilled Cheese + Smoked Salmon',
+  serve: 'Savory 提供 / SERVE', category: '揚げサンド', limited: false,
+  group: 'regular-savory',
+  yield: '1個分', kind: 'savory',
+  ing: [
+    ['揚げパン（半分）', 'Fried bread (half)', '1/2', '個'],
+    ['ポテトサラダ', 'Potato salad', '100', 'g'],
+    ['スモークサーモン', 'Smoked salmon', '15', 'g'],
+    ['アボカド', 'Avocado', '5', 'g'],
+    ['チーズ', 'Cheese', '10', 'g'],
+    ['オリーブオイル', 'Olive oil', '1', 'g'],
+    ['粗挽き胡椒', 'Coarse black pepper', '0.3', 'g'],
+    ['パセリ', 'Parsley', '0.2', 'g']
+  ],
+  steps: [
+    { jp: '揚げパンにポテトサラダ（100g）を詰める。',
+      en: 'Fill the fried bread with potato salad (100g).',
+      point: null },
+    { jp: 'スモークサーモン（15g）を3枚、斜めに重ねて並べる。',
+      en: 'Arrange smoked salmon (15g) in 3 slices, overlapping diagonally.',
+      point: null },
+    { jp: 'アボカド（5g）を5つ散らす。',
+      en: 'Scatter avocado (5g) in 5 pieces.',
+      point: { jp: '中央は開けておく。チーズが乗るため。', en: 'Leave the center open for the cheese.' } },
+    { jp: 'チーズ（10g）を中央に乗せ、遠火で溶かすように炙り、焼き目をつける。',
+      en: 'Place cheese (10g) in the center and torch from a distance to melt and brown.',
+      point: { jp: '遠火で炙る。焦げていない。', en: 'Torch from a distance; not burnt.' } },
+    { jp: 'オリーブオイル・粗挽き胡椒・パセリをかけて完成。',
+      en: 'Drizzle olive oil, coarse pepper and parsley to finish.',
+      point: null }
+  ],
+  finish: { jp: 'チーズが中央で溶けて焼き目がつき、サーモンとアボカドの緑が見えている',
+            en: 'Cheese melted and browned in the center; salmon and green avocado visible' }
+}
+
+
 
 ];
