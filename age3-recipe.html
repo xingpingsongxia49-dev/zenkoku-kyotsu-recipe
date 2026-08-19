@@ -412,6 +412,31 @@ footer{margin-top:26px;padding:16px 0 8px;border-top:1px solid var(--line);font-
   try{ var v = localStorage.getItem(EN_KEY); if(v==="0") showEn = false; }catch(e){}
 
   /* ---------- 一覧 ---------- */
+  /* 画像が無い品は自動で「写真 未登録」に切り替える。
+     写真ファイル（/age3-recipe/{id}-hero.jpg 等）を置けば、データを直さなくてもそのまま表示される。 */
+  window.A3renumber = function(root){
+    var i = 0;
+    [].forEach.call(root.querySelectorAll(".sech .no"), function(n){
+      if(!isNaN(Number(n.textContent.trim()))){ i++; n.textContent = (i<10?"0":"") + i; }
+    });
+  };
+  window.A3noph = function(img){
+    var p = img.parentNode; if(!p) return;
+    p.className = "ph noph";
+    p.innerHTML = '<span class="nophtx">写真<br>未登録</span>';
+  };
+  window.A3nohero = function(img){
+    var p = img.parentNode; if(!p) return;
+    p.className = "dhero nophoto";
+    p.textContent = "写真は未登録です（用紙の画像が届いていません）";
+  };
+  window.A3nosteps = function(img){
+    var shot = img.closest ? img.closest(".shot") : null;
+    var sec  = shot && shot.closest ? shot.closest(".sec") : null;
+    var root = sec && sec.closest ? sec.closest(".detail") : null;
+    if(sec) sec.remove(); else if(shot) shot.remove();
+    if(root) A3renumber(root);
+  };
   /* 商品区分。データ側に group を持たせる。
      "regular-sweets" = レギュラースイーツ / "regular-savory" = レギュラーセイボリー / "season" = シーズン
      未指定は season。現行の登録品はすべてシーズン商品のため、既存データの変更は不要。 */
@@ -453,7 +478,7 @@ footer{margin-top:26px;padding:16px 0 8px;border-top:1px solid var(--line);font-
     $("#grid").innerHTML = list.map(function(r){
       var ph = (r.photo === false)
         ? '<span class="ph noph"><span class="nophtx">写真<br>未登録</span></span>'
-        : '<span class="ph"><img src="/age3-recipe/'+esc(r.id)+'-hero.jpg" alt="'+esc(r.name)+'" loading="lazy"></span>';
+        : '<span class="ph"><img src="/age3-recipe/'+esc(r.id)+'-hero.jpg" alt="'+esc(r.name)+'" loading="lazy" onerror="A3noph(this)"></span>';
       return '<button class="tile" data-id="'+esc(r.id)+'">' + ph +
         '<span class="tx">' +
           '<span class="nm">'+esc(r.name)+'</span>' +
@@ -531,7 +556,7 @@ footer{margin-top:26px;padding:16px 0 8px;border-top:1px solid var(--line);font-
 
     var steps = (r.oldFormat || r.photo === false) ? "" :
       '<div class="sec"><div class="sech"><span class="no">03</span><span class="jp">工程写真</span><span class="en">STEPS</span></div>' +
-      '<div class="shot" data-zoom="/age3-recipe/'+esc(r.id)+'-steps.jpg"><img src="/age3-recipe/'+esc(r.id)+'-steps.jpg" alt="工程写真" loading="lazy"></div>' +
+      '<div class="shot" data-zoom="/age3-recipe/'+esc(r.id)+'-steps.jpg"><img src="/age3-recipe/'+esc(r.id)+'-steps.jpg" alt="工程写真" loading="lazy" onerror="A3nosteps(this)"></div>' +
       '<p class="cap">タップで拡大します。</p></div>';
 
     var vsec = "";
@@ -555,7 +580,7 @@ footer{margin-top:26px;padding:16px 0 8px;border-top:1px solid var(--line);font-
 
     var hero = (r.photo === false)
       ? '<div class="dhero nophoto">写真は未登録です（用紙の画像が届いていません）</div>'
-      : '<div class="dhero"><img src="/age3-recipe/'+esc(r.id)+'-hero.jpg" alt="'+esc(r.name)+'"></div>';
+      : '<div class="dhero"><img src="/age3-recipe/'+esc(r.id)+'-hero.jpg" alt="'+esc(r.name)+'" onerror="A3nohero(this)"></div>';
 
     var acts = (r.photo === false)
       ? '<div class="acts one"><button class="btn pri" id="cook">作りながら見る</button></div>'
@@ -929,7 +954,7 @@ footer{margin-top:26px;padding:16px 0 8px;border-top:1px solid var(--line);font-
               (r.finish.en && showEn ? '<div class="cen">'+esc(r.finish.en)+'</div>' : '') + '</div>'
             : '<div class="cjp" style="font-size:19px">このレシピのカードには完成基準が書かれていません。</div>') +
           (r.photo === false ? ''
-            : '<img src="/age3-recipe/'+esc(r.id)+'-hero.jpg" alt="'+esc(r.name)+'" style="max-width:280px;margin:18px auto 0">');
+            : '<img src="/age3-recipe/'+esc(r.id)+'-hero.jpg" alt="'+esc(r.name)+'" onerror="this.remove()" style="max-width:280px;margin:18px auto 0">');
       }
       var sh = body.querySelector("#cshot");
       if(sh) sh.onclick = function(){ openViewer("/age3-recipe/"+r.id+"-steps.jpg"); };
