@@ -1,0 +1,1051 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#1A1917">
+<title>Age.3 レシピ</title>
+<meta name="description" content="Age.3 揚げサンドのスタンダードレシピ。材料・作り方・ポイント・完成基準を、レシピカードのとおりに引けます。">
+<meta name="robots" content="noindex, nofollow">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Age.3">
+<meta property="og:title" content="Age.3 レシピ">
+<meta property="og:description" content="揚げサンドのスタンダードレシピ。材料・作り方・ポイント・完成基準。">
+<meta property="og:url" content="https://age-3013.vercel.app/age3-recipe.html">
+<link rel="icon" href="/age3-recipe-favicon.png">
+<link rel="manifest" href="/age3-recipe.webmanifest">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Age.3 レシピ">
+<style>
+:root{
+  --sumi:#1A1917;
+  --kinari:#F5F2EC;
+  --shiraki:#C9A87C;
+  --furuki:#7E6141;
+  --gin:#B9BCBE;
+  --hai:#6E6C67;
+  --olive:#7E7A2A;
+  --shu:#A6392E;
+  --line:#DCD6CB;
+  --shadow:0 1px 0 rgba(26,25,23,.06), 0 8px 24px -14px rgba(26,25,23,.35);
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;padding:0}
+html.locked,html.noscroll{overflow:hidden}
+
+/* ---------- 入口（4桁） ---------- */
+.gate{
+  position:fixed;inset:0;z-index:200;background:#1A1917;color:#F5F2EC;
+  display:flex;align-items:center;justify-content:center;padding:24px;
+  font-family:"Hiragino Kaku Gothic ProN","Yu Gothic","Noto Sans JP",sans-serif;
+}
+.gbox{width:100%;max-width:300px;text-align:center}
+.gmark{display:inline-block;font-size:11px;letter-spacing:.28em;color:#C9A87C;border:1px solid #7E6141;padding:3px 9px;border-radius:2px}
+.gate h1{font-size:21px;font-weight:800;margin:14px 0 0;letter-spacing:.02em}
+.glead{margin:22px 0 12px;font-size:13px;color:#B9BCBE}
+#gpin{
+  width:100%;padding:16px;font-size:26px;letter-spacing:.6em;text-align:center;
+  border:1.5px solid #56504A;border-radius:3px;background:#232120;color:#F5F2EC;
+  font-family:inherit;-webkit-appearance:none;appearance:none;
+}
+#gpin:focus{outline:none;border-color:#C9A87C;box-shadow:0 0 0 3px rgba(201,168,124,.2)}
+.gerr{margin:12px 0 0;font-size:13px;color:#E0A79C;font-weight:700}
+.gnote{margin:22px 0 0;font-size:11.5px;color:#6E6C67;line-height:1.8}
+
+body{
+  background:var(--kinari);color:var(--sumi);
+  font-family:"Hiragino Kaku Gothic ProN","Yu Gothic","Noto Sans JP",sans-serif;
+  font-size:16px;line-height:1.65;-webkit-font-smoothing:antialiased;
+  padding-bottom:40px;
+}
+.shell{max-width:760px;margin:0 auto;padding:0 16px}
+img{max-width:100%;display:block}
+
+/* ---------- header ---------- */
+header{background:var(--sumi);color:var(--kinari);padding:calc(env(safe-area-inset-top) + 18px) 0 15px}
+.brand{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.brand .mark{font-size:11px;letter-spacing:.28em;color:var(--shiraki);border:1px solid var(--furuki);padding:3px 8px;border-radius:2px}
+.brand h1{font-size:19px;font-weight:800;margin:0;letter-spacing:.02em}
+.lede{margin:9px 0 0;font-size:12.5px;color:var(--gin);line-height:1.6}
+
+/* ---------- search / filter ---------- */
+.tools{position:sticky;top:0;z-index:20;background:var(--kinari);padding:12px 0 8px;border-bottom:1px solid var(--line)}
+.searchbox{position:relative}
+#q{
+  width:100%;padding:14px 44px 14px 15px;font-size:16px;
+  border:1.5px solid var(--sumi);border-radius:3px;background:#fff;
+  font-family:inherit;color:var(--sumi);box-shadow:var(--shadow);
+}
+#q:focus{outline:none;border-color:var(--furuki);box-shadow:0 0 0 3px rgba(126,97,65,.18)}
+#q::placeholder{color:#A8A49C}
+#clear{position:absolute;right:6px;top:50%;transform:translateY(-50%);border:0;background:none;font-size:20px;color:var(--hai);width:34px;height:34px;cursor:pointer;display:none;line-height:1}
+.chips{display:flex;gap:6px;overflow-x:auto;padding:10px 0 2px;scrollbar-width:none}
+.chips::-webkit-scrollbar{display:none}
+.chip{
+  flex:0 0 auto;padding:7px 13px;font-size:12.5px;border-radius:999px;
+  border:1px solid var(--line);background:#fff;color:var(--hai);cursor:pointer;
+  font-family:inherit;white-space:nowrap;
+}
+.chip[aria-pressed="true"]{background:var(--sumi);color:var(--kinari);border-color:var(--sumi);font-weight:700}
+.count{font-size:12px;color:var(--hai);padding:8px 2px 0}
+
+/* ---------- 一覧 ---------- */
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;padding:14px 0 8px}
+@media(min-width:620px){.grid{grid-template-columns:repeat(3,1fr)}}
+.tile{
+  background:#fff;border:1px solid var(--line);border-radius:4px;overflow:hidden;
+  cursor:pointer;text-align:left;padding:0;font-family:inherit;color:inherit;
+  box-shadow:var(--shadow);display:flex;flex-direction:column;
+}
+.tile .ph{aspect-ratio:1/1;background:#fff;overflow:hidden}
+.tile .ph img{width:100%;height:100%;object-fit:contain}
+.tile .tx{padding:9px 10px 11px;border-top:1px solid var(--line)}
+.tile .nm{display:block;font-size:14.5px;font-weight:800;line-height:1.4;letter-spacing:.01em}
+.tile .en{display:block;font-size:11px;color:var(--hai);margin-top:2px;line-height:1.35}
+.tile .mt{display:flex;gap:5px;align-items:center;margin-top:7px;flex-wrap:wrap}
+.tag{font-size:9.5px;letter-spacing:.1em;padding:2px 6px;border-radius:2px;border:1px solid var(--line);color:var(--hai);white-space:nowrap}
+.tag.sw{border-color:#D9CDBA;color:#8A6A3C;background:#FBF7F1}
+.tag.sv{border-color:#D6C8C6;color:#8E4A42;background:#FBF3F2}
+.tag.lm{border-color:var(--sumi);color:var(--sumi);font-weight:700}
+.tag.se{border-color:#C6CBD2;color:#4A5A70;background:#F2F5F9}
+.tag.st-end{border-color:#E0B4AE;color:#A6392E;background:#FCF3F2;font-weight:700}
+.tag.st-start{border-color:#A9C9AE;color:#2E6B3A;background:#F1F8F2;font-weight:700}
+
+/* 販売状況の帯 */
+.stband{display:flex;align-items:flex-start;gap:10px;border-radius:3px;padding:11px 12px;margin-top:14px}
+.stband.end{background:#FCF3F2;border:1px solid #E9CFCB}
+.stband.start{background:#F1F8F2;border:1px solid #CFE2D3}
+.stband b{flex:0 0 auto;font-size:12px;font-weight:800;padding:3px 8px;border-radius:2px;color:#fff}
+.stband.end b{background:var(--shu)}
+.stband.start b{background:#2E6B3A}
+.stband span{font-size:13px;line-height:1.6}
+.stband.end span{color:#7E322A}
+.stband.start span{color:#2C5334}
+
+/* お知らせ */
+.noticebtn{
+  display:block;width:100%;margin-top:12px;padding:13px 14px;border-radius:3px;
+  border:1.5px solid var(--sumi);background:#fff;color:var(--sumi);font-family:inherit;
+  font-size:14px;font-weight:800;cursor:pointer;text-align:left;box-shadow:var(--shadow);
+}
+.noticebtn small{display:block;font-size:11.5px;font-weight:400;color:var(--hai);margin-top:3px}
+.nsec{margin-top:22px;border:1px solid var(--line);border-radius:3px;overflow:hidden;background:#fff}
+.nhead{display:flex;align-items:center;gap:9px;padding:10px 12px;color:#fff}
+.nhead.end{background:#A6392E}
+.nhead.start{background:#2E6B3A}
+.nhead.plan{background:#1F3A5F}
+.nhead .w{font-size:11px;font-weight:800;background:rgba(255,255,255,.22);padding:3px 8px;border-radius:2px;white-space:nowrap}
+.nhead .t{font-size:14.5px;font-weight:800}
+.nhead .sc{margin-left:auto;font-size:11px;background:#fff;color:#1A1917;padding:3px 8px;border-radius:2px;font-weight:700;white-space:nowrap}
+.nitems{list-style:none;margin:0;padding:0}
+.nitems li{display:flex;gap:10px;align-items:flex-start;padding:11px 12px;border-bottom:1px solid var(--line)}
+.nitems li:last-child{border-bottom:0}
+.nitems .cd{flex:0 0 auto;font-size:10.5px;font-weight:800;border:1px solid var(--line);color:var(--hai);border-radius:2px;padding:2px 5px;margin-top:2px}
+.nitems .bd{flex:1;min-width:0}
+.nitems .nm{display:block;font-size:15px;font-weight:700;line-height:1.45}
+.nitems .dt{display:block;font-size:12px;color:var(--hai);line-height:1.55;margin-top:2px}
+.nitems .stt{flex:0 0 auto;font-size:12px;font-weight:800;white-space:nowrap;margin-top:2px}
+.nitems .stt.x{color:var(--shu)}
+.nitems .stt.o{color:#2E6B3A}
+.nitems .go{display:inline-block;margin-top:5px;font-size:12px;font-weight:700;color:var(--furuki);
+  border:1px solid var(--line);border-radius:2px;padding:4px 9px;background:#FAF8F3;cursor:pointer;font-family:inherit}
+.nlines{margin:0;padding:12px 12px 12px 30px;font-size:14px;line-height:1.8}
+.ncaution{margin-top:16px;background:#FCF3F2;border:1px solid #E9CFCB;border-left:3px solid var(--shu);border-radius:2px;padding:11px 12px;font-size:12.5px;line-height:1.7;color:#7E322A}
+.nmeta{margin-top:14px;font-size:11.5px;color:var(--hai);line-height:1.8}
+.tag.cd{font-variant-numeric:tabular-nums}
+.empty{padding:38px 4px;color:var(--hai);font-size:14px;text-align:center}
+
+/* ---------- 詳細 ---------- */
+.detail{position:fixed;inset:0;z-index:60;background:var(--kinari);overflow-y:auto;-webkit-overflow-scrolling:touch}
+.dbar{
+  position:sticky;top:0;z-index:5;background:var(--sumi);color:var(--kinari);
+  padding:calc(env(safe-area-inset-top) + 10px) 16px 10px;
+  display:flex;align-items:center;gap:10px;
+}
+.back{background:none;border:0;color:var(--kinari);font-family:inherit;font-size:15px;font-weight:700;cursor:pointer;padding:4px 2px;display:flex;align-items:center;gap:6px}
+.dbar .sp{flex:1}
+.entog{
+  background:none;border:1px solid #56504A;color:var(--gin);font-family:inherit;
+  font-size:11px;letter-spacing:.1em;padding:5px 9px;border-radius:2px;cursor:pointer;
+}
+.entog[aria-pressed="true"]{background:var(--shiraki);border-color:var(--shiraki);color:#1A1917;font-weight:800}
+.dhero{background:#fff;padding:8px 0 4px;border-bottom:1px solid var(--line)}
+.dhero img{max-width:340px;margin:0 auto}
+.dhead{padding:16px 0 4px}
+.dserve{font-size:11px;letter-spacing:.22em;color:var(--hai)}
+.dhead h2{font-size:28px;font-weight:800;margin:6px 0 0;letter-spacing:.01em;line-height:1.3}
+.dhead .den{font-size:14px;color:var(--hai);margin-top:3px}
+.dmeta{display:flex;gap:6px;flex-wrap:wrap;margin-top:11px;padding-bottom:14px;border-bottom:1px solid var(--line)}
+
+.sec{margin-top:26px}
+.sech{display:flex;align-items:baseline;gap:9px;background:#EDEAE3;padding:9px 12px;border-radius:3px}
+.sech .no{font-size:13px;font-weight:800;font-variant-numeric:tabular-nums}
+.sech .jp{font-size:16px;font-weight:800}
+.sech .en{font-size:10.5px;letter-spacing:.18em;color:#9A968E}
+.sech .rt{margin-left:auto;font-size:11px;color:var(--hai)}
+
+/* 材料 */
+.ing{list-style:none;margin:0;padding:0}
+.ing li{display:flex;align-items:flex-end;gap:10px;padding:11px 4px;border-bottom:1px solid var(--line)}
+.ing .nm{flex:1;min-width:0}
+.ing .nm b{display:block;font-size:15.5px;font-weight:700;line-height:1.4}
+.ing .nm span{display:block;font-size:11px;color:var(--hai);line-height:1.35}
+.ing .qt{font-size:20px;font-weight:800;font-variant-numeric:tabular-nums;white-space:nowrap;letter-spacing:.01em}
+.ing .qt em{font-style:normal;font-size:12px;font-weight:700;margin-left:1px}
+.ing .qt.none{font-size:12px;font-weight:700;color:var(--hai)}
+
+/* 作り方 */
+.mth{list-style:none;margin:0;padding:0}
+.mth li{display:flex;gap:11px;padding:14px 2px;border-bottom:1px solid var(--line)}
+.mth .no{
+  flex:0 0 26px;height:26px;border-radius:50%;background:var(--sumi);color:var(--kinari);
+  font-size:13px;font-weight:800;display:flex;align-items:center;justify-content:center;margin-top:2px;
+}
+.mth .bd{display:block;flex:1;min-width:0}
+.mth .jp{display:block;font-size:16.5px;font-weight:700;line-height:1.6}
+.mth .en{display:block;font-size:12px;color:var(--hai);line-height:1.5;margin-top:3px}
+.pt{margin-top:9px;background:#FAF8F3;border:1px solid #E7E2D6;border-left:3px solid var(--olive);border-radius:2px;padding:8px 10px}
+.pt .lb{display:inline-block;background:var(--olive);color:#fff;font-size:9.5px;letter-spacing:.14em;font-weight:800;padding:2px 7px;border-radius:2px;margin-bottom:5px}
+.pt .jp{font-size:14px;font-weight:700;color:#5F5C22;line-height:1.55}
+.pt .en{font-size:11.5px;color:#8A8768;line-height:1.5;margin-top:2px}
+
+/* 完成基準 */
+.fin{background:#EDEAE3;border-radius:3px;padding:15px 14px}
+.fin .lb{font-size:10.5px;letter-spacing:.2em;color:var(--hai)}
+.fin .jp{font-size:18px;font-weight:800;line-height:1.55;margin-top:7px}
+.fin .en{font-size:12px;color:var(--hai);line-height:1.5;margin-top:5px}
+
+/* 工程写真・原本 */
+.shot{background:#fff;border:1px solid var(--line);border-radius:3px;padding:8px;margin-top:12px;cursor:zoom-in}
+.cap{font-size:11.5px;color:var(--hai);margin-top:7px}
+.note{margin-top:12px;background:#fff;border:1px solid var(--line);border-left:3px solid var(--shiraki);border-radius:2px;padding:10px 12px;font-size:13px;line-height:1.65}
+.note b{display:block;font-size:10.5px;letter-spacing:.16em;color:var(--hai);margin-bottom:5px;font-weight:700}
+.note ul{margin:0;padding-left:1.1em}
+
+.tile .ph.noph{display:flex;align-items:center;justify-content:center;background:#EDEAE3}
+.nophtx{font-size:11.5px;color:#9A968E;text-align:center;line-height:1.6;letter-spacing:.06em}
+.dhero.nophoto{padding:22px 16px;text-align:center;font-size:12.5px;color:var(--hai)}
+.subrec{margin-top:14px;background:#fff;border:1px solid var(--line);border-radius:3px;padding:12px 12px 10px}
+.sublb{font-size:11px;letter-spacing:.14em;font-weight:700;color:var(--furuki);margin-bottom:4px}
+.subrec .ing li{padding:8px 2px}
+.subrec .ing li:last-child{border-bottom:0}
+.subnote{margin:8px 0 0;font-size:12px;color:var(--hai);line-height:1.7}
+.vid{position:relative;margin-top:12px;background:#1A1917;border-radius:3px;overflow:hidden;aspect-ratio:16/9;cursor:pointer}
+.vid img{width:100%;height:100%;object-fit:cover;opacity:.86}
+.vid iframe{width:100%;height:100%;border:0;display:block}
+.vplay{
+  position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+  width:62px;height:62px;border-radius:50%;background:rgba(26,25,23,.78);color:#fff;
+  display:flex;align-items:center;justify-content:center;font-size:22px;padding-left:4px;
+  box-shadow:0 2px 14px rgba(0,0,0,.4);
+}
+.vlink{display:block;text-align:center;text-decoration:none;margin-top:12px;line-height:1.4}
+.acts{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:22px}
+.acts.one{grid-template-columns:1fr}
+.btn small{font-size:10.5px;font-weight:700}
+.btn{
+  padding:15px 10px;border-radius:3px;border:1.5px solid var(--sumi);background:#fff;color:var(--sumi);
+  font-family:inherit;font-size:14.5px;font-weight:800;cursor:pointer;box-shadow:var(--shadow);
+}
+.btn.pri{background:var(--sumi);color:var(--kinari)}
+.dfoot{margin:28px 0 46px;padding-top:14px;border-top:1px solid var(--line);font-size:11px;color:var(--hai);line-height:1.7}
+
+/* ---------- 作りながらモード ---------- */
+.cook{position:fixed;inset:0;z-index:90;background:#fff;display:flex;flex-direction:column}
+.cbar{background:var(--sumi);color:var(--kinari);padding:calc(env(safe-area-inset-top) + 10px) 16px 10px;display:flex;align-items:center;gap:10px}
+.cbar .ttl{font-size:14px;font-weight:800;flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.cbar .cnt{font-size:12px;color:var(--gin);font-variant-numeric:tabular-nums}
+.cbody{flex:1;overflow-y:auto;padding:22px 18px 12px;max-width:760px;margin:0 auto;width:100%}
+.cno{font-size:12px;letter-spacing:.24em;color:var(--hai)}
+.cjp{font-size:26px;font-weight:800;line-height:1.55;margin-top:10px;letter-spacing:.01em}
+.cen{font-size:14px;color:var(--hai);line-height:1.55;margin-top:8px}
+.cfin{margin-top:16px;background:#EDEAE3;border-radius:3px;padding:15px 14px}
+.cnav{display:grid;grid-template-columns:1fr 1fr;gap:9px;padding:10px 16px calc(env(safe-area-inset-bottom) + 14px);border-top:1px solid var(--line);background:var(--kinari)}
+.cdots{display:flex;gap:5px;justify-content:center;padding:2px 0 10px;flex-wrap:wrap}
+.cdots i{width:7px;height:7px;border-radius:50%;background:var(--line);display:block}
+.cdots i.on{background:var(--sumi)}
+.cdots i.done{background:var(--shiraki)}
+
+/* ---------- 画像ビューア ---------- */
+.viewer{position:fixed;inset:0;z-index:120;background:rgba(26,25,23,.96);overflow:auto;-webkit-overflow-scrolling:touch;padding:calc(env(safe-area-inset-top) + 52px) 8px 30px}
+.viewer img{margin:0 auto;max-width:none;width:min(100%,1000px)}
+.vclose{position:fixed;top:calc(env(safe-area-inset-top) + 8px);right:10px;z-index:121;background:#fff;border:0;border-radius:3px;font-family:inherit;font-size:14px;font-weight:800;padding:9px 14px;cursor:pointer}
+.vhint{color:#B9BCBE;font-size:11.5px;text-align:center;margin:0 0 10px}
+
+/* ---------- 質問箱 ---------- */
+.askfab{
+  position:fixed;right:14px;bottom:calc(env(safe-area-inset-bottom) + 16px);z-index:70;
+  background:var(--sumi);color:var(--kinari);border:0;border-radius:999px;
+  font-family:inherit;font-size:14px;font-weight:800;padding:14px 20px;cursor:pointer;
+  box-shadow:0 6px 20px -6px rgba(26,25,23,.65), 0 2px 6px rgba(26,25,23,.3);
+  display:flex;align-items:center;gap:8px;
+}
+.askfab .n{
+  background:var(--shu);color:#fff;font-size:11.5px;font-weight:800;
+  min-width:20px;height:20px;border-radius:999px;display:flex;align-items:center;justify-content:center;padding:0 5px;
+}
+.askfab.done .n{background:#2E6B3A}
+.asklead{background:#EDEAE3;border-radius:3px;padding:13px 13px;font-size:13px;line-height:1.75;margin-top:14px}
+.qcard{background:#fff;border:1px solid var(--line);border-radius:3px;margin-top:12px;overflow:hidden}
+.qcard.ok{border-color:#CFE2D3;background:#F7FBF8}
+.qtop{padding:13px 13px 0}
+.qtag{display:inline-block;font-size:10px;letter-spacing:.14em;font-weight:700;color:var(--hai);border:1px solid var(--line);border-radius:2px;padding:2px 7px}
+.qtag.ok{border-color:#A9C9AE;color:#2E6B3A;background:#F1F8F2}
+.qq{font-size:16px;font-weight:800;line-height:1.55;margin:9px 0 0}
+.qwhy{font-size:12.5px;color:var(--hai);line-height:1.7;margin:7px 0 0}
+.qlink{display:inline-block;margin-top:8px;font-size:12px;font-weight:700;color:var(--furuki);
+  border:1px solid var(--line);border-radius:2px;padding:4px 9px;background:#FAF8F3;cursor:pointer;font-family:inherit}
+.qopts{display:flex;flex-wrap:wrap;gap:7px;padding:11px 13px 0}
+.qopt{
+  flex:0 0 auto;padding:10px 13px;font-size:13.5px;border-radius:3px;border:1.5px solid var(--line);
+  background:#fff;color:var(--sumi);cursor:pointer;font-family:inherit;font-weight:700;line-height:1.4;text-align:left;
+}
+.qopt[aria-pressed="true"]{background:var(--sumi);color:var(--kinari);border-color:var(--sumi)}
+.qfree{padding:11px 13px 13px}
+.qfree textarea{
+  width:100%;min-height:64px;padding:10px 11px;font-size:15px;font-family:inherit;line-height:1.6;
+  border:1.5px solid var(--line);border-radius:3px;background:#fff;color:var(--sumi);resize:vertical;
+}
+.qfree textarea:focus{outline:none;border-color:var(--furuki);box-shadow:0 0 0 3px rgba(126,97,65,.14)}
+.qfree label{display:block;font-size:11.5px;color:var(--hai);margin-bottom:5px}
+.asksend{position:sticky;bottom:0;background:var(--kinari);padding:14px 0 calc(env(safe-area-inset-bottom) + 16px);border-top:1px solid var(--line);margin-top:22px}
+.asknote{font-size:11.5px;color:var(--hai);line-height:1.7;margin:9px 0 0}
+.askdone{background:#F1F8F2;border:1px solid #CFE2D3;border-radius:3px;padding:12px;font-size:13px;color:#2C5334;line-height:1.7;margin-top:14px}
+
+/* ---------- 注意帯 ---------- */
+.warnbar{background:#A6392E;color:#fff;font-size:11.5px;line-height:1.55;padding:9px 16px;text-align:center}
+footer{margin-top:26px;padding:16px 0 8px;border-top:1px solid var(--line);font-size:11px;color:var(--hai);line-height:1.75}
+.reset{margin-top:18px;padding-top:14px;border-top:1px dashed var(--line)}
+.rbtn{
+  padding:11px 16px;border-radius:3px;border:1.5px solid var(--hai);background:#fff;color:var(--hai);
+  font-family:inherit;font-size:13px;font-weight:700;cursor:pointer;
+}
+.rbtn:active{background:#EDEAE3}
+.rnote{margin:9px 0 0;font-size:11px;color:var(--hai);line-height:1.7}
+</style>
+</head>
+<body>
+
+<div class="gate" id="gate">
+  <div class="gbox">
+    <span class="gmark">Age.3</span>
+    <h1>レシピ</h1>
+    <p class="glead">4桁の番号を入れてください</p>
+    <input id="gpin" type="password" inputmode="numeric" pattern="[0-9]*" maxlength="4" autocomplete="off" aria-label="4桁の番号">
+    <p class="gerr" id="gerr" hidden>番号がちがいます</p>
+    <p class="gnote">番号は店長または本部に聞いてください。<br>一度入れると、この端末では次から聞かれません。</p>
+  </div>
+</div>
+<script>
+(function(){
+  var KEY="age3-recipe:ok3", CHECK=609101957;
+  var gate=document.getElementById("gate");
+  try{ if(localStorage.getItem(KEY)==="1"){ gate.remove(); return; } }catch(e){}
+  document.documentElement.classList.add("locked");
+  var pin=document.getElementById("gpin"), err=document.getElementById("gerr");
+  function hash(s){var x=2166136261;for(var j=0;j<s.length;j++){x^=s.charCodeAt(j);x=Math.imul(x,16777619);}return x>>>0;}
+  pin.addEventListener("input",function(){
+    err.hidden=true;
+    if(pin.value.length<4) return;
+    if(hash(pin.value)===CHECK){
+      try{ localStorage.setItem(KEY,"1"); }catch(e){}
+      document.documentElement.classList.remove("locked");
+      gate.remove();
+    }else{ err.hidden=false; pin.value=""; pin.focus(); }
+  });
+  setTimeout(function(){ pin.focus(); },120);
+})();
+</script>
+
+<header>
+  <div class="shell">
+    <div class="brand">
+      <span class="mark">Age.3</span>
+      <h1>レシピ</h1>
+    </div>
+    <p class="lede">揚げサンドのスタンダードレシピ。材料・作り方・ポイント・完成基準は、レシピカードに書かれているとおりに載せています。</p>
+  </div>
+</header>
+
+<div class="tools">
+  <div class="shell">
+    <div class="searchbox">
+      <input id="q" type="text" placeholder="品名・材料で探す（例：いちご、カレー）" autocomplete="off" aria-label="検索">
+      <button id="clear" aria-label="消す">×</button>
+    </div>
+    <div class="chips" id="chips"></div>
+  </div>
+</div>
+
+<main class="shell">
+  <button class="noticebtn" id="noticebtn"></button>
+  <p class="count" id="count"></p>
+  <div class="grid" id="grid"></div>
+  <p class="empty" id="empty" hidden>見つかりませんでした。品名か材料名で探してみてください。</p>
+  <footer>
+    出どころ：Age.3 STANDARD RECIPE カード<br>
+    このレシピは社外秘です。持ち出し・複製・SNS等への掲載を禁じます。<br>
+    分量・手順・ポイントは、すべてカードに書かれているとおりに写しています。カードに書かれていないことは載せていません。
+    <div class="reset">
+      <button id="reset" class="rbtn">この端末の記録を消す（リセット）</button>
+      <p class="rnote">合言葉をおぼえている記録と、英語表示の設定を消します。<br>
+      次に開くときは、また4桁の番号を入れることになります。<br>
+      レシピそのものは消えません。端末を人に渡すときや、番号が変わったときに押してください。</p>
+    </div>
+  </footer>
+</main>
+
+<script src="/age3-recipe-data.js"></script>
+<script>
+(function(){
+  "use strict";
+  var $ = function(s){ return document.querySelector(s); };
+  var esc = function(s){ return String(s==null?"":s).replace(/[&<>"']/g, function(c){
+    return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]; }); };
+
+  var PLAYLIST = (RECIPE_META && RECIPE_META.videoPlaylist) || "";
+  var PLAYLIST_URL = PLAYLIST ? "https://www.youtube.com/playlist?list=" + encodeURIComponent(PLAYLIST) : "";
+  var PLAYLIST_REG = (RECIPE_META && RECIPE_META.videoPlaylistRegular) || PLAYLIST;
+  function plId(r){ return (r && r.group && r.group.indexOf("regular") === 0) ? PLAYLIST_REG : PLAYLIST; }
+  function plUrl(r){ var p = plId(r); return p ? "https://www.youtube.com/playlist?list=" + encodeURIComponent(p) : ""; }
+
+  var EN_KEY = "age3-recipe:en";
+  var showEn = true;
+  try{ var v = localStorage.getItem(EN_KEY); if(v==="0") showEn = false; }catch(e){}
+
+  /* ---------- 一覧 ---------- */
+  /* 画像が無い品は自動で「写真 未登録」に切り替える。
+     写真ファイル（/age3-recipe/{id}-hero.jpg 等）を置けば、データを直さなくてもそのまま表示される。 */
+  window.A3renumber = function(root){
+    var i = 0;
+    [].forEach.call(root.querySelectorAll(".sech .no"), function(n){
+      if(!isNaN(Number(n.textContent.trim()))){ i++; n.textContent = (i<10?"0":"") + i; }
+    });
+  };
+  window.A3noph = function(img){
+    var p = img.parentNode; if(!p) return;
+    p.className = "ph noph";
+    p.innerHTML = '<span class="nophtx">写真<br>未登録</span>';
+  };
+  window.A3nohero = function(img){
+    var p = img.parentNode; if(!p) return;
+    p.className = "dhero nophoto";
+    p.textContent = "写真は未登録です（用紙の画像が届いていません）";
+  };
+  window.A3nosteps = function(img){
+    var shot = img.closest ? img.closest(".shot") : null;
+    var sec  = shot && shot.closest ? shot.closest(".sec") : null;
+    var root = sec && sec.closest ? sec.closest(".detail") : null;
+    if(sec) sec.remove(); else if(shot) shot.remove();
+    if(root) A3renumber(root);
+  };
+  /* 商品区分。データ側に group を持たせる。
+     "regular-sweets" = レギュラースイーツ / "regular-savory" = レギュラーセイボリー / "season" = シーズン
+     未指定は season。現行の登録品はすべてシーズン商品のため、既存データの変更は不要。 */
+  function group(r){ return r.group || "season"; }
+
+  var FILTERS = [
+    { id:"all",        label:"すべて",             test:function(){ return true; } },
+    { id:"reg-sweets", label:"レギュラースイーツ",   test:function(r){ return group(r)==="regular-sweets"; } },
+    { id:"reg-savory", label:"レギュラーセイボリー", test:function(r){ return group(r)==="regular-savory"; } },
+    { id:"season",     label:"シーズン",           test:function(r){ return group(r)==="season"; } }
+  ];
+  var filter = "all", query = "";
+
+  function haystack(r){
+    var t = [r.name, r.en, r.code||"", r.category||"", r.series||""];
+    r.ing.forEach(function(i){ t.push(i[0]); t.push(i[1]||""); });
+    r.steps.forEach(function(s){ t.push(s.jp); if(s.point) t.push(s.point.jp); });
+    return t.join(" ").toLowerCase();
+  }
+  RECIPES.forEach(function(r){ r._hay = haystack(r); });
+
+  function tags(r){
+    var h = "";
+    if(r.status)          h += '<span class="tag st-'+esc(r.status.tone)+'">'+esc(r.status.label)+'</span>';
+    if(r.series)          h += '<span class="tag se">'+esc(r.series)+'</span>';
+    if(r.kind==="sweets") h += '<span class="tag sw">SWEETS</span>';
+    if(r.kind==="savory") h += '<span class="tag sv">Savory</span>';
+    if(r.limited)         h += '<span class="tag lm">期間限定</span>';
+    h += '<span class="tag cd">' + esc(r.code || "番号なし") + '</span>';
+    return h;
+  }
+
+  function render(){
+    var q = query.trim().toLowerCase();
+    var f = FILTERS.filter(function(x){ return x.id===filter; })[0];
+    var list = RECIPES.filter(function(r){
+      return f.test(r) && (!q || r._hay.indexOf(q) >= 0);
+    });
+    $("#grid").innerHTML = list.map(function(r){
+      var ph = (r.photo === false)
+        ? '<span class="ph noph"><span class="nophtx">写真<br>未登録</span></span>'
+        : '<span class="ph"><img src="/age3-recipe/'+esc(r.id)+'-hero.jpg" alt="'+esc(r.name)+'" loading="lazy" onerror="A3noph(this)"></span>';
+      return '<button class="tile" data-id="'+esc(r.id)+'">' + ph +
+        '<span class="tx">' +
+          '<span class="nm">'+esc(r.name)+'</span>' +
+          '<span class="en">'+esc(r.en)+'</span>' +
+          '<span class="mt">'+tags(r)+'</span>' +
+        '</span></button>';
+    }).join("");
+    $("#empty").hidden = list.length > 0;
+    $("#empty").textContent = q ? "見つかりませんでした。品名か材料名で探してみてください。" : "このカテゴリーにはまだレシピが登録されていません。";
+    $("#count").textContent = list.length + "品" + (q || filter!=="all" ? "（全"+RECIPES.length+"品中）" : "");
+  }
+
+  $("#chips").innerHTML = FILTERS.map(function(f){
+    return '<button class="chip" data-f="'+f.id+'" aria-pressed="'+(f.id==="all")+'">'+esc(f.label)+'</button>';
+  }).join("");
+  $("#chips").addEventListener("click", function(e){
+    var b = e.target.closest(".chip"); if(!b) return;
+    filter = b.dataset.f;
+    [].forEach.call(this.querySelectorAll(".chip"), function(c){
+      c.setAttribute("aria-pressed", String(c.dataset.f===filter));
+    });
+    render();
+  });
+  $("#q").addEventListener("input", function(){
+    query = this.value; $("#clear").style.display = this.value ? "block" : "none"; render();
+  });
+  $("#clear").addEventListener("click", function(){
+    $("#q").value = ""; query = ""; this.style.display = "none"; render(); $("#q").focus();
+  });
+  $("#grid").addEventListener("click", function(e){
+    var t = e.target.closest(".tile"); if(!t) return;
+    location.hash = "#/r/" + t.dataset.id;
+  });
+
+  /* ---------- 詳細 ---------- */
+  function byId(id){ return RECIPES.filter(function(r){ return r.id===id; })[0]; }
+
+  function qtyHtml(i){
+    if(i[2]==null) return '<span class="qt none">分量の記載なし</span>';
+    return '<span class="qt">'+esc(i[2])+(i[3]?'<em>'+esc(i[3])+'</em>':'')+'</span>';
+  }
+
+  function detailHtml(r){
+    var meta = [];
+    if(r.series)   meta.push('<span class="tag se">'+esc(r.series)+'</span>');
+    if(r.code)     meta.push('<span class="tag cd">CODE '+esc(r.code)+'</span>');
+    if(r.ver)      meta.push('<span class="tag">VER '+esc(r.ver)+(r.issued?' / '+esc(r.issued):'')+'</span>');
+    if(r.category) meta.push('<span class="tag">'+esc(r.category)+'</span>');
+    if(r.limited)  meta.push('<span class="tag lm">期間限定</span>');
+    if(r.oldFormat)meta.push('<span class="tag">旧フォーマット</span>');
+
+    function ingList(rows){
+      return rows.map(function(i){
+        return '<li><span class="nm"><b>'+esc(i[0])+'</b>'+(i[1]?'<span class="en-line">'+esc(i[1])+'</span>':'')+'</span>'+qtyHtml(i)+'</li>';
+      }).join("");
+    }
+    var ing = ingList(r.ing);
+
+    var sub = r.sub ? '<div class="subrec"><div class="sublb">仕込み ／ '+esc(r.sub.title)+'</div>' +
+        '<ul class="ing">'+ingList(r.sub.ing)+'</ul>' +
+        (r.sub.note ? '<p class="subnote">'+esc(r.sub.note)+'</p>' : '') + '</div>' : "";
+
+    var mth = r.steps.map(function(s,n){
+      var pt = s.point ? '<div class="pt"><span class="lb">POINT</span>' +
+            '<div class="jp">'+esc(s.point.jp)+'</div>' +
+            (s.point.en ? '<div class="en en-line">'+esc(s.point.en)+'</div>' : '') + '</div>' : "";
+      return '<li><span class="no">'+(n+1)+'</span><span class="bd">' +
+             '<span class="jp">'+esc(s.jp)+'</span>' +
+             (s.en ? '<span class="en en-line">'+esc(s.en)+'</span>' : '') + pt + '</span></li>';
+    }).join("");
+
+    var fin = r.finish ? '<div class="sec"><div class="fin"><div class="lb">完成基準 / FINISH STANDARD</div>' +
+        '<div class="jp">'+esc(r.finish.jp)+'</div>' +
+        (r.finish.en ? '<div class="en en-line">'+esc(r.finish.en)+'</div>' : '') + '</div></div>' : "";
+
+    var steps = (r.oldFormat || r.photo === false) ? "" :
+      '<div class="sec"><div class="sech"><span class="no">03</span><span class="jp">工程写真</span><span class="en">STEPS</span></div>' +
+      '<div class="shot" data-zoom="/age3-recipe/'+esc(r.id)+'-steps.jpg"><img src="/age3-recipe/'+esc(r.id)+'-steps.jpg" alt="工程写真" onerror="A3nosteps(this)"></div>' +
+      '<p class="cap">タップで拡大します。</p></div>';
+
+    var vsec = "";
+    if(r.video){
+      vsec = '<div class="sec"><div class="sech"><span class="no">'+(steps?'04':'03')+'</span><span class="jp">作り方動画</span><span class="en">VIDEO</span></div>' +
+        '<div class="vid" id="vid" data-vid="'+esc(r.video)+'">' +
+          '<img src="https://i.ytimg.com/vi/'+esc(r.video)+'/hqdefault.jpg" alt="" loading="lazy">' +
+          '<span class="vplay">▶</span>' +
+        '</div>' +
+        '<p class="cap">タップすると YouTube の動画が再生されます。通信量にご注意ください。</p>' +
+        (r.videoNote ? '<div class="note vnote"><b>この動画について</b>'+esc(r.videoNote)+'</div>' : '') +
+        '</div>';
+    }else if(plId(r)){
+      vsec = '<div class="sec"><div class="sech"><span class="no">'+(steps?'04':'03')+'</span><span class="jp">作り方動画</span><span class="en">VIDEO</span></div>' +
+        '<a class="btn vlink" href="'+plUrl(r)+'" target="_blank" rel="noopener">作り方動画の一覧を YouTube で開く</a>' +
+        '<p class="cap">この品の動画はまだ紐づけていません。一覧から探してください。</p></div>';
+    }
+
+    var notes = (r.notes && r.notes.length)
+      ? '<div class="note"><b>申し送り</b><ul>'+r.notes.map(function(n){ return '<li>'+esc(n)+'</li>'; }).join("")+'</ul></div>' : "";
+
+    var hero = (r.photo === false)
+      ? '<div class="dhero nophoto">写真は未登録です（用紙の画像が届いていません）</div>'
+      : '<div class="dhero"><img src="/age3-recipe/'+esc(r.id)+'-hero.jpg" alt="'+esc(r.name)+'" onerror="A3nohero(this)"></div>';
+
+    var acts = (r.photo === false)
+      ? '<div class="acts one"><button class="btn pri" id="cook">作りながら見る</button></div>'
+      : '<div class="acts">' +
+          '<button class="btn pri" id="cook">作りながら見る</button>' +
+          '<button class="btn" data-zoom="/age3-recipe/'+esc(r.id)+'-card.jpg">レシピカード原本' +
+          (r.cardOutdated ? '<br><small>（前の版）</small>' : '') + '</button>' +
+        '</div>' +
+        (r.cardOutdated ? '<p class="cap">原本の画像は前の版の用紙です。分量・手順は新しい用紙に合わせています。</p>' : '');
+
+    return '<div class="dbar">' +
+        '<button class="back" id="back">&larr; 一覧</button><span class="sp"></span>' +
+        '<button class="entog" id="entog" aria-pressed="'+showEn+'">EN</button>' +
+      '</div>' + hero +
+      '<div class="shell">' +
+        '<div class="dhead">' +
+          (r.serve ? '<div class="dserve">'+esc(r.serve)+'</div>' : '') +
+          '<h2>'+esc(r.name)+'</h2>' +
+          '<div class="den">'+esc(r.en)+'</div>' +
+          '<div class="dmeta">'+meta.join("")+'</div>' +
+          (r.status ? '<div class="stband '+esc(r.status.tone)+'"><b>'+esc(r.status.label)+'</b>' +
+            '<span>'+esc(r.status.detail||"")+
+            '<br>2026年8月5日のお知らせより。<button class="go" id="tonotice">お知らせを見る</button></span></div>' : '') +
+        '</div>' +
+        '<div class="sec"><div class="sech"><span class="no">01</span><span class="jp">材料</span><span class="en">INGREDIENTS</span><span class="rt">'+esc(r.yield||"")+'</span></div>' +
+          '<ul class="ing">'+ing+'</ul>' + sub + notes + '</div>' +
+        '<div class="sec"><div class="sech"><span class="no">02</span><span class="jp">作り方</span><span class="en">METHOD</span><span class="rt">'+r.steps.length+'手順</span></div>' +
+          '<ol class="mth">'+mth+'</ol></div>' +
+        steps + vsec + fin + acts +
+        '<p class="dfoot">出どころ：Age.3 STANDARD RECIPE カード'+(r.code?'（'+esc(r.code)+'）':'')+'<br>' +
+        'CONFIDENTIAL — 社外秘。持ち出し・複製・SNS等への掲載を禁じます。</p>' +
+      '</div>';
+  }
+
+  var detailEl = null;
+  function applyEn(root){
+    [].forEach.call((root||document).querySelectorAll(".en-line"), function(el){
+      el.style.display = showEn ? "" : "none";
+    });
+  }
+  function openDetail(id){
+    var r = byId(id); if(!r){ location.hash = ""; return; }
+    closeDetail();
+    detailEl = document.createElement("div");
+    detailEl.className = "detail";
+    detailEl.innerHTML = detailHtml(r);
+    document.body.appendChild(detailEl);
+    document.documentElement.classList.add("noscroll");
+    applyEn(detailEl);
+    detailEl.querySelector("#back").onclick = function(){ history.back(); };
+    detailEl.querySelector("#entog").onclick = function(){
+      showEn = !showEn; this.setAttribute("aria-pressed", String(showEn));
+      try{ localStorage.setItem(EN_KEY, showEn ? "1" : "0"); }catch(e){}
+      applyEn(detailEl);
+    };
+    detailEl.querySelector("#cook").onclick = function(){ openCook(r); };
+    detailEl.addEventListener("click", function(e){
+      var z = e.target.closest("[data-zoom]"); if(z){ openViewer(z.dataset.zoom); return; }
+      if(e.target.closest("#tonotice")){ location.hash = "#/notice"; return; }
+      var v = e.target.closest(".vid[data-vid]");
+      if(v){
+        var id = v.dataset.vid;
+        v.innerHTML = '<iframe src="https://www.youtube-nocookie.com/embed/' + encodeURIComponent(id) +
+          '?rel=0&playsinline=1&autoplay=1" title="作り方動画" frameborder="0" allowfullscreen ' +
+          'allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"></iframe>';
+        v.removeAttribute("data-vid");
+      }
+    });
+  }
+  function closeDetail(){
+    if(detailEl){ detailEl.remove(); detailEl = null; }
+    document.documentElement.classList.remove("noscroll");
+  }
+
+  /* ---------- 商品切り替えのお知らせ ---------- */
+  var NOTICE = (typeof RECIPE_NOTICE !== "undefined") ? RECIPE_NOTICE : null;
+
+  if(NOTICE){
+    $("#noticebtn").innerHTML = esc(NOTICE.title) +
+      '<small>' + esc(NOTICE.asOf) + '時点の決定事項。終了する品・9月から始まる品をまとめています。</small>';
+    $("#noticebtn").addEventListener("click", function(){ location.hash = "#/notice"; });
+  }else{
+    $("#noticebtn").hidden = true;
+  }
+
+  function noticeHtml(){
+    var n = NOTICE;
+    var secs = n.sections.map(function(s){
+      var body;
+      if(s.items){
+        body = '<ul class="nitems">' + s.items.map(function(it){
+          var cls = (it.state === "終了") ? "x" : "o";
+          return '<li>' +
+            (it.code ? '<span class="cd">'+esc(it.code)+'</span>' : '') +
+            '<span class="bd"><span class="nm">'+esc(it.name)+'</span>' +
+            (it.detail ? '<span class="dt">'+esc(it.detail)+'</span>' : '') +
+            (it.recipe ? '<button class="go" data-go="'+esc(it.recipe)+'">レシピを見る</button>' : '') +
+            '</span>' +
+            '<span class="stt '+cls+'">'+esc(it.state)+'</span></li>';
+        }).join("") + '</ul>';
+      }else{
+        body = '<ul class="nlines">' + s.lines.map(function(l){ return '<li>'+esc(l)+'</li>'; }).join("") + '</ul>';
+      }
+      return '<div class="nsec"><div class="nhead '+esc(s.tone)+'">' +
+        '<span class="w">'+esc(s.when)+'</span><span class="t">'+esc(s.title)+'</span>' +
+        (s.scope ? '<span class="sc">'+esc(s.scope)+'</span>' : '') +
+        '</div>' + body + '</div>';
+    }).join("");
+
+    return '<div class="dbar"><button class="back" id="back">&larr; 一覧</button></div>' +
+      '<div class="shell">' +
+        '<div class="dhead"><div class="dserve">Age.3 ／ ANCHOR　店舗共有</div>' +
+          '<h2>'+esc(n.title)+'</h2>' +
+          '<div class="den">'+esc(n.source)+'</div>' +
+          '<div class="dmeta"><span class="tag">作成：'+esc(n.author)+'</span>' +
+            '<span class="tag">共有先：'+esc(n.audience)+'</span>' +
+            '<span class="tag cd">'+esc(n.asOf)+'時点</span></div>' +
+        '</div>' +
+        '<div class="ncaution">'+esc(n.draft)+'</div>' +
+        secs +
+        '<p class="nmeta">'+esc(n.change)+'<br>' +
+        'このお知らせは、いただいた「商品切り替えのお知らせ」に書かれている内容だけを写しています。書かれていない品目・日付は足していません。</p>' +
+        '<div class="dfoot">出どころ：Age.3 ／ ANCHOR「商品切り替えのお知らせ」（店舗共有）<br>' +
+        'CONFIDENTIAL — 社外秘。持ち出し・複製・SNS等への掲載を禁じます。</div>' +
+      '</div>';
+  }
+
+  var noticeEl = null;
+  function openNotice(){
+    if(!NOTICE){ location.hash = ""; return; }
+    closeNotice();
+    noticeEl = document.createElement("div");
+    noticeEl.className = "detail";
+    noticeEl.innerHTML = noticeHtml();
+    document.body.appendChild(noticeEl);
+    document.documentElement.classList.add("noscroll");
+    noticeEl.querySelector("#back").onclick = function(){ history.back(); };
+    noticeEl.addEventListener("click", function(e){
+      var g = e.target.closest("[data-go]");
+      if(g) location.hash = "#/r/" + g.dataset.go;
+    });
+  }
+  function closeNotice(){
+    if(noticeEl){ noticeEl.remove(); noticeEl = null; }
+    if(!detailEl) document.documentElement.classList.remove("noscroll");
+  }
+
+  /* ---------- 質問箱 ---------- */
+  var QUESTIONS = (typeof RECIPE_QUESTIONS !== "undefined") ? RECIPE_QUESTIONS : [];
+  var ANS_KEY = "age3-recipe:answers";
+  var answers = {};
+  try{ answers = JSON.parse(localStorage.getItem(ANS_KEY) || "{}") || {}; }catch(e){ answers = {}; }
+  function saveAnswers(){ try{ localStorage.setItem(ANS_KEY, JSON.stringify(answers)); }catch(e){} }
+  function isAnswered(q){
+    var a = answers[q.id];
+    return !!(a && ((a.pick && a.pick.length) || (a.free && a.free.trim())));
+  }
+  function openCount(){ return QUESTIONS.filter(function(q){ return !q.answered && !isAnswered(q); }).length; }
+
+  var fab = document.createElement("button");
+  fab.className = "askfab"; fab.id = "askfab";
+  fab.addEventListener("click", function(){ location.hash = "#/ask"; });
+  document.body.appendChild(fab);
+
+  function paintFab(){
+    var n = openCount();
+    fab.innerHTML = '質問箱<span class="n">' + (n ? n : '✓') + '</span>';
+    fab.classList.toggle("done", n === 0);
+    fab.setAttribute("aria-label", n ? ("答えていない質問が" + n + "件あります") : "質問はすべて答えました");
+  }
+  function showFab(on){ fab.style.display = on ? "flex" : "none"; }
+  paintFab();
+
+  function askHtml(){
+    var open = QUESTIONS.filter(function(q){ return !q.answered && !isAnswered(q); });
+    var done = QUESTIONS.filter(function(q){ return  q.answered ||  isAnswered(q); });
+
+    function card(q){
+      var a = answers[q.id] || { pick: [], free: "" };
+      var rec = q.recipe ? byId(q.recipe) : null;
+      var ok = isAnswered(q);
+      return '<div class="qcard'+(ok?' ok':'')+'" data-q="'+esc(q.id)+'">' +
+        '<div class="qtop">' +
+          '<span class="qtag'+(ok?' ok':'')+'">'+esc(ok ? '答えました' : q.tag)+'</span>' +
+          '<p class="qq">'+esc(q.q)+'</p>' +
+          '<p class="qwhy">'+esc(q.why)+'</p>' +
+          (rec ? '<button class="qlink" data-go="'+esc(rec.id)+'">'+esc(rec.name)+'のレシピを見る</button>' : '') +
+        '</div>' +
+        (q.options ? '<div class="qopts">' + q.options.map(function(o,i){
+            return '<button class="qopt" data-pick="'+i+'" aria-pressed="'+((a.pick||[]).indexOf(i)>=0)+'">'+esc(o)+'</button>';
+          }).join("") + '</div>' : '') +
+        '<div class="qfree"><label>補足があれば書いてください（書かなくても大丈夫です）</label>' +
+          '<textarea data-free rows="2">'+esc(a.free||"")+'</textarea></div>' +
+      '</div>';
+    }
+
+    return '<div class="dbar"><button class="back" id="back">&larr; 一覧</button></div>' +
+      '<div class="shell">' +
+        '<div class="dhead"><div class="dserve">Age.3 レシピ</div><h2>質問箱</h2>' +
+          '<div class="den">こちらから確認したいことを、いつでも答えられるようにまとめています</div></div>' +
+        '<div class="asklead">レシピカードや動画を突き合わせたときに、<b>用紙だけでは決められなかったこと</b>を並べています。' +
+          '推測で埋めずにここへ出しています。<br>答えは<b>この端末に自動で保存</b>されるので、途中でやめても消えません。' +
+          '書き終えたら、いちばん下の<b>「答えをまとめて送る」</b>を押してください。</div>' +
+
+        (open.length
+          ? '<div class="sec"><div class="sech"><span class="no">'+(open.length<10?'0':'')+open.length+'</span>' +
+            '<span class="jp">まだ答えていない</span><span class="en">OPEN</span></div>' +
+            open.map(card).join("") + '</div>'
+          : '<div class="askdone">まだ答えていない質問はありません。ありがとうございます。</div>') +
+
+        (done.length
+          ? '<div class="sec"><div class="sech"><span class="no">'+(done.length<10?'0':'')+done.length+'</span>' +
+            '<span class="jp">答えたもの</span><span class="en">ANSWERED</span></div>' +
+            done.map(card).join("") + '</div>'
+          : '') +
+
+        '<div class="sec"><div class="sech"><span class="jp">そのほかの連絡・要望</span><span class="en">FREE</span></div>' +
+          '<div class="qcard"><div class="qfree"><label>直したいところ、足したいレシピ、うまく動かないところなど</label>' +
+          '<textarea id="askfree" rows="4">'+esc((answers.__free && answers.__free.free) || "")+'</textarea></div></div></div>' +
+
+        '<div class="asksend">' +
+          '<button class="btn pri" id="asksend" style="width:100%">答えをまとめて送る</button>' +
+          '<div class="acts" style="margin-top:9px">' +
+            '<button class="btn" id="askcopy">文章をコピー</button>' +
+            '<button class="btn" id="askclear">書いたものを消す</button>' +
+          '</div>' +
+          '<p class="asknote">「送る」を押すと、答えをまとめた文章ができます。LINEなどに貼って送ってください。' +
+          'この端末の中だけに保存されるので、送るまではこちらに届きません。</p>' +
+        '</div>' +
+      '</div>';
+  }
+
+  function answerText(){
+    var d = new Date();
+    var pad = function(n){ return (n<10?"0":"")+n; };
+    var lines = ["Age.3 レシピ 質問箱の答え",
+                 d.getFullYear()+"年"+(d.getMonth()+1)+"月"+d.getDate()+"日 "+pad(d.getHours())+":"+pad(d.getMinutes()), ""];
+    var any = false;
+    QUESTIONS.forEach(function(q){
+      var a = answers[q.id]; if(!a) return;
+      var picks = (a.pick||[]).map(function(i){ return q.options ? q.options[i] : ""; }).filter(Boolean);
+      var free = (a.free||"").trim();
+      if(!picks.length && !free) return;
+      any = true;
+      lines.push("■ " + q.q);
+      if(picks.length) lines.push("　→ " + picks.join(" ／ "));
+      if(free)         lines.push("　補足：" + free);
+      lines.push("");
+    });
+    var f = (answers.__free && answers.__free.free || "").trim();
+    if(f){ any = true; lines.push("■ そのほかの連絡・要望"); lines.push("　" + f); lines.push(""); }
+    if(!any) return null;
+    lines.push("（Age.3 レシピの質問箱から送信）");
+    return lines.join("\n");
+  }
+
+  var askEl = null;
+  function openAsk(){
+    closeAsk();
+    askEl = document.createElement("div");
+    askEl.className = "detail";
+    askEl.innerHTML = askHtml();
+    document.body.appendChild(askEl);
+    document.documentElement.classList.add("noscroll");
+    askEl.querySelector("#back").onclick = function(){ history.back(); };
+
+    askEl.addEventListener("click", function(e){
+      var g = e.target.closest("[data-go]");
+      if(g){ location.hash = "#/r/" + g.dataset.go; return; }
+      var o = e.target.closest(".qopt");
+      if(o){
+        var card = o.closest(".qcard"), id = card.dataset.q, i = +o.dataset.pick;
+        var a = answers[id] || (answers[id] = { pick: [], free: "" });
+        a.pick = a.pick || [];
+        var at = a.pick.indexOf(i);
+        if(at >= 0) a.pick.splice(at, 1); else a.pick.push(i);
+        [].forEach.call(card.querySelectorAll(".qopt"), function(btn){
+          btn.setAttribute("aria-pressed", String(a.pick.indexOf(+btn.dataset.pick) >= 0));
+        });
+        saveAnswers(); paintFab();
+        card.classList.toggle("ok", isAnswered({ id:id }) );
+        return;
+      }
+    });
+
+    askEl.addEventListener("input", function(e){
+      var t = e.target;
+      if(t.id === "askfree"){
+        answers.__free = { free: t.value }; saveAnswers(); return;
+      }
+      if(t.hasAttribute && t.hasAttribute("data-free")){
+        var id = t.closest(".qcard").dataset.q;
+        var a = answers[id] || (answers[id] = { pick: [], free: "" });
+        a.free = t.value; saveAnswers(); paintFab();
+      }
+    });
+
+    askEl.querySelector("#asksend").onclick = function(){
+      var txt = answerText();
+      if(!txt){ alert("まだ何も書かれていません。\n選択肢を押すか、文章を書いてから送ってください。"); return; }
+      if(navigator.share){
+        navigator.share({ text: txt }).catch(function(){});
+      }else{
+        copyText(txt, "答えをコピーしました。LINEなどに貼って送ってください。");
+      }
+    };
+    askEl.querySelector("#askcopy").onclick = function(){
+      var txt = answerText();
+      if(!txt){ alert("まだ何も書かれていません。"); return; }
+      copyText(txt, "答えをコピーしました。LINEなどに貼って送ってください。");
+    };
+    askEl.querySelector("#askclear").onclick = function(){
+      if(!window.confirm("この端末に書いた答えをすべて消します。よろしいですか？")) return;
+      answers = {}; saveAnswers(); paintFab();
+      askEl.innerHTML = askHtml();
+      openAsk();
+    };
+  }
+  function closeAsk(){
+    if(askEl){ askEl.remove(); askEl = null; }
+    if(!detailEl && !noticeEl) document.documentElement.classList.remove("noscroll");
+  }
+
+  function copyText(txt, msg){
+    function fallback(){
+      var ta = document.createElement("textarea");
+      ta.value = txt; ta.style.position = "fixed"; ta.style.opacity = "0";
+      document.body.appendChild(ta); ta.select();
+      try{ document.execCommand("copy"); alert(msg); }catch(e){ alert("コピーできませんでした。文章を長押しで選んでコピーしてください。"); }
+      ta.remove();
+    }
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(txt).then(function(){ alert(msg); }, fallback);
+    }else fallback();
+  }
+
+  /* ---------- 作りながらモード ---------- */
+  var cookEl = null, wakeLock = null;
+  function openCook(r){
+    var i = 0, last = r.steps.length; /* last index = 完成基準ページ */
+    cookEl = document.createElement("div");
+    cookEl.className = "cook";
+    cookEl.innerHTML =
+      '<div class="cbar"><button class="back" id="cx">&times; とじる</button>' +
+      '<span class="ttl">'+esc(r.name)+'</span><span class="cnt" id="ccnt"></span></div>' +
+      '<div class="cbody" id="cbody"></div>' +
+      '<div class="cdots" id="cdots"></div>' +
+      '<div class="cnav"><button class="btn" id="cprev">&larr; もどる</button><button class="btn pri" id="cnext">つぎへ &rarr;</button></div>';
+    document.body.appendChild(cookEl);
+    document.documentElement.classList.add("noscroll");
+
+    function draw(){
+      var body = cookEl.querySelector("#cbody");
+      if(i < last){
+        var s = r.steps[i];
+        body.innerHTML = '<div class="cno">STEP ' + (i+1) + ' / ' + last + '</div>' +
+          '<div class="cjp">'+esc(s.jp)+'</div>' +
+          (s.en && showEn ? '<div class="cen">'+esc(s.en)+'</div>' : '') +
+          (s.point ? '<div class="pt"><span class="lb">POINT</span><div class="jp">'+esc(s.point.jp)+'</div>' +
+            (s.point.en && showEn ? '<div class="en">'+esc(s.point.en)+'</div>' : '') + '</div>' : '') +
+          (r.oldFormat ? '' : '<button class="btn" id="cshot" style="width:100%;margin-top:22px">工程写真を見る</button>') +
+          ((r.video || plId(r))
+            ? '<a class="btn vlink" style="margin-top:9px" href="' +
+              (r.video ? 'https://www.youtube.com/watch?v=' + encodeURIComponent(r.video) : plUrl(r)) +
+              '" target="_blank" rel="noopener">作り方動画を見る</a>' : '');
+      }else{
+        body.innerHTML = '<div class="cno">できあがり</div>' +
+          (r.finish
+            ? '<div class="cfin"><div class="lb" style="font-size:10.5px;letter-spacing:.2em;color:#6E6C67">完成基準 / FINISH STANDARD</div>' +
+              '<div class="cjp" style="font-size:21px;margin-top:8px">'+esc(r.finish.jp)+'</div>' +
+              (r.finish.en && showEn ? '<div class="cen">'+esc(r.finish.en)+'</div>' : '') + '</div>'
+            : '<div class="cjp" style="font-size:19px">このレシピのカードには完成基準が書かれていません。</div>') +
+          (r.photo === false ? ''
+            : '<img src="/age3-recipe/'+esc(r.id)+'-hero.jpg" alt="'+esc(r.name)+'" onerror="this.remove()" style="max-width:280px;margin:18px auto 0">');
+      }
+      var sh = body.querySelector("#cshot");
+      if(sh) sh.onclick = function(){ openViewer("/age3-recipe/"+r.id+"-steps.jpg"); };
+      body.scrollTop = 0;
+      cookEl.querySelector("#ccnt").textContent = (i<last ? (i+1)+"/"+last : "完成");
+      cookEl.querySelector("#cdots").innerHTML =
+        r.steps.map(function(_,n){ return '<i class="'+(n===i?"on":(n<i?"done":""))+'"></i>'; }).join("") +
+        '<i class="'+(i===last?"on":"")+'"></i>';
+      cookEl.querySelector("#cprev").disabled = (i===0);
+      cookEl.querySelector("#cprev").style.opacity = i===0 ? ".4" : "1";
+      cookEl.querySelector("#cnext").textContent = (i>=last) ? "とじる" : "つぎへ →";
+    }
+    cookEl.querySelector("#cprev").onclick = function(){ if(i>0){ i--; draw(); } };
+    cookEl.querySelector("#cnext").onclick = function(){ if(i>=last){ closeCook(); } else { i++; draw(); } };
+    cookEl.querySelector("#cx").onclick = closeCook;
+    draw();
+
+    syncFab();
+    if(navigator.wakeLock && navigator.wakeLock.request){
+      navigator.wakeLock.request("screen").then(function(w){ wakeLock = w; }).catch(function(){});
+    }
+  }
+  function closeCook(){
+    if(cookEl){ cookEl.remove(); cookEl = null; }
+    if(wakeLock){ try{ wakeLock.release(); }catch(e){} wakeLock = null; }
+    if(!detailEl) document.documentElement.classList.remove("noscroll");
+    syncFab();
+  }
+
+  /* ---------- 画像ビューア ---------- */
+  var viewEl = null;
+  function openViewer(src){
+    closeViewer();
+    viewEl = document.createElement("div");
+    viewEl.innerHTML = '<button class="vclose" id="vx">&times; とじる</button>' +
+      '<div class="viewer" id="vwrap"><p class="vhint">指を広げるともっと大きくなります</p>' +
+      '<img src="'+esc(src)+'" alt="拡大"></div>';
+    document.body.appendChild(viewEl);
+    viewEl.querySelector("#vx").onclick = closeViewer;
+    syncFab();
+  }
+  function closeViewer(){ if(viewEl){ viewEl.remove(); viewEl = null; } syncFab(); }
+
+  /* ---------- ルーティング ---------- */
+  function syncFab(){ showFab(!(cookEl || viewEl || askEl)); }
+
+  function route(){
+    closeCook(); closeViewer();
+    var h = location.hash || "";
+    if(h === "#/ask"){ closeDetail(); closeNotice(); openAsk(); syncFab(); return; }
+    closeAsk();
+    if(h === "#/notice"){ closeDetail(); openNotice(); syncFab(); return; }
+    closeNotice();
+    var m = /^#\/r\/([a-z0-9\-]+)$/.exec(h);
+    if(m) openDetail(m[1]); else closeDetail();
+    syncFab();
+  }
+  window.addEventListener("hashchange", route);
+  document.addEventListener("keydown", function(e){
+    if(e.key === "Escape"){
+      if(viewEl) closeViewer();
+      else if(cookEl) closeCook();
+      else if(detailEl || noticeEl || askEl) history.back();
+    }
+  });
+
+  /* ---------- リセット ---------- */
+  $("#reset").addEventListener("click", function(){
+    var ok = window.confirm(
+      "この端末の記録を消します。\n\n" +
+      "・合言葉をおぼえている記録\n" +
+      "・英語表示の設定\n\n" +
+      "次に開くときは、また4桁の番号を入れることになります。\n" +
+      "レシピそのものは消えません。\n\nよろしいですか？");
+    if(!ok) return;
+    try{
+      localStorage.removeItem("age3-recipe:ok3");
+      localStorage.removeItem("age3-recipe:ok2");
+      localStorage.removeItem("age3-recipe:ok");
+      localStorage.removeItem(EN_KEY);
+    }catch(e){}
+    location.hash = "";
+    location.reload();
+  });
+
+  render();
+  route();
+})();
+</script>
+</body>
+</html>
