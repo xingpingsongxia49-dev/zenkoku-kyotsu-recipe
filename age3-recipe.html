@@ -323,6 +323,73 @@ footer{margin-top:26px;padding:16px 0 8px;border-top:1px solid var(--line);font-
 }
 .rbtn:active{background:#EDEAE3}
 .rnote{margin:9px 0 0;font-size:11px;color:var(--hai);line-height:1.7}
+
+/* ---------- 印刷用レシピカード ---------- */
+#printroot{display:none}
+.pcard{width:186mm;padding:0;font-family:"Hiragino Kaku Gothic ProN","Yu Gothic","Noto Sans JP",sans-serif;color:#1A1917;background:#fff}
+.pcard + .pcard{margin-top:12mm}
+.ph-top{display:flex;justify-content:space-between;align-items:flex-start;border-bottom:0}
+.ph-brand{font-size:19pt;font-weight:800;letter-spacing:.02em;line-height:1}
+.ph-brand small{display:block;font-size:6.5pt;font-weight:400;letter-spacing:.34em;color:#6E6C67;margin-top:3mm}
+.ph-meta{text-align:right;font-size:7.4pt;color:#1A1917;line-height:1.75}
+.ph-meta b{font-weight:700}
+.ph-meta span{color:#6E6C67;letter-spacing:.12em;margin-right:1.5mm}
+.pserve{margin-top:5mm;font-size:7.6pt;letter-spacing:.24em;color:#6E6C67}
+.pname{font-size:19pt;font-weight:800;letter-spacing:.01em;line-height:1.25;margin-top:2mm}
+.pname-en{font-size:9pt;color:#6E6C67;margin-top:1mm}
+.prule{height:1px;background:#DCD6CB;margin:3mm 0 0}
+.pcols{display:flex;gap:5mm;margin-top:3mm}
+.pcol-l{width:52%}
+.pcol-r{width:48%}
+.psec{background:#EDEAE3;border-radius:1mm;padding:1.4mm 2.5mm;display:flex;align-items:baseline;gap:2.5mm;margin-top:3mm}
+.psec:first-child{margin-top:0}
+.psec .n{font-size:9.5pt;font-weight:800}
+.psec .j{font-size:9.5pt;font-weight:800}
+.psec .e{font-size:6.4pt;letter-spacing:.16em;color:#9A968E}
+.psec .r{margin-left:auto;font-size:6.6pt;color:#6E6C67}
+.ping{list-style:none;margin:0;padding:0}
+.ping li{display:flex;align-items:flex-end;gap:2mm;padding:1.2mm .5mm;border-bottom:.3pt solid #DCD6CB}
+.ping .nm{flex:1;min-width:0}
+.ping .nm b{display:block;font-size:8.4pt;font-weight:700;line-height:1.35}
+.ping .nm i{display:block;font-style:normal;font-size:6.2pt;color:#6E6C67;line-height:1.3}
+.ping .qt{font-size:10pt;font-weight:800;white-space:nowrap;font-variant-numeric:tabular-nums}
+.ping .qt em{font-style:normal;font-size:6.6pt;font-weight:700;margin-left:.3mm}
+.ping .qt.none{font-size:6.6pt;font-weight:700;color:#6E6C67}
+.pmth{list-style:none;margin:0;padding:0}
+.pmth li{display:flex;gap:2.2mm;padding:1.5mm .3mm;border-bottom:.3pt solid #DCD6CB}
+.pmth .no{flex:0 0 4.6mm;height:4.6mm;border-radius:50%;background:#1A1917;color:#fff;font-size:6.8pt;font-weight:800;display:flex;align-items:center;justify-content:center;margin-top:.6mm}
+.pmth .bd{flex:1;min-width:0}
+.pmth .j{display:block;font-size:8.4pt;font-weight:700;line-height:1.5}
+.pmth .e{display:block;font-size:6.1pt;color:#6E6C67;line-height:1.45;margin-top:.6mm}
+.ppt{margin-top:1.1mm;background:#FAF8F3;border:.3pt solid #E7E2D6;border-left:1pt solid #7E7A2A;border-radius:.5mm;padding:1.2mm 1.8mm}
+.ppt .lb{display:inline-block;background:#7E7A2A;color:#fff;font-size:5.4pt;letter-spacing:.14em;font-weight:800;padding:.3mm 1.4mm;border-radius:.5mm}
+.ppt .j{font-size:6.8pt;font-weight:700;color:#5F5C22;line-height:1.45;margin-top:.8mm}
+.ppt .e{font-size:5.9pt;color:#8A8768;line-height:1.4;margin-top:.4mm}
+.phero{border:.3pt solid #DCD6CB;border-radius:1mm;padding:2mm;text-align:center}
+.phero img{max-width:46mm;max-height:64mm;margin:0 auto;display:block}
+.phero .nop{font-size:7pt;color:#9A968E;padding:16mm 0}
+.pshot{margin-top:3mm}
+.pshot img{width:100%;display:block}
+.pfin{margin-top:4mm;background:#EDEAE3;border-radius:1mm;padding:2.4mm 3mm}
+.pfin .lb{font-size:6.4pt;letter-spacing:.2em;color:#6E6C67}
+.pfin .j{font-size:10pt;font-weight:800;line-height:1.5;margin-top:1.4mm}
+.pfin .e{font-size:6.8pt;color:#6E6C67;line-height:1.4;margin-top:1mm}
+.pnote{margin-top:3mm;border-left:1pt solid #C9A87C;padding:1.5mm 2.5mm;font-size:6.6pt;line-height:1.6;color:#5A564F}
+.pnote b{display:block;font-size:5.8pt;letter-spacing:.16em;color:#6E6C67;margin-bottom:.8mm}
+.pfoot{display:flex;justify-content:space-between;margin-top:3mm;padding-top:1.5mm;border-top:.3pt solid #DCD6CB;font-size:6.2pt;color:#6E6C67;letter-spacing:.06em}
+
+@page{size:A4 portrait;margin:12mm}
+@media print{
+  html.printing body>*{display:none !important}
+  html.printing #printroot{display:block !important}
+  html.printing,html.printing body{background:#fff !important}
+  html.printing body{padding:0 !important;margin:0 !important}
+  html.printing #printroot{padding:0;margin:0}
+  .pcard{page-break-after:always;break-after:page}
+  .pcard + .pcard{margin-top:0 !important}
+  .pcard:last-child{page-break-after:auto;break-after:auto}
+  .pmth li,.ping li,.pfin,.phero{page-break-inside:avoid;break-inside:avoid}
+}
 </style>
 </head>
 <body>
@@ -381,6 +448,7 @@ footer{margin-top:26px;padding:16px 0 8px;border-top:1px solid var(--line);font-
 <main class="shell">
   <button class="noticebtn" id="noticebtn"></button>
   <p class="count" id="count"></p>
+  <button class="rbtn" id="printall" style="width:100%;margin:6px 0 2px" hidden></button>
   <div class="grid" id="grid"></div>
   <p class="empty" id="empty" hidden>見つかりませんでした。品名か材料名で探してみてください。</p>
   <footer>
@@ -415,6 +483,96 @@ footer{margin-top:26px;padding:16px 0 8px;border-top:1px solid var(--line);font-
   try{ var v = localStorage.getItem(EN_KEY); if(v==="0") showEn = false; }catch(e){}
 
   /* ---------- 一覧 ---------- */
+
+  /* ---------- 印刷用レシピカード ---------- */
+  function A3cardIng(rows){
+    return rows.map(function(i){
+      var qt = (i[2]==null)
+        ? '<span class="qt none">分量の記載なし</span>'
+        : '<span class="qt">'+esc(i[2])+(i[3]?'<em>'+esc(i[3])+'</em>':'')+'</span>';
+      return '<li><span class="nm"><b>'+esc(i[0])+'</b>'+(i[1]?'<i>'+esc(i[1])+'</i>':'')+'</span>'+qt+'</li>';
+    }).join('');
+  }
+  function A3card(r){
+    var hero = (r.photo === false)
+      ? '<div class="nop">写真 未登録</div>'
+      : '<img src="/age3-recipe/'+esc(r.id)+'-hero.jpg" alt="" onerror="this.parentNode.innerHTML=\'<div class=&quot;nop&quot;>写真 未登録</div>\'">';
+    var shot = (r.oldFormat || r.photo === false) ? '' :
+      '<div class="pshot"><img src="/age3-recipe/'+esc(r.id)+'-steps.jpg" alt="" onerror="this.parentNode.remove()"></div>';
+    var mth = r.steps.map(function(s,n){
+      var pt = s.point ? '<div class="ppt"><span class="lb">POINT</span><div class="j">'+esc(s.point.jp)+'</div>'+
+             (s.point.en?'<div class="e">'+esc(s.point.en)+'</div>':'')+'</div>' : '';
+      return '<li><span class="no">'+(n+1)+'</span><span class="bd"><span class="j">'+esc(s.jp)+'</span>'+
+             (s.en?'<span class="e">'+esc(s.en)+'</span>':'')+pt+'</span></li>';
+    }).join('');
+    var notes = (r.notes && r.notes.length)
+      ? '<div class="pnote"><b>申し送り</b>'+r.notes.map(esc).join('<br>')+'</div>' : '';
+    var sub = r.sub ? '<div class="pnote"><b>仕込み ／ '+esc(r.sub.title)+'</b>'+
+        r.sub.ing.map(function(i){return esc(i[0])+'　'+(i[2]==null?'—':esc(i[2])+esc(i[3]||''));}).join('<br>')+
+        (r.sub.note?'<br>'+esc(r.sub.note):'')+'</div>' : '';
+    return '<section class="pcard">' +
+      '<div class="ph-top"><div class="ph-brand">Age.3<small>R E C I P E</small></div>' +
+        '<div class="ph-meta">' +
+          (r.code?'<div><span>CODE</span><b>'+esc(r.code)+'</b></div>':'') +
+          (r.category?'<div><span>CATEGORY</span>'+esc(r.category)+'</div>':'') +
+          (r.ver?'<div><span>VER</span>'+esc(r.ver)+(r.issued?' / '+esc(r.issued):'')+'</div>':'') +
+        '</div></div>' +
+      (r.serve?'<div class="pserve">'+esc(r.serve)+'</div>':'') +
+      '<div class="pname">'+esc(r.name)+'</div>' +
+      '<div class="pname-en">'+esc(r.en)+'</div>' +
+      '<div class="prule"></div>' +
+      '<div class="pcols"><div class="pcol-l">' +
+        '<div class="psec"><span class="n">01</span><span class="j">材料</span><span class="e">INGREDIENTS</span><span class="r">'+esc(r.yield||'')+'</span></div>' +
+        '<ul class="ping">'+A3cardIng(r.ing)+'</ul>' + sub +
+        '<div class="psec"><span class="n">02</span><span class="j">作り方</span><span class="e">METHOD</span><span class="r">'+r.steps.length+'手順</span></div>' +
+        '<ul class="pmth">'+mth+'</ul>' +
+      '</div><div class="pcol-r">' +
+        '<div class="phero">'+hero+'</div>' + shot + notes +
+      '</div></div>' +
+      (r.finish?'<div class="pfin"><div class="lb">完成基準 / FINISH STANDARD</div><div class="j">'+esc(r.finish.jp)+'</div>'+
+        (r.finish.en?'<div class="e">'+esc(r.finish.en)+'</div>':'')+'</div>':'') +
+      '<div class="pfoot"><span>Age.3 STANDARD RECIPE</span><span>CONFIDENTIAL — DO NOT COPY</span></div>' +
+      '</section>';
+  }
+  function A3print(list){
+    var root = document.getElementById('printroot');
+    if(!root){ root = document.createElement('div'); root.id = 'printroot'; document.body.appendChild(root); }
+    root.innerHTML = list.map(A3card).join('');
+    var imgs = [].slice.call(root.querySelectorAll('img'));
+    var left = imgs.length;
+    function fit(){
+      var LIMIT = 1020; /* A4 297mm - 上下12mm余白 相当 */
+      [].forEach.call(root.querySelectorAll('.pcard'), function(c){
+        var k = 1;
+        c.style.zoom = ''; c.style.width = '';
+        for(var i = 0; i < 8; i++){
+          var h = c.getBoundingClientRect().height;
+          if(h <= LIMIT) break;
+          k = Math.max(0.58, k * (LIMIT - 6) / h);
+          c.style.zoom = k;
+          c.style.width = (186 / k) + 'mm';
+        }
+      });
+    }
+    function go(){
+      document.documentElement.classList.add('printing');
+      fit();
+      setTimeout(function(){
+        window.print();
+        setTimeout(function(){ document.documentElement.classList.remove('printing'); root.innerHTML=''; }, 400);
+      }, 120);
+    }
+    if(!left) return go();
+    imgs.forEach(function(im){
+      if(im.complete) { if(!--left) go(); return; }
+      im.addEventListener('load', function(){ if(!--left) go(); });
+      im.addEventListener('error', function(){ if(!--left) go(); });
+    });
+    setTimeout(function(){ if(left>0){ left=0; go(); } }, 4000);
+  }
+
+  window.A3card = A3card; window.A3print = A3print;
+
   /* 画像が無い品は自動で「写真 未登録」に切り替える。
      写真ファイル（/age3-recipe/{id}-hero.jpg 等）を置けば、データを直さなくてもそのまま表示される。 */
   window.A3renumber = function(root){
@@ -490,6 +648,8 @@ footer{margin-top:26px;padding:16px 0 8px;border-top:1px solid var(--line);font-
         '</span></button>';
     }).join("");
     $("#empty").hidden = list.length > 0;
+    var pa = $("#printall");
+    if(pa){ pa.hidden = list.length === 0; pa.textContent = "表示中の" + list.length + "品をまとめて印刷 / PDF"; pa.__list = list; }
     $("#empty").textContent = q ? "見つかりませんでした。品名か材料名で探してみてください。" : "このカテゴリーにはまだレシピが登録されていません。";
     $("#count").textContent = list.length + "品" + (q || filter!=="all" ? "（全"+RECIPES.length+"品中）" : "");
   }
@@ -497,6 +657,7 @@ footer{margin-top:26px;padding:16px 0 8px;border-top:1px solid var(--line);font-
   $("#chips").innerHTML = FILTERS.map(function(f){
     return '<button class="chip" data-f="'+f.id+'" aria-pressed="'+(f.id==="all")+'">'+esc(f.label)+'</button>';
   }).join("");
+  (function(){ var pa = $("#printall"); if(pa) pa.addEventListener("click", function(){ if(this.__list && this.__list.length) A3print(this.__list); }); })();
   $("#chips").addEventListener("click", function(e){
     var b = e.target.closest(".chip"); if(!b) return;
     filter = b.dataset.f;
@@ -585,14 +746,10 @@ footer{margin-top:26px;padding:16px 0 8px;border-top:1px solid var(--line);font-
       ? '<div class="dhero nophoto">写真は未登録です（用紙の画像が届いていません）</div>'
       : '<div class="dhero"><img src="/age3-recipe/'+esc(r.id)+'-hero.jpg" alt="'+esc(r.name)+'" onerror="A3nohero(this)"></div>';
 
-    var acts = (r.photo === false)
-      ? '<div class="acts one"><button class="btn pri" id="cook">作りながら見る</button></div>'
-      : '<div class="acts">' +
+    var acts = '<div class="acts">' +
           '<button class="btn pri" id="cook">作りながら見る</button>' +
-          '<button class="btn" data-zoom="/age3-recipe/'+esc(r.id)+'-card.jpg">レシピカード原本' +
-          (r.cardOutdated ? '<br><small>（前の版）</small>' : '') + '</button>' +
-        '</div>' +
-        (r.cardOutdated ? '<p class="cap">原本の画像は前の版の用紙です。分量・手順は新しい用紙に合わせています。</p>' : '');
+          '<button class="btn" id="printcard">レシピカード<br><small>印刷 / PDF</small></button>' +
+        '</div>';
 
     return '<div class="dbar">' +
         '<button class="back" id="back">&larr; 一覧</button><span class="sp"></span>' +
@@ -640,6 +797,7 @@ footer{margin-top:26px;padding:16px 0 8px;border-top:1px solid var(--line);font-
       applyEn(detailEl);
     };
     detailEl.querySelector("#cook").onclick = function(){ openCook(r); };
+    (function(){ var pb = detailEl.querySelector("#printcard"); if(pb) pb.onclick = function(){ A3print([r]); }; })();
     detailEl.addEventListener("click", function(e){
       var z = e.target.closest("[data-zoom]"); if(z){ openViewer(z.dataset.zoom); return; }
       if(e.target.closest("#tonotice")){ location.hash = "#/notice"; return; }
