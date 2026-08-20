@@ -40,7 +40,11 @@ var RECIPE_META = {
   /* 作り方動画の置き場所（YouTubeのプレイリストID）。
      各レシピの video に動画IDを入れると、その品の詳細に動画が出る。
      入れていない品は、このプレイリストを開くボタンになる。 */
-  videoPlaylist: 'PLd6x2EVLblGi7aDWkzoQT2UbfW5kwLJOL'
+  videoPlaylist: 'PLd6x2EVLblGi7aDWkzoQT2UbfW5kwLJOL',
+
+  /* レギュラー商品用のプレイリスト。group が regular- で始まる品は、
+     動画を紐づけていない場合こちらを開く。 */
+  videoPlaylistRegular: 'PLd6x2EVLblGhlqTur7gwhA-7LGX5d45cM'
 };
 
 /* ============================================================================
@@ -962,6 +966,7 @@ var RECIPES = [
   name: 'ホイップ', en: 'Whipped Cream',
   serve: 'SWEETS 提供 / SERVE', category: '揚げサンド', limited: false,
   group: 'regular-sweets',
+  video: '5KbSGnsnXVw',
   yield: '1個分', kind: 'sweets',
   ing: [
     ['揚げパン（半分）', 'Fried bread (half)', '1/2', '個'],
@@ -981,6 +986,7 @@ var RECIPES = [
   name: 'ジャムいちご', en: 'Jam Strawberry',
   serve: 'SWEETS 提供 / SERVE', category: '揚げサンド', limited: false,
   group: 'regular-sweets',
+  video: 'Ns69FoVChcE',
   yield: '1個分', kind: 'sweets',
   ing: [
     ['揚げパン（半分）', 'Fried bread (half)', '1/2', '個'],
@@ -1008,6 +1014,7 @@ var RECIPES = [
   name: 'チョコいちご', en: 'Chocolate Strawberry',
   serve: 'SWEETS 提供 / SERVE', category: '揚げサンド', limited: false,
   group: 'regular-sweets',
+  video: 'UeysOhYzCTQ',
   yield: '1個分', kind: 'sweets',
   ing: [
     ['揚げパン（半分）', 'Fried bread (half)', '1/2', '個'],
@@ -1035,6 +1042,7 @@ var RECIPES = [
   name: 'チョコバナナ', en: 'Chocolate Banana',
   serve: 'SWEETS 提供 / SERVE', category: '揚げサンド', limited: false,
   group: 'regular-sweets',
+  video: 'iJve4PPseTQ',
   yield: '1個分', kind: 'sweets',
   ing: [
     ['揚げパン（半分）', 'Fried bread (half)', '1/2', '個'],
@@ -1062,6 +1070,7 @@ var RECIPES = [
   name: '生みかん', en: 'Mandarin Orange',
   serve: 'SWEETS 提供 / SERVE', category: '揚げサンド', limited: false,
   group: 'regular-sweets',
+  video: 'dzZBsbHGFe8',
   yield: '1個分', kind: 'sweets',
   ing: [
     ['揚げパン（半分）', 'Fried bread (half)', '1/2', '個'],
@@ -1089,6 +1098,7 @@ var RECIPES = [
   name: 'ブルーベリー', en: 'Blueberry',
   serve: 'SWEETS 提供 / SERVE', category: '揚げサンド', limited: false,
   group: 'regular-sweets',
+  video: 'JM-6D4z8yHY',
   yield: '1個分', kind: 'sweets',
   ing: [
     ['揚げパン（半分）', 'Fried bread (half)', '1/2', '個'],
@@ -1116,6 +1126,7 @@ var RECIPES = [
   name: 'マンゴー', en: 'Mango',
   serve: 'SWEETS 提供 / SERVE', category: '揚げサンド', limited: false,
   group: 'regular-sweets',
+  video: 'RHfPDzh966o',
   yield: '1個分', kind: 'sweets',
   ing: [
     ['揚げパン（半分）', 'Fried bread (half)', '1/2', '個'],
@@ -1143,6 +1154,7 @@ var RECIPES = [
   name: 'あんバター', en: 'Red Bean & Butter',
   serve: 'SWEETS 提供 / SERVE', category: '揚げサンド', limited: false,
   group: 'regular-sweets',
+  video: 'SFNCoAqnx-c',
   yield: '1個分', kind: 'sweets',
   ing: [
     ['揚げパン（半分）', 'Fried bread (half)', '1/2', '個'],
@@ -1170,6 +1182,7 @@ var RECIPES = [
   name: 'キャラメルビスケット', en: 'Caramel Biscuit',
   serve: 'SWEETS 提供 / SERVE', category: '揚げサンド', limited: false,
   group: 'regular-sweets',
+  video: 'D3qcH5gK0Mo',
   yield: '1個分', kind: 'sweets',
   ing: [
     ['揚げパン（半分）', 'Fried bread (half)', '1/2', '個'],
@@ -1201,6 +1214,7 @@ var RECIPES = [
   name: 'モンブラン', en: 'Mont Blanc',
   serve: 'SWEETS 提供 / SERVE', category: '揚げサンド', limited: false,
   group: 'regular-sweets',
+  video: 'U-IJwKHStu8',
   yield: '1個分', kind: 'sweets',
   ing: [
     ['揚げパン（半分）', 'Fried bread (half)', '1/2', '個'],
@@ -1228,6 +1242,7 @@ var RECIPES = [
   name: 'クレームブリュレ', en: 'Crème Brûlée',
   serve: 'SWEETS 提供 / SERVE', category: '揚げサンド', limited: false,
   group: 'regular-sweets',
+  video: 'o5Zo9rgEcbk',
   yield: '1個分', kind: 'sweets',
   ing: [
     ['揚げパン（半分）', 'Fried bread', '1/2', '個'],
@@ -1255,6 +1270,7 @@ var RECIPES = [
   name: '大学芋', en: 'Candied Sweet Potato',
   serve: 'SWEETS 提供 / SERVE', category: '揚げサンド', limited: false,
   group: 'regular-sweets',
+  video: '3XJWZkX2J1k',
   yield: '1個分', kind: 'sweets',
   ing: [
     ['揚げパン（半分）', 'Fried bread (half)', '1/2', '個'],
@@ -1282,6 +1298,7 @@ var RECIPES = [
   name: '黒蜜きなこ', en: 'Kuromitsu Kinako',
   serve: 'SWEETS 提供 / SERVE', category: '揚げサンド', limited: false,
   group: 'regular-sweets',
+  video: 'NqhisK4REjc',
   yield: '1個分', kind: 'sweets',
   ing: [
     ['揚げパン（半分）', 'Fried bread (half)', '1/2', '個'],
@@ -1309,6 +1326,7 @@ var RECIPES = [
   name: '黒蜜たっぷりきな粉', en: 'Kuromitsu Extra Kinako',
   serve: 'SWEETS 提供 / SERVE', category: '揚げサンド', limited: false,
   group: 'regular-sweets',
+  video: 'OoP6B2a_kzs',
   yield: '1個分', kind: 'sweets',
   ing: [
     ['揚げパン（半分）', 'Fried bread (half)', '1/2', '個'],
@@ -1339,6 +1357,7 @@ var RECIPES = [
   name: 'チョコベリーナッツ', en: 'Chocolate Cream Berry Nuts',
   serve: 'SWEETS 提供 / SERVE', category: '揚げサンド', limited: false,
   group: 'regular-sweets',
+  video: 'cnRocqhA9j0',
   yield: '1個分', kind: 'sweets',
   ing: [
     ['揚げパン（半分）', 'Fried bread (half)', '1/2', '個'],
@@ -1374,6 +1393,7 @@ var RECIPES = [
   name: 'チョコクリームいちご', en: 'Chocolate Cream Strawberry',
   serve: 'SWEETS 提供 / SERVE', category: '揚げサンド', limited: false,
   group: 'regular-sweets',
+  video: 'o-UvWqqhEVk',
   yield: '1個分', kind: 'sweets',
   ing: [
     ['揚げパン（半分）', 'Fried bread (half)', '1/2', '個'],
@@ -1401,6 +1421,7 @@ var RECIPES = [
   name: 'チョコクリームバナナ', en: 'Chocolate Cream Banana',
   serve: 'SWEETS 提供 / SERVE', category: '揚げサンド', limited: false,
   group: 'regular-sweets',
+  video: 'UVoDjAkzws4',
   yield: '1個分', kind: 'sweets',
   ing: [
     ['揚げパン（半分）', 'Fried bread (half)', '1/2', '個'],
@@ -1428,6 +1449,7 @@ var RECIPES = [
   name: '生チョコチョコ', en: 'Ganache Chocolate',
   serve: 'SWEETS 提供 / SERVE', category: '揚げサンド', limited: false,
   group: 'regular-sweets',
+  video: 'kwHfvb0aRrA',
   yield: '1個分', kind: 'sweets',
   ing: [
     ['揚げパン（半分）', 'Fried bread (half)', '1/2', '個'],
@@ -1455,6 +1477,7 @@ var RECIPES = [
   name: '生チョコ抹茶', en: 'Ganache Matcha',
   serve: 'SWEETS 提供 / SERVE', category: '揚げサンド', limited: false,
   group: 'regular-sweets',
+  video: 'G70NlcougSM',
   yield: '1個分', kind: 'sweets',
   ing: [
     ['揚げパン（半分）', 'Fried bread (half)', '1/2', '個'],
@@ -1482,6 +1505,7 @@ var RECIPES = [
   name: 'はちみつレアチーズ', en: 'Honey Rare Cheese',
   serve: 'SWEETS 提供 / SERVE', category: '揚げサンド', limited: false,
   group: 'regular-sweets',
+  video: 'PB0Ar_wPeZQ',
   yield: '1個分', kind: 'sweets',
   ing: [
     ['揚げパン（半分）', 'Fried bread (half)', '1/2', '個'],
@@ -1505,6 +1529,7 @@ var RECIPES = [
   name: 'ベリーピスタチオ', en: 'Berry Pistachio',
   serve: 'SWEETS 提供 / SERVE', category: '揚げサンド', limited: false,
   group: 'regular-sweets',
+  video: 'baxvu2rqEJs',
   yield: '1個分', kind: 'sweets',
   ing: [
     ['揚げパン（半分）', 'Fried bread (half)', '1/2', '個'],
@@ -1532,6 +1557,7 @@ var RECIPES = [
   name: 'シナモンアップルパイ', en: 'Cinnamon Apple Pie',
   serve: 'SWEETS 提供 / SERVE', category: '揚げサンド', limited: false,
   group: 'regular-sweets',
+  video: 'fiW4CwPA4XA',
   yield: '1個分', kind: 'sweets',
   ing: [
     ['揚げパン（半分）', 'Fried bread (half)', '1/2', '個'],
@@ -1604,6 +1630,7 @@ var RECIPES = [
   name: '月見照り焼き', en: 'Tsukimi Teriyaki',
   serve: 'Savory 提供 / SERVE', category: '揚げサンド', limited: false,
   group: 'regular-savory',
+  video: 'XdlAsvxL-Is',
   yield: '1個分', kind: 'savory',
   ing: [
     ['揚げパン（半分）', 'Fried bread (half)', '1/2', '個'],
@@ -1636,6 +1663,7 @@ var RECIPES = [
   name: 'ポテトサラダ', en: 'Potato Salad',
   serve: 'Savory 提供 / SERVE', category: '揚げサンド', limited: false,
   group: 'regular-savory',
+  video: 'VXQqHodgg_g',
   yield: '1個分', kind: 'savory',
   ing: [
     ['揚げパン（半分）', 'Fried bread (half)', '1/2', '個'],
@@ -1663,6 +1691,7 @@ var RECIPES = [
   name: 'タマゴサラダ', en: 'Egg Salad',
   serve: 'Savory 提供 / SERVE', category: '揚げサンド', limited: false,
   group: 'regular-savory',
+  video: 'Ze9hBFeOk2g',
   yield: '1個分', kind: 'savory',
   ing: [
     ['揚げパン（半分）', 'Fried bread (half)', '1/2', '個'],
@@ -1686,6 +1715,7 @@ var RECIPES = [
   name: 'ツナマヨネーズ', en: 'Tuna Mayonnaise',
   serve: 'Savory 提供 / SERVE', category: '揚げサンド', limited: false,
   group: 'regular-savory',
+  video: 'TDqTJKHfnAU',
   yield: '1個分', kind: 'savory',
   ing: [
     ['揚げパン（半分）', 'Fried bread (half)', '1/2', '個'],
@@ -1714,6 +1744,8 @@ var RECIPES = [
   name: '焼きチーズクリームシチュー', en: 'Grilled Cheese Cream Stew',
   serve: 'Savory 提供 / SERVE', category: '揚げサンド', limited: false,
   group: 'regular-savory',
+  video: 'fDBvPTzM1ew',
+  videoNote: 'プレイリストの動画名は「焼きチーズシチュー」。この品の名前（焼きチーズクリームシチュー）と表記が異なる。',
   yield: '1個分', kind: 'savory',
   ing: [
     ['揚げパン（半分）', 'Fried bread (half)', '1/2', '個'],
@@ -1744,6 +1776,7 @@ var RECIPES = [
   name: '焼きキーマカレー', en: 'Baked Keema Curry',
   serve: 'Savory 提供 / SERVE', category: '揚げサンド', limited: false,
   group: 'regular-savory',
+  video: 'hMb3xyBHXKk',
   yield: '1個分', kind: 'savory',
   ing: [
     ['揚げパン（半分）', 'Fried bread (half)', '1/2', '個'],
@@ -1774,6 +1807,8 @@ var RECIPES = [
   name: '激辛！焼きキーマカレー', en: 'Hot Grill Keema Curry',
   serve: 'Savory 提供 / SERVE', category: '揚げサンド', limited: false,
   group: 'regular-savory',
+  video: 'Lmj704VxHY4',
+  videoNote: 'プレイリストの動画名は「激辛焼きキーマカレー（新）」。この品の名前（激辛！焼きキーマカレー）と表記が異なる。',
   yield: '1個分', kind: 'savory',
   ing: [
     ['揚げパン（半分）', 'Fried bread (half)', '1/2', '個'],
@@ -1808,6 +1843,7 @@ var RECIPES = [
   name: 'とろたまナポリタン', en: 'Egg + Napolitan',
   serve: 'Savory 提供 / SERVE', category: '揚げサンド', limited: false,
   group: 'regular-savory',
+  video: '-0w8zAdAW4A',
   yield: '1個分', kind: 'savory',
   ing: [
     ['揚げパン（半分）', 'Fried bread (half)', '1/2', '個'],
@@ -1835,6 +1871,7 @@ var RECIPES = [
   name: 'とろたまナポリタン 追いチーズ', en: 'Egg + Napolitan Extra Cheese',
   serve: 'Savory 提供 / SERVE', category: '揚げサンド', limited: false,
   group: 'regular-savory',
+  video: 'H0OhVkor01k',
   yield: '1個分', kind: 'savory',
   ing: [
     ['揚げパン（半分）', 'Fried bread (half)', '1/2', '個'],
@@ -1862,6 +1899,7 @@ var RECIPES = [
   name: 'とろタマ焼きそば', en: 'Egg + Fried Noodle',
   serve: 'Savory 提供 / SERVE', category: '揚げサンド', limited: false,
   group: 'regular-savory',
+  video: 'nuQiq05uMjg',
   yield: '1個分', kind: 'savory',
   ing: [
     ['揚げパン（半分）', 'Fried bread (half)', '1/2', '個'],
@@ -1891,6 +1929,7 @@ var RECIPES = [
   name: '旨だれ牛カルビ焼肉', en: 'Beef Short Rib Yakiniku with Special BBQ Sauce',
   serve: 'Savory 提供 / SERVE', category: '揚げサンド', limited: false,
   group: 'regular-savory',
+  video: 'KGa9H1QcQwU',
   yield: '1個分', kind: 'savory',
   ing: [
     ['揚げパン（半分）', 'Fried bread (half)', '1/2', '個'],
@@ -1920,6 +1959,7 @@ var RECIPES = [
   name: 'チキン南蛮', en: 'Chicken Nanban',
   serve: 'Savory 提供 / SERVE', category: '揚げサンド', limited: false,
   group: 'regular-savory',
+  video: 'mgzGwkJpu8Q',
   yield: '1個分', kind: 'savory',
   ing: [
     ['揚げパン（半分）', 'Fried bread (half)', '1/2', '個'],
@@ -1956,6 +1996,8 @@ var RECIPES = [
   name: '炙りチーズスモークサーモン', en: 'Grilled Cheese + Smoked Salmon',
   serve: 'Savory 提供 / SERVE', category: '揚げサンド', limited: false,
   group: 'regular-savory',
+  video: 'f2PSzyX5Tj0',
+  videoNote: 'プレイリストの動画名は「炙りチーズサーモン」。この品の名前（炙りチーズスモークサーモン）と表記が異なる。',
   yield: '1個分', kind: 'savory',
   ing: [
     ['揚げパン（半分）', 'Fried bread (half)', '1/2', '個'],

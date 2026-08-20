@@ -406,6 +406,9 @@ footer{margin-top:26px;padding:16px 0 8px;border-top:1px solid var(--line);font-
 
   var PLAYLIST = (RECIPE_META && RECIPE_META.videoPlaylist) || "";
   var PLAYLIST_URL = PLAYLIST ? "https://www.youtube.com/playlist?list=" + encodeURIComponent(PLAYLIST) : "";
+  var PLAYLIST_REG = (RECIPE_META && RECIPE_META.videoPlaylistRegular) || PLAYLIST;
+  function plId(r){ return (r && r.group && r.group.indexOf("regular") === 0) ? PLAYLIST_REG : PLAYLIST; }
+  function plUrl(r){ var p = plId(r); return p ? "https://www.youtube.com/playlist?list=" + encodeURIComponent(p) : ""; }
 
   var EN_KEY = "age3-recipe:en";
   var showEn = true;
@@ -569,9 +572,9 @@ footer{margin-top:26px;padding:16px 0 8px;border-top:1px solid var(--line);font-
         '<p class="cap">タップすると YouTube の動画が再生されます。通信量にご注意ください。</p>' +
         (r.videoNote ? '<div class="note vnote"><b>この動画について</b>'+esc(r.videoNote)+'</div>' : '') +
         '</div>';
-    }else if(PLAYLIST){
+    }else if(plId(r)){
       vsec = '<div class="sec"><div class="sech"><span class="no">'+(steps?'04':'03')+'</span><span class="jp">作り方動画</span><span class="en">VIDEO</span></div>' +
-        '<a class="btn vlink" href="'+PLAYLIST_URL+'" target="_blank" rel="noopener">作り方動画の一覧を YouTube で開く</a>' +
+        '<a class="btn vlink" href="'+plUrl(r)+'" target="_blank" rel="noopener">作り方動画の一覧を YouTube で開く</a>' +
         '<p class="cap">この品の動画はまだ紐づけていません。一覧から探してください。</p></div>';
     }
 
@@ -942,9 +945,9 @@ footer{margin-top:26px;padding:16px 0 8px;border-top:1px solid var(--line);font-
           (s.point ? '<div class="pt"><span class="lb">POINT</span><div class="jp">'+esc(s.point.jp)+'</div>' +
             (s.point.en && showEn ? '<div class="en">'+esc(s.point.en)+'</div>' : '') + '</div>' : '') +
           (r.oldFormat ? '' : '<button class="btn" id="cshot" style="width:100%;margin-top:22px">工程写真を見る</button>') +
-          ((r.video || PLAYLIST)
+          ((r.video || plId(r))
             ? '<a class="btn vlink" style="margin-top:9px" href="' +
-              (r.video ? 'https://www.youtube.com/watch?v=' + encodeURIComponent(r.video) : PLAYLIST_URL) +
+              (r.video ? 'https://www.youtube.com/watch?v=' + encodeURIComponent(r.video) : plUrl(r)) +
               '" target="_blank" rel="noopener">作り方動画を見る</a>' : '');
       }else{
         body.innerHTML = '<div class="cno">できあがり</div>' +
