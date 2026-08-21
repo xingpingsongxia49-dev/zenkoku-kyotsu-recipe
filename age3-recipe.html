@@ -324,71 +324,88 @@ footer{margin-top:26px;padding:16px 0 8px;border-top:1px solid var(--line);font-
 .rbtn:active{background:#EDEAE3}
 .rnote{margin:9px 0 0;font-size:11px;color:var(--hai);line-height:1.7}
 
-/* ---------- 印刷用レシピカード ---------- */
+/* ---------- 印刷用レシピカード（PDF原本と同じ体裁） ---------- */
 #printroot{display:none}
-.pcard{width:186mm;padding:0;font-family:"Hiragino Kaku Gothic ProN","Yu Gothic","Noto Sans JP",sans-serif;color:#1A1917;background:#fff}
-.pcard + .pcard{margin-top:12mm}
-.ph-top{display:flex;justify-content:space-between;align-items:flex-start;border-bottom:0}
-.ph-brand{font-size:19pt;font-weight:800;letter-spacing:.02em;line-height:1}
-.ph-brand small{display:block;font-size:6.5pt;font-weight:400;letter-spacing:.34em;color:#6E6C67;margin-top:3mm}
-.ph-meta{text-align:right;font-size:7.4pt;color:#1A1917;line-height:1.75}
-.ph-meta b{font-weight:700}
-.ph-meta span{color:#6E6C67;letter-spacing:.12em;margin-right:1.5mm}
-.pserve{margin-top:5mm;font-size:7.6pt;letter-spacing:.24em;color:#6E6C67}
-.pname{font-size:19pt;font-weight:800;letter-spacing:.01em;line-height:1.25;margin-top:2mm}
-.pname-en{font-size:9pt;color:#6E6C67;margin-top:1mm}
-.prule{height:1px;background:#DCD6CB;margin:3mm 0 0}
-.pcols{display:flex;gap:5mm;margin-top:3mm}
-.pcol-l{width:52%}
-.pcol-r{width:48%}
-.psec{background:#EDEAE3;border-radius:1mm;padding:1.4mm 2.5mm;display:flex;align-items:baseline;gap:2.5mm;margin-top:3mm}
-.psec:first-child{margin-top:0}
-.psec .n{font-size:9.5pt;font-weight:800}
-.psec .j{font-size:9.5pt;font-weight:800}
-.psec .e{font-size:6.4pt;letter-spacing:.16em;color:#9A968E}
-.psec .r{margin-left:auto;font-size:6.6pt;color:#6E6C67}
-.ping{list-style:none;margin:0;padding:0}
-.ping li{display:flex;align-items:flex-end;gap:2mm;padding:1.2mm .5mm;border-bottom:.3pt solid #DCD6CB}
-.ping .nm{flex:1;min-width:0}
-.ping .nm b{display:block;font-size:8.4pt;font-weight:700;line-height:1.35}
-.ping .nm i{display:block;font-style:normal;font-size:6.2pt;color:#6E6C67;line-height:1.3}
-.ping .qt{font-size:10pt;font-weight:800;white-space:nowrap;font-variant-numeric:tabular-nums}
-.ping .qt em{font-style:normal;font-size:6.6pt;font-weight:700;margin-left:.3mm}
-.ping .qt.none{font-size:6.6pt;font-weight:700;color:#6E6C67}
+.pcard{position:relative;box-sizing:border-box;width:210mm;height:297mm;overflow:hidden;
+  background:#fff;color:#4C4948;font-weight:400;
+  font-family:"Noto Sans JP","Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic",Meiryo,sans-serif;
+  -webkit-print-color-adjust:exact;print-color-adjust:exact}
+.pcard *{box-sizing:border-box}
+.pstripe{position:absolute;top:0;right:0;width:46.3mm;height:46.3mm;display:block}
+/* 背景色は「背景のグラフィック」設定に左右されるので、必ず出したい面は画像で敷く */
+.pbg{position:absolute;left:0;top:0;width:100%;height:100%;display:block}
+.psec,.pfin,.pmth .no,.ppt .lb{position:relative}
+.psec>span,.pfin>div,.pmth .no>i,.ppt .lb>i{position:relative;font-style:normal}
+.pabs{position:absolute;left:13.76mm;right:13.66mm}
+.plogo{top:10.05mm;width:44.98mm;height:14.29mm}
+.plogo img{width:100%;height:100%;object-fit:contain;object-position:left top;display:block}
+.prec{top:26.40mm;font-size:8.25pt;line-height:1;letter-spacing:.28em;color:#777}
+.pmeta{top:11.03mm;text-align:right;font-size:8.25pt;line-height:1.65;color:#777;white-space:nowrap}
+.pmeta b{font-weight:700;color:#4C4948;margin-left:1.6mm}
+.pmeta i{font-style:normal}
+.pserve{top:36.69mm;font-size:9pt;line-height:1;letter-spacing:.2em;color:#777;white-space:nowrap;overflow:hidden}
+.pname{top:43.35mm;font-size:22.5pt;line-height:1.15;font-weight:400;color:#4C4948;white-space:nowrap;overflow:hidden}
+.pname-en{top:54.31mm;font-size:10.5pt;line-height:1.2;color:#999;white-space:nowrap;overflow:hidden}
+.prule{top:63.5mm;height:.8pt;background:#4C4948}
+.pcols{top:67.48mm}
+.pcolsin{display:flex;align-items:flex-start;width:182.58mm}
+.pcol-l{flex:0 0 79.39mm;width:79.39mm}
+.pcol-sp{flex:0 0 7.41mm;width:7.41mm}
+.pcol-r{flex:0 0 95.78mm;width:95.78mm}
+.pfitl{width:79.39mm}
+.pfitr{width:95.78mm}
+.psec{height:9.53mm;background:#F2F2F2;display:flex;align-items:baseline;padding:1.57mm 2.3mm 0 3.18mm}
+.psec .n{font-size:13.5pt;font-weight:700;line-height:1}
+.psec .j{font-size:11.25pt;font-weight:700;line-height:1;margin-left:1.6mm}
+.psec .e{font-size:6.75pt;line-height:1;color:#AAA;margin-left:1.6mm;letter-spacing:.02em}
+.psec .r{margin-left:auto;font-size:6pt;line-height:1;color:#AAA}
+.ping{list-style:none;margin:0 0 2.9mm;padding:0}
+.ping li{display:flex;align-items:flex-start;padding:3.05mm 0 .97mm}
+.ping li + li{border-top:.7pt solid #EBEBEB;padding-top:1.25mm}
+.ping .nm{flex:1;min-width:0;padding-right:2mm}
+.ping .nm b{display:block;font-size:9.38pt;font-weight:400;line-height:1.3}
+.ping .nm i{display:block;font-style:normal;font-size:6.75pt;color:#999;line-height:1.3;margin-top:.7mm}
+.ping .qt{font-size:10.5pt;font-weight:700;white-space:nowrap;line-height:1.16;margin-top:.25mm}
+.ping .qt em{font-style:normal;font-size:7.5pt;font-weight:400;color:#777}
+.ping .qt.none{font-size:7.5pt;font-weight:400;color:#777}
 .pmth{list-style:none;margin:0;padding:0}
-.pmth li{display:flex;gap:2.2mm;padding:1.5mm .3mm;border-bottom:.3pt solid #DCD6CB}
-.pmth .no{flex:0 0 4.6mm;height:4.6mm;border-radius:50%;background:#1A1917;color:#fff;font-size:6.8pt;font-weight:800;display:flex;align-items:center;justify-content:center;margin-top:.6mm}
+.pmth li{display:flex;padding:4.75mm 0 1.4mm}
+.pmth li + li{border-top:.7pt solid #EBEBEB;padding-top:1.3mm}
+.pmth .no{flex:0 0 5.82mm;height:5.82mm;border-radius:50%;background:#4C4948;color:#fff;
+  font-size:8.25pt;font-weight:400;line-height:5.82mm;text-align:center;margin-right:2.93mm}
 .pmth .bd{flex:1;min-width:0}
-.pmth .j{display:block;font-size:8.4pt;font-weight:700;line-height:1.5}
-.pmth .e{display:block;font-size:6.1pt;color:#6E6C67;line-height:1.45;margin-top:.6mm}
-.ppt{margin-top:1.1mm;background:#FAF8F3;border:.3pt solid #E7E2D6;border-left:1pt solid #7E7A2A;border-radius:.5mm;padding:1.2mm 1.8mm}
-.ppt .lb{display:inline-block;background:#7E7A2A;color:#fff;font-size:5.4pt;letter-spacing:.14em;font-weight:800;padding:.3mm 1.4mm;border-radius:.5mm}
-.ppt .j{font-size:6.8pt;font-weight:700;color:#5F5C22;line-height:1.45;margin-top:.8mm}
-.ppt .e{font-size:5.9pt;color:#8A8768;line-height:1.4;margin-top:.4mm}
-.phero{border:.3pt solid #DCD6CB;border-radius:1mm;padding:2mm;text-align:center}
-.phero img{max-width:46mm;max-height:64mm;margin:0 auto;display:block}
-.phero .nop{font-size:7pt;color:#9A968E;padding:16mm 0}
-.pshot{margin-top:3mm}
+.pmth .j{display:block;font-size:9pt;line-height:1.5}
+.pmth .e{display:block;font-size:6.75pt;color:#999;line-height:1.32;margin-top:.5mm}
+.ppt{display:flex;align-items:flex-start;margin-top:.6mm}
+.ppt .lb{flex:0 0 auto;background:#BFAE00;color:#fff;font-size:6pt;font-weight:700;letter-spacing:.14em;
+  height:3.99mm;line-height:3.99mm;padding:0 1.3mm 0 1.45mm;margin-right:1.76mm}
+.ppt .tx{flex:1;min-width:0;margin-top:-.85mm}
+.ppt .j{font-size:7.88pt;color:#8A7A00;line-height:1.33}
+.ppt .e{font-size:6pt;color:#AAA;line-height:1.35;margin-top:.6mm}
+.psub{margin-top:3.5mm;font-size:7.5pt;line-height:1.6;color:#777}
+.psub b{display:block;font-size:6.75pt;font-weight:700;letter-spacing:.1em;color:#AAA;margin-bottom:.9mm}
+.phero{height:74.1mm;display:flex;align-items:flex-start;justify-content:center}
+.phero img{max-width:100%;max-height:74.1mm;display:block}
+.phero .nop{font-size:8.25pt;color:#AAA;margin:32mm auto 0}
+.pshot{margin-top:3.2mm}
 .pshot img{width:100%;display:block}
-.pfin{margin-top:4mm;background:#EDEAE3;border-radius:1mm;padding:2.4mm 3mm}
-.pfin .lb{font-size:6.4pt;letter-spacing:.2em;color:#6E6C67}
-.pfin .j{font-size:10pt;font-weight:800;line-height:1.5;margin-top:1.4mm}
-.pfin .e{font-size:6.8pt;color:#6E6C67;line-height:1.4;margin-top:1mm}
-.pnote{margin-top:3mm;border-left:1pt solid #C9A87C;padding:1.5mm 2.5mm;font-size:6.6pt;line-height:1.6;color:#5A564F}
-.pnote b{display:block;font-size:5.8pt;letter-spacing:.16em;color:#6E6C67;margin-bottom:.8mm}
-.pfoot{display:flex;justify-content:space-between;margin-top:3mm;padding-top:1.5mm;border-top:.3pt solid #DCD6CB;font-size:6.2pt;color:#6E6C67;letter-spacing:.06em}
+.pnote{margin-top:4mm;font-size:6.75pt;line-height:1.6;color:#777}
+.pnote b{display:block;font-size:6.75pt;font-weight:700;letter-spacing:.1em;color:#AAA;margin-bottom:.9mm}
+.pfin{top:261.94mm;height:24.09mm;background:#ECECEC;padding:3.91mm 5.82mm 0}
+.pfin .lb{font-size:8.25pt;line-height:1;letter-spacing:.2em;color:#888}
+.pfin .j{font-size:13.5pt;line-height:1.2;color:#4C4948;margin-top:2.8mm}
+.pfin .e{font-size:8.25pt;line-height:1.2;color:#888;margin-top:.7mm}
+.pfoot{top:287.48mm;display:flex;justify-content:space-between;font-size:7.5pt;line-height:1;color:#AAA}
 
-@page{size:A4 portrait;margin:12mm}
+@page{size:A4 portrait;margin:0}
 @media print{
   html.printing body>*{display:none !important}
   html.printing #printroot{display:block !important}
-  html.printing,html.printing body{background:#fff !important}
-  html.printing body{padding:0 !important;margin:0 !important}
+  html.printing,html.printing body{background:#fff !important;margin:0 !important;padding:0 !important}
   html.printing #printroot{padding:0;margin:0}
+  html.printing{overflow:visible !important}
   .pcard{page-break-after:always;break-after:page}
-  .pcard + .pcard{margin-top:0 !important}
   .pcard:last-child{page-break-after:auto;break-after:auto}
-  .pmth li,.ping li,.pfin,.phero{page-break-inside:avoid;break-inside:avoid}
 }
 </style>
 </head>
@@ -484,7 +501,20 @@ footer{margin-top:26px;padding:16px 0 8px;border-top:1px solid var(--line);font-
 
   /* ---------- 一覧 ---------- */
 
-  /* ---------- 印刷用レシピカード ---------- */
+  /* ---------- 印刷用レシピカード（PDF原本と同じ体裁） ---------- */
+  var BGX = "data:image/svg+xml;charset=utf-8,";
+  function bgFill(hex){ return BGX + "%3Csvg xmlns='http://www.w3.org/2000/svg' preserveAspectRatio='none' viewBox='0 0 1 1'%3E%3Crect width='1' height='1' fill='%23" + hex + "'/%3E%3C/svg%3E"; }
+  var BG_SEC = bgFill("F2F2F2"), BG_FIN = bgFill("ECECEC"), BG_PT = bgFill("BFAE00");
+  var BG_DOT = BGX + "%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='50' fill='%234C4948'/%3E%3C/svg%3E";
+  var BG_STRIPE = BGX + "%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' preserveAspectRatio='none'%3E%3Cdefs%3E%3Cpattern id='s' width='3.866' height='3.866' patternUnits='userSpaceOnUse' patternTransform='rotate(45)'%3E%3Crect width='1.944' height='3.866' fill='%23ECECEC'/%3E%3C/pattern%3E%3C/defs%3E%3Cpath d='M0 0 H100 V100 H59 L0 41 Z' fill='url(%23s)'/%3E%3C/svg%3E";
+  function bgimg(src){ return '<img class="pbg" src="'+src+'" alt="">'; }
+  var A3LOGO = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAhwAAACrCAMAAAAacLWqAAAAwFBMVEVmZmaVlZWUlJTw8PBpaWnV1dVjY2NlZWXp6emIiIgmJiY+Pj43NzcAAABJSUn+/v5XV1d+fn5nZ2epqal3d3eHh4eWlpa+vr6np6c9PT21tbWYmJjKysrGxsZVVVWnp6e3t7e3t7fX19eXl5fHx8e3t7fGxsZmZmbW1tbZ2dmoqKjn5+fHx8enp6fHx8e2trbGxsY5OTnX19fW1tbX19fn5+eJiYmoqKi4uLjIyMj5+fmXl5eYmJi3t7fp6emYmJi2na20AAAAQHRSTlNrYClfod3RKJmhG17AAP4E/gP9A/37+Qb5+vYGCvAD0c9OEs6MjtAGL6mQTW6vTW+wBVBvjC/PT7AuKrCOLxJz7ZJmmgAAILdJREFUeNrtXel64rqyNRAy7HOFBkuysJkJBAgkZCbz+7/VlczgAdnYxt0htPWj99e7E7ClpVJVadUqAxTjWAaEWP0xHbSbFDHqDkYRr84e76H8dwum/ECjmNNjGRIZoPHYsSlFteAgjPUHIwkNExbg+CehYQEw+uCc1DSjXkOUD6fyR8wCHP/gkQLAa1VokbGxH7zzAOWxU4DjHxstMBpwWtsxkGi/ujgqwPHvDOlK3AhWSzCIuIXJ0VGA4wiwAcCgieq1REMMHdd1LcDxTwwLjCa0lniwPk6KjgIcvx8br1VWSzHo81lCdBTg+PVhyqjK6rVU6GhDBxbg+AewAZ/SYqNW4xPgFOD4F5zRId/CRl2OeNtxK4PfAhxHPhwY9kUJody2bcEJiU6JkeYXxAU4jt1ulHggy0VZf2HcXF9XrrvGvM+3blk2IcskSSK9AMdvxgZ+8mMDcbv06v/314kdFcfwXoJcWAGOXx3Fzr3FR+y9K9cbmy0TyiH/I3/iqyT0KRB2mcB0FOD4zYfKi4cNZpdA+E7elOvfW3Ct1zFMEMwW4PjFUSxsrn0KYs+/dHQNLN3OEtN5HuJaGp4CHMd7qEzXRoHaN1FUDRmVaNHBXgpwHO/AoGevFp2/45ibeAeUNFELmuxOdaQFBzahaZpmsTY/73HAh5XhsOcw1rt0wGDb7yDV3eFKYTl+7xgus1z2GOL4jJbTaG8lxEh79+1bOnBg8Dkez2ezRQPAYnF+2HB8LkMVMcY7sCGdi3uxdayc5g4OuOCEEsQvk93cFOMPuhxjN4NBF3JVdiOpEzYd6DlncEDwJWp1l4zYg7hYoJ+MYwF03VF6kQAb0iO5CXsdpJMzOCx4yza5+cJ0/Gwcey3qapc+JbkkgfhtCxzDvI8VsLZOiBdexw+fKi8C1er8dne2Ymk6hqFzhZXyBYcJypt0Lf1I9lTF+FPgeL3tcNFMWIbSgpNQqkNU8k2CYbDw4Mdw4XX8tN/xVPlMyAY1gUH/6N0KhBb34EfnoADHj0IjjeU2QZf90VtZDEp+9NnXhdfx0/hIXNsowRH0SLmVK59jHTyteYq0WoDj14yw5ZAuY65MsK00m7gHZrFZfws4gj4Hs/LlkGI4C0ZDtPPveB0Q4oZzdXXn/uXuymmYvwskLfCNghTSJB5LYnCY8M0O8xBv/g3TAS2ssxyOBX+R5aj6djaykyW4k4Mj6I4uL/bg8YMDu1sM9j4r05JhnDSbzRPDKFWuGy4yfgs+TNj3WQ7+kmxXJwUHxlBsMUZ498hNxxL8vYeJLQhnijKDEKohwjgV9qDS+y3wMIGfpk5miUqaUoAjHAu539I/atPhniCj23cFC1QLFJHVa6hGmVg89FILbf0MOC59NHWR1GEyEtuldx0RsXTEpkO+GRzNBCVxSkr9x6dfAA/ov7K3u0md6YTggOBa6HSE7C/8AxNj/YUoCVoAVqqc7FJSYmI+AgcetmFw75l9Pk5s7hODY6yt5Rbnf+/+zbLugmk3CO4s64/NJyi3bbK7Yr1eo2KMD9t4WHC4CSbIRXJVMCOhWWpwbdklakL4V7ZxAASVt0AMn79PKN8Jz0NvHFO4ztovh2w8pNm3N3ntTgo9wWTgaIAHrt83f4MwuDSDsHJfqg6fT+UQRP3ZHw6Nm/v13sh3NsFtqIyQUMbccKWuP1wW+HC9L/OrQzfFT9cpnjMZOEzYJlHqhV9/9orFRQasTDucc4IIQrXVAiH5FxlfnnY+VMgQ2g9wNYDVaDgwNTYaY7/ZIEzYF5fn55cf703G9IXrtHl/qNy4BngUm1LrVMkHI9ls3fNIkzr4o16HpZDx2BQMIZ1dryuMMPZ++6XKM1woOFfrNHfmr/yv771uXUYkl6M1vuD1o82IXsSxdJjogPB+naEirJzqGROBwwGDSLk6lKiYf49ostuWyKjVY31CJJ3CUchy9CynfHU3PX8cPMA0T9gA933f8vO2ql0HV47Cnfr3r25baz0QNcDVIQbkuElWMJf4bYCcwQFBj8dICE3+lOlQLt55U27Uuh8IEY4h47dn/z1IKEwuTk5OeNPmXCnEU85YNQ04LHDvu4ZA4hIqjwauMWeqh3p51sleIGIcnu2wIL4g65PvEzg4b3A04JTFRfqNPxOwSMh1+/6zHxHCbSYERZqdW0cSRRIKlBKCgkGGSAEOFxsb+JHT+60wBMqotfehMx4HiA5pei/o+twb3r+lS9gZiXZwH8Wpj138iTBOOqKv1QA0GBuWXEWj0kU/Km2pMyuIf6XwRZ/82Hgua+Mg+bq3tg4dh5YxdkDFlxolzF68gnyjFRN6FTGE6qUecvc6WgBcBqJJal/6zstuRyRIUK2XzEyOjbNnDxvoOcp/gzK2b+rQYR8QAUqRTEt2cMEom5VBnvLWEHj5NabbMCx/wiAGo3fuk/NG/EPFLS1LDVMiB963GUoqylpOPJ3+kB2JGKVfBzzYGsNF7YNhAclHv1qwLUl0Khat/OStMbCEt0ZjrjHcue+XK1C2/el61HwEgbI/9XWXNCE6CE5shb99njeLLRiSP0t16FgcRD2Pshrwoa2bIUQ7Lwk9j93gMOUqbKb5A+qsKe3kC44rcBZMJtiPW5dtMmwoJTlalBfSSrrX/I43m8VHpg2w0Lnp/ObH0QGhPAzhZ2RvHiLmyVz0JMeKx/Lhn+BSF9XmyzXG4CwQcEQk2izQjboZQ2hJylFJb8ESggNjyz+d9lP89sLWq+6+iQjrJ29ZIDaVa9abDln0zkH8opwL+xxDj9SueIG9Z92M5EkYtMLYkIbJ0lv2rtCdLJQyLprVC8MolW6nlYeEi2XBue8oo9+7ps8Ct7qNsvsX/+xpolgog/4OrgGtjvKoW4HAC4ZYVwlMaY1pfoTBFiiHjkr7OqK6Sz6MbvMi0bDSlxCYoOxba9Tv4Z3WG2otl/32gxELfHp47LPd3phCh7kvODD0iqeRLefDsvpEZzryMqYQPIWmnEZLMVsy3tUmbV1k3F1dOY7TaCS0xwGBE/a423Uwwa1mo9TZGP6M1wHB+fxZsERRXJ1Wn3Zae2PnBHjXKnLOre2qy41yYT7oaFidEK1IVGKU8uC7bvOK9F6hBSr+2JS/7jY9ESwXuYd+phYQArcrT8IGG/Rk72PFNL3sqP2kXhprr+/JM87FljrS4w2+HXqP9V17Qu8DpV0eDJu+1yKLJOtrgpkOmrT0M6YDgmHS1I/7ju+Wsxc4MHjx4tiOa4cwuNGZcv6Y7sYvarpHocWu82ncQjt+XvUePlAjaDjYbZLft+CN0OxTYsOfshxEhWjrq6ddJkRc7lgyY8cFh+8gpqtSGI36WG6EQcV2DL0Ti0/Om+CZ5BA+hYwAGyU5JU3wpr2u5qMfckkvT1aDNzklbEcaCO0qWdwBDvAqtubb9CiJIcLg3qYDy+B06wTftUAvEfc9ZjqLxQIFOSCBx6F2g+6IrbNL2AA/OuDbqHxzftHnlMY2e2vEFg8YOzayt5/YYD3dJqxSXQDZ29uaauiI6B3GVz9AnSFTIUOa9XHgwA8O1AlbQQzxcjhBspn2lEfDH3JJLXynnvFuzYSDjem8Gd2peteGNuKdNC87iviG8mJpTUdNftOefpiuOoZ+7+BImOCR5cBtDbASkLHCggrdLTnbWlB+NSzHQBHsuJ/OoGNsNtz0P3yYi6i8BxJW3IaOB4eveJrOPTttwg+d18Ebe4azcv/SLXDvcnQx0AaU7D4FOEzwykKVfKHx9vb0Wi6fnZ09rslmYk020+3IymEI28Bl2NQrRVmPeN0/I/6zvRt61vVcPAws9gcIg1o6In3Y9aEBHTvfuZ/C6cChPnr84fVTQWF6Pp7P3k9cKAjOKFEVsltkMw04poejtejio/Ed1bHJitnQRux++uQ+TdPAv3zovA5u7RWwyCBZg7n/dkc4Uw2PAJ2kepYg141Ko8AIUewziQQU5h3u5hddHBQjTM3EqCO0pmMAs4ED+8K74EbEUEs5TqY0FZOz0FAkdpMxpPOnO1dSMEdl/MWT0w6TkM+q4LAGdMBXxD1UNp8Dgjfhu8sKTDUGE50XyMp7nbVQw1VNROPSkUyYlfhZLNDl2VAQBY4OOLQhd+20qfEUWTf6BDTikoaPmymj4+DRFJG2psP9XFKeCRwmLOkOueRFJBAuUE6wWJoaxA8OHIqx/aBBB5lEpwuNGMPx1fZYPq+hA8MCl7qye3sPNx2CJ5qJAApBRZfFPkvxzW2SEQr1NbvIrZyglHNSI4QdnuVwjYeGFR2H42hwNGDFy46+b1VveB3GAhfBw+ysn4g1TpTF1pxxrJI0Y4u1qIyEgo9mxgWrIYUIu/ksQ5qPyeDxfHqGy9Zh6sI3dBwD+hRp7eMsh+eO8oetfKP/0MmHMGiBB80nkkSShdschro4TwoOpbBaj8ACWkKhtmQcCmkWXCjYJy7N7KFSca7KptX7+h3Kkz0w5ynCbiN6Oz6JuHpY2LJOtVzjzNNk6XCdZI1lWKLxSFHi2y+sEUpUULB57fT0ud0eKsah8X07rVSeWo7Zg1qa2ZpaZAF4sEq20OltHaDESG85MPBuG5guBa/RntyPMKgFR41Nd5YYSnC0a1nOo9VogUEYWyell+51pRK9xhIKVwoKruIkhL9F2Fha562bzVlqcASSB1zLRsW9vp5ng/MEB0lQu34HNFccNHHZKgwouLpfOg9/A8bYsuDaoYK/VfVdgjjclSemh6gRuVJeDWREoQ7Wc43ZS0bToXdIUXt3MusKGNvRhkgsDbF98U6G2FS1deDoBtwyHRnAgYFHzoxq6mP2tITBrOKkJrjXMgF2/+YVKG0/SB/ixOAIl1ug/rHKukvTEbL3ZJgWHP7iaSS+cMRqarnGtJRQIHd7aBmZrzsX6kpzrOy86veDI+xaJ2m6+ksHBt8snM1NC45V19LVNOMoGGoJg5nZ19qsK7vdSddtwZPti9HEkSzA8HTLrX461mYyFgwd3qktB4SWt04i0hWP4BqLx0wzq49IQ/fBEb+4nZATo8QPIS2HprbhWKWZIWyjvXwOv1Y2mUWHHzjCdGQjDDpgQvUcop2pv60k2IoqnzBtv93pPfvRePgu6XBPcPi4nOI1ehNBPWGQZSMMtsCnLnNCpzvOFQgrW6lV1k3sNcgoyQ7/OpkfreUIp/zQR+Q+MPSGw2PdKK4tjEsRaCOMTDJh8nh4znKumNs8EFUoAZODYyuEliHXsTawU0mK+h4ZUgvMN7PNY8t7LL1gPptk8vZDHHCf8IMZjym+bbtg8hwY/Drd9puejtV0WKG9ECMoogMHxCbz1YzHpgtwBGGwkWXnQfCqJZgtYhdqqzOh2vgtM42hPdVwYI61lQwEjQDrMaY1taGdbc8dpbP4HYSByfIjDGIw01YojeKgpqlYtW/SWC5NKKvI9sfbjv00wN6DqRxSs+GpLLDPHd6DpQ0xaixTmULLV2HnX6lZzEppsvhskGrbbyfBlJLg1z5dMg67uVcAHO3onzN0c+XT8tnZHlSVjeQnTrqVv9tczUahA5qhuF0+dDOd4vZ2+tzdFZmTpLAH140DD/JYufZz+Oh39O43dHHs0Kflo/9VuKoIA1bDtHRc44ysHxkZabVhRDlqqRww4ds0Z5xuuoZabmW25bVAt9l+eDtgh/TB75Dy+zQEY+wz7WviOlyBwdSWB0KdOCmtZgoGTfCp/bRhREC9rQeKyFlKWGKg4RcrGaNMpgOrUI/z2fTsMI+WYJ4jtnLT0ByXPi2fOXR8dbm+8fbk1oT951YHtqleXSeLT2pCrQwbM4CpWasGOAtJoylspFzUO92Nf1atIggVubZeI7x8mMEwhjN/L5m4gMPQZA28rctX0/P2NnIrRV/W5YGntioUJWspeq2mXyebXW5JBxNp73q3XkNu7bPQzxKaGhsRHNKMrCW8ampV/zGRjp2HqN9HE3E9hIxtw/HiuaPV+Wy21AJxK0VX5YEJqwN5N5tL52jRgegYgmDTJTn3D6FKF8bTYyPUktebt4cM0Sxcy0ehZ4gP8Vwx4SsNiCamqXjDPmlJ5CLB38AiTXlgBmGu9U7+1onvis6rCgJWn2nKU+ZrEBAerCPaGQG872by0vYZlndD0iTDAz1VAncN8RLextaJZPK8igIzEwall6nhmNWJ+F5+3soJKvWDj0rZIFuTRgwXWkHRSuqD0dMmZdODTLFC+OUjzaB+7NFpbJnYCc0LHOQ5K9cYg1ZHV/ZLxfwaroL1x05QG4PwWRlk+0JLT2kjndTtYp1Nnka8HSRdCAb6fIpYwxEGBwZvdl5lo57EXJblglNbV6pNBa++G8awHdJiRbxZAdkz3to6fUU9SLfAjc09JB0eJjbML1+9rNbnhliV37intxFelGnKU2VTI1jTKwzCrAgHo0tOt9qFSMcCLb8ucO1Mm9MeyC4OgvWCosgepUy1ltdOEL+Bh8hCdQJ67bpoG/vc/RA44Fcb7a4iD9UIIlUgJlh+hEH3SVoAvA5EAq1mQvnspQf2uSiz9L1R63SYCmJ4I5SJDpMPgsGVb0L597ZbJJ+6dzmYnFdMiQ4jFMcGb7835aIqfEXLGkF2uqoRPFnXCL62HNPsfZBcTYebxYDjZqwHVEeE0eGgAfa+6oL6NnapeCE9sBBeVsb8ayfFsn+V1drpIAX13eWh0toqcgXmjFPOGWtPgWmEElATL44ljHFbINUYXEKh/T/DcGsEr6N2H8tXYVBajhd7jXMJzmAUXXd7RfL2sNtYRu/7zXBDW8QtR7ObvFbfS7Si55QW0zShKUf6twiKisd/AnbACfOsor3dzkv6+U15HFy8MypDw6DlgNDT8qmJ75fufVy56KZGEC4ts5b1k/WGQn5e42PjJYph55kLRtQBRtUfXJw+VwfdyhJG+1twCN6aeo2epE2cGwDOScbUu+m3lmldM/hWfjyfL8bnpdFb7DaRH+27VUHNbWVoGec2KbXt2azZZDXxYAQf8tZ/We9PqUNwd6egEFkjGCET5knbpj0dzzz9OzGWr/F2/SLPsfH4fCBN2M0GtDmlIS0w1psOIroJ0CHnxxkK380BTnMuANC9PJ8t5i9vIO1sjR47gsqzVW4aIvjsHkZleqBE74cX/CNbk7+W60/pAhHOiPQhiW0EjySflk9XGikJBZh8OfWFBVnKFKAFHr3gkszuNLduGLdyzE9D84nrfV8iXnYejSq2eqb+Cwsrzebv9hmhRNpze1hOcwyb8Gbpsdc3uR77cQR0qTs5feUO93w1WycF1gId8jyq1y7eCTqZU2oEgONRONO7klEyYRm4xvLtBl66hbTdd5OHcqslnS6o/sy/Qaejb8qlvp8ZILZfiPRZ4aWXyK/zQSpsjHztrSm/TT5dFniohmN9xJoPS8T5zZp8evjou5KgeleqJX2SS1BDFxWGTp5IABz+4mnpbqe/3LzUKgyaqT/JBAOx5wVYhoMFRgqDSbc68h1cn+reL/JJ2ikYhhh8VQNNUnniOAfCkWY31gkf3ruvsxzLtprwpe37Wdq+1rrZLfB/7BzWkOCIjwFiRuDLuG9JU+9NGGE6PtJ6WVYAG2T2dy4pTFAWUcqR7H0EgK5Rmfto1gX39wFJdaiYcBLydeykPBgsbZ3WTaKieg0Dhnhg+68aWOc//ROuLEcNSRem1AtYDsunML+jGiDKYX/MoyWxfI5AQ63rv8QDx7AUmR0m9sD0XQmvkaEeDH4EhcVlCGil+M6tamPynnAzYPgelSGkoj8pK3mqL+vqYWIHGgJS8Q0jnrAF+rQvLcf/Khy9PzLitxy+jl3sJcN2xVDfkjgdYRDLHYz81XNffyubpK/83Vz5fo/U/FnK45HezzJqgzdjO9QDtwpT5OP8reB9lZzJ5l4725tLKCJsORgJavcjurgHUUkYE0ykyThFBjhFz4Jww7dhvYrT3aTzqD2v23v2dYqUEMRvgXdGJ/BvlTSr8JnUo6dbzIO84bfu3A63IyB9nGLq/CLRHgzPk5kejfDETmVlZt/GsBqk5ypkzPRsgAvOEbv1g2NBfaUAmVJXLfMZ7UkYhKGe19K2/bV6dwjuY++kKePv56Wz8udn+Ww8vhDb/VvR6V2amVOF6FtoJItkHyF9DlZPBw0+aMTqmUEwtQl5no/fGaInluGZFJ87GlI6T7H3Xth+XGMMyzykwPQX6Xbq+dGOWz5EmKLP6jqt1KnAKVOj3W1Ti06SfYalF/WNfHIm1CUU3vFA0zZVXUOIPQHY8LxJXw3kPGtBjxmlMJgYHFtZeNUj1tnhtUDf2DNRWmLZ+Sy0mq6zXAQ4ktaDqaiuntRosNljL8EdlAXKt4uTk/fJk5xUYzO9PgEU/pk1ejT1piMx1xjDT76l5zB1/+kqNO58I3Djc3XlNHBWkDh7oAO10xZyqb5lmY8VgE1YFbsJN9Jb4mJ8D5JdT/pfYA0OB055cqGluD0coTBoJVybc7aN+v60l95y4GyX+BIdIptKPj1NzSmBUNN7lAyS2m0MevO4/qASF8pPal7eL6V0E14kWG79mg8cJrjwlM6n2Y0z1hlKt2laoj3lQB0lizDafDdKRuToVJurUbUVyaRSXiIjCz4ccJOJKSk6ZvpCHaihoO2QIwnfmLwzhlC4KkD+HSHEKLMnj69qEqwsR4Gx/pZP5nMB90olaWXC+olSyhhAEbUFSHCgFR9t2cIA+f8iHSrE7Y9pA2S6tDUBfk7LwK8TNoAZHDUTbu0lmiYjrHbxaNrhnBPfDCjxfsKbF7cPy0IfKyPdZQMOT8uHDRIreGqnVqcwWE9GGFSXd3kwm+tu3MlmUwdkyPRKiE5YuqOF2jcgU4CHwTAYj6JmOk0h3FLX8ZUHY1bttNvtfkdR9L4fKubqJG41sgd7xuoRG15Wku+neKRL+iW95cXAyq1qxj2O2LeTgSWGVcurFBUahC/KoAGzzdZrhwVqc27Tzn40kdGx9gvejJV1u6Q+pZS9eNMRMmE8Cc0fg5Go5TkQVbFO6hmS822VbJo0TGxOQeY5k/vBdSrrm8fNUrJnBW4FMVao2D87tHZIO36l831zBVGEwd394TXab/vCg398ZZhv+RtPc0GTwK9/a+3DYZXf9NBRJchUBhZj55DUpoyVW+S5o+3GngUXKnOnrxDabS8d8EFyRkeNV7OkxpRXOFrYFO2ABiuZYL/dpHyC8uP5YjzufoGDKrA1Qu5onV8m1gyPRseFXpwUJ+gR+8nyBkedzzK9kinX6enb5jRYQOVzegm3FTT2pb77PuCwql0MF7o+N1CM9m4YID8vops5TgCseb4tXlfxV6Z3UsRVeDMQ3BWI8XIJbjUPY3yiUghmHutputxt88AKoVxwAE/Lh7zncOhFiZgneHsM3zq52w5kf2YskHB/DV6fXyjmHFOCFIoHzDm13y9vvkBu5PfDHEaIo8Nfc/ByMYjqZo4T/K4zpChndEijlfXef0n3kvFAuTL9dtOxpdJDxdwrufSLwOFPW6E2zOOFnQhx0tcE6JBf/8Fpzuiw9+mfAs2GRhWtceTIWILD31KHdXNpUaQvU6grCl0i7708tPO1HvxmT4MIIW44zvI+2HEa+OiBsQSHCZ48Pq/9lo+/rC9TUIRBnAhb4HrQ1+vQZfQ6JrAFipEaHP5KNXk25xNnYziKkBOFySyPyssJrRqIZmhuVrY4A0fbP+VPgkOpWCHf0ZzTHErToe1mnpAwaDbg+8qn5aenSy1D5F6m6QZxpUL4clCkY/DxNwCL1U4LDj/tk3RgK6cpVAXbeq5xEnDInzlZmTNSgvDtyVVBPTsbn48143z639lZufy5HOXyeHEiCAndCt8XpiM9OPwdu2g3vxk0wSXVKEQl6mbugKe1GrkYZPr2t5d58N6MlQtwZPA5fMXT7TyztyZ4JmuJqJVCFOc1moAsgsFnk20sjQPXyuu4ZUHtwIGxrjf68Atf0zIoPNL04PBuuuhlnhOIYYkpsTAumtX+WiGq7OzmEamSt7W0VjNrjYQyEze+IpoCHFnA8eRj+Vj59mGGZgubvV7KO1ELlDc0LHELsybzIXTAf6ce8M8KcKQHx7lXA/kHpTNVvYDjNBo4FTZoda98remjDpECHBnAsSlCqv+xnndpLEfLh42a2LPA3vJuFItjJQs4lu4oQoQ2D+BxTPzqSeSg9p5oheBpXTPEPotoJT04bG43+cnJyft8+vOau66cXX1vYf3Nx+F1F+O6XSmSYOnB8fn69HYo0ybReeILP9nTvnDFYJ3EKTKkmUJZ119UMpI/b3ZNsGB+iZu91xM3VpaDtItTJQM49q9MzxEbAd0lUt33wTxZCVLcyma2HAcxMG4FSCDoY98Aw4GrIon63nyOAhw/DA6ftJA7/oN3e31gA3zaa+b7GyzA8YvBYcJQtRua7Gc5LPC6FlOg8yLL8avBgcGMhrpo7eUNSYejyjbiMbDwR38xOEzwJHJkBWMLlJvr+vUc4p4CHD9qOOBtmP9BZpm14uQh0mW0IHMcCzg0vV35dyZtHgWp0cSLfGgH4GKlfzE4pHtxqlWLSn0gKCoHvPXLa4gRLsDxq8Gh09WrITropSk8h1jd4vZKz36KsRgckqxBAY4s/uiNVpmDd65BwmJl7P4UHA2EHxp18g5x4Y7+cnB0WUS/grGChxXb2051SHRPjtFlmwcKE+q0D4pQ5UgthyvGtui6nRNMsxWCCIbu/1ueO/D+vM/DQm+kWSkOld/vc8QIeRPG5pejTcs/b2x++600f2d8S3u4TuyXIoo9hmjlObZhARVsdl56uQ70MoWVmxdjML84FZQQTR0ka97sI5tZgONg8hzVXboLhBImxLIhdrsv/3tKbHmOoMiCfDq8Ls6UowCHT3w9TuDL1W12JYxVrVSsQhRfgOJMOQpwQNjr5CokyEQJFvf0xwEOVejGcxTkYPPrYnWPBhyq9Dov+WLEm93iSDkmcMi4YiBQLlaDX/ZAweA4KnBA1fyP7G81bNXLrGB+HRc4XL+jzfYxHoiKd9WWqLhNOT5wKDfhsZkVHhIZ9kR1BjYLaBwjONxuBS99nl5IkDLeP3dbuFsFNI4UHK7xgK+TPndZfjtl0OvL1txcLM5f3d8u3NBjBsdSlQeOHj+eOWHxWrWEMsTEyeXt50puumB8HTk41oQuABtliZCmYEQeGlQNQtz/KHFJwkTz+WRw/rLscQcsq0iH5j3+H6IvxdvdAzneAAAAAElFTkSuQmCC";
+  var CAT_EN = { "揚げサンド":"Fried Sandwich", "揚げサンド（期間限定）":"Fried Sandwich (Limited)" };
+  function catLine(r){
+    if(!r.category) return "";
+    var e = CAT_EN[r.category];
+    return esc(r.category) + (e ? " / " + e : "");
+  }
   function A3cardIng(rows){
     return rows.map(function(i){
       var qt = (i[2]==null)
@@ -500,39 +530,76 @@ footer{margin-top:26px;padding:16px 0 8px;border-top:1px solid var(--line);font-
     var shot = (r.oldFormat || r.photo === false) ? '' :
       '<div class="pshot"><img src="/age3-recipe/'+esc(r.id)+'-steps.jpg" alt="" onerror="this.parentNode.remove()"></div>';
     var mth = r.steps.map(function(s,n){
-      var pt = s.point ? '<div class="ppt"><span class="lb">POINT</span><div class="j">'+esc(s.point.jp)+'</div>'+
-             (s.point.en?'<div class="e">'+esc(s.point.en)+'</div>':'')+'</div>' : '';
-      return '<li><span class="no">'+(n+1)+'</span><span class="bd"><span class="j">'+esc(s.jp)+'</span>'+
+      var pt = s.point ? '<div class="ppt"><span class="lb">'+bgimg(BG_PT)+'<i>POINT</i></span><span class="tx">'+
+             '<span class="j">'+esc(s.point.jp)+'</span>'+
+             (s.point.en?'<span class="e">'+esc(s.point.en)+'</span>':'')+'</span></div>' : '';
+      return '<li><span class="no">'+bgimg(BG_DOT)+'<i>'+(n+1)+'</i></span><span class="bd"><span class="j">'+esc(s.jp)+'</span>'+
              (s.en?'<span class="e">'+esc(s.en)+'</span>':'')+pt+'</span></li>';
     }).join('');
     var notes = (r.notes && r.notes.length)
-      ? '<div class="pnote"><b>申し送り</b>'+r.notes.map(esc).join('<br>')+'</div>' : '';
-    var sub = r.sub ? '<div class="pnote"><b>仕込み ／ '+esc(r.sub.title)+'</b>'+
+      ? '<div class="pnote"><b>申し送り / NOTES</b>'+r.notes.map(esc).join('<br>')+'</div>' : '';
+    var sub = r.sub ? '<div class="psub"><b>仕込み ／ '+esc(r.sub.title)+'</b>'+
         r.sub.ing.map(function(i){return esc(i[0])+'　'+(i[2]==null?'—':esc(i[2])+esc(i[3]||''));}).join('<br>')+
         (r.sub.note?'<br>'+esc(r.sub.note):'')+'</div>' : '';
     return '<section class="pcard">' +
-      '<div class="ph-top"><div class="ph-brand">Age.3<small>R E C I P E</small></div>' +
-        '<div class="ph-meta">' +
-          (r.code?'<div><span>CODE</span><b>'+esc(r.code)+'</b></div>':'') +
-          (r.category?'<div><span>CATEGORY</span>'+esc(r.category)+'</div>':'') +
-          (r.ver?'<div><span>VER</span>'+esc(r.ver)+(r.issued?' / '+esc(r.issued):'')+'</div>':'') +
-        '</div></div>' +
-      (r.serve?'<div class="pserve">'+esc(r.serve)+'</div>':'') +
-      '<div class="pname">'+esc(r.name)+'</div>' +
-      '<div class="pname-en">'+esc(r.en)+'</div>' +
-      '<div class="prule"></div>' +
-      '<div class="pcols"><div class="pcol-l">' +
-        '<div class="psec"><span class="n">01</span><span class="j">材料</span><span class="e">INGREDIENTS</span><span class="r">'+esc(r.yield||'')+'</span></div>' +
+      '<img class="pstripe" src="'+BG_STRIPE+'" alt="">' +
+      '<div class="pabs plogo"><img src="'+A3LOGO+'" alt="Age.3"></div>' +
+      '<div class="pabs prec">RECIPE</div>' +
+      '<div class="pabs pmeta">' +
+        (r.code?'<div><i>CODE</i><b>'+esc(r.code)+'</b></div>':'') +
+        (r.category?'<div><i>CATEGORY</i><b>'+catLine(r)+'</b></div>':'') +
+        (r.ver?'<div><i>VER</i><b>'+esc(r.ver)+'</b><i>'+(r.issued?' / '+esc(r.issued):'')+'</i></div>':'') +
+      '</div>' +
+      (r.serve?'<div class="pabs pserve">'+esc(r.serve)+'</div>':'') +
+      '<div class="pabs pname">'+esc(r.name)+'</div>' +
+      '<div class="pabs pname-en">'+esc(r.en||'')+'</div>' +
+      '<div class="pabs prule"></div>' +
+      '<div class="pabs pcols"><div class="pcolsin"><div class="pcol-l"><div class="pfitl">' +
+        '<div class="psec">'+bgimg(BG_SEC)+'<span class="n">01</span><span class="j">材料</span><span class="e">INGREDIENTS</span>' +
+          (r.yield?'<span class="r">／ '+esc(r.yield)+' / per piece</span>':'') + '</div>' +
         '<ul class="ping">'+A3cardIng(r.ing)+'</ul>' + sub +
-        '<div class="psec"><span class="n">02</span><span class="j">作り方</span><span class="e">METHOD</span><span class="r">'+r.steps.length+'手順</span></div>' +
+        '<div class="psec">'+bgimg(BG_SEC)+'<span class="n">02</span><span class="j">作り方</span><span class="e">METHOD</span></div>' +
         '<ul class="pmth">'+mth+'</ul>' +
-      '</div><div class="pcol-r">' +
+      '</div></div><div class="pcol-sp"></div><div class="pcol-r"><div class="pfitr">' +
         '<div class="phero">'+hero+'</div>' + shot + notes +
-      '</div></div>' +
-      (r.finish?'<div class="pfin"><div class="lb">完成基準 / FINISH STANDARD</div><div class="j">'+esc(r.finish.jp)+'</div>'+
-        (r.finish.en?'<div class="e">'+esc(r.finish.en)+'</div>':'')+'</div>':'') +
-      '<div class="pfoot"><span>Age.3 STANDARD RECIPE</span><span>CONFIDENTIAL — DO NOT COPY</span></div>' +
+      '</div></div></div></div>' +
+      '<div class="pabs pfin">'+bgimg(BG_FIN)+'<div class="lb">完成基準 / FINISH STANDARD</div>' +
+        '<div class="j">'+(r.finish?esc(r.finish.jp):'（カードに記載なし）')+'</div>' +
+        ((r.finish&&r.finish.en)?'<div class="e">'+esc(r.finish.en)+'</div>':'') + '</div>' +
+      '<div class="pabs pfoot"><span>Age.3 STANDARD RECIPE</span><span>CONFIDENTIAL — DO NOT COPY</span></div>' +
       '</section>';
+  }
+  /* 1品1ページに必ず収める。はみ出す分だけ本文（2段組み）を縮小する。 */
+  function A3fit(root){
+    var LIMIT = mm(194.0);              /* 本文に使える高さ 67.48mm〜261.5mm */
+    [['.pfitl',79.39],['.pfitr',95.78]].forEach(function(t){
+      [].forEach.call(root.querySelectorAll(t[0]), function(c){
+        var k = 1;
+        c.style.zoom = ''; c.style.width = t[1] + 'mm';
+        for(var i = 0; i < 10; i++){
+          var h = c.getBoundingClientRect().height;
+          if(h <= LIMIT) break;
+          k = Math.max(0.5, k * (LIMIT - mm(1)) / h);
+          c.style.zoom = k;
+          c.style.width = (t[1] / k) + 'mm';
+        }
+      });
+    });
+    /* 品名が横幅に収まらないときだけ文字を詰める */
+    [].forEach.call(root.querySelectorAll('.pname'), function(el){
+      var sz = 22.5;
+      el.style.fontSize = sz + 'pt';
+      while(el.scrollWidth > el.clientWidth + 1 && sz > 11){ sz -= 0.5; el.style.fontSize = sz + 'pt'; }
+    });
+  }
+  var _mmpx = 0;
+  function mm(v){
+    if(!_mmpx){
+      var d = document.createElement('div');
+      d.style.cssText = 'position:absolute;visibility:hidden;height:100mm';
+      document.body.appendChild(d); _mmpx = d.getBoundingClientRect().height / 100; d.remove();
+    }
+    return v * _mmpx;
   }
   function A3print(list){
     var root = document.getElementById('printroot');
@@ -540,27 +607,13 @@ footer{margin-top:26px;padding:16px 0 8px;border-top:1px solid var(--line);font-
     root.innerHTML = list.map(A3card).join('');
     var imgs = [].slice.call(root.querySelectorAll('img'));
     var left = imgs.length;
-    function fit(){
-      var LIMIT = 1020; /* A4 297mm - 上下12mm余白 相当 */
-      [].forEach.call(root.querySelectorAll('.pcard'), function(c){
-        var k = 1;
-        c.style.zoom = ''; c.style.width = '';
-        for(var i = 0; i < 8; i++){
-          var h = c.getBoundingClientRect().height;
-          if(h <= LIMIT) break;
-          k = Math.max(0.58, k * (LIMIT - 6) / h);
-          c.style.zoom = k;
-          c.style.width = (186 / k) + 'mm';
-        }
-      });
-    }
     function go(){
       document.documentElement.classList.add('printing');
-      fit();
+      A3fit(root);
       setTimeout(function(){
         window.print();
         setTimeout(function(){ document.documentElement.classList.remove('printing'); root.innerHTML=''; }, 400);
-      }, 120);
+      }, 150);
     }
     if(!left) return go();
     imgs.forEach(function(im){
@@ -568,10 +621,10 @@ footer{margin-top:26px;padding:16px 0 8px;border-top:1px solid var(--line);font-
       im.addEventListener('load', function(){ if(!--left) go(); });
       im.addEventListener('error', function(){ if(!--left) go(); });
     });
-    setTimeout(function(){ if(left>0){ left=0; go(); } }, 4000);
+    setTimeout(function(){ if(left>0){ left=0; go(); } }, 6000);
   }
 
-  window.A3card = A3card; window.A3print = A3print;
+  window.A3card = A3card; window.A3print = A3print; window.A3fit = A3fit;
 
   /* 画像が無い品は自動で「写真 未登録」に切り替える。
      写真ファイル（/age3-recipe/{id}-hero.jpg 等）を置けば、データを直さなくてもそのまま表示される。 */
