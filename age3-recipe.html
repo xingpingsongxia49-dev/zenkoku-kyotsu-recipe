@@ -501,6 +501,7 @@ footer{margin-top:26px;padding:16px 0 8px;border-top:1px solid var(--line);font-
   <p class="count" id="count"></p>
   <button class="rbtn" id="printall" style="width:100%;margin:6px 0 2px" hidden></button>
   <button class="rbtn" id="printkitchen" style="width:100%;margin:6px 0 2px" hidden></button>
+  <button class="rbtn" id="printkitchen2" style="width:100%;margin:0 0 2px" hidden></button>
   <div class="grid" id="grid"></div>
   <p class="empty" id="empty" hidden>見つかりませんでした。品名か材料名で探してみてください。</p>
   <footer>
@@ -524,7 +525,7 @@ footer{margin-top:26px;padding:16px 0 8px;border-top:1px solid var(--line);font-
   var esc = function(s){ return String(s==null?"":s).replace(/[&<>"']/g, function(c){
     return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]; }); };
 
-  var K_MODE = 'a4', K_FONT = 9.5, K_PH_MAX = 26;   /* 早見表: 'a4'=A4縦2枚 / 'a3'=A3縦1枚 */
+  var K_MODE = 'a4', K_FONT = 9.5, K_PH = 16.5;   /* 早見表: 'a4'=A4縦2枚 / 'a3'=A3縦1枚 */
   var PLAYLIST = (RECIPE_META && RECIPE_META.videoPlaylist) || "";
   var PLAYLIST_URL = PLAYLIST ? "https://www.youtube.com/playlist?list=" + encodeURIComponent(PLAYLIST) : "";
   var PLAYLIST_REG = (RECIPE_META && RECIPE_META.videoPlaylistRegular) || PLAYLIST;
@@ -706,28 +707,21 @@ footer{margin-top:26px;padding:16px 0 8px;border-top:1px solid var(--line);font-
       '<div class="kfoot"><span>Age.3 STANDARD RECIPE ／ 分量はレシピカードの記載に準拠</span>' +
         '<span>CONFIDENTIAL — DO NOT COPY</span></div></section>';
   }
-  function A3kitchen(mode){
-    mode = mode || K_MODE;
+  function A3kitchen(which){
+    which = which || 'sweets';
     var root = document.getElementById('printroot');
     if(!root){ root = document.createElement('div'); root.id = 'printroot'; document.body.appendChild(root); }
-    var sw = RECIPES.filter(function(r){ return r.group === 'regular-sweets'; });
-    var sv = RECIPES.filter(function(r){ return r.group === 'regular-savory'; });
-    if(!sw.length && !sv.length) return;
-    function cat(l,e,n){ return '<div class="kcat">'+l+'<span>'+e+' ／ '+n+'品</span></div>'; }
-    if(mode === 'a3'){
-      root.innerHTML = kPage('a3', '<b>レギュラー全'+(sw.length+sv.length)+'品</b><br>左＝材料 ／ 右＝使用量（揚げパンを除く）',
-        cat('レギュラースイーツ','REGULAR SWEETS',sw.length) + kRows(sw) +
-        cat('レギュラーセイボリー','REGULAR SAVORY',sv.length) + kRows(sv));
-    } else {
-      root.innerHTML =
-        kPage('', '<b>レギュラースイーツ '+sw.length+'品</b><br>左＝材料 ／ 右＝使用量（揚げパンを除く）',
-          cat('レギュラースイーツ','REGULAR SWEETS',sw.length) + kRows(sw)) +
-        kPage('', '<b>レギュラーセイボリー '+sv.length+'品</b><br>左＝材料 ／ 右＝使用量（揚げパンを除く）',
-          cat('レギュラーセイボリー','REGULAR SAVORY',sv.length) + kRows(sv));
-    }
+    var g = (which === 'savory') ? 'regular-savory' : 'regular-sweets';
+    var label = (which === 'savory') ? 'レギュラーセイボリー' : 'レギュラースイーツ';
+    var en = (which === 'savory') ? 'REGULAR SAVORY' : 'REGULAR SWEETS';
+    var list = RECIPES.filter(function(r){ return r.group === g; });
+    if(!list.length) return;
+    root.innerHTML = kPage('',
+      '<b>' + label + ' ' + list.length + '品</b><br>左＝材料 ／ 右＝使用量（揚げパンを除く）',
+      '<div class="kcat">' + label + '<span>' + en + ' ／ ' + list.length + '品</span></div>' + kRows(list));
     var imgs = [].slice.call(root.querySelectorAll('img'));
     var left = imgs.length;
-    function done(){ A3printGo(root, mode === 'a3' ? 'kitchen-a3' : 'kitchen'); }
+    function done(){ A3printGo(root, 'kitchen'); }
     if(!left) return done();
     imgs.forEach(function(im){
       if(im.complete){ if(!--left) done(); return; }
@@ -739,59 +733,50 @@ footer{margin-top:26px;padding:16px 0 8px;border-top:1px solid var(--line);font-
   /* 文字サイズは固定。余った高さを写真に回して、写真をできるだけ大きく見せる。
      それでも入りきらない場合だけ文字を小さくする。 */
   function kFit(root){
-    var heights = [];
     [].forEach.call(root.querySelectorAll('.kpage'), function(pg){
       var body = pg.querySelector('.kbody'); if(!body) return;
-      var isA3 = pg.classList.contains('a3');
-      var pageH = isA3 ? 420 : 297;
+      var pageH = pg.classList.contains('a3') ? 420 : 297;
       var phs = [].slice.call(pg.querySelectorAll('.kph'));
+      var rows = [].slice.call(pg.querySelectorAll('.krow'));
       function setPh(h){ phs.forEach(function(e){ e.style.height = h + 'mm'; }); }
-      function overflow(){
+      function slack(){
         var top = (body.getBoundingClientRect().top - pg.getBoundingClientRect().top) / mm(1);
-        return (body.getBoundingClientRect().height / mm(1)) - (pageH - top - K_FOOT_H);
+        return (pageH - top - K_FOOT_H) - (body.getBoundingClientRect().height / mm(1));
       }
-      /* 1) 写真の高さを二分探索で最大化 */
-      var lo = 10, hi = 46, best = 10;
+      rows.forEach(function(r){ r.style.marginBottom = ''; });
       body.style.fontSize = K_FONT + 'pt';
-      for(var i = 0; i < 15; i++){
-        var mid = (lo + hi) / 2;
-        setPh(mid);
-        if(overflow() <= 0){ best = mid; lo = mid; } else { hi = mid; }
-        if(hi - lo < 0.2) break;
+      setPh(K_PH);
+      /* 1) 入らないときは写真を縮める（品数が増えたとき用） */
+      if(slack() < 0){
+        var lo = 8, hi = K_PH, best = 8;
+        for(var i = 0; i < 14; i++){
+          var mid = (lo + hi) / 2;
+          setPh(mid);
+          if(slack() >= 0){ best = mid; lo = mid; } else { hi = mid; }
+          if(hi - lo < 0.2) break;
+        }
+        setPh(best);
       }
-      setPh(best); heights.push(best);
       /* 2) 写真を最小にしても入らないときだけ文字を縮める */
-      if(overflow() > 0){
+      if(slack() < 0){
+        setPh(8);
         var f1 = 5, f2 = K_FONT, bf = 5;
-        setPh(10);
         for(var j = 0; j < 14; j++){
           var fm = (f1 + f2) / 2;
           body.style.fontSize = fm + 'pt';
-          if(overflow() <= 0){ bf = fm; f1 = fm; } else { f2 = fm; }
+          if(slack() >= 0){ bf = fm; f1 = fm; } else { f2 = fm; }
           if(f2 - f1 < 0.05) break;
         }
         body.style.fontSize = bf + 'pt';
       }
-    });
-    /* 3) ページ間で写真の大きさをそろえる（一番小さいページに合わせ、上限も設ける） */
-    if(heights.length){
-      var h = Math.min(Math.min.apply(null, heights), K_PH_MAX);
-      [].forEach.call(root.querySelectorAll('.kph'), function(e){ e.style.height = h + 'mm'; });
-    }
-    /* 4) 余った高さは段の間に均等配分して、下がぽっかり空かないようにする */
-    [].forEach.call(root.querySelectorAll('.kpage'), function(pg){
-      var body = pg.querySelector('.kbody'); if(!body) return;
-      var pageH = pg.classList.contains('a3') ? 420 : 297;
-      var rows = [].slice.call(pg.querySelectorAll('.krow'));
-      rows.forEach(function(r){ r.style.marginBottom = ''; });
-      if(rows.length < 2) return;
-      var top = (body.getBoundingClientRect().top - pg.getBoundingClientRect().top) / mm(1);
-      var slack = (pageH - top - K_FOOT_H) - (body.getBoundingClientRect().height / mm(1));
-      if(slack <= 2) return;
-      var add = Math.min(slack / rows.length, 32);
-      rows.forEach(function(r){
-        r.style.marginBottom = (parseFloat(getComputedStyle(r).marginBottom) / mm(1) + add) + 'mm';
-      });
+      /* 3) 余った高さは段の間に均等配分 */
+      var sl = slack();
+      if(sl > 2 && rows.length > 1){
+        var add = Math.min(sl / rows.length, 34);
+        rows.forEach(function(r){
+          r.style.marginBottom = (parseFloat(getComputedStyle(r).marginBottom) / mm(1) + add) + 'mm';
+        });
+      }
     });
   }
   window.A3kitchen = A3kitchen; window.kFit = kFit;
@@ -874,12 +859,19 @@ footer{margin-top:26px;padding:16px 0 8px;border-top:1px solid var(--line);font-
     $("#empty").hidden = list.length > 0;
     var pa = $("#printall");
     if(pa){ pa.hidden = list.length === 0; pa.textContent = "表示中の" + list.length + "品をまとめて印刷 / PDF"; pa.__list = list; }
+    var nsw = RECIPES.filter(function(r){ return r.group === "regular-sweets"; }).length;
+    var nsv = RECIPES.filter(function(r){ return r.group === "regular-savory"; }).length;
     var pk = $("#printkitchen");
     if(pk){
-      var nreg = RECIPES.filter(function(r){ return r.group && r.group.indexOf("regular") === 0; }).length;
-      pk.hidden = nreg === 0;
-      pk.innerHTML = "レギュラー商品 キッチン掲載用 早見表を印刷 / PDF" +
-        "<br><small>写真つき・使用グラム数の一覧／A4縦2枚（スイーツ・セイボリー 計" + nreg + "品）</small>";
+      pk.hidden = nsw === 0;
+      pk.innerHTML = "キッチン掲載用 早見表｜レギュラースイーツ" +
+        "<br><small>写真つき・使用グラム数の一覧／A4縦1枚（" + nsw + "品）</small>";
+    }
+    var pk2 = $("#printkitchen2");
+    if(pk2){
+      pk2.hidden = nsv === 0;
+      pk2.innerHTML = "キッチン掲載用 早見表｜レギュラーセイボリー" +
+        "<br><small>写真つき・使用グラム数の一覧／A4縦1枚（" + nsv + "品）</small>";
     }
     $("#empty").textContent = q ? "見つかりませんでした。品名か材料名で探してみてください。" : "このカテゴリーにはまだレシピが登録されていません。";
     $("#count").textContent = list.length + "品" + (q || filter!=="all" ? "（全"+RECIPES.length+"品中）" : "");
@@ -889,7 +881,10 @@ footer{margin-top:26px;padding:16px 0 8px;border-top:1px solid var(--line);font-
     return '<button class="chip" data-f="'+f.id+'" aria-pressed="'+(f.id==="all")+'">'+esc(f.label)+'</button>';
   }).join("");
   (function(){ var pa = $("#printall"); if(pa) pa.addEventListener("click", function(){ if(this.__list && this.__list.length) A3print(this.__list); }); })();
-  (function(){ var pk = $("#printkitchen"); if(pk) pk.addEventListener("click", function(){ A3kitchen(); }); })();
+  (function(){
+    var pk = $("#printkitchen"); if(pk) pk.addEventListener("click", function(){ A3kitchen("sweets"); });
+    var pk2 = $("#printkitchen2"); if(pk2) pk2.addEventListener("click", function(){ A3kitchen("savory"); });
+  })();
   $("#chips").addEventListener("click", function(e){
     var b = e.target.closest(".chip"); if(!b) return;
     filter = b.dataset.f;
