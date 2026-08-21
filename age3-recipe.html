@@ -397,6 +397,35 @@ footer{margin-top:26px;padding:16px 0 8px;border-top:1px solid var(--line);font-
 .pfin .e{font-size:8.25pt;line-height:1.2;color:#888;margin-top:.7mm}
 .pfoot{top:287.48mm;display:flex;justify-content:space-between;font-size:7.5pt;line-height:1;color:#AAA}
 
+/* ---------- キッチン掲載用 使用グラム数 早見表 ---------- */
+.kpage{position:relative;box-sizing:border-box;width:297mm;height:210mm;overflow:hidden;
+  background:#fff;color:#4C4948;font-weight:400;padding:8mm 10mm;
+  font-family:"Noto Sans JP","Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic",Meiryo,sans-serif;
+  -webkit-print-color-adjust:exact;print-color-adjust:exact}
+.kpage *{box-sizing:border-box}
+.khead{display:flex;align-items:flex-end;justify-content:space-between;padding-bottom:1.6mm;border-bottom:.8pt solid #4C4948}
+.khead .l{display:flex;align-items:flex-end}
+.khead .lg{height:7mm;width:22mm;object-fit:contain;object-position:left bottom;display:block;margin-right:4mm}
+.khead .t{font-size:11.5pt;font-weight:700;line-height:1.05}
+.khead .s{font-size:7pt;color:#999;letter-spacing:.16em;line-height:1.05;margin-top:.8mm}
+.khead .r{font-size:7.5pt;color:#999;text-align:right;line-height:1.5}
+.khead .r b{color:#4C4948;font-weight:700;font-size:9pt}
+.kgrid{display:flex;flex-wrap:wrap;margin-top:4mm;align-content:flex-start}
+.krow{display:flex;width:100%}
+.kcell{width:52.6mm;margin-right:3.5mm}
+.kcell:last-child{margin-right:0}
+.kph{height:22mm;display:flex;align-items:center;justify-content:center}
+.kph img{max-width:100%;max-height:22mm;display:block}
+.kph .nop{font-size:6.5pt;color:#C4C0B8}
+.kname{font-size:9.5pt;font-weight:700;line-height:1.22;margin-top:1mm}
+.kname i{font-style:normal;font-size:6.2pt;color:#AAA;font-weight:400;margin-left:1.2mm;white-space:nowrap}
+.ktbl{width:100%;border-collapse:collapse;margin-top:1.2mm;table-layout:fixed}
+.ktbl th{font-size:6.2pt;font-weight:400;color:#999;text-align:left;padding:.5mm 1mm;border-bottom:.7pt solid #4C4948}
+.ktbl th.q,.ktbl td.q{text-align:right;width:15mm}
+.ktbl td{font-size:7.6pt;padding:.8mm 1mm;border-bottom:.5pt solid #E4E1DA;line-height:1.22;vertical-align:top}
+.ktbl td.q{font-weight:700;white-space:nowrap}
+.kfoot{position:absolute;left:10mm;right:10mm;bottom:4mm;display:flex;justify-content:space-between;font-size:6.5pt;color:#AAA}
+
 @page{size:A4 portrait;margin:0}
 @media print{
   html.printing body>*{display:none !important}
@@ -404,8 +433,9 @@ footer{margin-top:26px;padding:16px 0 8px;border-top:1px solid var(--line);font-
   html.printing,html.printing body{background:#fff !important;margin:0 !important;padding:0 !important}
   html.printing #printroot{padding:0;margin:0}
   html.printing{overflow:visible !important}
-  .pcard{page-break-after:always;break-after:page}
-  .pcard:last-child{page-break-after:auto;break-after:auto}
+  .pcard,.kpage{page-break-after:always;break-after:page}
+  .pcard:last-child,.kpage:last-child{page-break-after:auto;break-after:auto}
+  .krow{page-break-inside:avoid;break-inside:avoid}
 }
 </style>
 </head>
@@ -466,6 +496,7 @@ footer{margin-top:26px;padding:16px 0 8px;border-top:1px solid var(--line);font-
   <button class="noticebtn" id="noticebtn"></button>
   <p class="count" id="count"></p>
   <button class="rbtn" id="printall" style="width:100%;margin:6px 0 2px" hidden></button>
+  <button class="rbtn" id="printkitchen" style="width:100%;margin:6px 0 2px" hidden></button>
   <div class="grid" id="grid"></div>
   <p class="empty" id="empty" hidden>見つかりませんでした。品名か材料名で探してみてください。</p>
   <footer>
@@ -601,20 +632,31 @@ footer{margin-top:26px;padding:16px 0 8px;border-top:1px solid var(--line);font-
     }
     return v * _mmpx;
   }
+  function A3printGo(root, orient){
+    var st = document.getElementById('a3pagestyle');
+    if(!st){ st = document.createElement('style'); st.id = 'a3pagestyle'; document.head.appendChild(st); }
+    st.textContent = '@page{size:A4 ' + (orient === 'landscape' ? 'landscape' : 'portrait') + ';margin:0}';
+    /* #printroot は画面では display:none なので、そのままだと高さが 0 と判定されて縮小が効かない。
+       いったん画面外に出して実寸で測り、1ページに収めてから印刷する。 */
+    root.style.cssText = 'position:fixed;left:-10000px;top:0;display:block;z-index:-1';
+    try{ if(orient === 'landscape') kFit(root); else A3fit(root); }catch(e){}
+    root.style.cssText = '';
+    document.documentElement.classList.add('printing');
+    setTimeout(function(){
+      window.print();
+      setTimeout(function(){
+        document.documentElement.classList.remove('printing');
+        root.innerHTML = ''; st.textContent = '';
+      }, 400);
+    }, 150);
+  }
   function A3print(list){
     var root = document.getElementById('printroot');
     if(!root){ root = document.createElement('div'); root.id = 'printroot'; document.body.appendChild(root); }
     root.innerHTML = list.map(A3card).join('');
     var imgs = [].slice.call(root.querySelectorAll('img'));
     var left = imgs.length;
-    function go(){
-      document.documentElement.classList.add('printing');
-      A3fit(root);
-      setTimeout(function(){
-        window.print();
-        setTimeout(function(){ document.documentElement.classList.remove('printing'); root.innerHTML=''; }, 400);
-      }, 150);
-    }
+    function go(){ A3printGo(root, 'portrait'); }
     if(!left) return go();
     imgs.forEach(function(im){
       if(im.complete) { if(!--left) go(); return; }
@@ -625,6 +667,76 @@ footer{margin-top:26px;padding:16px 0 8px;border-top:1px solid var(--line);font-
   }
 
   window.A3card = A3card; window.A3print = A3print; window.A3fit = A3fit;
+  /* ---------- キッチン掲載用 使用グラム数 早見表 ---------- */
+  var K_PER_ROW = 5, K_ROWS_PER_PAGE = 3, K_GRID_W = 277.0, K_FOOT_H = 7.0;
+  function kName(s){ return String(s||'').replace(/\s*※.*$/,'').trim(); }
+  function kCell(r){
+    var ph = (r.photo === false)
+      ? '<div class="nop">写真なし</div>'
+      : '<img src="/age3-recipe/'+esc(r.id)+'-hero.jpg" alt="" onerror="this.parentNode.innerHTML=\'<div class=&quot;nop&quot;>写真なし</div>\'">';
+    var rows = (r.ing||[]).filter(function(i){ return String(i[0]).indexOf('揚げパン') < 0; })
+      .map(function(i){
+        var q = (i[2]==null) ? '—' : esc(i[2]) + esc(i[3]||'');
+        return '<tr><td>'+esc(kName(i[0]))+'</td><td class="q">'+q+'</td></tr>';
+      }).join('');
+    return '<div class="kcell">' +
+      '<div class="kph">'+ph+'</div>' +
+      '<div class="kname">'+esc(r.name)+(r.code?'<i>'+esc(r.code)+'</i>':'')+'</div>' +
+      '<table class="ktbl"><tr><th>材料</th><th class="q">使用量</th></tr>'+rows+'</table>' +
+      '</div>';
+  }
+  function kPage(title, rowsHtml, pno, ptotal){
+    return '<section class="kpage">' +
+      '<div class="khead"><div class="l"><img class="lg" src="'+A3LOGO+'" alt="Age.3">' +
+        '<div><div class="t">使用グラム数 早見表</div><div class="s">PRODUCT RECIPE REFERENCE</div></div></div>' +
+        '<div class="r"><b>'+esc(title)+'</b><br>'+pno+' / '+ptotal+'</div></div>' +
+      '<div class="kgrid">'+rowsHtml+'</div>' +
+      '<div class="kfoot"><span>Age.3 STANDARD RECIPE ／ 分量はレシピカードの記載に準拠</span>' +
+        '<span>CONFIDENTIAL — DO NOT COPY</span></div>' +
+      '</section>';
+  }
+  function A3kitchen(list, title){
+    if(!list || !list.length) return;
+    var root = document.getElementById('printroot');
+    if(!root){ root = document.createElement('div'); root.id = 'printroot'; document.body.appendChild(root); }
+    var rows = [];
+    for(var i = 0; i < list.length; i += K_PER_ROW){
+      rows.push('<div class="krow">' + list.slice(i, i + K_PER_ROW).map(kCell).join('') + '</div>');
+    }
+    var pages = [];
+    for(var i = 0; i < rows.length; i += K_ROWS_PER_PAGE){
+      pages.push(rows.slice(i, i + K_ROWS_PER_PAGE).join(''));
+    }
+    root.innerHTML = pages.map(function(h, n){ return kPage(title, h, n + 1, pages.length); }).join('');
+    var imgs = [].slice.call(root.querySelectorAll('img'));
+    var left = imgs.length;
+    function done(){ A3printGo(root, 'landscape'); }
+    if(!left) return done();
+    imgs.forEach(function(im){
+      if(im.complete){ if(!--left) done(); return; }
+      im.addEventListener('load', function(){ if(!--left) done(); });
+      im.addEventListener('error', function(){ if(!--left) done(); });
+    });
+    setTimeout(function(){ if(left > 0){ left = 0; done(); } }, 8000);
+  }
+  function kFit(root){
+    [].forEach.call(root.querySelectorAll('.kpage'), function(pg){
+      var g = pg.querySelector('.kgrid'); if(!g) return;
+      var top = (g.getBoundingClientRect().top - pg.getBoundingClientRect().top) / mm(1);
+      var avail = 210 - top - K_FOOT_H;
+      var k = 1;
+      g.style.zoom = ''; g.style.width = K_GRID_W + 'mm';
+      for(var i = 0; i < 8; i++){
+        var h = g.getBoundingClientRect().height / mm(1);
+        if(h <= avail) break;
+        k = Math.max(0.62, k * (avail - 0.5) / h);
+        g.style.zoom = k;
+        g.style.width = (K_GRID_W / k) + 'mm';
+      }
+    });
+  }
+  window.A3kitchen = A3kitchen; window.kFit = kFit;
+
 
   /* 画像が無い品は自動で「写真 未登録」に切り替える。
      写真ファイル（/age3-recipe/{id}-hero.jpg 等）を置けば、データを直さなくてもそのまま表示される。 */
@@ -703,6 +815,13 @@ footer{margin-top:26px;padding:16px 0 8px;border-top:1px solid var(--line);font-
     $("#empty").hidden = list.length > 0;
     var pa = $("#printall");
     if(pa){ pa.hidden = list.length === 0; pa.textContent = "表示中の" + list.length + "品をまとめて印刷 / PDF"; pa.__list = list; }
+    var pk = $("#printkitchen");
+    if(pk){
+      pk.hidden = list.length === 0;
+      pk.innerHTML = "キッチン掲載用 早見表を印刷 / PDF<br><small>使用グラム数だけの一覧・A4横（" + list.length + "品）</small>";
+      pk.__list = list;
+      pk.__title = (FILTERS.filter(function(f){ return f.id === filter; })[0] || {}).label || "すべて";
+    }
     $("#empty").textContent = q ? "見つかりませんでした。品名か材料名で探してみてください。" : "このカテゴリーにはまだレシピが登録されていません。";
     $("#count").textContent = list.length + "品" + (q || filter!=="all" ? "（全"+RECIPES.length+"品中）" : "");
   }
@@ -711,6 +830,7 @@ footer{margin-top:26px;padding:16px 0 8px;border-top:1px solid var(--line);font-
     return '<button class="chip" data-f="'+f.id+'" aria-pressed="'+(f.id==="all")+'">'+esc(f.label)+'</button>';
   }).join("");
   (function(){ var pa = $("#printall"); if(pa) pa.addEventListener("click", function(){ if(this.__list && this.__list.length) A3print(this.__list); }); })();
+  (function(){ var pk = $("#printkitchen"); if(pk) pk.addEventListener("click", function(){ if(this.__list && this.__list.length) A3kitchen(this.__list, this.__title); }); })();
   $("#chips").addEventListener("click", function(e){
     var b = e.target.closest(".chip"); if(!b) return;
     filter = b.dataset.f;

@@ -1210,7 +1210,7 @@ var RECIPES = [
 },
 /* ---------------------------------------------------------------- AS-10 */
 {
-  id: 'as-10', code: 'AS-10', ver: '1.0', issued: '2026.06',
+  id: 'as-10', code: 'AS-10', ver: '1.1', issued: '2026.08',
   name: 'モンブラン', en: 'Mont Blanc',
   serve: 'SWEETS 提供 / SERVE', category: '揚げサンド', limited: false,
   group: 'regular-sweets',
@@ -1219,15 +1219,15 @@ var RECIPES = [
   ing: [
     ['揚げパン（半分）', 'Fried bread (half)', '1/2', '個'],
     ['ホイップ', 'Whipped cream', '80', 'g'],
-    ['モンブランクリーム', 'Mont Blanc cream', '90', 'g'],
+    ['モンブランクリーム', 'Mont Blanc cream', '20', 'g'],
     ['栗', 'Chestnut', '1', '個']
   ],
   steps: [
     { jp: 'パンにクリーム（約80g）を詰める。',
       en: 'Fill the bread with cream (about 80g).',
       point: { jp: '側面にクリームをつけない。表面は平らにならす。', en: 'Keep cream off the sides and smooth the surface flat.' } },
-    { jp: 'モンブランクリーム（90g）を円を描くように絞る。',
-      en: 'Pipe the Mont Blanc cream (90g) in a circular motion.',
+    { jp: 'モンブランクリーム（20g）を円を描くように絞る。',
+      en: 'Pipe the Mont Blanc cream (20g) in a circular motion.',
       point: { jp: '白い部分が見えないように覆う。線が1本1本しっかり形に残るように絞る。', en: 'Cover so no white shows. Pipe so each strand keeps its distinct shape.' } },
     { jp: '栗を真ん中に乗せて完成。',
       en: 'Place a chestnut in the center to finish.',
@@ -1626,7 +1626,7 @@ var RECIPES = [
 },
 /* ---------------------------------------------------------------- AS-22 */
 {
-  id: 'as-22', code: 'AS-22', ver: '1.0', issued: '2026.06',
+  id: 'as-22', code: 'AS-22', ver: '1.1', issued: '2026.08',
   name: '月見照り焼き', en: 'Tsukimi Teriyaki',
   serve: 'Savory 提供 / SERVE', category: '揚げサンド', limited: false,
   group: 'regular-savory',
@@ -1636,7 +1636,7 @@ var RECIPES = [
     ['揚げパン（半分）', 'Fried bread (half)', '1/2', '個'],
     ['パティ', 'Patty', '1', '枚'],
     ['照り焼きソース', 'Teriyaki sauce', '10', 'g'],
-    ['目玉焼き', 'Fried egg', '1', '個'],
+    ['目玉焼き', 'Fried egg', '1', '枚'],
     ['レタス', 'Lettuce', '1', '枚'],
     ['マヨネーズ', 'Mayonnaise', '20', 'g']
   ],
@@ -1803,7 +1803,7 @@ var RECIPES = [
 },
 /* ---------------------------------------------------------------- AS-28 */
 {
-  id: 'as-28', code: 'AS-28', ver: '1.0', issued: '2026.06',
+  id: 'as-28', code: 'AS-28', ver: '1.1', issued: '2026.08',
   name: '激辛！焼きキーマカレー', en: 'Hot Grill Keema Curry',
   serve: 'Savory 提供 / SERVE', category: '揚げサンド', limited: false,
   group: 'regular-savory',
@@ -1812,14 +1812,14 @@ var RECIPES = [
   yield: '1個分', kind: 'savory',
   ing: [
     ['揚げパン（半分）', 'Fried bread (half)', '1/2', '個'],
-    ['カレー', 'Keema curry', '110', 'g'],
+    ['カレー', 'Keema curry', '120', 'g'],
     ['チーズ', 'Cheese', '10', 'g'],
     ['チリパウダー', 'Chili powder', '0.2', 'g'],
     ['パセリ', 'Parsley', '0.2', 'g']
   ],
   steps: [
-    { jp: '揚げパンにカレー（110g）を詰める。',
-      en: 'Fill the fried bread with curry (110g).',
+    { jp: '揚げパンにカレー（120g）を詰める。',
+      en: 'Fill the fried bread with curry (120g).',
       point: { jp: 'カレーがしっかり温まっているか必ず確認する。', en: 'Always check the curry is fully heated through.' } },
     { jp: 'チーズ（10g）を全体に乗せる。',
       en: 'Top evenly with cheese (10g).',
@@ -1839,7 +1839,7 @@ var RECIPES = [
 },
 /* ---------------------------------------------------------------- AS-29 */
 {
-  id: 'as-29', code: 'AS-29', ver: '1.0', issued: '2026.06',
+  id: 'as-29', code: 'AS-29', ver: '1.1', issued: '2026.08',
   name: 'とろたまナポリタン', en: 'Egg + Napolitan',
   serve: 'Savory 提供 / SERVE', category: '揚げサンド', limited: false,
   group: 'regular-savory',
@@ -1847,16 +1847,16 @@ var RECIPES = [
   yield: '1個分', kind: 'savory',
   ing: [
     ['揚げパン（半分）', 'Fried bread (half)', '1/2', '個'],
-    ['目玉焼き（冷凍）', 'Fried egg (frozen)', '1', '個'],
-    ['ナポリタン', 'Napolitan pasta', '110', 'g'],
+    ['目玉焼き（冷凍）', 'Fried egg (frozen)', '1', '枚'],
+    ['ナポリタン', 'Napolitan pasta', '100', 'g'],
     ['ザネッティチーズ', 'Zanetti cheese', '5', 'g']
   ],
   steps: [
-    { jp: '揚げパンに、揚げた目玉焼き（1個）を入れる。',
+    { jp: '揚げパンに、揚げた目玉焼き（1枚）を入れる。',
       en: 'Place the fried egg (1) inside the fried bread.',
       point: { jp: '黄身を割らないように静かに入れる。', en: 'Place it gently so the yolk doesn\'t break.' } },
-    { jp: 'ナポリタン（110g）を詰める。',
-      en: 'Fill with Napolitan pasta (110g).',
+    { jp: 'ナポリタン（100g）を詰める。',
+      en: 'Fill with Napolitan pasta (100g).',
       point: { jp: 'ナポリタンがしっかり温まっているか必ず確認する。', en: 'Always check the pasta is fully heated through.' } },
     { jp: 'ザネッティチーズ（5g）を上から削りかける。',
       en: 'Grate Zanetti cheese (5g) over the top.',
@@ -1867,7 +1867,7 @@ var RECIPES = [
 },
 /* ---------------------------------------------------------------- AS-30 */
 {
-  id: 'as-30', code: 'AS-30', ver: '1.0', issued: '2026.06',
+  id: 'as-30', code: 'AS-30', ver: '1.1', issued: '2026.08',
   name: 'とろたまナポリタン 追いチーズ', en: 'Egg + Napolitan Extra Cheese',
   serve: 'Savory 提供 / SERVE', category: '揚げサンド', limited: false,
   group: 'regular-savory',
@@ -1875,16 +1875,16 @@ var RECIPES = [
   yield: '1個分', kind: 'savory',
   ing: [
     ['揚げパン（半分）', 'Fried bread (half)', '1/2', '個'],
-    ['目玉焼き（冷凍）', 'Fried egg (frozen)', '1', '個'],
-    ['ナポリタン', 'Napolitan pasta', '110', 'g'],
+    ['目玉焼き（冷凍）', 'Fried egg (frozen)', '1', '枚'],
+    ['ナポリタン', 'Napolitan pasta', '100', 'g'],
     ['ザネッティチーズ', 'Zanetti cheese', '15', 'g']
   ],
   steps: [
-    { jp: '揚げパンに、揚げた目玉焼き（1個）を入れる。',
+    { jp: '揚げパンに、揚げた目玉焼き（1枚）を入れる。',
       en: 'Place the fried egg (1) inside the fried bread.',
       point: { jp: '黄身を割らないように静かに入れる。', en: 'Place it gently so the yolk doesn\'t break.' } },
-    { jp: 'ナポリタン（110g）を詰める。',
-      en: 'Fill with Napolitan pasta (110g).',
+    { jp: 'ナポリタン（100g）を詰める。',
+      en: 'Fill with Napolitan pasta (100g).',
       point: { jp: 'ナポリタンがしっかり温まっているか必ず確認する。', en: 'Always check the pasta is fully heated through.' } },
     { jp: 'ザネッティチーズ（15g）を上から削りかける。',
       en: 'Grate Zanetti cheese (15g) over the top.',
@@ -1895,7 +1895,7 @@ var RECIPES = [
 },
 /* ---------------------------------------------------------------- AS-31 */
 {
-  id: 'as-31', code: 'AS-31', ver: '1.0', issued: '2026.06',
+  id: 'as-31', code: 'AS-31', ver: '1.1', issued: '2026.08',
   name: 'とろタマ焼きそば', en: 'Egg + Fried Noodle',
   serve: 'Savory 提供 / SERVE', category: '揚げサンド', limited: false,
   group: 'regular-savory',
@@ -1903,18 +1903,18 @@ var RECIPES = [
   yield: '1個分', kind: 'savory',
   ing: [
     ['揚げパン（半分）', 'Fried bread (half)', '1/2', '個'],
-    ['目玉焼き（冷凍）', 'Fried egg (frozen)', '1', '個'],
-    ['焼きそば', 'Yakisoba noodles', '110', 'g'],
+    ['目玉焼き（冷凍）', 'Fried egg (frozen)', '1', '枚'],
+    ['焼きそば', 'Yakisoba noodles', '100', 'g'],
     ['中濃ソース', 'Tonkatsu-style sauce', '15', 'g'],
     ['紅生姜', 'Pickled red ginger', '5', 'g'],
     ['青のり', 'Green seaweed flakes', '0.2', 'g']
   ],
   steps: [
-    { jp: '揚げパンの内側に中濃ソース（5g）をかけ、揚げた目玉焼き（1個）を入れる。',
+    { jp: '揚げパンの内側に中濃ソース（5g）をかけ、揚げた目玉焼き（1枚）を入れる。',
       en: 'Brush sauce (5g) inside the fried bread, then place the fried egg (1).',
       point: { jp: '黄身を割らないように静かに入れる。', en: 'Place it gently so the yolk doesn\'t break.' } },
-    { jp: '焼きそば（110g）を詰め、中濃ソース（10g）を上からかける。',
-      en: 'Fill with yakisoba (110g), then drizzle sauce (10g) over the top.',
+    { jp: '焼きそば（100g）を詰め、中濃ソース（10g）を上からかける。',
+      en: 'Fill with yakisoba (100g), then drizzle sauce (10g) over the top.',
       point: { jp: '焼きそばがしっかり温まっているか必ず確認する。', en: 'Always check the yakisoba is fully heated through.' } },
     { jp: '紅生姜（5g）・青のり（0.2g）をかけて完成。',
       en: 'Top with pickled red ginger (5g) and green seaweed (0.2g) to finish.',
@@ -1992,7 +1992,7 @@ var RECIPES = [
 },
 /* ---------------------------------------------------------------- AS-34 */
 {
-  id: 'as-34', code: 'AS-34', ver: '1.0', issued: '2026.06',
+  id: 'as-34', code: 'AS-34', ver: '1.1', issued: '2026.08',
   name: '炙りチーズスモークサーモン', en: 'Grilled Cheese + Smoked Salmon',
   serve: 'Savory 提供 / SERVE', category: '揚げサンド', limited: false,
   group: 'regular-savory',
@@ -2003,7 +2003,7 @@ var RECIPES = [
     ['揚げパン（半分）', 'Fried bread (half)', '1/2', '個'],
     ['ポテトサラダ', 'Potato salad', '100', 'g'],
     ['スモークサーモン', 'Smoked salmon', '15', 'g'],
-    ['アボカド', 'Avocado', '5', 'g'],
+    ['アボカド', 'Avocado', '5', '個'],
     ['チーズ', 'Cheese', '10', 'g'],
     ['オリーブオイル', 'Olive oil', '1', 'g'],
     ['粗挽き胡椒', 'Coarse black pepper', '0.3', 'g'],
