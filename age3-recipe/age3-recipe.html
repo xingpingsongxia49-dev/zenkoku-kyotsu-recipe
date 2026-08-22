@@ -1,0 +1,1462 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#1A1917">
+<title>Age.3 レシピ</title>
+<meta name="description" content="Age.3 揚げサンドのスタンダードレシピ。材料・作り方・ポイント・完成基準を、レシピカードのとおりに引けます。">
+<meta name="robots" content="noindex, nofollow">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Age.3">
+<meta property="og:title" content="Age.3 レシピ">
+<meta property="og:description" content="揚げサンドのスタンダードレシピ。材料・作り方・ポイント・完成基準。">
+<meta property="og:url" content="https://age-3013.vercel.app/age3-recipe.html">
+<link rel="icon" href="/age3-recipe-favicon.png">
+<link rel="manifest" href="/age3-recipe.webmanifest">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Age.3 レシピ">
+<style>
+:root{
+  --sumi:#1A1917;
+  --kinari:#F5F2EC;
+  --shiraki:#C9A87C;
+  --furuki:#7E6141;
+  --gin:#B9BCBE;
+  --hai:#6E6C67;
+  --olive:#7E7A2A;
+  --shu:#A6392E;
+  --line:#DCD6CB;
+  --shadow:0 1px 0 rgba(26,25,23,.06), 0 8px 24px -14px rgba(26,25,23,.35);
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;padding:0}
+html.locked,html.noscroll{overflow:hidden}
+
+/* ---------- 入口（4桁） ---------- */
+.gate{
+  position:fixed;inset:0;z-index:200;background:#1A1917;color:#F5F2EC;
+  display:flex;align-items:center;justify-content:center;padding:24px;
+  font-family:"Hiragino Kaku Gothic ProN","Yu Gothic","Noto Sans JP",sans-serif;
+}
+.gbox{width:100%;max-width:300px;text-align:center}
+.gmark{display:inline-block;font-size:11px;letter-spacing:.28em;color:#C9A87C;border:1px solid #7E6141;padding:3px 9px;border-radius:2px}
+.gate h1{font-size:21px;font-weight:800;margin:14px 0 0;letter-spacing:.02em}
+.glead{margin:22px 0 12px;font-size:13px;color:#B9BCBE}
+#gpin{
+  width:100%;padding:16px;font-size:26px;letter-spacing:.6em;text-align:center;
+  border:1.5px solid #56504A;border-radius:3px;background:#232120;color:#F5F2EC;
+  font-family:inherit;-webkit-appearance:none;appearance:none;
+}
+#gpin:focus{outline:none;border-color:#C9A87C;box-shadow:0 0 0 3px rgba(201,168,124,.2)}
+.gerr{margin:12px 0 0;font-size:13px;color:#E0A79C;font-weight:700}
+.gnote{margin:22px 0 0;font-size:11.5px;color:#6E6C67;line-height:1.8}
+
+body{
+  background:var(--kinari);color:var(--sumi);
+  font-family:"Hiragino Kaku Gothic ProN","Yu Gothic","Noto Sans JP",sans-serif;
+  font-size:16px;line-height:1.65;-webkit-font-smoothing:antialiased;
+  padding-bottom:40px;
+}
+.shell{max-width:760px;margin:0 auto;padding:0 16px}
+img{max-width:100%;display:block}
+
+/* ---------- header ---------- */
+header{background:var(--sumi);color:var(--kinari);padding:calc(env(safe-area-inset-top) + 18px) 0 15px}
+.brand{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.brand .mark{font-size:11px;letter-spacing:.28em;color:var(--shiraki);border:1px solid var(--furuki);padding:3px 8px;border-radius:2px}
+.brand h1{font-size:19px;font-weight:800;margin:0;letter-spacing:.02em}
+.lede{margin:9px 0 0;font-size:12.5px;color:var(--gin);line-height:1.6}
+
+/* ---------- search / filter ---------- */
+.tools{position:sticky;top:0;z-index:20;background:var(--kinari);padding:12px 0 8px;border-bottom:1px solid var(--line)}
+.searchbox{position:relative}
+#q{
+  width:100%;padding:14px 44px 14px 15px;font-size:16px;
+  border:1.5px solid var(--sumi);border-radius:3px;background:#fff;
+  font-family:inherit;color:var(--sumi);box-shadow:var(--shadow);
+}
+#q:focus{outline:none;border-color:var(--furuki);box-shadow:0 0 0 3px rgba(126,97,65,.18)}
+#q::placeholder{color:#A8A49C}
+#clear{position:absolute;right:6px;top:50%;transform:translateY(-50%);border:0;background:none;font-size:20px;color:var(--hai);width:34px;height:34px;cursor:pointer;display:none;line-height:1}
+.chips{display:flex;gap:6px;overflow-x:auto;padding:10px 0 2px;scrollbar-width:none}
+.chips::-webkit-scrollbar{display:none}
+.chip{
+  flex:0 0 auto;padding:7px 13px;font-size:12.5px;border-radius:999px;
+  border:1px solid var(--line);background:#fff;color:var(--hai);cursor:pointer;
+  font-family:inherit;white-space:nowrap;
+}
+.chip[aria-pressed="true"]{background:var(--sumi);color:var(--kinari);border-color:var(--sumi);font-weight:700}
+.count{font-size:12px;color:var(--hai);padding:8px 2px 0}
+
+/* ---------- 一覧 ---------- */
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;padding:14px 0 8px}
+@media(min-width:620px){.grid{grid-template-columns:repeat(3,1fr)}}
+.tile{
+  background:#fff;border:1px solid var(--line);border-radius:4px;overflow:hidden;
+  cursor:pointer;text-align:left;padding:0;font-family:inherit;color:inherit;
+  box-shadow:var(--shadow);display:flex;flex-direction:column;
+}
+.tile .ph{aspect-ratio:1/1;background:#fff;overflow:hidden}
+.tile .ph img{width:100%;height:100%;object-fit:contain}
+.tile .tx{padding:9px 10px 11px;border-top:1px solid var(--line)}
+.tile .nm{display:block;font-size:14.5px;font-weight:800;line-height:1.4;letter-spacing:.01em}
+.tile .en{display:block;font-size:11px;color:var(--hai);margin-top:2px;line-height:1.35}
+.tile .mt{display:flex;gap:5px;align-items:center;margin-top:7px;flex-wrap:wrap}
+.tag{font-size:9.5px;letter-spacing:.1em;padding:2px 6px;border-radius:2px;border:1px solid var(--line);color:var(--hai);white-space:nowrap}
+.tag.sw{border-color:#D9CDBA;color:#8A6A3C;background:#FBF7F1}
+.tag.sv{border-color:#D6C8C6;color:#8E4A42;background:#FBF3F2}
+.tag.lm{border-color:var(--sumi);color:var(--sumi);font-weight:700}
+.tag.se{border-color:#C6CBD2;color:#4A5A70;background:#F2F5F9}
+.tag.st-end{border-color:#E0B4AE;color:#A6392E;background:#FCF3F2;font-weight:700}
+.tag.st-start{border-color:#A9C9AE;color:#2E6B3A;background:#F1F8F2;font-weight:700}
+
+/* 販売状況の帯 */
+.stband{display:flex;align-items:flex-start;gap:10px;border-radius:3px;padding:11px 12px;margin-top:14px}
+.stband.end{background:#FCF3F2;border:1px solid #E9CFCB}
+.stband.start{background:#F1F8F2;border:1px solid #CFE2D3}
+.stband b{flex:0 0 auto;font-size:12px;font-weight:800;padding:3px 8px;border-radius:2px;color:#fff}
+.stband.end b{background:var(--shu)}
+.stband.start b{background:#2E6B3A}
+.stband span{font-size:13px;line-height:1.6}
+.stband.end span{color:#7E322A}
+.stband.start span{color:#2C5334}
+
+/* お知らせ */
+.noticebtn{
+  display:block;width:100%;margin-top:12px;padding:13px 14px;border-radius:3px;
+  border:1.5px solid var(--sumi);background:#fff;color:var(--sumi);font-family:inherit;
+  font-size:14px;font-weight:800;cursor:pointer;text-align:left;box-shadow:var(--shadow);
+}
+.noticebtn small{display:block;font-size:11.5px;font-weight:400;color:var(--hai);margin-top:3px}
+.nsec{margin-top:22px;border:1px solid var(--line);border-radius:3px;overflow:hidden;background:#fff}
+.nhead{display:flex;align-items:center;gap:9px;padding:10px 12px;color:#fff}
+.nhead.end{background:#A6392E}
+.nhead.start{background:#2E6B3A}
+.nhead.plan{background:#1F3A5F}
+.nhead .w{font-size:11px;font-weight:800;background:rgba(255,255,255,.22);padding:3px 8px;border-radius:2px;white-space:nowrap}
+.nhead .t{font-size:14.5px;font-weight:800}
+.nhead .sc{margin-left:auto;font-size:11px;background:#fff;color:#1A1917;padding:3px 8px;border-radius:2px;font-weight:700;white-space:nowrap}
+.nitems{list-style:none;margin:0;padding:0}
+.nitems li{display:flex;gap:12px;align-items:center;padding:13px 12px;border-bottom:1px solid var(--line)}
+.nitems li:last-child{border-bottom:0}
+.nitems li.tap{cursor:pointer}
+.nitems li.tap:active{background:#FAF8F3}
+.nitems .nph{flex:0 0 auto;width:54px;height:68px;border-radius:3px;background:#fff;overflow:hidden;
+  display:flex;align-items:center;justify-content:center}
+.nitems .nph img{max-width:100%;max-height:100%;display:block;cursor:zoom-in}
+.nitems .nph.nop{background:#F5F2EC}
+.nitems .nph.nop img{width:30px;height:auto;opacity:.4;cursor:default}
+.nitems .bd{flex:1;min-width:0}
+.nitems .nm{display:block;font-size:16px;font-weight:800;line-height:1.4}
+.nitems .cd{display:inline-block;font-size:10px;font-weight:800;border:1px solid var(--line);color:var(--hai);
+  border-radius:2px;padding:1px 5px;margin-right:6px;vertical-align:2px}
+.nitems .dt{display:block;font-size:12.5px;color:var(--hai);line-height:1.6;margin-top:3px}
+.nitems .rt{flex:0 0 auto;display:flex;align-items:center;gap:7px}
+.nitems .stt{font-size:11.5px;font-weight:800;white-space:nowrap;border-radius:999px;padding:3px 9px;border:1px solid}
+.nitems .stt.x{color:#A6392E;border-color:#E3C4BF;background:#FCF3F2}
+.nitems .stt.o{color:#2E6B3A;border-color:#C3DCC8;background:#F2F8F3}
+.nitems .arw{font-size:17px;color:#C4BFB4;line-height:1}
+.nlines{margin:0;padding:12px 12px 12px 30px;font-size:14px;line-height:1.8}
+.ncaution{margin-top:16px;background:#FCF3F2;border:1px solid #E9CFCB;border-left:3px solid var(--shu);border-radius:2px;padding:11px 12px;font-size:12.5px;line-height:1.7;color:#7E322A}
+.nmeta{margin-top:14px;font-size:11.5px;color:var(--hai);line-height:1.8}
+.tag.cd{font-variant-numeric:tabular-nums}
+.empty{padding:38px 4px;color:var(--hai);font-size:14px;text-align:center}
+
+/* ---------- 詳細 ---------- */
+.detail{position:fixed;inset:0;z-index:60;background:var(--kinari);overflow-y:auto;-webkit-overflow-scrolling:touch}
+.dbar{
+  position:sticky;top:0;z-index:5;background:var(--sumi);color:var(--kinari);
+  padding:calc(env(safe-area-inset-top) + 10px) 16px 10px;
+  display:flex;align-items:center;gap:10px;
+}
+.back{background:none;border:0;color:var(--kinari);font-family:inherit;font-size:15px;font-weight:700;cursor:pointer;padding:4px 2px;display:flex;align-items:center;gap:6px}
+.dbar .sp{flex:1}
+.entog{
+  background:none;border:1px solid #56504A;color:var(--gin);font-family:inherit;
+  font-size:11px;letter-spacing:.1em;padding:5px 9px;border-radius:2px;cursor:pointer;
+}
+.entog[aria-pressed="true"]{background:var(--shiraki);border-color:var(--shiraki);color:#1A1917;font-weight:800}
+.dhero{background:#fff;padding:8px 0 4px;border-bottom:1px solid var(--line)}
+.dhero img{max-width:340px;margin:0 auto}
+.dhead{padding:16px 0 4px}
+.dserve{font-size:11px;letter-spacing:.22em;color:var(--hai)}
+.dhead h2{font-size:28px;font-weight:800;margin:6px 0 0;letter-spacing:.01em;line-height:1.3}
+.dhead .den{font-size:14px;color:var(--hai);margin-top:3px}
+.dmeta{display:flex;gap:6px;flex-wrap:wrap;margin-top:11px;padding-bottom:14px;border-bottom:1px solid var(--line)}
+
+.sec{margin-top:26px}
+.sech{display:flex;align-items:baseline;gap:9px;background:#EDEAE3;padding:9px 12px;border-radius:3px}
+.sech .no{font-size:13px;font-weight:800;font-variant-numeric:tabular-nums}
+.sech .jp{font-size:16px;font-weight:800}
+.sech .en{font-size:10.5px;letter-spacing:.18em;color:#9A968E}
+.sech .rt{margin-left:auto;font-size:11px;color:var(--hai)}
+
+/* 材料 */
+.ing{list-style:none;margin:0;padding:0}
+.ing li{display:flex;align-items:flex-end;gap:10px;padding:11px 4px;border-bottom:1px solid var(--line)}
+.ing .nm{flex:1;min-width:0}
+.ing .nm b{display:block;font-size:15.5px;font-weight:700;line-height:1.4}
+.ing .nm span{display:block;font-size:11px;color:var(--hai);line-height:1.35}
+.ing .qt{font-size:20px;font-weight:800;font-variant-numeric:tabular-nums;white-space:nowrap;letter-spacing:.01em}
+.ing .qt em{font-style:normal;font-size:12px;font-weight:700;margin-left:1px}
+.ing .qt.none{font-size:12px;font-weight:700;color:var(--hai)}
+
+/* 作り方 */
+.mth{list-style:none;margin:0;padding:0}
+.mth li{display:flex;gap:11px;padding:14px 2px;border-bottom:1px solid var(--line)}
+.mth .no{
+  flex:0 0 26px;height:26px;border-radius:50%;background:var(--sumi);color:var(--kinari);
+  font-size:13px;font-weight:800;display:flex;align-items:center;justify-content:center;margin-top:2px;
+}
+.mth .bd{display:block;flex:1;min-width:0}
+.mth .jp{display:block;font-size:16.5px;font-weight:700;line-height:1.6}
+.mth .en{display:block;font-size:12px;color:var(--hai);line-height:1.5;margin-top:3px}
+.pt{margin-top:9px;background:#FAF8F3;border:1px solid #E7E2D6;border-left:3px solid var(--olive);border-radius:2px;padding:8px 10px}
+.pt .lb{display:inline-block;background:var(--olive);color:#fff;font-size:9.5px;letter-spacing:.14em;font-weight:800;padding:2px 7px;border-radius:2px;margin-bottom:5px}
+.pt .jp{font-size:14px;font-weight:700;color:#5F5C22;line-height:1.55}
+.pt .en{font-size:11.5px;color:#8A8768;line-height:1.5;margin-top:2px}
+
+/* 完成基準 */
+.fin{background:#EDEAE3;border-radius:3px;padding:15px 14px}
+.fin .lb{font-size:10.5px;letter-spacing:.2em;color:var(--hai)}
+.fin .jp{font-size:18px;font-weight:800;line-height:1.55;margin-top:7px}
+.fin .en{font-size:12px;color:var(--hai);line-height:1.5;margin-top:5px}
+
+/* 工程写真・原本 */
+.shot{background:#fff;border:1px solid var(--line);border-radius:3px;padding:8px;margin-top:12px;cursor:zoom-in}
+.cap{font-size:11.5px;color:var(--hai);margin-top:7px}
+.note{margin-top:12px;background:#fff;border:1px solid var(--line);border-left:3px solid var(--shiraki);border-radius:2px;padding:10px 12px;font-size:13px;line-height:1.65}
+.note b{display:block;font-size:10.5px;letter-spacing:.16em;color:var(--hai);margin-bottom:5px;font-weight:700}
+.note ul{margin:0;padding-left:1.1em}
+
+.tile .ph.noph{display:flex;align-items:center;justify-content:center;background:#EDEAE3}
+.nophtx{font-size:11.5px;color:#9A968E;text-align:center;line-height:1.6;letter-spacing:.06em}
+.dhero.nophoto{padding:22px 16px;text-align:center;font-size:12.5px;color:var(--hai)}
+.subrec{margin-top:14px;background:#fff;border:1px solid var(--line);border-radius:3px;padding:12px 12px 10px}
+.sublb{font-size:11px;letter-spacing:.14em;font-weight:700;color:var(--furuki);margin-bottom:4px}
+.subrec .ing li{padding:8px 2px}
+.subrec .ing li:last-child{border-bottom:0}
+.subnote{margin:8px 0 0;font-size:12px;color:var(--hai);line-height:1.7}
+.vid{position:relative;margin-top:12px;background:#1A1917;border-radius:3px;overflow:hidden;aspect-ratio:16/9;cursor:pointer}
+.vid img{width:100%;height:100%;object-fit:cover;opacity:.86}
+.vid iframe{width:100%;height:100%;border:0;display:block}
+.vplay{
+  position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+  width:62px;height:62px;border-radius:50%;background:rgba(26,25,23,.78);color:#fff;
+  display:flex;align-items:center;justify-content:center;font-size:22px;padding-left:4px;
+  box-shadow:0 2px 14px rgba(0,0,0,.4);
+}
+.vlink{display:block;text-align:center;text-decoration:none;margin-top:12px;line-height:1.4}
+.acts{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:22px}
+.acts.one{grid-template-columns:1fr}
+.btn small{font-size:10.5px;font-weight:700}
+.btn{
+  padding:15px 10px;border-radius:3px;border:1.5px solid var(--sumi);background:#fff;color:var(--sumi);
+  font-family:inherit;font-size:14.5px;font-weight:800;cursor:pointer;box-shadow:var(--shadow);
+}
+.btn.pri{background:var(--sumi);color:var(--kinari)}
+.dfoot{margin:28px 0 46px;padding-top:14px;border-top:1px solid var(--line);font-size:11px;color:var(--hai);line-height:1.7}
+
+/* ---------- 作りながらモード ---------- */
+.cook{position:fixed;inset:0;z-index:90;background:#fff;display:flex;flex-direction:column}
+.cbar{background:var(--sumi);color:var(--kinari);padding:calc(env(safe-area-inset-top) + 10px) 16px 10px;display:flex;align-items:center;gap:10px}
+.cbar .ttl{font-size:14px;font-weight:800;flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.cbar .cnt{font-size:12px;color:var(--gin);font-variant-numeric:tabular-nums}
+.cbody{flex:1;overflow-y:auto;padding:22px 18px 12px;max-width:760px;margin:0 auto;width:100%}
+.cno{font-size:12px;letter-spacing:.24em;color:var(--hai)}
+.cjp{font-size:26px;font-weight:800;line-height:1.55;margin-top:10px;letter-spacing:.01em}
+.cen{font-size:14px;color:var(--hai);line-height:1.55;margin-top:8px}
+.cfin{margin-top:16px;background:#EDEAE3;border-radius:3px;padding:15px 14px}
+.cnav{display:grid;grid-template-columns:1fr 1fr;gap:9px;padding:10px 16px calc(env(safe-area-inset-bottom) + 14px);border-top:1px solid var(--line);background:var(--kinari)}
+.cdots{display:flex;gap:5px;justify-content:center;padding:2px 0 10px;flex-wrap:wrap}
+.cdots i{width:7px;height:7px;border-radius:50%;background:var(--line);display:block}
+.cdots i.on{background:var(--sumi)}
+.cdots i.done{background:var(--shiraki)}
+
+/* ---------- 画像ビューア ---------- */
+.viewer{position:fixed;inset:0;z-index:120;background:rgba(26,25,23,.96);overflow:auto;-webkit-overflow-scrolling:touch;padding:calc(env(safe-area-inset-top) + 52px) 8px 30px}
+.viewer img{margin:0 auto;max-width:none;width:min(100%,1000px)}
+.vclose{position:fixed;top:calc(env(safe-area-inset-top) + 8px);right:10px;z-index:121;background:#fff;border:0;border-radius:3px;font-family:inherit;font-size:14px;font-weight:800;padding:9px 14px;cursor:pointer}
+.vhint{color:#B9BCBE;font-size:11.5px;text-align:center;margin:0 0 10px}
+
+/* ---------- 質問箱 ---------- */
+.askfab{
+  position:fixed;right:14px;bottom:calc(env(safe-area-inset-bottom) + 16px);z-index:70;
+  background:var(--sumi);color:var(--kinari);border:0;border-radius:999px;
+  font-family:inherit;font-size:14px;font-weight:800;padding:14px 20px;cursor:pointer;
+  box-shadow:0 6px 20px -6px rgba(26,25,23,.65), 0 2px 6px rgba(26,25,23,.3);
+  display:flex;align-items:center;gap:8px;
+}
+.askfab .n{
+  background:var(--shu);color:#fff;font-size:11.5px;font-weight:800;
+  min-width:20px;height:20px;border-radius:999px;display:flex;align-items:center;justify-content:center;padding:0 5px;
+}
+.askfab.done .n{background:#2E6B3A}
+.asklead{background:#EDEAE3;border-radius:3px;padding:13px 13px;font-size:13px;line-height:1.75;margin-top:14px}
+.qcard{background:#fff;border:1px solid var(--line);border-radius:3px;margin-top:12px;overflow:hidden}
+.qcard.ok{border-color:#CFE2D3;background:#F7FBF8}
+.qtop{padding:13px 13px 0}
+.qtag{display:inline-block;font-size:10px;letter-spacing:.14em;font-weight:700;color:var(--hai);border:1px solid var(--line);border-radius:2px;padding:2px 7px}
+.qtag.ok{border-color:#A9C9AE;color:#2E6B3A;background:#F1F8F2}
+.qq{font-size:16px;font-weight:800;line-height:1.55;margin:9px 0 0}
+.qwhy{font-size:12.5px;color:var(--hai);line-height:1.7;margin:7px 0 0}
+.qlink{display:inline-block;margin-top:8px;font-size:12px;font-weight:700;color:var(--furuki);
+  border:1px solid var(--line);border-radius:2px;padding:4px 9px;background:#FAF8F3;cursor:pointer;font-family:inherit}
+.qopts{display:flex;flex-wrap:wrap;gap:7px;padding:11px 13px 0}
+.qopt{
+  flex:0 0 auto;padding:10px 13px;font-size:13.5px;border-radius:3px;border:1.5px solid var(--line);
+  background:#fff;color:var(--sumi);cursor:pointer;font-family:inherit;font-weight:700;line-height:1.4;text-align:left;
+}
+.qopt[aria-pressed="true"]{background:var(--sumi);color:var(--kinari);border-color:var(--sumi)}
+.qfree{padding:11px 13px 13px}
+.qfree textarea{
+  width:100%;min-height:64px;padding:10px 11px;font-size:15px;font-family:inherit;line-height:1.6;
+  border:1.5px solid var(--line);border-radius:3px;background:#fff;color:var(--sumi);resize:vertical;
+}
+.qfree textarea:focus{outline:none;border-color:var(--furuki);box-shadow:0 0 0 3px rgba(126,97,65,.14)}
+.qfree label{display:block;font-size:11.5px;color:var(--hai);margin-bottom:5px}
+.asksend{position:sticky;bottom:0;background:var(--kinari);padding:14px 0 calc(env(safe-area-inset-bottom) + 16px);border-top:1px solid var(--line);margin-top:22px}
+.asknote{font-size:11.5px;color:var(--hai);line-height:1.7;margin:9px 0 0}
+.askdone{background:#F1F8F2;border:1px solid #CFE2D3;border-radius:3px;padding:12px;font-size:13px;color:#2C5334;line-height:1.7;margin-top:14px}
+
+/* ---------- 注意帯 ---------- */
+.warnbar{background:#A6392E;color:#fff;font-size:11.5px;line-height:1.55;padding:9px 16px;text-align:center}
+footer{margin-top:26px;padding:16px 0 8px;border-top:1px solid var(--line);font-size:11px;color:var(--hai);line-height:1.75}
+.reset{margin-top:18px;padding-top:14px;border-top:1px dashed var(--line)}
+.rbtn{
+  padding:11px 16px;border-radius:3px;border:1.5px solid var(--hai);background:#fff;color:var(--hai);
+  font-family:inherit;font-size:13px;font-weight:700;cursor:pointer;
+}
+.rbtn:active{background:#EDEAE3}
+.rnote{margin:9px 0 0;font-size:11px;color:var(--hai);line-height:1.7}
+
+/* ---------- 印刷用レシピカード（PDF原本と同じ体裁） ---------- */
+#printroot{display:none}
+.pcard{position:relative;box-sizing:border-box;width:210mm;height:297mm;overflow:hidden;
+  background:#fff;color:#4C4948;font-weight:400;
+  font-family:"Noto Sans JP","Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic",Meiryo,sans-serif;
+  -webkit-print-color-adjust:exact;print-color-adjust:exact}
+.pcard *{box-sizing:border-box}
+.pstripe{position:absolute;top:0;right:0;width:46.3mm;height:46.3mm;display:block}
+/* 背景色は「背景のグラフィック」設定に左右されるので、必ず出したい面は画像で敷く */
+.pbg{position:absolute;left:0;top:0;width:100%;height:100%;display:block}
+.psec,.pfin,.pmth .no,.ppt .lb{position:relative}
+.psec>span,.pfin>div,.pmth .no>i,.ppt .lb>i{position:relative;font-style:normal}
+.pabs{position:absolute;left:13.76mm;right:13.66mm}
+.plogo{top:10.05mm;width:44.98mm;height:14.29mm}
+.plogo img{width:100%;height:100%;object-fit:contain;object-position:left top;display:block}
+.prec{top:26.40mm;font-size:8.25pt;line-height:1;letter-spacing:.28em;color:#777}
+.pmeta{top:11.03mm;text-align:right;font-size:8.25pt;line-height:1.65;color:#777;white-space:nowrap}
+.pmeta b{font-weight:700;color:#4C4948;margin-left:1.6mm}
+.pmeta i{font-style:normal}
+.pserve{top:36.69mm;font-size:9pt;line-height:1;letter-spacing:.2em;color:#777;white-space:nowrap;overflow:hidden}
+.pname{top:43.35mm;font-size:22.5pt;line-height:1.15;font-weight:400;color:#4C4948;white-space:nowrap;overflow:hidden}
+.pname-en{top:54.31mm;font-size:10.5pt;line-height:1.2;color:#999;white-space:nowrap;overflow:hidden}
+.prule{top:63.5mm;height:.8pt;background:#4C4948}
+.pcols{top:67.48mm}
+.pcolsin{display:flex;align-items:flex-start;width:182.58mm}
+.pcol-l{flex:0 0 79.39mm;width:79.39mm}
+.pcol-sp{flex:0 0 7.41mm;width:7.41mm}
+.pcol-r{flex:0 0 95.78mm;width:95.78mm}
+.pfitl{width:79.39mm}
+.pfitr{width:95.78mm}
+.psec{height:9.53mm;background:#F2F2F2;display:flex;align-items:baseline;padding:1.57mm 2.3mm 0 3.18mm}
+.psec .n{font-size:13.5pt;font-weight:700;line-height:1}
+.psec .j{font-size:11.25pt;font-weight:700;line-height:1;margin-left:1.6mm}
+.psec .e{font-size:6.75pt;line-height:1;color:#AAA;margin-left:1.6mm;letter-spacing:.02em}
+.psec .r{margin-left:auto;font-size:6pt;line-height:1;color:#AAA}
+.ping{list-style:none;margin:0 0 2.9mm;padding:0}
+.ping li{display:flex;align-items:flex-start;padding:3.05mm 0 .97mm}
+.ping li + li{border-top:.7pt solid #EBEBEB;padding-top:1.25mm}
+.ping .nm{flex:1;min-width:0;padding-right:2mm}
+.ping .nm b{display:block;font-size:9.38pt;font-weight:400;line-height:1.3}
+.ping .nm i{display:block;font-style:normal;font-size:6.75pt;color:#999;line-height:1.3;margin-top:.7mm}
+.ping .qt{font-size:10.5pt;font-weight:700;white-space:nowrap;line-height:1.16;margin-top:.25mm}
+.ping .qt em{font-style:normal;font-size:7.5pt;font-weight:400;color:#777}
+.ping .qt.none{font-size:7.5pt;font-weight:400;color:#777}
+.pmth{list-style:none;margin:0;padding:0}
+.pmth li{display:flex;padding:4.75mm 0 1.4mm}
+.pmth li + li{border-top:.7pt solid #EBEBEB;padding-top:1.3mm}
+.pmth .no{flex:0 0 5.82mm;height:5.82mm;border-radius:50%;background:#4C4948;color:#fff;
+  font-size:8.25pt;font-weight:400;line-height:5.82mm;text-align:center;margin-right:2.93mm}
+.pmth .bd{flex:1;min-width:0}
+.pmth .j{display:block;font-size:9pt;line-height:1.5}
+.pmth .e{display:block;font-size:6.75pt;color:#999;line-height:1.32;margin-top:.5mm}
+.ppt{display:flex;align-items:flex-start;margin-top:.6mm}
+.ppt .lb{flex:0 0 auto;background:#BFAE00;color:#fff;font-size:6pt;font-weight:700;letter-spacing:.14em;
+  height:3.99mm;line-height:3.99mm;padding:0 1.3mm 0 1.45mm;margin-right:1.76mm}
+.ppt .tx{flex:1;min-width:0;margin-top:-.85mm}
+.ppt .j{font-size:7.88pt;color:#8A7A00;line-height:1.33}
+.ppt .e{font-size:6pt;color:#AAA;line-height:1.35;margin-top:.6mm}
+.psub{margin-top:3.5mm;font-size:7.5pt;line-height:1.6;color:#777}
+.psub b{display:block;font-size:6.75pt;font-weight:700;letter-spacing:.1em;color:#AAA;margin-bottom:.9mm}
+.phero{height:74.1mm;display:flex;align-items:flex-start;justify-content:center}
+.phero img{max-width:100%;max-height:74.1mm;display:block}
+.phero .nop{font-size:8.25pt;color:#AAA;margin:32mm auto 0}
+.pshot{margin-top:3.2mm}
+.pshot img{width:100%;display:block}
+.pnote{margin-top:4mm;font-size:6.75pt;line-height:1.6;color:#777}
+.pnote b{display:block;font-size:6.75pt;font-weight:700;letter-spacing:.1em;color:#AAA;margin-bottom:.9mm}
+.pfin{top:261.94mm;height:24.09mm;background:#ECECEC;padding:3.91mm 5.82mm 0}
+.pfin .lb{font-size:8.25pt;line-height:1;letter-spacing:.2em;color:#888}
+.pfin .j{font-size:13.5pt;line-height:1.2;color:#4C4948;margin-top:2.8mm}
+.pfin .e{font-size:8.25pt;line-height:1.2;color:#888;margin-top:.7mm}
+.pfoot{top:287.48mm;display:flex;justify-content:space-between;font-size:7.5pt;line-height:1;color:#AAA}
+
+/* ---------- キッチン掲載用 使用グラム数 早見表 ---------- */
+.kpage{position:relative;box-sizing:border-box;width:210mm;height:297mm;overflow:hidden;
+  background:#fff;color:#4C4948;font-weight:400;padding:9mm 10mm;
+  font-family:"Noto Sans JP","Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic",Meiryo,sans-serif;
+  -webkit-print-color-adjust:exact;print-color-adjust:exact}
+.kpage.a3{width:297mm;height:420mm;padding:12mm 13mm}
+.kpage *{box-sizing:border-box}
+.khead{display:flex;align-items:flex-end;justify-content:space-between;padding-bottom:1.8mm;border-bottom:.9pt solid #4C4948}
+.khead .l{display:flex;align-items:flex-end}
+.khead .lg{height:7mm;width:22mm;object-fit:contain;object-position:left bottom;display:block;margin-right:4mm}
+.khead .t{font-size:12pt;font-weight:700;line-height:1.05}
+.khead .s{font-size:7pt;color:#999;letter-spacing:.16em;line-height:1.05;margin-top:.9mm}
+.khead .r{font-size:7.5pt;color:#999;text-align:right;line-height:1.5}
+.khead .r b{color:#4C4948;font-weight:700;font-size:9.5pt}
+.kbody{font-size:9.5pt;margin-top:4mm}
+.kcat{font-weight:700;font-size:1.05em;letter-spacing:.1em;line-height:1.1;
+  padding:0 0 .3em;border-bottom:1.8pt solid #4C4948;margin:0 0 .8em}
+.kcat span{font-weight:400;font-size:.62em;color:#999;letter-spacing:.14em;margin-left:.8em}
+.krow + .kcat{margin-top:1.4em}
+.krow{display:flex;width:100%;margin-bottom:.8em;align-items:flex-start}
+.kcell{flex:1 1 0;min-width:0;margin-right:2.6mm}
+.kcell:last-child{margin-right:0}
+.khd{display:flex;flex-direction:column;align-items:center;padding-bottom:.3em;border-bottom:1pt solid #4C4948}
+.kph{width:100%;height:22mm;display:flex;align-items:flex-end;justify-content:center;margin-bottom:1.2mm}
+.kph img{max-width:100%;max-height:100%;display:block}
+.kph .nop{font-size:.7em;color:#C4C0B8;align-self:center}
+.kname{width:100%;text-align:center;font-size:.95em;font-weight:700;line-height:1.2;min-height:2.4em;display:flex;align-items:flex-end;justify-content:center;flex-wrap:wrap}
+.kname i{font-style:normal;font-size:.62em;color:#AAA;font-weight:400;margin-left:.4em;white-space:nowrap}
+.ktbl{width:100%;border-collapse:collapse;table-layout:auto}
+.ktbl td{font-size:.85em;padding:.3em .05em;border-bottom:.4pt solid #E0DCD4;line-height:1.2;vertical-align:top}
+.ktbl td.q{text-align:right;font-weight:700;white-space:nowrap;width:1px;padding-left:.5em}
+.kfoot{position:absolute;left:10mm;right:10mm;bottom:4.5mm;display:flex;justify-content:space-between;font-size:6.6pt;color:#AAA}
+.kpage.a3 .kfoot{left:13mm;right:13mm;bottom:6mm;font-size:8pt}
+@page{size:A4 portrait;margin:0}
+@media print{
+  html.printing body>*{display:none !important}
+  html.printing #printroot{display:block !important}
+  html.printing,html.printing body{background:#fff !important;margin:0 !important;padding:0 !important}
+  html.printing #printroot{padding:0;margin:0}
+  html.printing{overflow:visible !important}
+  .pcard,.kpage{page-break-after:always;break-after:page}
+  .pcard:last-child,.kpage:last-child{page-break-after:auto;break-after:auto}
+  .krow{page-break-inside:avoid;break-inside:avoid}
+}
+</style>
+</head>
+<body>
+
+<div class="gate" id="gate">
+  <div class="gbox">
+    <span class="gmark">Age.3</span>
+    <h1>レシピ</h1>
+    <p class="glead">4桁の番号を入れてください</p>
+    <input id="gpin" type="password" inputmode="numeric" pattern="[0-9]*" maxlength="4" autocomplete="off" aria-label="4桁の番号">
+    <p class="gerr" id="gerr" hidden>番号がちがいます</p>
+    <p class="gnote">番号は店長または本部に聞いてください。<br>一度入れると、この端末では次から聞かれません。</p>
+  </div>
+</div>
+<script>
+(function(){
+  var KEY="age3-recipe:ok3", CHECK=609101957;
+  var gate=document.getElementById("gate");
+  try{ if(localStorage.getItem(KEY)==="1"){ gate.remove(); return; } }catch(e){}
+  document.documentElement.classList.add("locked");
+  var pin=document.getElementById("gpin"), err=document.getElementById("gerr");
+  function hash(s){var x=2166136261;for(var j=0;j<s.length;j++){x^=s.charCodeAt(j);x=Math.imul(x,16777619);}return x>>>0;}
+  pin.addEventListener("input",function(){
+    err.hidden=true;
+    if(pin.value.length<4) return;
+    if(hash(pin.value)===CHECK){
+      try{ localStorage.setItem(KEY,"1"); }catch(e){}
+      document.documentElement.classList.remove("locked");
+      gate.remove();
+    }else{ err.hidden=false; pin.value=""; pin.focus(); }
+  });
+  setTimeout(function(){ pin.focus(); },120);
+})();
+</script>
+
+<header>
+  <div class="shell">
+    <div class="brand">
+      <span class="mark">Age.3</span>
+      <h1>レシピ</h1>
+    </div>
+    <p class="lede">揚げサンドのスタンダードレシピ。材料・作り方・ポイント・完成基準は、レシピカードに書かれているとおりに載せています。</p>
+  </div>
+</header>
+
+<div class="tools">
+  <div class="shell">
+    <div class="searchbox">
+      <input id="q" type="text" placeholder="品名・材料で探す（例：いちご、カレー）" autocomplete="off" aria-label="検索">
+      <button id="clear" aria-label="消す">×</button>
+    </div>
+    <div class="chips" id="chips"></div>
+  </div>
+</div>
+
+<main class="shell">
+  <button class="noticebtn" id="noticebtn"></button>
+  <p class="count" id="count"></p>
+  <button class="rbtn" id="printall" style="width:100%;margin:6px 0 2px" hidden></button>
+  <button class="rbtn" id="printkitchen" style="width:100%;margin:6px 0 2px" hidden></button>
+  <button class="rbtn" id="printkitchen2" style="width:100%;margin:0 0 2px" hidden></button>
+  <div class="grid" id="grid"></div>
+  <p class="empty" id="empty" hidden>見つかりませんでした。品名か材料名で探してみてください。</p>
+  <footer>
+    出どころ：Age.3 STANDARD RECIPE カード<br>
+    このレシピは社外秘です。持ち出し・複製・SNS等への掲載を禁じます。<br>
+    分量・手順・ポイントは、すべてカードに書かれているとおりに写しています。カードに書かれていないことは載せていません。
+    <div class="reset">
+      <button id="reset" class="rbtn">この端末の記録を消す（リセット）</button>
+      <p class="rnote">合言葉をおぼえている記録と、英語表示の設定を消します。<br>
+      次に開くときは、また4桁の番号を入れることになります。<br>
+      レシピそのものは消えません。端末を人に渡すときや、番号が変わったときに押してください。</p>
+    </div>
+  </footer>
+</main>
+
+<script src="/age3-recipe-data.js"></script>
+<script>
+(function(){
+  "use strict";
+  var $ = function(s){ return document.querySelector(s); };
+  var esc = function(s){ return String(s==null?"":s).replace(/[&<>"']/g, function(c){
+    return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]; }); };
+
+  var K_MODE = 'a4', K_FONT = 9.5, K_PH = 16.5;   /* 早見表: 'a4'=A4縦2枚 / 'a3'=A3縦1枚 */
+  var A3MARK = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHgAAAB+CAMAAADY4yX9AAAAYFBMVEVMTExMTExMTExMTExMTExMTExMTExMTEwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADWtFHJAAAAIHRSTlP6AW6Tz7BOLgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAOebvDYAAAOkSURBVHja7ZtZkqMwDECF1vvfeFgMIRjbeIP0FPpLF81DsnYSGEpEUZhhEhZCK7kFZP+HocBBmLQ7WD3qyraeYGUISx46B2wCccE+YISksHUAC1wRbQ02hmuCbcEGl4VagjO4V8nXwJwDvmZtaM8FsEZgglxpA9Zs7pVjhvaGvmZsaJGwfJEG4BKFL6gMHU74ksrQJkXnOzacNxkka2dTyAVeeqNga+SDjRgay1l7Ahdbm2o2RsHK0E1Yw2CBriJ2DlboLngGRrhByAcT3CJyBN/E/ZDhRjt/keEuvzqe8wKGW0U3sNwL5hWscLOQA/Pd4KlNgFs9eqcypBXuYZAJnDxhK/I95njShmTOkpKzwERWkhHM6agrcB6zeLgY6IWgy03kaG47EFZKgZI3yZxS57u6pBy+OUHKc4apZZFC15VIqHDSalKY2zhmqWSMTg99OCyhuQHm749nz1yRAWRYYgN3SQcFB0VnRzEcvQBP921VSRWdY++4S8qjhTvbwvyzmDpKK696PKyhLN8Os/5h8Vv2AkdQqxoq3QLDtqhm+OiIo+Kj0GmWwniHwXG/XGSrnexU1QU88p3Ied6kMFaiscSL4BZRzpFstXgikINgiWauTwLYrCaz7uRMm0gtGgZTLFfTsK8UtJKnAKIv/UMnZuFkrRAx1s5jNvficaD8lFpdz15OS2AkdQ0QNpbsn3ftRU2PpUvmqF183eUqIudcHKvHGprid+Myz034mBon0uznzo2nv5s6VyPngjKvFUQjKVPDPZfgJM4ciOsnOiwa55nXpag11pb+Qyla5HO7TETmJWfY95Ylp+Oaniyzr0ZrUgOyJwn+mEcrBlvMnp22U2StGAO4YFqchtsxM5vVDPJWNB+PBQ+xarzEhzYC9NAOhI5bH7yXe/eeC882e9Z9QN+vM6H69UPJWs/b3lpHHxOL7qsNuxjcX5XD6bcPmsJZzl4OhF5amDY5cFTLfwvTaK+UDTbPYscDEEleUgIe/Lokx+WIepdwc7Aei5h47//MTwXdwJIAD09pXATmpzTmeo35/wPLj2osRWCp17gfmH8UTEVgesH5YPxbYPxlcCKO9SmNy8D6gvPB9rfA9htg8lKKdwl6lWVoAAY67noYj+OVd0kTcOHqsOSrc/UD6gu+CK7eC8hTGpeCqVaw6S9DGskL/gmwYqVYqVe3WxK/4P8VrIVgfMEvuBfYOjaZ8SJR+Z1cKq9O3KvxSZbF8hzCid88/QOX0SRhF3tsmgAAAABJRU5ErkJggg==";
+  var PLAYLIST = (RECIPE_META && RECIPE_META.videoPlaylist) || "";
+  var PLAYLIST_URL = PLAYLIST ? "https://www.youtube.com/playlist?list=" + encodeURIComponent(PLAYLIST) : "";
+  var PLAYLIST_REG = (RECIPE_META && RECIPE_META.videoPlaylistRegular) || PLAYLIST;
+  function plId(r){ return (r && r.group && r.group.indexOf("regular") === 0) ? PLAYLIST_REG : PLAYLIST; }
+  function plUrl(r){ var p = plId(r); return p ? "https://www.youtube.com/playlist?list=" + encodeURIComponent(p) : ""; }
+
+  var EN_KEY = "age3-recipe:en";
+  var showEn = true;
+  try{ var v = localStorage.getItem(EN_KEY); if(v==="0") showEn = false; }catch(e){}
+
+  /* ---------- 一覧 ---------- */
+
+  /* ---------- 印刷用レシピカード（PDF原本と同じ体裁） ---------- */
+  var BGX = "data:image/svg+xml;charset=utf-8,";
+  function bgFill(hex){ return BGX + "%3Csvg xmlns='http://www.w3.org/2000/svg' preserveAspectRatio='none' viewBox='0 0 1 1'%3E%3Crect width='1' height='1' fill='%23" + hex + "'/%3E%3C/svg%3E"; }
+  var BG_SEC = bgFill("F2F2F2"), BG_FIN = bgFill("ECECEC"), BG_PT = bgFill("BFAE00");
+  var BG_DOT = BGX + "%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='50' fill='%234C4948'/%3E%3C/svg%3E";
+  var BG_STRIPE = BGX + "%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' preserveAspectRatio='none'%3E%3Cdefs%3E%3Cpattern id='s' width='3.866' height='3.866' patternUnits='userSpaceOnUse' patternTransform='rotate(45)'%3E%3Crect width='1.944' height='3.866' fill='%23ECECEC'/%3E%3C/pattern%3E%3C/defs%3E%3Cpath d='M0 0 H100 V100 H59 L0 41 Z' fill='url(%23s)'/%3E%3C/svg%3E";
+  function bgimg(src){ return '<img class="pbg" src="'+src+'" alt="">'; }
+  var A3LOGO = "data:image/png;base64,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";
+  var CAT_EN = { "揚げサンド":"Fried Sandwich", "揚げサンド（期間限定）":"Fried Sandwich (Limited)" };
+  function catLine(r){
+    if(!r.category) return "";
+    var e = CAT_EN[r.category];
+    return esc(r.category) + (e ? " / " + e : "");
+  }
+  function A3cardIng(rows){
+    return rows.map(function(i){
+      var qt = (i[2]==null)
+        ? '<span class="qt none">分量の記載なし</span>'
+        : '<span class="qt">'+esc(i[2])+(i[3]?'<em>'+esc(i[3])+'</em>':'')+'</span>';
+      return '<li><span class="nm"><b>'+esc(i[0])+'</b>'+(i[1]?'<i>'+esc(i[1])+'</i>':'')+'</span>'+qt+'</li>';
+    }).join('');
+  }
+  function A3card(r){
+    var hero = (r.photo === false)
+      ? '<div class="nop">写真 未登録</div>'
+      : '<img src="/age3-recipe/'+esc(r.id)+'-hero.jpg" alt="" onerror="this.parentNode.innerHTML=\'<div class=&quot;nop&quot;>写真 未登録</div>\'">';
+    var shot = (r.photo === false) ? '' :
+      '<div class="pshot"><img src="/age3-recipe/'+esc(r.id)+'-steps.jpg" alt="" onerror="this.parentNode.remove()"></div>';
+    var mth = r.steps.map(function(s,n){
+      var pt = s.point ? '<div class="ppt"><span class="lb">'+bgimg(BG_PT)+'<i>POINT</i></span><span class="tx">'+
+             '<span class="j">'+esc(s.point.jp)+'</span>'+
+             (s.point.en?'<span class="e">'+esc(s.point.en)+'</span>':'')+'</span></div>' : '';
+      return '<li><span class="no">'+bgimg(BG_DOT)+'<i>'+(n+1)+'</i></span><span class="bd"><span class="j">'+esc(s.jp)+'</span>'+
+             (s.en?'<span class="e">'+esc(s.en)+'</span>':'')+pt+'</span></li>';
+    }).join('');
+    var notes = (r.notes && r.notes.length)
+      ? '<div class="pnote"><b>申し送り / NOTES</b>'+r.notes.map(esc).join('<br>')+'</div>' : '';
+    var sub = r.sub ? '<div class="psub"><b>仕込み ／ '+esc(r.sub.title)+'</b>'+
+        r.sub.ing.map(function(i){return esc(i[0])+'　'+(i[2]==null?'—':esc(i[2])+esc(i[3]||''));}).join('<br>')+
+        (r.sub.note?'<br>'+esc(r.sub.note):'')+'</div>' : '';
+    return '<section class="pcard">' +
+      '<img class="pstripe" src="'+BG_STRIPE+'" alt="">' +
+      '<div class="pabs plogo"><img src="'+A3LOGO+'" alt="Age.3"></div>' +
+      '<div class="pabs prec">RECIPE</div>' +
+      '<div class="pabs pmeta">' +
+        (r.code?'<div><i>CODE</i><b>'+esc(r.code)+'</b></div>':'') +
+        (r.category?'<div><i>CATEGORY</i><b>'+catLine(r)+'</b></div>':'') +
+        (r.ver?'<div><i>VER</i><b>'+esc(r.ver)+'</b><i>'+(r.issued?' / '+esc(r.issued):'')+'</i></div>':'') +
+      '</div>' +
+      (r.serve?'<div class="pabs pserve">'+esc(r.serve)+'</div>':'') +
+      '<div class="pabs pname">'+esc(r.name)+'</div>' +
+      '<div class="pabs pname-en">'+esc(r.en||'')+'</div>' +
+      '<div class="pabs prule"></div>' +
+      '<div class="pabs pcols"><div class="pcolsin"><div class="pcol-l"><div class="pfitl">' +
+        '<div class="psec">'+bgimg(BG_SEC)+'<span class="n">01</span><span class="j">材料</span><span class="e">INGREDIENTS</span>' +
+          (r.yield?'<span class="r">／ '+esc(r.yield)+' / per piece</span>':'') + '</div>' +
+        '<ul class="ping">'+A3cardIng(r.ing)+'</ul>' + sub +
+        '<div class="psec">'+bgimg(BG_SEC)+'<span class="n">02</span><span class="j">作り方</span><span class="e">METHOD</span></div>' +
+        '<ul class="pmth">'+mth+'</ul>' +
+      '</div></div><div class="pcol-sp"></div><div class="pcol-r"><div class="pfitr">' +
+        '<div class="phero">'+hero+'</div>' + shot + notes +
+      '</div></div></div></div>' +
+      '<div class="pabs pfin">'+bgimg(BG_FIN)+'<div class="lb">完成基準 / FINISH STANDARD</div>' +
+        '<div class="j">'+(r.finish?esc(r.finish.jp):'（カードに記載なし）')+'</div>' +
+        ((r.finish&&r.finish.en)?'<div class="e">'+esc(r.finish.en)+'</div>':'') + '</div>' +
+      '<div class="pabs pfoot"><span>Age.3 STANDARD RECIPE</span><span>CONFIDENTIAL — DO NOT COPY</span></div>' +
+      '</section>';
+  }
+  /* 1品1ページに必ず収める。はみ出す分だけ本文（2段組み）を縮小する。 */
+  function A3fit(root){
+    var LIMIT = mm(194.0);              /* 本文に使える高さ 67.48mm〜261.5mm */
+    [['.pfitl',79.39],['.pfitr',95.78]].forEach(function(t){
+      [].forEach.call(root.querySelectorAll(t[0]), function(c){
+        var k = 1;
+        c.style.zoom = ''; c.style.width = t[1] + 'mm';
+        for(var i = 0; i < 10; i++){
+          var h = c.getBoundingClientRect().height;
+          if(h <= LIMIT) break;
+          k = Math.max(0.5, k * (LIMIT - mm(1)) / h);
+          c.style.zoom = k;
+          c.style.width = (t[1] / k) + 'mm';
+        }
+      });
+    });
+    /* 品名が横幅に収まらないときだけ文字を詰める */
+    [].forEach.call(root.querySelectorAll('.pname'), function(el){
+      var sz = 22.5;
+      el.style.fontSize = sz + 'pt';
+      while(el.scrollWidth > el.clientWidth + 1 && sz > 11){ sz -= 0.5; el.style.fontSize = sz + 'pt'; }
+    });
+  }
+  var _mmpx = 0;
+  function mm(v){
+    if(!_mmpx){
+      var d = document.createElement('div');
+      d.style.cssText = 'position:absolute;visibility:hidden;height:100mm';
+      document.body.appendChild(d); _mmpx = d.getBoundingClientRect().height / 100; d.remove();
+    }
+    return v * _mmpx;
+  }
+  function A3printGo(root, orient){
+    var st = document.getElementById('a3pagestyle');
+    if(!st){ st = document.createElement('style'); st.id = 'a3pagestyle'; document.head.appendChild(st); }
+    var sz = orient === 'landscape' ? 'A4 landscape' : (orient === 'kitchen-a3' ? 'A3 portrait' : 'A4 portrait');
+    st.textContent = '@page{size:' + sz + ';margin:0}';
+    /* #printroot は画面では display:none なので、そのままだと高さが 0 と判定されて縮小が効かない。
+       いったん画面外に出して実寸で測り、1ページに収めてから印刷する。 */
+    root.style.cssText = 'position:fixed;left:-10000px;top:0;display:block;z-index:-1';
+    try{ if(orient.indexOf('kitchen') === 0) kFit(root); else A3fit(root); }catch(e){}
+    root.style.cssText = '';
+    document.documentElement.classList.add('printing');
+    setTimeout(function(){
+      window.print();
+      setTimeout(function(){
+        document.documentElement.classList.remove('printing');
+        root.innerHTML = ''; st.textContent = '';
+      }, 400);
+    }, 150);
+  }
+  function A3print(list){
+    var root = document.getElementById('printroot');
+    if(!root){ root = document.createElement('div'); root.id = 'printroot'; document.body.appendChild(root); }
+    root.innerHTML = list.map(A3card).join('');
+    var imgs = [].slice.call(root.querySelectorAll('img'));
+    var left = imgs.length;
+    function go(){ A3printGo(root, 'portrait'); }
+    if(!left) return go();
+    imgs.forEach(function(im){
+      if(im.complete) { if(!--left) go(); return; }
+      im.addEventListener('load', function(){ if(!--left) go(); });
+      im.addEventListener('error', function(){ if(!--left) go(); });
+    });
+    setTimeout(function(){ if(left>0){ left=0; go(); } }, 6000);
+  }
+
+  window.A3card = A3card; window.A3print = A3print; window.A3fit = A3fit;
+  /* ---------- キッチン掲載用 使用グラム数 早見表 ---------- */
+  var K_PER_ROW = 5, K_FOOT_H = 8.0;
+  function kShort(s){ return String(s||'').replace(/\s*※.*$/,'').replace(/[（(][^）)]*[）)]/g,'').trim(); }
+  function kCell(r){
+    var ph = (r.photo === false) ? '<div class="nop">写真なし</div>'
+      : '<img src="/age3-recipe/'+esc(r.id)+'-hero.jpg" alt="" onerror="this.parentNode.innerHTML=\'<div class=&quot;nop&quot;>写真なし</div>\'">';
+    var rows = (r.ing||[]).filter(function(i){ return String(i[0]).indexOf('揚げパン') < 0; })
+      .map(function(i){
+        var q = (i[2]==null) ? '—' : esc(i[2]) + esc(i[3]||'');
+        return '<tr><td>'+esc(kShort(i[0]))+'</td><td class="q">'+q+'</td></tr>';
+      }).join('');
+    return '<div class="kcell"><div class="khd"><div class="kph">'+ph+'</div>' +
+      '<div class="kname">'+esc(r.name)+(r.code?'<i>'+esc(r.code)+'</i>':'')+'</div></div>' +
+      '<table class="ktbl">'+rows+'</table></div>';
+  }
+  function kRows(list){
+    var h = '';
+    for(var i = 0; i < list.length; i += K_PER_ROW){
+      var cells = list.slice(i, i + K_PER_ROW).map(kCell).join('');
+      for(var j = list.slice(i, i + K_PER_ROW).length; j < K_PER_ROW; j++) cells += '<div class="kcell"></div>';
+      h += '<div class="krow">'+cells+'</div>';
+    }
+    return h;
+  }
+  function kPage(cls, right, bodyHtml){
+    return '<section class="kpage'+(cls?' '+cls:'')+'">' +
+      '<div class="khead"><div class="l"><img class="lg" src="'+A3LOGO+'" alt="Age.3">' +
+        '<div><div class="t">使用グラム数 早見表</div><div class="s">PRODUCT RECIPE REFERENCE</div></div></div>' +
+        '<div class="r">'+right+'</div></div>' +
+      '<div class="kbody">'+bodyHtml+'</div>' +
+      '<div class="kfoot"><span>Age.3 STANDARD RECIPE ／ 分量はレシピカードの記載に準拠</span>' +
+        '<span>CONFIDENTIAL — DO NOT COPY</span></div></section>';
+  }
+  function A3kitchen(which){
+    which = which || 'sweets';
+    var root = document.getElementById('printroot');
+    if(!root){ root = document.createElement('div'); root.id = 'printroot'; document.body.appendChild(root); }
+    var g = (which === 'savory') ? 'regular-savory' : 'regular-sweets';
+    var label = (which === 'savory') ? 'レギュラーセイボリー' : 'レギュラースイーツ';
+    var en = (which === 'savory') ? 'REGULAR SAVORY' : 'REGULAR SWEETS';
+    var list = RECIPES.filter(function(r){ return r.group === g; });
+    if(!list.length) return;
+    root.innerHTML = kPage('',
+      '<b>' + label + ' ' + list.length + '品</b><br>左＝材料 ／ 右＝使用量（揚げパンを除く）',
+      '<div class="kcat">' + label + '<span>' + en + ' ／ ' + list.length + '品</span></div>' + kRows(list));
+    var imgs = [].slice.call(root.querySelectorAll('img'));
+    var left = imgs.length;
+    function done(){ A3printGo(root, 'kitchen'); }
+    if(!left) return done();
+    imgs.forEach(function(im){
+      if(im.complete){ if(!--left) done(); return; }
+      im.addEventListener('load', function(){ if(!--left) done(); });
+      im.addEventListener('error', function(){ if(!--left) done(); });
+    });
+    setTimeout(function(){ if(left > 0){ left = 0; done(); } }, 8000);
+  }
+  /* 文字サイズは固定。余った高さを写真に回して、写真をできるだけ大きく見せる。
+     それでも入りきらない場合だけ文字を小さくする。 */
+  function kFit(root){
+    [].forEach.call(root.querySelectorAll('.kpage'), function(pg){
+      var body = pg.querySelector('.kbody'); if(!body) return;
+      var pageH = pg.classList.contains('a3') ? 420 : 297;
+      var phs = [].slice.call(pg.querySelectorAll('.kph'));
+      var rows = [].slice.call(pg.querySelectorAll('.krow'));
+      function setPh(h){ phs.forEach(function(e){ e.style.height = h + 'mm'; }); }
+      function slack(){
+        var top = (body.getBoundingClientRect().top - pg.getBoundingClientRect().top) / mm(1);
+        return (pageH - top - K_FOOT_H) - (body.getBoundingClientRect().height / mm(1));
+      }
+      rows.forEach(function(r){ r.style.marginBottom = ''; });
+      body.style.fontSize = K_FONT + 'pt';
+      setPh(K_PH);
+      /* 1) 入らないときは写真を縮める（品数が増えたとき用） */
+      if(slack() < 0){
+        var lo = 8, hi = K_PH, best = 8;
+        for(var i = 0; i < 14; i++){
+          var mid = (lo + hi) / 2;
+          setPh(mid);
+          if(slack() >= 0){ best = mid; lo = mid; } else { hi = mid; }
+          if(hi - lo < 0.2) break;
+        }
+        setPh(best);
+      }
+      /* 2) 写真を最小にしても入らないときだけ文字を縮める */
+      if(slack() < 0){
+        setPh(8);
+        var f1 = 5, f2 = K_FONT, bf = 5;
+        for(var j = 0; j < 14; j++){
+          var fm = (f1 + f2) / 2;
+          body.style.fontSize = fm + 'pt';
+          if(slack() >= 0){ bf = fm; f1 = fm; } else { f2 = fm; }
+          if(f2 - f1 < 0.05) break;
+        }
+        body.style.fontSize = bf + 'pt';
+      }
+      /* 3) 余った高さは段の間に均等配分 */
+      var sl = slack();
+      if(sl > 2 && rows.length > 1){
+        var add = Math.min(sl / rows.length, 34);
+        rows.forEach(function(r){
+          r.style.marginBottom = (parseFloat(getComputedStyle(r).marginBottom) / mm(1) + add) + 'mm';
+        });
+      }
+    });
+  }
+  window.A3kitchen = A3kitchen; window.kFit = kFit;
+
+
+  /* 画像が無い品は自動で「写真 未登録」に切り替える。
+     写真ファイル（/age3-recipe/{id}-hero.jpg 等）を置けば、データを直さなくてもそのまま表示される。 */
+  window.A3renumber = function(root){
+    var i = 0;
+    [].forEach.call(root.querySelectorAll(".sech .no"), function(n){
+      if(!isNaN(Number(n.textContent.trim()))){ i++; n.textContent = (i<10?"0":"") + i; }
+    });
+  };
+  window.A3nomark = function(img){
+    var p = img.parentNode; if(!p) return;
+    p.className = "nph nop";
+    p.innerHTML = '<img src="' + A3MARK + '" alt="">';
+  };
+  window.A3noph = function(img){
+    var p = img.parentNode; if(!p) return;
+    p.className = "ph noph";
+    p.innerHTML = '<span class="nophtx">写真<br>未登録</span>';
+  };
+  window.A3nohero = function(img){
+    var p = img.parentNode; if(!p) return;
+    p.className = "dhero nophoto";
+    p.textContent = "写真は未登録です（用紙の画像が届いていません）";
+  };
+  window.A3nosteps = function(img){
+    var shot = img.closest ? img.closest(".shot") : null;
+    var sec  = shot && shot.closest ? shot.closest(".sec") : null;
+    var root = sec && sec.closest ? sec.closest(".detail") : null;
+    if(sec) sec.remove(); else if(shot) shot.remove();
+    if(root) A3renumber(root);
+  };
+  /* 商品区分。データ側に group を持たせる。
+     "regular-sweets" = レギュラースイーツ / "regular-savory" = レギュラーセイボリー / "season" = シーズン
+     未指定は season。現行の登録品はすべてシーズン商品のため、既存データの変更は不要。 */
+  function group(r){ return r.group || "season"; }
+
+  var FILTERS = [
+    { id:"all",        label:"すべて",             test:function(){ return true; } },
+    { id:"reg-sweets", label:"レギュラースイーツ",   test:function(r){ return group(r)==="regular-sweets"; } },
+    { id:"reg-savory", label:"レギュラーセイボリー", test:function(r){ return group(r)==="regular-savory"; } },
+    { id:"season",     label:"シーズン",           test:function(r){ return group(r)==="season"; } }
+  ];
+  var filter = "all", query = "";
+
+  function haystack(r){
+    var t = [r.name, r.en, r.code||"", r.category||"", r.series||""];
+    r.ing.forEach(function(i){ t.push(i[0]); t.push(i[1]||""); });
+    r.steps.forEach(function(s){ t.push(s.jp); if(s.point) t.push(s.point.jp); });
+    return t.join(" ").toLowerCase();
+  }
+  RECIPES.forEach(function(r){ r._hay = haystack(r); });
+
+  function tags(r){
+    var h = "";
+    if(r.status)          h += '<span class="tag st-'+esc(r.status.tone)+'">'+esc(r.status.label)+'</span>';
+    if(r.series)          h += '<span class="tag se">'+esc(r.series)+'</span>';
+    if(r.kind==="sweets") h += '<span class="tag sw">SWEETS</span>';
+    if(r.kind==="savory") h += '<span class="tag sv">Savory</span>';
+    if(r.limited)         h += '<span class="tag lm">期間限定</span>';
+    h += '<span class="tag cd">' + esc(r.code || "番号なし") + '</span>';
+    return h;
+  }
+
+  function render(){
+    var q = query.trim().toLowerCase();
+    var f = FILTERS.filter(function(x){ return x.id===filter; })[0];
+    var list = RECIPES.filter(function(r){
+      return f.test(r) && (!q || r._hay.indexOf(q) >= 0);
+    });
+    $("#grid").innerHTML = list.map(function(r){
+      var ph = (r.photo === false)
+        ? '<span class="ph noph"><span class="nophtx">写真<br>未登録</span></span>'
+        : '<span class="ph"><img src="/age3-recipe/'+esc(r.id)+'-hero.jpg" alt="'+esc(r.name)+'" loading="lazy" onerror="A3noph(this)"></span>';
+      return '<button class="tile" data-id="'+esc(r.id)+'">' + ph +
+        '<span class="tx">' +
+          '<span class="nm">'+esc(r.name)+'</span>' +
+          '<span class="en">'+esc(r.en)+'</span>' +
+          '<span class="mt">'+tags(r)+'</span>' +
+        '</span></button>';
+    }).join("");
+    $("#empty").hidden = list.length > 0;
+    var pa = $("#printall");
+    if(pa){ pa.hidden = list.length === 0; pa.textContent = "表示中の" + list.length + "品をまとめて印刷 / PDF"; pa.__list = list; }
+    var nsw = RECIPES.filter(function(r){ return r.group === "regular-sweets"; }).length;
+    var nsv = RECIPES.filter(function(r){ return r.group === "regular-savory"; }).length;
+    var pk = $("#printkitchen");
+    if(pk){
+      pk.hidden = nsw === 0;
+      pk.innerHTML = "キッチン掲載用 早見表｜レギュラースイーツ" +
+        "<br><small>写真つき・使用グラム数の一覧／A4縦1枚（" + nsw + "品）</small>";
+    }
+    var pk2 = $("#printkitchen2");
+    if(pk2){
+      pk2.hidden = nsv === 0;
+      pk2.innerHTML = "キッチン掲載用 早見表｜レギュラーセイボリー" +
+        "<br><small>写真つき・使用グラム数の一覧／A4縦1枚（" + nsv + "品）</small>";
+    }
+    $("#empty").textContent = q ? "見つかりませんでした。品名か材料名で探してみてください。" : "このカテゴリーにはまだレシピが登録されていません。";
+    $("#count").textContent = list.length + "品" + (q || filter!=="all" ? "（全"+RECIPES.length+"品中）" : "");
+  }
+
+  $("#chips").innerHTML = FILTERS.map(function(f){
+    return '<button class="chip" data-f="'+f.id+'" aria-pressed="'+(f.id==="all")+'">'+esc(f.label)+'</button>';
+  }).join("");
+  (function(){ var pa = $("#printall"); if(pa) pa.addEventListener("click", function(){ if(this.__list && this.__list.length) A3print(this.__list); }); })();
+  (function(){
+    var pk = $("#printkitchen"); if(pk) pk.addEventListener("click", function(){ A3kitchen("sweets"); });
+    var pk2 = $("#printkitchen2"); if(pk2) pk2.addEventListener("click", function(){ A3kitchen("savory"); });
+  })();
+  $("#chips").addEventListener("click", function(e){
+    var b = e.target.closest(".chip"); if(!b) return;
+    filter = b.dataset.f;
+    [].forEach.call(this.querySelectorAll(".chip"), function(c){
+      c.setAttribute("aria-pressed", String(c.dataset.f===filter));
+    });
+    render();
+  });
+  $("#q").addEventListener("input", function(){
+    query = this.value; $("#clear").style.display = this.value ? "block" : "none"; render();
+  });
+  $("#clear").addEventListener("click", function(){
+    $("#q").value = ""; query = ""; this.style.display = "none"; render(); $("#q").focus();
+  });
+  $("#grid").addEventListener("click", function(e){
+    var t = e.target.closest(".tile"); if(!t) return;
+    location.hash = "#/r/" + t.dataset.id;
+  });
+
+  /* ---------- 詳細 ---------- */
+  function byId(id){ return RECIPES.filter(function(r){ return r.id===id; })[0]; }
+
+  function qtyHtml(i){
+    if(i[2]==null) return '<span class="qt none">分量の記載なし</span>';
+    return '<span class="qt">'+esc(i[2])+(i[3]?'<em>'+esc(i[3])+'</em>':'')+'</span>';
+  }
+
+  function detailHtml(r){
+    var meta = [];
+    if(r.series)   meta.push('<span class="tag se">'+esc(r.series)+'</span>');
+    if(r.code)     meta.push('<span class="tag cd">CODE '+esc(r.code)+'</span>');
+    if(r.ver)      meta.push('<span class="tag">VER '+esc(r.ver)+(r.issued?' / '+esc(r.issued):'')+'</span>');
+    if(r.category) meta.push('<span class="tag">'+esc(r.category)+'</span>');
+    if(r.limited)  meta.push('<span class="tag lm">期間限定</span>');
+    if(r.oldFormat)meta.push('<span class="tag">旧フォーマット</span>');
+
+    function ingList(rows){
+      return rows.map(function(i){
+        return '<li><span class="nm"><b>'+esc(i[0])+'</b>'+(i[1]?'<span class="en-line">'+esc(i[1])+'</span>':'')+'</span>'+qtyHtml(i)+'</li>';
+      }).join("");
+    }
+    var ing = ingList(r.ing);
+
+    var sub = r.sub ? '<div class="subrec"><div class="sublb">仕込み ／ '+esc(r.sub.title)+'</div>' +
+        '<ul class="ing">'+ingList(r.sub.ing)+'</ul>' +
+        (r.sub.note ? '<p class="subnote">'+esc(r.sub.note)+'</p>' : '') + '</div>' : "";
+
+    var mth = r.steps.map(function(s,n){
+      var pt = s.point ? '<div class="pt"><span class="lb">POINT</span>' +
+            '<div class="jp">'+esc(s.point.jp)+'</div>' +
+            (s.point.en ? '<div class="en en-line">'+esc(s.point.en)+'</div>' : '') + '</div>' : "";
+      return '<li><span class="no">'+(n+1)+'</span><span class="bd">' +
+             '<span class="jp">'+esc(s.jp)+'</span>' +
+             (s.en ? '<span class="en en-line">'+esc(s.en)+'</span>' : '') + pt + '</span></li>';
+    }).join("");
+
+    var fin = r.finish ? '<div class="sec"><div class="fin"><div class="lb">完成基準 / FINISH STANDARD</div>' +
+        '<div class="jp">'+esc(r.finish.jp)+'</div>' +
+        (r.finish.en ? '<div class="en en-line">'+esc(r.finish.en)+'</div>' : '') + '</div></div>' : "";
+
+    var steps = (r.photo === false) ? "" :
+      '<div class="sec"><div class="sech"><span class="no">03</span><span class="jp">工程写真</span><span class="en">STEPS</span></div>' +
+      '<div class="shot" data-zoom="/age3-recipe/'+esc(r.id)+'-steps.jpg"><img src="/age3-recipe/'+esc(r.id)+'-steps.jpg" alt="工程写真" onerror="A3nosteps(this)"></div>' +
+      '<p class="cap">タップで拡大します。</p></div>';
+
+    var vsec = "";
+    if(r.video){
+      vsec = '<div class="sec"><div class="sech"><span class="no">'+(steps?'04':'03')+'</span><span class="jp">作り方動画</span><span class="en">VIDEO</span></div>' +
+        '<div class="vid" id="vid" data-vid="'+esc(r.video)+'">' +
+          '<img src="https://i.ytimg.com/vi/'+esc(r.video)+'/hqdefault.jpg" alt="" loading="lazy">' +
+          '<span class="vplay">▶</span>' +
+        '</div>' +
+        '<p class="cap">タップすると YouTube の動画が再生されます。通信量にご注意ください。</p>' +
+        (r.videoNote ? '<div class="note vnote"><b>この動画について</b>'+esc(r.videoNote)+'</div>' : '') +
+        '</div>';
+    }else if(plId(r)){
+      vsec = '<div class="sec"><div class="sech"><span class="no">'+(steps?'04':'03')+'</span><span class="jp">作り方動画</span><span class="en">VIDEO</span></div>' +
+        '<a class="btn vlink" href="'+plUrl(r)+'" target="_blank" rel="noopener">作り方動画の一覧を YouTube で開く</a>' +
+        '<p class="cap">この品の動画はまだ紐づけていません。一覧から探してください。</p></div>';
+    }
+
+    var notes = (r.notes && r.notes.length)
+      ? '<div class="note"><b>申し送り</b><ul>'+r.notes.map(function(n){ return '<li>'+esc(n)+'</li>'; }).join("")+'</ul></div>' : "";
+
+    var hero = (r.photo === false)
+      ? '<div class="dhero nophoto">写真は未登録です（用紙の画像が届いていません）</div>'
+      : '<div class="dhero"><img src="/age3-recipe/'+esc(r.id)+'-hero.jpg" alt="'+esc(r.name)+'" onerror="A3nohero(this)"></div>';
+
+    var acts = '<div class="acts">' +
+          '<button class="btn pri" id="cook">作りながら見る</button>' +
+          '<button class="btn" id="printcard">レシピカード<br><small>印刷 / PDF</small></button>' +
+        '</div>';
+
+    return '<div class="dbar">' +
+        '<button class="back" id="back">&larr; 一覧</button><span class="sp"></span>' +
+        '<button class="entog" id="entog" aria-pressed="'+showEn+'">EN</button>' +
+      '</div>' + hero +
+      '<div class="shell">' +
+        '<div class="dhead">' +
+          (r.serve ? '<div class="dserve">'+esc(r.serve)+'</div>' : '') +
+          '<h2>'+esc(r.name)+'</h2>' +
+          '<div class="den">'+esc(r.en)+'</div>' +
+          '<div class="dmeta">'+meta.join("")+'</div>' +
+          (r.status ? '<div class="stband '+esc(r.status.tone)+'"><b>'+esc(r.status.label)+'</b>' +
+            '<span>'+esc(r.status.detail||"")+
+            '<br>2026年8月5日のお知らせより。<button class="go" id="tonotice">お知らせを見る</button></span></div>' : '') +
+        '</div>' +
+        '<div class="sec"><div class="sech"><span class="no">01</span><span class="jp">材料</span><span class="en">INGREDIENTS</span><span class="rt">'+esc(r.yield||"")+'</span></div>' +
+          '<ul class="ing">'+ing+'</ul>' + sub + notes + '</div>' +
+        '<div class="sec"><div class="sech"><span class="no">02</span><span class="jp">作り方</span><span class="en">METHOD</span><span class="rt">'+r.steps.length+'手順</span></div>' +
+          '<ol class="mth">'+mth+'</ol></div>' +
+        steps + vsec + fin + acts +
+        '<p class="dfoot">出どころ：Age.3 STANDARD RECIPE カード'+(r.code?'（'+esc(r.code)+'）':'')+'<br>' +
+        'CONFIDENTIAL — 社外秘。持ち出し・複製・SNS等への掲載を禁じます。</p>' +
+      '</div>';
+  }
+
+  var detailEl = null;
+  function applyEn(root){
+    [].forEach.call((root||document).querySelectorAll(".en-line"), function(el){
+      el.style.display = showEn ? "" : "none";
+    });
+  }
+  function openDetail(id){
+    var r = byId(id); if(!r){ location.hash = ""; return; }
+    closeDetail();
+    detailEl = document.createElement("div");
+    detailEl.className = "detail";
+    detailEl.innerHTML = detailHtml(r);
+    document.body.appendChild(detailEl);
+    document.documentElement.classList.add("noscroll");
+    applyEn(detailEl);
+    detailEl.querySelector("#back").onclick = function(){ history.back(); };
+    detailEl.querySelector("#entog").onclick = function(){
+      showEn = !showEn; this.setAttribute("aria-pressed", String(showEn));
+      try{ localStorage.setItem(EN_KEY, showEn ? "1" : "0"); }catch(e){}
+      applyEn(detailEl);
+    };
+    detailEl.querySelector("#cook").onclick = function(){ openCook(r); };
+    (function(){ var pb = detailEl.querySelector("#printcard"); if(pb) pb.onclick = function(){ A3print([r]); }; })();
+    detailEl.addEventListener("click", function(e){
+      var z = e.target.closest("[data-zoom]"); if(z){ openViewer(z.dataset.zoom); return; }
+      if(e.target.closest("#tonotice")){ location.hash = "#/notice"; return; }
+      var v = e.target.closest(".vid[data-vid]");
+      if(v){
+        var id = v.dataset.vid;
+        v.innerHTML = '<iframe src="https://www.youtube-nocookie.com/embed/' + encodeURIComponent(id) +
+          '?rel=0&playsinline=1&autoplay=1" title="作り方動画" frameborder="0" allowfullscreen ' +
+          'allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"></iframe>';
+        v.removeAttribute("data-vid");
+      }
+    });
+  }
+  function closeDetail(){
+    if(detailEl){ detailEl.remove(); detailEl = null; }
+    document.documentElement.classList.remove("noscroll");
+  }
+
+  /* ---------- 商品切り替えのお知らせ ---------- */
+  var NOTICE = (typeof RECIPE_NOTICE !== "undefined") ? RECIPE_NOTICE : null;
+
+  if(NOTICE){
+    $("#noticebtn").innerHTML = esc(NOTICE.title) +
+      '<small>' + esc(NOTICE.asOf) + '時点の決定事項。終了する品・9月から始まる品をまとめています。</small>';
+    $("#noticebtn").addEventListener("click", function(){ location.hash = "#/notice"; });
+  }else{
+    $("#noticebtn").hidden = true;
+  }
+
+  function noticeHtml(){
+    var n = NOTICE;
+    var secs = n.sections.map(function(s){
+      var body;
+      if(s.items){
+        body = '<ul class="nitems">' + s.items.map(function(it){
+          var ph;
+          if(it.photo){
+            ph = '<span class="nph"><img src="'+esc(it.photo)+'" alt="" data-zoom="'+esc(it.photo)+'" onerror="A3nomark(this)"></span>';
+          }else if(it.recipe){
+            var src = '/age3-recipe/' + it.recipe + '-hero.jpg';
+            ph = '<span class="nph"><img src="'+esc(src)+'" alt="" data-zoom="'+esc(src)+'" onerror="A3nomark(this)"></span>';
+          }else{
+            ph = '<span class="nph nop"><img src="'+A3MARK+'" alt=""></span>';
+          }
+          var stt = (it.state === "終了") ? '<span class="stt x">終了</span>'
+                  : (it.state === "継続") ? '<span class="stt o">継続</span>' : '';
+          return '<li' + (it.recipe ? ' class="tap" data-go="'+esc(it.recipe)+'"' : '') + '>' + ph +
+            '<span class="bd">' +
+              '<span class="nm">' + (it.code ? '<span class="cd">'+esc(it.code)+'</span>' : '') + esc(it.name) + '</span>' +
+              (it.detail ? '<span class="dt">'+esc(it.detail)+'</span>' : '') +
+            '</span>' +
+            '<span class="rt">' + stt + (it.recipe ? '<span class="arw">›</span>' : '') + '</span>' +
+          '</li>';
+        }).join("") + '</ul>';
+      }else{
+        body = '<ul class="nlines">' + s.lines.map(function(l){ return '<li>'+esc(l)+'</li>'; }).join("") + '</ul>';
+      }
+      return '<div class="nsec"><div class="nhead '+esc(s.tone)+'">' +
+        '<span class="w">'+esc(s.when)+'</span><span class="t">'+esc(s.title)+'</span>' +
+        (s.scope ? '<span class="sc">'+esc(s.scope)+'</span>' : '') +
+        '</div>' + body + '</div>';
+    }).join("");
+
+    return '<div class="dbar"><button class="back" id="back">&larr; 一覧</button></div>' +
+      '<div class="shell">' +
+        '<div class="dhead"><div class="dserve">Age.3 ／ ANCHOR　店舗共有</div>' +
+          '<h2>'+esc(n.title)+'</h2>' +
+          '<div class="den">'+esc(n.source)+'</div>' +
+          '<div class="dmeta"><span class="tag">作成：'+esc(n.author)+'</span>' +
+            '<span class="tag">共有先：'+esc(n.audience)+'</span>' +
+            '<span class="tag cd">'+esc(n.asOf)+'時点</span></div>' +
+        '</div>' +
+        '<div class="ncaution">'+esc(n.draft)+'</div>' +
+        secs +
+        '<p class="nmeta">'+esc(n.change)+'<br>' +
+        'このお知らせは、いただいた「商品切り替えのお知らせ」に書かれている内容だけを写しています。書かれていない品目・日付は足していません。</p>' +
+        '<div class="dfoot">出どころ：Age.3 ／ ANCHOR「商品切り替えのお知らせ」（店舗共有）<br>' +
+        'CONFIDENTIAL — 社外秘。持ち出し・複製・SNS等への掲載を禁じます。</div>' +
+      '</div>';
+  }
+
+  var noticeEl = null;
+  function openNotice(){
+    if(!NOTICE){ location.hash = ""; return; }
+    closeNotice();
+    noticeEl = document.createElement("div");
+    noticeEl.className = "detail";
+    noticeEl.innerHTML = noticeHtml();
+    document.body.appendChild(noticeEl);
+    document.documentElement.classList.add("noscroll");
+    noticeEl.querySelector("#back").onclick = function(){ history.back(); };
+    noticeEl.addEventListener("click", function(e){
+      var z = e.target.closest("[data-zoom]");
+      if(z){ openViewer(z.dataset.zoom); return; }
+      var g = e.target.closest("[data-go]");
+      if(g) location.hash = "#/r/" + g.dataset.go;
+    });
+  }
+  function closeNotice(){
+    if(noticeEl){ noticeEl.remove(); noticeEl = null; }
+    if(!detailEl) document.documentElement.classList.remove("noscroll");
+  }
+
+  /* ---------- 質問箱 ---------- */
+  var QUESTIONS = (typeof RECIPE_QUESTIONS !== "undefined") ? RECIPE_QUESTIONS : [];
+  var ANS_KEY = "age3-recipe:answers";
+  var answers = {};
+  try{ answers = JSON.parse(localStorage.getItem(ANS_KEY) || "{}") || {}; }catch(e){ answers = {}; }
+  function saveAnswers(){ try{ localStorage.setItem(ANS_KEY, JSON.stringify(answers)); }catch(e){} }
+  function isAnswered(q){
+    var a = answers[q.id];
+    return !!(a && ((a.pick && a.pick.length) || (a.free && a.free.trim())));
+  }
+  function openCount(){ return QUESTIONS.filter(function(q){ return !q.answered && !isAnswered(q); }).length; }
+
+  var fab = document.createElement("button");
+  fab.className = "askfab"; fab.id = "askfab";
+  fab.addEventListener("click", function(){ location.hash = "#/ask"; });
+  document.body.appendChild(fab);
+
+  function paintFab(){
+    var n = openCount();
+    fab.innerHTML = '質問箱<span class="n">' + (n ? n : '✓') + '</span>';
+    fab.classList.toggle("done", n === 0);
+    fab.setAttribute("aria-label", n ? ("答えていない質問が" + n + "件あります") : "質問はすべて答えました");
+  }
+  function showFab(on){ fab.style.display = on ? "flex" : "none"; }
+  paintFab();
+
+  function askHtml(){
+    var open = QUESTIONS.filter(function(q){ return !q.answered && !isAnswered(q); });
+    var done = QUESTIONS.filter(function(q){ return  q.answered ||  isAnswered(q); });
+
+    function card(q){
+      var a = answers[q.id] || { pick: [], free: "" };
+      var rec = q.recipe ? byId(q.recipe) : null;
+      var ok = isAnswered(q);
+      return '<div class="qcard'+(ok?' ok':'')+'" data-q="'+esc(q.id)+'">' +
+        '<div class="qtop">' +
+          '<span class="qtag'+(ok?' ok':'')+'">'+esc(ok ? '答えました' : q.tag)+'</span>' +
+          '<p class="qq">'+esc(q.q)+'</p>' +
+          '<p class="qwhy">'+esc(q.why)+'</p>' +
+          (rec ? '<button class="qlink" data-go="'+esc(rec.id)+'">'+esc(rec.name)+'のレシピを見る</button>' : '') +
+        '</div>' +
+        (q.options ? '<div class="qopts">' + q.options.map(function(o,i){
+            return '<button class="qopt" data-pick="'+i+'" aria-pressed="'+((a.pick||[]).indexOf(i)>=0)+'">'+esc(o)+'</button>';
+          }).join("") + '</div>' : '') +
+        '<div class="qfree"><label>補足があれば書いてください（書かなくても大丈夫です）</label>' +
+          '<textarea data-free rows="2">'+esc(a.free||"")+'</textarea></div>' +
+      '</div>';
+    }
+
+    return '<div class="dbar"><button class="back" id="back">&larr; 一覧</button></div>' +
+      '<div class="shell">' +
+        '<div class="dhead"><div class="dserve">Age.3 レシピ</div><h2>質問箱</h2>' +
+          '<div class="den">こちらから確認したいことを、いつでも答えられるようにまとめています</div></div>' +
+        '<div class="asklead">レシピカードや動画を突き合わせたときに、<b>用紙だけでは決められなかったこと</b>を並べています。' +
+          '推測で埋めずにここへ出しています。<br>答えは<b>この端末に自動で保存</b>されるので、途中でやめても消えません。' +
+          '書き終えたら、いちばん下の<b>「答えをまとめて送る」</b>を押してください。</div>' +
+
+        (open.length
+          ? '<div class="sec"><div class="sech"><span class="no">'+(open.length<10?'0':'')+open.length+'</span>' +
+            '<span class="jp">まだ答えていない</span><span class="en">OPEN</span></div>' +
+            open.map(card).join("") + '</div>'
+          : '<div class="askdone">まだ答えていない質問はありません。ありがとうございます。</div>') +
+
+        (done.length
+          ? '<div class="sec"><div class="sech"><span class="no">'+(done.length<10?'0':'')+done.length+'</span>' +
+            '<span class="jp">答えたもの</span><span class="en">ANSWERED</span></div>' +
+            done.map(card).join("") + '</div>'
+          : '') +
+
+        '<div class="sec"><div class="sech"><span class="jp">そのほかの連絡・要望</span><span class="en">FREE</span></div>' +
+          '<div class="qcard"><div class="qfree"><label>直したいところ、足したいレシピ、うまく動かないところなど</label>' +
+          '<textarea id="askfree" rows="4">'+esc((answers.__free && answers.__free.free) || "")+'</textarea></div></div></div>' +
+
+        '<div class="asksend">' +
+          '<button class="btn pri" id="asksend" style="width:100%">答えをまとめて送る</button>' +
+          '<div class="acts" style="margin-top:9px">' +
+            '<button class="btn" id="askcopy">文章をコピー</button>' +
+            '<button class="btn" id="askclear">書いたものを消す</button>' +
+          '</div>' +
+          '<p class="asknote">「送る」を押すと、答えをまとめた文章ができます。LINEなどに貼って送ってください。' +
+          'この端末の中だけに保存されるので、送るまではこちらに届きません。</p>' +
+        '</div>' +
+      '</div>';
+  }
+
+  function answerText(){
+    var d = new Date();
+    var pad = function(n){ return (n<10?"0":"")+n; };
+    var lines = ["Age.3 レシピ 質問箱の答え",
+                 d.getFullYear()+"年"+(d.getMonth()+1)+"月"+d.getDate()+"日 "+pad(d.getHours())+":"+pad(d.getMinutes()), ""];
+    var any = false;
+    QUESTIONS.forEach(function(q){
+      var a = answers[q.id]; if(!a) return;
+      var picks = (a.pick||[]).map(function(i){ return q.options ? q.options[i] : ""; }).filter(Boolean);
+      var free = (a.free||"").trim();
+      if(!picks.length && !free) return;
+      any = true;
+      lines.push("■ " + q.q);
+      if(picks.length) lines.push("　→ " + picks.join(" ／ "));
+      if(free)         lines.push("　補足：" + free);
+      lines.push("");
+    });
+    var f = (answers.__free && answers.__free.free || "").trim();
+    if(f){ any = true; lines.push("■ そのほかの連絡・要望"); lines.push("　" + f); lines.push(""); }
+    if(!any) return null;
+    lines.push("（Age.3 レシピの質問箱から送信）");
+    return lines.join("\n");
+  }
+
+  var askEl = null;
+  function openAsk(){
+    closeAsk();
+    askEl = document.createElement("div");
+    askEl.className = "detail";
+    askEl.innerHTML = askHtml();
+    document.body.appendChild(askEl);
+    document.documentElement.classList.add("noscroll");
+    askEl.querySelector("#back").onclick = function(){ history.back(); };
+
+    askEl.addEventListener("click", function(e){
+      var g = e.target.closest("[data-go]");
+      if(g){ location.hash = "#/r/" + g.dataset.go; return; }
+      var o = e.target.closest(".qopt");
+      if(o){
+        var card = o.closest(".qcard"), id = card.dataset.q, i = +o.dataset.pick;
+        var a = answers[id] || (answers[id] = { pick: [], free: "" });
+        a.pick = a.pick || [];
+        var at = a.pick.indexOf(i);
+        if(at >= 0) a.pick.splice(at, 1); else a.pick.push(i);
+        [].forEach.call(card.querySelectorAll(".qopt"), function(btn){
+          btn.setAttribute("aria-pressed", String(a.pick.indexOf(+btn.dataset.pick) >= 0));
+        });
+        saveAnswers(); paintFab();
+        card.classList.toggle("ok", isAnswered({ id:id }) );
+        return;
+      }
+    });
+
+    askEl.addEventListener("input", function(e){
+      var t = e.target;
+      if(t.id === "askfree"){
+        answers.__free = { free: t.value }; saveAnswers(); return;
+      }
+      if(t.hasAttribute && t.hasAttribute("data-free")){
+        var id = t.closest(".qcard").dataset.q;
+        var a = answers[id] || (answers[id] = { pick: [], free: "" });
+        a.free = t.value; saveAnswers(); paintFab();
+      }
+    });
+
+    askEl.querySelector("#asksend").onclick = function(){
+      var txt = answerText();
+      if(!txt){ alert("まだ何も書かれていません。\n選択肢を押すか、文章を書いてから送ってください。"); return; }
+      if(navigator.share){
+        navigator.share({ text: txt }).catch(function(){});
+      }else{
+        copyText(txt, "答えをコピーしました。LINEなどに貼って送ってください。");
+      }
+    };
+    askEl.querySelector("#askcopy").onclick = function(){
+      var txt = answerText();
+      if(!txt){ alert("まだ何も書かれていません。"); return; }
+      copyText(txt, "答えをコピーしました。LINEなどに貼って送ってください。");
+    };
+    askEl.querySelector("#askclear").onclick = function(){
+      if(!window.confirm("この端末に書いた答えをすべて消します。よろしいですか？")) return;
+      answers = {}; saveAnswers(); paintFab();
+      askEl.innerHTML = askHtml();
+      openAsk();
+    };
+  }
+  function closeAsk(){
+    if(askEl){ askEl.remove(); askEl = null; }
+    if(!detailEl && !noticeEl) document.documentElement.classList.remove("noscroll");
+  }
+
+  function copyText(txt, msg){
+    function fallback(){
+      var ta = document.createElement("textarea");
+      ta.value = txt; ta.style.position = "fixed"; ta.style.opacity = "0";
+      document.body.appendChild(ta); ta.select();
+      try{ document.execCommand("copy"); alert(msg); }catch(e){ alert("コピーできませんでした。文章を長押しで選んでコピーしてください。"); }
+      ta.remove();
+    }
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(txt).then(function(){ alert(msg); }, fallback);
+    }else fallback();
+  }
+
+  /* ---------- 作りながらモード ---------- */
+  var cookEl = null, wakeLock = null;
+  function openCook(r){
+    var i = 0, last = r.steps.length; /* last index = 完成基準ページ */
+    cookEl = document.createElement("div");
+    cookEl.className = "cook";
+    cookEl.innerHTML =
+      '<div class="cbar"><button class="back" id="cx">&times; とじる</button>' +
+      '<span class="ttl">'+esc(r.name)+'</span><span class="cnt" id="ccnt"></span></div>' +
+      '<div class="cbody" id="cbody"></div>' +
+      '<div class="cdots" id="cdots"></div>' +
+      '<div class="cnav"><button class="btn" id="cprev">&larr; もどる</button><button class="btn pri" id="cnext">つぎへ &rarr;</button></div>';
+    document.body.appendChild(cookEl);
+    document.documentElement.classList.add("noscroll");
+
+    function draw(){
+      var body = cookEl.querySelector("#cbody");
+      if(i < last){
+        var s = r.steps[i];
+        body.innerHTML = '<div class="cno">STEP ' + (i+1) + ' / ' + last + '</div>' +
+          '<div class="cjp">'+esc(s.jp)+'</div>' +
+          (s.en && showEn ? '<div class="cen">'+esc(s.en)+'</div>' : '') +
+          (s.point ? '<div class="pt"><span class="lb">POINT</span><div class="jp">'+esc(s.point.jp)+'</div>' +
+            (s.point.en && showEn ? '<div class="en">'+esc(s.point.en)+'</div>' : '') + '</div>' : '') +
+          (r.photo === false ? '' : '<button class="btn" id="cshot" style="width:100%;margin-top:22px">工程写真を見る</button>') +
+          ((r.video || plId(r))
+            ? '<a class="btn vlink" style="margin-top:9px" href="' +
+              (r.video ? 'https://www.youtube.com/watch?v=' + encodeURIComponent(r.video) : plUrl(r)) +
+              '" target="_blank" rel="noopener">作り方動画を見る</a>' : '');
+      }else{
+        body.innerHTML = '<div class="cno">できあがり</div>' +
+          (r.finish
+            ? '<div class="cfin"><div class="lb" style="font-size:10.5px;letter-spacing:.2em;color:#6E6C67">完成基準 / FINISH STANDARD</div>' +
+              '<div class="cjp" style="font-size:21px;margin-top:8px">'+esc(r.finish.jp)+'</div>' +
+              (r.finish.en && showEn ? '<div class="cen">'+esc(r.finish.en)+'</div>' : '') + '</div>'
+            : '<div class="cjp" style="font-size:19px">このレシピのカードには完成基準が書かれていません。</div>') +
+          (r.photo === false ? ''
+            : '<img src="/age3-recipe/'+esc(r.id)+'-hero.jpg" alt="'+esc(r.name)+'" onerror="this.remove()" style="max-width:280px;margin:18px auto 0">');
+      }
+      var sh = body.querySelector("#cshot");
+      if(sh) sh.onclick = function(){ openViewer("/age3-recipe/"+r.id+"-steps.jpg"); };
+      body.scrollTop = 0;
+      cookEl.querySelector("#ccnt").textContent = (i<last ? (i+1)+"/"+last : "完成");
+      cookEl.querySelector("#cdots").innerHTML =
+        r.steps.map(function(_,n){ return '<i class="'+(n===i?"on":(n<i?"done":""))+'"></i>'; }).join("") +
+        '<i class="'+(i===last?"on":"")+'"></i>';
+      cookEl.querySelector("#cprev").disabled = (i===0);
+      cookEl.querySelector("#cprev").style.opacity = i===0 ? ".4" : "1";
+      cookEl.querySelector("#cnext").textContent = (i>=last) ? "とじる" : "つぎへ →";
+    }
+    cookEl.querySelector("#cprev").onclick = function(){ if(i>0){ i--; draw(); } };
+    cookEl.querySelector("#cnext").onclick = function(){ if(i>=last){ closeCook(); } else { i++; draw(); } };
+    cookEl.querySelector("#cx").onclick = closeCook;
+    draw();
+
+    syncFab();
+    if(navigator.wakeLock && navigator.wakeLock.request){
+      navigator.wakeLock.request("screen").then(function(w){ wakeLock = w; }).catch(function(){});
+    }
+  }
+  function closeCook(){
+    if(cookEl){ cookEl.remove(); cookEl = null; }
+    if(wakeLock){ try{ wakeLock.release(); }catch(e){} wakeLock = null; }
+    if(!detailEl) document.documentElement.classList.remove("noscroll");
+    syncFab();
+  }
+
+  /* ---------- 画像ビューア ---------- */
+  var viewEl = null;
+  function openViewer(src){
+    closeViewer();
+    viewEl = document.createElement("div");
+    viewEl.innerHTML = '<button class="vclose" id="vx">&times; とじる</button>' +
+      '<div class="viewer" id="vwrap"><p class="vhint">指を広げるともっと大きくなります</p>' +
+      '<img src="'+esc(src)+'" alt="拡大"></div>';
+    document.body.appendChild(viewEl);
+    viewEl.querySelector("#vx").onclick = closeViewer;
+    syncFab();
+  }
+  function closeViewer(){ if(viewEl){ viewEl.remove(); viewEl = null; } syncFab(); }
+
+  /* ---------- ルーティング ---------- */
+  function syncFab(){ showFab(!(cookEl || viewEl || askEl)); }
+
+  function route(){
+    closeCook(); closeViewer();
+    var h = location.hash || "";
+    if(h === "#/ask"){ closeDetail(); closeNotice(); openAsk(); syncFab(); return; }
+    closeAsk();
+    if(h === "#/notice"){ closeDetail(); openNotice(); syncFab(); return; }
+    closeNotice();
+    var m = /^#\/r\/([a-z0-9\-]+)$/.exec(h);
+    if(m) openDetail(m[1]); else closeDetail();
+    syncFab();
+  }
+  window.addEventListener("hashchange", route);
+  document.addEventListener("keydown", function(e){
+    if(e.key === "Escape"){
+      if(viewEl) closeViewer();
+      else if(cookEl) closeCook();
+      else if(detailEl || noticeEl || askEl) history.back();
+    }
+  });
+
+  /* ---------- リセット ---------- */
+  $("#reset").addEventListener("click", function(){
+    var ok = window.confirm(
+      "この端末の記録を消します。\n\n" +
+      "・合言葉をおぼえている記録\n" +
+      "・英語表示の設定\n\n" +
+      "次に開くときは、また4桁の番号を入れることになります。\n" +
+      "レシピそのものは消えません。\n\nよろしいですか？");
+    if(!ok) return;
+    try{
+      localStorage.removeItem("age3-recipe:ok3");
+      localStorage.removeItem("age3-recipe:ok2");
+      localStorage.removeItem("age3-recipe:ok");
+      localStorage.removeItem(EN_KEY);
+    }catch(e){}
+    location.hash = "";
+    location.reload();
+  });
+
+  render();
+  route();
+})();
+</script>
+</body>
+</html>
