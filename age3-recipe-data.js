@@ -30,7 +30,7 @@
    ========================================================================== */
 
 var RECIPE_META = {
-  assetVersion: '20260822b',
+  assetVersion: '20260822c',
   brand: 'Age.3',
   title: 'Age.3 レシピ',
   sub: '揚げサンド スタンダードレシピ',
@@ -180,8 +180,8 @@ var RECIPE_QUESTIONS = [
 
 
   { id:'q-more-recipes', recipe:null, tag:'追加',
-    q:'動画はあるのにレシピが無い12品のカードを、いただけますか。',
-    why:'チーズバーガー／パイン／チョコドレスクレープ／抹茶ドレスクレープ／いちごドレスクレープ／金の抹茶栗あん団子／白身フライ／天丼／ミックスベリーオペラ／チョコミント／飛騨牛ステーキ／タイティー抹茶ブリュレ。カードをいただければ同じように登録できます。',
+    q:'動画はあるのにレシピが無い10品のカードを、いただけますか。',
+    why:'チーズバーガー／パイン／チョコドレスクレープ／抹茶ドレスクレープ／いちごドレスクレープ／金の抹茶栗あん団子／ミックスベリーオペラ／チョコミント／飛騨牛ステーキ／タイティー抹茶ブリュレ。カードをいただければ同じように登録できます。',
     options:['あとで送る','揚げサンド以外は入れなくてよい','その他（下に書く）'] }
 ];
 
@@ -971,6 +971,59 @@ var RECIPES = [
   ],
   finish: { jp: 'うなぎ2枚に焼き目がつき、卵焼きとうなぎがパンから縦にはみ出している',
             en: 'Two seared unagi slices with light char, the omelet and unagi extending vertically beyond the bread' },
+},
+
+/* ---------------------------------------------------------------- 白身フライ */
+{
+  id: 'shiromi-fry', code: null, ver: null, issued: null,
+  name: '白身フライ', en: 'fried white-fish fillet',
+  serve: null, category: null, limited: false,
+  yield: '1個分', kind: 'savory', oldFormat: true,
+  ing: [
+    ['揚げたパン（半分）', 'Fried bread (half piece)', null, null],
+    ['白身フライ', 'Fried white-fish fillet', '1', '枚'],
+    ['タマゴサラダ', 'Egg salad', '50', 'g'],
+    ['サニーレタス', 'Green leaf lettuce', '1', '枚'],
+    ['タルタルソース', 'Tartar sauce', '15', 'g']
+  ],
+  steps: [
+    { jp: '揚げたパンにレタスを敷き、卵サラダを約50gのせる',
+      en: 'Place lettuce on the fried bread and add about 50 g of egg salad.', point: null },
+    { jp: '白身フライを斜めに半分に切り、断面が見える面と見えない面を交互に配置し、半分ほど卵サラダに刺す',
+      en: 'Cut the white-fish fillet diagonally in half, arranging the pieces alternately — cut side up, then down — and press them halfway into the egg salad.', point: null },
+    { jp: '白身フライの中心にタルタルソースをかけ、パセリを振りかけたら完成',
+      en: 'Drizzle tartar sauce over the center of the fish, sprinkle with parsley, and it is ready to serve.', point: null }
+  ],
+  finish: { jp: '白身フライ2切れが断面を交互に向けて立ち、中心にタルタルソースがかかっている',
+            en: 'Two fillet pieces standing with their cut sides facing alternately, tartar sauce over the center' },
+},
+
+/* ---------------------------------------------------------------- 天丼 */
+{
+  id: 'tendon', code: null, ver: null, issued: null,
+  name: '天丼', en: 'TENDON',
+  serve: null, category: null, limited: false,
+  yield: '1個分', kind: 'savory', oldFormat: true,
+  ing: [
+    ['揚げたパン（半分）', 'Fried bread (half piece)', null, null],
+    ['海老天ぷら', 'Shrimp tempura', '1', '本'],
+    ['焼きおにぎり', 'Grilled rice ball', '1', '個'],
+    ['半熟たまご', 'Soft-boiled egg', '1', '個'],
+    ['青唐辛子', 'Green chili pepper', '1', '本'],
+    ['刻みのり', 'Shredded nori', '2', 'g'],
+    ['天丼タレ', 'Tendon sauce', '15', 'g']
+  ],
+  steps: [
+    { jp: 'パンの内側にタレをかける。焼きおにぎりを1つ分入れ、タレを少しかける。この時に左側を少し凹ませておき、そこに海老天を乗せる',
+      en: 'Drizzle sauce on the inside of the bread. Place one grilled rice ball inside, add a little more sauce, and make a small dent on the left side to place the shrimp tempura.', point: null },
+    { jp: '空いた左側のスペースに温泉卵、獅子唐辛子をトッピングする',
+      en: 'Add a soft-boiled egg and a shishito pepper in the remaining space.',
+      point: { jp: '獅子唐辛子は爆発するため、穴を開けて素揚げにする。', en: 'Pierce the pepper before frying so it does not burst.' } },
+    { jp: '天ぷらを中心にタレを回しかけ、卵に切り込みを入れて黄身が見えるようにする。海苔を乗せたら完成',
+      en: 'Drizzle sauce over the tempura, cut the egg slightly so the yolk is visible, then top with nori to finish.', point: null }
+  ],
+  finish: { jp: '海老天と唐辛子が立ち、卵の黄身が見えていて、上に刻みのりがのっている',
+            en: 'The shrimp tempura and pepper standing upright, the egg yolk visible, topped with shredded nori' },
 },
 
 /* ---------------------------------------------------------------- AS-01 */
