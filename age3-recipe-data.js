@@ -30,7 +30,7 @@
    ========================================================================== */
 
 var RECIPE_META = {
-  assetVersion: '20260822c',
+  assetVersion: '20260822d',
   brand: 'Age.3',
   title: 'Age.3 レシピ',
   sub: '揚げサンド スタンダードレシピ',
@@ -274,7 +274,7 @@ var RECIPES = [
     ['ポテトサラダ', 'Potato salad', '80', 'g'],
     ['スパイシー焼肉（牛カルビ）', 'Spicy beef short rib yakiniku', '1', 'pc'],
     ['チリパウダー', 'Chili powder', '1', 'g'],
-    ['半熟タマゴ', 'Soft-boiled egg', '1', '個'],
+    ['半熟卵', 'Soft-boiled egg', '1', '個'],
     ['ハラペーニョ', 'Jalapeño slices', '3', '枚'],
     ['白胡麻', 'White sesame seeds', '1', 'g'],
     ['乾燥唐辛子', 'Dried chili', '1', 'g']
@@ -286,7 +286,7 @@ var RECIPES = [
     { jp: 'スパイシー焼肉（1パック）を盛り、チリパウダー（1g）を振りかける。',
       en: 'Arrange the spicy yakiniku (1 pack) and sprinkle chili powder (1g).',
       point: { jp: '中央を窪ませ卵を乗せやすくする。汁は入れすぎない。', en: 'Make a hollow in the center for the egg. Don\'t add too much sauce.' } },
-    { jp: '半熟タマゴをのせて少し割る。',
+    { jp: '半熟卵をのせて少し割る。',
       en: 'Place the soft-boiled egg and cut it slightly.',
       point: { jp: '卵は必ず包丁で切れ目を入れる。箸や指で割らない。', en: 'Always cut the egg with a knife — never break it with chopsticks or fingers.' } },
     { jp: '白胡麻（1g）を全体に振る。',
@@ -1008,15 +1008,15 @@ var RECIPES = [
     ['揚げたパン（半分）', 'Fried bread (half piece)', null, null],
     ['海老天ぷら', 'Shrimp tempura', '1', '本'],
     ['焼きおにぎり', 'Grilled rice ball', '1', '個'],
-    ['半熟たまご', 'Soft-boiled egg', '1', '個'],
-    ['青唐辛子', 'Green chili pepper', '1', '本'],
+    ['半熟卵', 'Soft-boiled egg', '1', '個'],
+    ['獅子唐辛子', 'Shishito pepper', '1', '本'],
     ['刻みのり', 'Shredded nori', '2', 'g'],
     ['天丼タレ', 'Tendon sauce', '15', 'g']
   ],
   steps: [
     { jp: 'パンの内側にタレをかける。焼きおにぎりを1つ分入れ、タレを少しかける。この時に左側を少し凹ませておき、そこに海老天を乗せる',
       en: 'Drizzle sauce on the inside of the bread. Place one grilled rice ball inside, add a little more sauce, and make a small dent on the left side to place the shrimp tempura.', point: null },
-    { jp: '空いた左側のスペースに温泉卵、獅子唐辛子をトッピングする',
+    { jp: '空いた左側のスペースに半熟卵、獅子唐辛子をトッピングする',
       en: 'Add a soft-boiled egg and a shishito pepper in the remaining space.',
       point: { jp: '獅子唐辛子は爆発するため、穴を開けて素揚げにする。', en: 'Pierce the pepper before frying so it does not burst.' } },
     { jp: '天ぷらを中心にタレを回しかけ、卵に切り込みを入れて黄身が見えるようにする。海苔を乗せたら完成',
@@ -2002,7 +2002,7 @@ var RECIPES = [
     ['レタス', 'Lettuce', '1', '枚'],
     ['ポテトサラダ', 'Potato salad', '80', 'g'],
     ['焼肉（牛カルビ）', 'Beef short rib yakiniku', '1', 'pc'],
-    ['半熟タマゴ', 'Soft-boiled egg', '1', '個'],
+    ['半熟卵', 'Soft-boiled egg', '1', '個'],
     ['白胡麻', 'White sesame seeds', '1', 'g']
   ],
   steps: [
@@ -2012,7 +2012,7 @@ var RECIPES = [
     { jp: '焼肉（1パック）をポテトサラダの上に盛り付ける。',
       en: 'Arrange the yakiniku (1 pack) on top of the potato salad.',
       point: { jp: '中央を窪ませ、卵が乗せやすいようにする。焼肉の汁は入れすぎない。パンに染みてふやけるため。', en: 'Make a hollow in the center for the egg. Don\'t add too much sauce — it soaks the bread and makes it soggy.' } },
-    { jp: '半熟タマゴをのせて少し割り、白胡麻（1g）を振って完成。',
+    { jp: '半熟卵をのせて少し割り、白胡麻（1g）を振って完成。',
       en: 'Place the soft-boiled egg, cut it slightly, and sprinkle white sesame (1g) to finish.',
       point: { jp: '卵は必ず包丁で切れ目を入れる。箸や指で割らない。', en: 'Always cut the egg with a knife — never break it with chopsticks or fingers.' } }
   ],
