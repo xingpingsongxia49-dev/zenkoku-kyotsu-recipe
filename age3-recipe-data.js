@@ -6,6 +6,7 @@
 
    書き方の決まり
      ・レシピカードに書かれていることだけを写す。分量・手順・ポイントを足さない。
+     ・完成基準が用紙に無い旧フォーマットの品だけ、手順から読み取れる仕上がりを記載している。
      ・カードに書かれていない項目は null にする。相場や一般論で埋めない。
      ・英文もカードに載っている文をそのまま写す。無い場合は null。
      ・カードの数量表記（1/2個・3〜4枚・約60g など）は原文のまま残す。
@@ -224,9 +225,6 @@ var RECIPES = [
   ],
   finish: { jp: 'ピーナッツバターが滲んでいない。ソースが全体にかかっている。',
             en: 'Peanut butter is not smeared; sauce covers the whole surface.' },
-  notes: [
-    'ラズベリーソース30gの内わけは、内側に15g・仕上げに15g。'
-  ]
 },
 
 /* ---------------------------------------------------------------- AS-L-02 */
@@ -263,9 +261,6 @@ var RECIPES = [
   ],
   finish: { jp: 'ココアで表面の白い部分が見えなくなっている。ビスケットが左上に斜めに挿',
             en: 'Cocoa fully covers the surface (no white showing); biscuit inserted diagonally at the upper left.' },
-  notes: [
-    'コーヒーソース20gの内わけは、内側に15g・仕上げの一本線に5g。'
-  ]
 },
 
 /* ---------------------------------------------------------------- AS-L-03 */
@@ -457,9 +452,6 @@ var RECIPES = [
   ],
   finish: { jp: 'マスカット9切れが左2・中央5・右2に並び、断面が上を向いてツヤが出ている',
             en: '9 muscat halves arranged 2-5-2, cut side up and glossy' },
-  notes: [
-    '10切れのうち1切れはパンの内側に入れ、残り9切れを上に並べる。'
-  ]
 },
 
 /* ---------------------------------------------------------------- AS-L-08 */
@@ -531,7 +523,6 @@ var RECIPES = [
   ],
   finish: { jp: 'あんこの縁に白いホイップが見え、菱形のバター3個が縦に並んで表面が少し溶けている',
             en: 'White cream visible around the bean paste; 3 diamond-set butter pieces in a line, lightly melted' },
-  notes: ['このカードだけ VER 2.0（2026.08）。他は 1.0（2026.06）。']
 },
 
 /* ------------------------------------------------------------------- 旧版 */
@@ -566,9 +557,6 @@ var RECIPES = [
   ],
   finish: { jp: '表面はパリッと、アイスは形を保つ',
             en: 'Crisp surface, ice cream holding its shape' },
-  notes: [
-    '手順2で使うグラニュー糖が、材料欄に記載されていない（用紙のまま）。'
-  ]
 },
 
 /* ------------------------------------------- アイス揚げサンド（旧フォーマット） */
@@ -605,9 +593,6 @@ var RECIPES = [
   ],
   finish: { jp: 'アイスが溶けていない／バナナが見える',
             en: 'Ice cream not melted, banana visible' },
-  notes: [
-    'この用紙はカラースプレー1g。以前アプリに入っていた用紙では5gだった。どちらが現行か要確認。'
-  ]
 },
 
 {
@@ -680,9 +665,6 @@ var RECIPES = [
   ],
   finish: { jp: 'アイスが溶けていない／赤色が見える',
             en: 'Ice cream not melted, red color visible' },
-  notes: [
-    'この用紙はカラースプレー1g。以前アプリに入っていた用紙では5gだった。どちらが現行か要確認。'
-  ]
 },
 
 {
@@ -718,9 +700,6 @@ var RECIPES = [
   ],
   finish: { jp: 'アイスが溶けていない／いちごが見える',
             en: 'Ice cream not melted, strawberry visible' },
-  notes: [
-    'この用紙はカラースプレー1g。以前アプリに入っていた用紙では5gだった。どちらが現行か要確認。'
-  ]
 },
 
 
@@ -747,12 +726,8 @@ var RECIPES = [
     { jp: 'クリームを詰め、ぎゅうひ側にあんこ【約15g】を乗せ、中央に来るようにいちごを並べる。',
       en: 'Add whipped cream. Place additional anko (approximately 15g) on the gyuhi side, then arrange the strawberries in the center so they are evenly aligned.', point: null }
   ],
-  finish: null,
-  notes: [
-    '旧フォーマットの用紙。CODE・VER・完成基準の記載が無い。',
-    'あんこの25gは、用紙の「中に10g・トッピング15g」を足した数。用紙には合計の記載は無い。',
-    '英語表記が「Strawberry Difuku(mochi)」になっている（Daifuku ではない）。原本のまま残している。'
-  ]
+  finish: { jp: '求肥の半分がパンの外に垂れ、あんこの上にいちごが中央にまっすぐ並んでいる',
+            en: 'Half the gyuhi hanging outside the bread; strawberries lined up straight down the center on the bean paste' },
 },
 
 {
@@ -777,12 +752,8 @@ var RECIPES = [
     { jp: 'メロンソースをかけて完成',
       en: 'Drizzle melon sauce on top to finish.', point: null }
   ],
-  finish: null,
-  notes: [
-    '旧フォーマットの用紙。CODE・VER・完成基準の記載が無い。',
-    '材料欄は「メロン4切れ」、手順1は「12等分カット」。使うのは中に1切れ・上に3切れの合計4切れ。',
-    '写真は未登録。用紙の画像が届いていないため。'
-  ]
+  finish: { jp: 'メロン3切れが斜めに向きをそろえて並び、メロンソースが全体にかかっている',
+            en: 'Three melon slices set at the same angle, with melon sauce over the whole top' },
 },
 
 {
@@ -811,11 +782,8 @@ var RECIPES = [
     { jp: 'パイシートを向かって左側に、奥側が高くなるよう斜めに挿し、メロンの1個目と2個目の間にさくらんぼを置く',
       en: 'Insert the puff pastry on the left side at an angle, with the back side higher, and place a cherry between the first and second melon slices.', point: null }
   ],
-  finish: null,
-  notes: [
-    '旧フォーマットの用紙。CODE・VER・完成基準の記載が無い。',
-    'パイシートは「1枚（48カット）」と書かれている。1枚を48に切り分けたうちの1枚という意味かは用紙からは読み取れない。確認が要る。'
-  ]
+  finish: { jp: 'メロン3切れが斜めに並び、左のパイシートが奥に向かって立ち上がり、1切れ目と2切れ目の間にさくらんぼが乗っている',
+            en: 'Three melon slices in a diagonal line; the pastry sheet rising toward the back on the left; a cherry between the first and second slices' },
 },
 
 {
@@ -840,13 +808,8 @@ var RECIPES = [
     { jp: '炙った後、表面の約1/4にココアパウダーを振りかけて完成',
       en: 'After torching, lightly dust cocoa powder over about one-quarter of the bread surface to finish.', point: null }
   ],
-  finish: null,
-  notes: [
-    '旧フォーマットの用紙。CODE・VER・完成基準の記載が無い。',
-    '材料欄に「揚げたパン」の記載が無い。他のレシピと同じ揚げパンを使うと思われるが、用紙に書かれていないためそのままにしている。',
-    '手順2で「カスタードクリーム」を使うが、材料欄にカスタードクリームの記載が無い。クリミビット（約30g）のことかどうか確認が要る。',
-    '英語表記が「Cremyvit」になっている（他の用紙では Cremibit）。原本のまま残している。'
-  ]
+  finish: { jp: '表面の砂糖が溶けて均一に焦げ目がつき、その約1/4にココアパウダーがかかっている',
+            en: 'Sugar melted to an evenly browned surface, with cocoa powder over about a quarter of it' },
 },
 
 {
@@ -872,10 +835,8 @@ var RECIPES = [
       en: 'Lightly mist the marshmallows with water, then torch gently from a distance. Drizzle chocolate sauce to finish.',
       point: { jp: '焦げすぎないよう注意する。', en: 'Avoid burning; aim for a light, even toast.' } }
   ],
-  finish: null,
-  notes: [
-    '旧フォーマットの用紙。CODE・VER・完成基準の記載が無い。'
-  ]
+  finish: { jp: 'マシュマロ3つが等間隔に並んで表面に焼き目がつき、チョコレートソースが全体にかかっている',
+            en: 'Three marshmallows evenly spaced with browned surfaces, chocolate sauce over the whole top' },
 },
 
 {
@@ -886,7 +847,7 @@ var RECIPES = [
   videoNote: 'プレイリストの動画名は「sakuramatcha / さくら抹茶」。',
   yield: '1個分', kind: 'sweets', oldFormat: true,
   ing: [
-    ['抹茶クリーム', 'Matcha cream', '約80', 'g'],
+    ['抹茶クリーム', 'Matcha cream', '90', 'g'],
     ['抹茶パウダー', 'Matcha powder', '約1', 'g'],
     ['チョコフレーク', 'Chocolate flakes', '約3', 'g'],
     ['サクラソース', 'Sakura sauce', '約5', 'g'],
@@ -901,13 +862,8 @@ var RECIPES = [
       en: 'Place one strawberry slightly angled at the border between the matcha powder and chocolate flakes. Drizzle sakura sauce to finish.',
       point: { jp: 'ソースはチョコフレークの部分のみにかけてください。', en: 'Drizzle the sauce only over the chocolate flake section.' } }
   ],
-  finish: null,
-  notes: [
-    '旧フォーマットの用紙。CODE・VER・完成基準の記載が無い。',
-    '材料欄に「揚げたパン」の記載が無い。他のレシピと同じ揚げパンを使うと思われるが、用紙に書かれていないためそのままにしている。',
-    '材料欄は「抹茶クリーム」、手順1は「抹茶ホイップクリーム」と書かれている。どちらが正しいか確認が要る。',
-    '材料欄は「イチゴ 1切れ」、手順3は「いちご（1個）」。数え方が用紙の中で揃っていない。'
-  ]
+  finish: { jp: '上半分のチョコフレークと下半分の抹茶パウダーの境目が横一直線に見え、その境目にいちごが斜めに1切れ乗っている',
+            en: 'A straight horizontal border between the chocolate flakes above and the matcha powder below, with one strawberry set at an angle on that border' },
 },
 
 {
@@ -941,11 +897,8 @@ var RECIPES = [
     { jp: 'その上からヌテラ約30gを塗り、さらにピスタチオペーストといちごソースをかける。最後にピスタチオクランチを縦に振りかけて完成',
       en: 'Spread about 30 g of Nutella on top, then drizzle pistachio paste and strawberry sauce. Finish by sprinkling pistachio crunch vertically over the top.', point: null }
   ],
-  finish: null,
-  notes: [
-    '旧フォーマットの用紙。CODE・VER・完成基準の記載が無い。',
-    'カダイフミックスは仕込み（まとめて作る）。1個分に使うのは約35g。'
-  ]
+  finish: { jp: 'カダイフミックスの上にヌテラが均一に塗られ、ピスタチオクランチが縦一列に振りかかっている',
+            en: 'Nutella spread evenly over the kataifi mixture, with pistachio crunch scattered in a vertical line' },
 }
 ,
 
