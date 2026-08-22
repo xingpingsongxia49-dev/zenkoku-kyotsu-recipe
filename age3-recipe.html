@@ -573,7 +573,7 @@ footer{margin-top:26px;padding:16px 0 8px;border-top:1px solid var(--line);font-
     var hero = (r.photo === false)
       ? '<div class="nop">写真 未登録</div>'
       : '<img src="/age3-recipe/'+esc(r.id)+'-hero.jpg" alt="" onerror="this.parentNode.innerHTML=\'<div class=&quot;nop&quot;>写真 未登録</div>\'">';
-    var shot = (r.oldFormat || r.photo === false) ? '' :
+    var shot = (r.photo === false) ? '' :
       '<div class="pshot"><img src="/age3-recipe/'+esc(r.id)+'-steps.jpg" alt="" onerror="this.parentNode.remove()"></div>';
     var mth = r.steps.map(function(s,n){
       var pt = s.point ? '<div class="ppt"><span class="lb">'+bgimg(BG_PT)+'<i>POINT</i></span><span class="tx">'+
@@ -959,7 +959,7 @@ footer{margin-top:26px;padding:16px 0 8px;border-top:1px solid var(--line);font-
         '<div class="jp">'+esc(r.finish.jp)+'</div>' +
         (r.finish.en ? '<div class="en en-line">'+esc(r.finish.en)+'</div>' : '') + '</div></div>' : "";
 
-    var steps = (r.oldFormat || r.photo === false) ? "" :
+    var steps = (r.photo === false) ? "" :
       '<div class="sec"><div class="sech"><span class="no">03</span><span class="jp">工程写真</span><span class="en">STEPS</span></div>' +
       '<div class="shot" data-zoom="/age3-recipe/'+esc(r.id)+'-steps.jpg"><img src="/age3-recipe/'+esc(r.id)+'-steps.jpg" alt="工程写真" onerror="A3nosteps(this)"></div>' +
       '<p class="cap">タップで拡大します。</p></div>';
@@ -1355,7 +1355,7 @@ footer{margin-top:26px;padding:16px 0 8px;border-top:1px solid var(--line);font-
           (s.en && showEn ? '<div class="cen">'+esc(s.en)+'</div>' : '') +
           (s.point ? '<div class="pt"><span class="lb">POINT</span><div class="jp">'+esc(s.point.jp)+'</div>' +
             (s.point.en && showEn ? '<div class="en">'+esc(s.point.en)+'</div>' : '') + '</div>' : '') +
-          (r.oldFormat ? '' : '<button class="btn" id="cshot" style="width:100%;margin-top:22px">工程写真を見る</button>') +
+          (r.photo === false ? '' : '<button class="btn" id="cshot" style="width:100%;margin-top:22px">工程写真を見る</button>') +
           ((r.video || plId(r))
             ? '<a class="btn vlink" style="margin-top:9px" href="' +
               (r.video ? 'https://www.youtube.com/watch?v=' + encodeURIComponent(r.video) : plUrl(r)) +

@@ -731,7 +731,7 @@ var RECIPES = [
   name: 'いちご大福', en: 'Strawberry Difuku(mochi)',
   serve: null, category: null, limited: false,
   video: 'uYjwgyCQF1Q',
-  yield: '1個分', kind: 'sweets', oldFormat: true,
+  yield: '1個分', kind: 'sweets', oldFormat: true, photo: false,
   ing: [
     ['揚げたパン（半分）', 'Fried bread (half piece)', null, null],
     ['ホイップクリーム', 'Whipped cream', '70〜80', 'g'],
@@ -790,7 +790,7 @@ var RECIPES = [
   name: 'メロンパフェ', en: 'Melon Parfait',
   serve: null, category: null, limited: false,
   video: '23DwD5fM-_w',
-  yield: '1個分', kind: 'sweets', oldFormat: true,
+  yield: '1個分', kind: 'sweets', oldFormat: true, photo: false,
   ing: [
     ['揚げたパン（半分）', 'Fried bread (half piece)', null, null],
     ['ホイップクリーム', 'Whipped cream', '70〜80', 'g'],
@@ -823,7 +823,7 @@ var RECIPES = [
   name: 'チョコブリュレ', en: 'chocolate Brulee',
   serve: null, category: null, limited: false,
   video: 'ppqnfNudRgQ',
-  yield: '1個分', kind: 'sweets', oldFormat: true,
+  yield: '1個分', kind: 'sweets', oldFormat: true, photo: false,
   ing: [
     ['チョコレートホイップ', 'Chocolate whipped cream', '50〜60', 'g'],
     ['クリミビット', 'Cremyvit', '約30', 'g'],
@@ -854,7 +854,7 @@ var RECIPES = [
   name: 'チョコマシュマロ', en: 'chocolate marshmallow',
   serve: null, category: null, limited: false,
   video: 'jo5I4HcVI_w',
-  yield: '1個分', kind: 'sweets', oldFormat: true,
+  yield: '1個分', kind: 'sweets', oldFormat: true, photo: false,
   ing: [
     ['揚げたパン（半分）', 'Fried bread (half piece)', null, null],
     ['チョコレートクリーム', 'Chocolate cream', '70〜80', 'g'],
@@ -914,7 +914,7 @@ var RECIPES = [
   id: 'dubai-choco', code: null, ver: null, issued: null,
   name: 'ドバイチョコ', en: 'Dubai chocolate',
   serve: null, category: null, limited: false,
-  yield: '1個分', kind: 'sweets', oldFormat: true,
+  yield: '1個分', kind: 'sweets', oldFormat: true, photo: false,
   ing: [
     ['揚げたパン（半分）', 'Fried bread (half piece)', null, null],
     ['チョコクリーム', 'Chocolate cream', '約45', 'g'],
