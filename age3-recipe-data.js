@@ -30,7 +30,7 @@
    ========================================================================== */
 
 var RECIPE_META = {
-  assetVersion: '20260822',
+  assetVersion: '20260822b',
   brand: 'Age.3',
   title: 'Age.3 レシピ',
   sub: '揚げサンド スタンダードレシピ',
@@ -174,18 +174,14 @@ var RECIPE_QUESTIONS = [
     options:['合っている','違う（正しい動画名を下に書く）'] },
 
   { id:'q-video-missing', recipe:null, tag:'動画',
-    q:'北海道あんバター・メロン揚げサンド・ドバイチョコの動画は、非公開になっていませんか。',
-    why:'プレイリストに「4本の利用できない動画が非表示になっています」と出ていて、この3品の動画が見つかりません。公開設定を「限定公開」にしていただければ、こちらから紐づけられます。',
+    q:'北海道あんバター・ドバイチョコの動画は、非公開になっていませんか。',
+    why:'プレイリストに「4本の利用できない動画が非表示になっています」と出ていて、この2品の動画が見つかりません。公開設定を「限定公開」にしていただければ、こちらから紐づけられます。',
     options:['非公開だった（設定を直す）','もともと動画が無い','その他（下に書く）'] },
 
-  { id:'q-melon-photo', recipe:'melon', tag:'写真',
-    q:'メロン揚げサンドの用紙の画像を、もう一度送っていただけますか。',
-    why:'22品のうちこの1品だけ写真が入っていません。以前いただいたのはLINEのスクリーンショットで、スマホの画面枠が写り込んでいたため使いませんでした。',
-    options:['あとで送る','用紙が無い（写真なしのままでよい）'] },
 
   { id:'q-more-recipes', recipe:null, tag:'追加',
-    q:'動画はあるのにレシピが無い14品のカードを、いただけますか。',
-    why:'チーズバーガー／パイン／チョコドレスクレープ／抹茶ドレスクレープ／いちごドレスクレープ／金の抹茶栗あん団子／白身フライ／天丼／ミックスベリーオペラ／ローストビーフ／チョコミント／飛騨牛ステーキ／抹茶ブリュレ／タイティー抹茶ブリュレ。カードをいただければ同じように登録できます。',
+    q:'動画はあるのにレシピが無い12品のカードを、いただけますか。',
+    why:'チーズバーガー／パイン／チョコドレスクレープ／抹茶ドレスクレープ／いちごドレスクレープ／金の抹茶栗あん団子／白身フライ／天丼／ミックスベリーオペラ／チョコミント／飛騨牛ステーキ／タイティー抹茶ブリュレ。カードをいただければ同じように登録できます。',
     options:['あとで送る','揚げサンド以外は入れなくてよい','その他（下に書く）'] }
 ];
 
@@ -729,32 +725,6 @@ var RECIPES = [
   ],
   finish: { jp: '求肥の半分がパンの外に垂れ、あんこの上にいちごが中央にまっすぐ並んでいる',
             en: 'Half the gyuhi hanging outside the bread; strawberries lined up straight down the center on the bean paste' },
-},
-
-{
-  id: 'melon', code: null, ver: null, issued: null,
-  name: 'メロン揚げサンド', en: 'Melon',
-  serve: null, category: null, limited: false,
-  yield: '1個分', kind: 'sweets', oldFormat: true, photo: false,
-  ing: [
-    ['揚げたパン（半分）', 'Fried bread (half piece)', null, null],
-    ['ホイップクリーム', 'Whipped cream', '70〜80', 'g'],
-    ['メロン（幅1.5cm）', 'Melon slices (1.5 cm width)', '4', '切れ'],
-    ['メロンソース', 'Melon sauce', '15', 'g']
-  ],
-  steps: [
-    { jp: 'メロンを12等分カットする（幅1.5cm）',
-      en: 'Cut the melon into 12 equal pieces (1.5 cm width).',
-      point: { jp: 'メロンが小さい場合は等分カットを変えて対応', en: 'If the melon is small, adjust the number of cuts accordingly.' } },
-    { jp: '揚げたパンの中にメロン1個とソースを入れる',
-      en: 'Put one piece of melon and sauce inside the fried bread.', point: null },
-    { jp: 'ホイップをつめてメロンを3個斜めに乗せる',
-      en: 'Fill with whipped cream and place three melon pieces diagonally on top.', point: null },
-    { jp: 'メロンソースをかけて完成',
-      en: 'Drizzle melon sauce on top to finish.', point: null }
-  ],
-  finish: { jp: 'メロン3切れが斜めに向きをそろえて並び、メロンソースが全体にかかっている',
-            en: 'Three melon slices set at the same angle, with melon sauce over the whole top' },
 },
 
 {
