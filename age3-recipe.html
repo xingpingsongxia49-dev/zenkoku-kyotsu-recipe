@@ -139,17 +139,25 @@ header{background:var(--sumi);color:var(--kinari);padding:calc(env(safe-area-ins
 .nhead .t{font-size:14.5px;font-weight:800}
 .nhead .sc{margin-left:auto;font-size:11px;background:#fff;color:#1A1917;padding:3px 8px;border-radius:2px;font-weight:700;white-space:nowrap}
 .nitems{list-style:none;margin:0;padding:0}
-.nitems li{display:flex;gap:10px;align-items:flex-start;padding:11px 12px;border-bottom:1px solid var(--line)}
+.nitems li{display:flex;gap:12px;align-items:center;padding:13px 12px;border-bottom:1px solid var(--line)}
 .nitems li:last-child{border-bottom:0}
-.nitems .cd{flex:0 0 auto;font-size:10.5px;font-weight:800;border:1px solid var(--line);color:var(--hai);border-radius:2px;padding:2px 5px;margin-top:2px}
+.nitems li.tap{cursor:pointer}
+.nitems li.tap:active{background:#FAF8F3}
+.nitems .nph{flex:0 0 auto;width:54px;height:68px;border-radius:3px;background:#fff;overflow:hidden;
+  display:flex;align-items:center;justify-content:center}
+.nitems .nph img{max-width:100%;max-height:100%;display:block;cursor:zoom-in}
+.nitems .nph.nop{background:#F5F2EC}
+.nitems .nph.nop img{width:30px;height:auto;opacity:.4;cursor:default}
 .nitems .bd{flex:1;min-width:0}
-.nitems .nm{display:block;font-size:15px;font-weight:700;line-height:1.45}
-.nitems .dt{display:block;font-size:12px;color:var(--hai);line-height:1.55;margin-top:2px}
-.nitems .stt{flex:0 0 auto;font-size:12px;font-weight:800;white-space:nowrap;margin-top:2px}
-.nitems .stt.x{color:var(--shu)}
-.nitems .stt.o{color:#2E6B3A}
-.nitems .go{display:inline-block;margin-top:5px;font-size:12px;font-weight:700;color:var(--furuki);
-  border:1px solid var(--line);border-radius:2px;padding:4px 9px;background:#FAF8F3;cursor:pointer;font-family:inherit}
+.nitems .nm{display:block;font-size:16px;font-weight:800;line-height:1.4}
+.nitems .cd{display:inline-block;font-size:10px;font-weight:800;border:1px solid var(--line);color:var(--hai);
+  border-radius:2px;padding:1px 5px;margin-right:6px;vertical-align:2px}
+.nitems .dt{display:block;font-size:12.5px;color:var(--hai);line-height:1.6;margin-top:3px}
+.nitems .rt{flex:0 0 auto;display:flex;align-items:center;gap:7px}
+.nitems .stt{font-size:11.5px;font-weight:800;white-space:nowrap;border-radius:999px;padding:3px 9px;border:1px solid}
+.nitems .stt.x{color:#A6392E;border-color:#E3C4BF;background:#FCF3F2}
+.nitems .stt.o{color:#2E6B3A;border-color:#C3DCC8;background:#F2F8F3}
+.nitems .arw{font-size:17px;color:#C4BFB4;line-height:1}
 .nlines{margin:0;padding:12px 12px 12px 30px;font-size:14px;line-height:1.8}
 .ncaution{margin-top:16px;background:#FCF3F2;border:1px solid #E9CFCB;border-left:3px solid var(--shu);border-radius:2px;padding:11px 12px;font-size:12.5px;line-height:1.7;color:#7E322A}
 .nmeta{margin-top:14px;font-size:11.5px;color:var(--hai);line-height:1.8}
@@ -526,6 +534,7 @@ footer{margin-top:26px;padding:16px 0 8px;border-top:1px solid var(--line);font-
     return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]; }); };
 
   var K_MODE = 'a4', K_FONT = 9.5, K_PH = 16.5;   /* 早見表: 'a4'=A4縦2枚 / 'a3'=A3縦1枚 */
+  var A3MARK = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHgAAAB+CAMAAADY4yX9AAAAYFBMVEVMTExMTExMTExMTExMTExMTExMTExMTEwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADWtFHJAAAAIHRSTlP6AW6Tz7BOLgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAOebvDYAAAOkSURBVHja7ZtZkqMwDECF1vvfeFgMIRjbeIP0FPpLF81DsnYSGEpEUZhhEhZCK7kFZP+HocBBmLQ7WD3qyraeYGUISx46B2wCccE+YISksHUAC1wRbQ02hmuCbcEGl4VagjO4V8nXwJwDvmZtaM8FsEZgglxpA9Zs7pVjhvaGvmZsaJGwfJEG4BKFL6gMHU74ksrQJkXnOzacNxkka2dTyAVeeqNga+SDjRgay1l7Ahdbm2o2RsHK0E1Yw2CBriJ2DlboLngGRrhByAcT3CJyBN/E/ZDhRjt/keEuvzqe8wKGW0U3sNwL5hWscLOQA/Pd4KlNgFs9eqcypBXuYZAJnDxhK/I95njShmTOkpKzwERWkhHM6agrcB6zeLgY6IWgy03kaG47EFZKgZI3yZxS57u6pBy+OUHKc4apZZFC15VIqHDSalKY2zhmqWSMTg99OCyhuQHm749nz1yRAWRYYgN3SQcFB0VnRzEcvQBP921VSRWdY++4S8qjhTvbwvyzmDpKK696PKyhLN8Os/5h8Vv2AkdQqxoq3QLDtqhm+OiIo+Kj0GmWwniHwXG/XGSrnexU1QU88p3Ied6kMFaiscSL4BZRzpFstXgikINgiWauTwLYrCaz7uRMm0gtGgZTLFfTsK8UtJKnAKIv/UMnZuFkrRAx1s5jNvficaD8lFpdz15OS2AkdQ0QNpbsn3ftRU2PpUvmqF183eUqIudcHKvHGprid+Myz034mBon0uznzo2nv5s6VyPngjKvFUQjKVPDPZfgJM4ciOsnOiwa55nXpag11pb+Qyla5HO7TETmJWfY95Ylp+Oaniyzr0ZrUgOyJwn+mEcrBlvMnp22U2StGAO4YFqchtsxM5vVDPJWNB+PBQ+xarzEhzYC9NAOhI5bH7yXe/eeC882e9Z9QN+vM6H69UPJWs/b3lpHHxOL7qsNuxjcX5XD6bcPmsJZzl4OhF5amDY5cFTLfwvTaK+UDTbPYscDEEleUgIe/Lokx+WIepdwc7Aei5h47//MTwXdwJIAD09pXATmpzTmeo35/wPLj2osRWCp17gfmH8UTEVgesH5YPxbYPxlcCKO9SmNy8D6gvPB9rfA9htg8lKKdwl6lWVoAAY67noYj+OVd0kTcOHqsOSrc/UD6gu+CK7eC8hTGpeCqVaw6S9DGskL/gmwYqVYqVe3WxK/4P8VrIVgfMEvuBfYOjaZ8SJR+Z1cKq9O3KvxSZbF8hzCid88/QOX0SRhF3tsmgAAAABJRU5ErkJggg==";
   var PLAYLIST = (RECIPE_META && RECIPE_META.videoPlaylist) || "";
   var PLAYLIST_URL = PLAYLIST ? "https://www.youtube.com/playlist?list=" + encodeURIComponent(PLAYLIST) : "";
   var PLAYLIST_REG = (RECIPE_META && RECIPE_META.videoPlaylistRegular) || PLAYLIST;
@@ -789,6 +798,11 @@ footer{margin-top:26px;padding:16px 0 8px;border-top:1px solid var(--line);font-
     [].forEach.call(root.querySelectorAll(".sech .no"), function(n){
       if(!isNaN(Number(n.textContent.trim()))){ i++; n.textContent = (i<10?"0":"") + i; }
     });
+  };
+  window.A3nomark = function(img){
+    var p = img.parentNode; if(!p) return;
+    p.className = "nph nop";
+    p.innerHTML = '<img src="' + A3MARK + '" alt="">';
   };
   window.A3noph = function(img){
     var p = img.parentNode; if(!p) return;
@@ -1060,14 +1074,24 @@ footer{margin-top:26px;padding:16px 0 8px;border-top:1px solid var(--line);font-
       var body;
       if(s.items){
         body = '<ul class="nitems">' + s.items.map(function(it){
-          var cls = (it.state === "終了") ? "x" : "o";
-          return '<li>' +
-            (it.code ? '<span class="cd">'+esc(it.code)+'</span>' : '') +
-            '<span class="bd"><span class="nm">'+esc(it.name)+'</span>' +
-            (it.detail ? '<span class="dt">'+esc(it.detail)+'</span>' : '') +
-            (it.recipe ? '<button class="go" data-go="'+esc(it.recipe)+'">レシピを見る</button>' : '') +
+          var ph;
+          if(it.photo){
+            ph = '<span class="nph"><img src="'+esc(it.photo)+'" alt="" data-zoom="'+esc(it.photo)+'" onerror="A3nomark(this)"></span>';
+          }else if(it.recipe){
+            var src = '/age3-recipe/' + it.recipe + '-hero.jpg';
+            ph = '<span class="nph"><img src="'+esc(src)+'" alt="" data-zoom="'+esc(src)+'" onerror="A3nomark(this)"></span>';
+          }else{
+            ph = '<span class="nph nop"><img src="'+A3MARK+'" alt=""></span>';
+          }
+          var stt = (it.state === "終了") ? '<span class="stt x">終了</span>'
+                  : (it.state === "継続") ? '<span class="stt o">継続</span>' : '';
+          return '<li' + (it.recipe ? ' class="tap" data-go="'+esc(it.recipe)+'"' : '') + '>' + ph +
+            '<span class="bd">' +
+              '<span class="nm">' + (it.code ? '<span class="cd">'+esc(it.code)+'</span>' : '') + esc(it.name) + '</span>' +
+              (it.detail ? '<span class="dt">'+esc(it.detail)+'</span>' : '') +
             '</span>' +
-            '<span class="stt '+cls+'">'+esc(it.state)+'</span></li>';
+            '<span class="rt">' + stt + (it.recipe ? '<span class="arw">›</span>' : '') + '</span>' +
+          '</li>';
         }).join("") + '</ul>';
       }else{
         body = '<ul class="nlines">' + s.lines.map(function(l){ return '<li>'+esc(l)+'</li>'; }).join("") + '</ul>';
@@ -1107,6 +1131,8 @@ footer{margin-top:26px;padding:16px 0 8px;border-top:1px solid var(--line);font-
     document.documentElement.classList.add("noscroll");
     noticeEl.querySelector("#back").onclick = function(){ history.back(); };
     noticeEl.addEventListener("click", function(e){
+      var z = e.target.closest("[data-zoom]");
+      if(z){ openViewer(z.dataset.zoom); return; }
       var g = e.target.closest("[data-go]");
       if(g) location.hash = "#/r/" + g.dataset.go;
     });

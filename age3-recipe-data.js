@@ -65,16 +65,6 @@ var RECIPE_NOTICE = {
   sections: [
     {
       when: '8月末で終了', tone: 'end',
-      title: '夏メニューの終了', scope: '嘉麻店のみ',
-      items: [
-        { name: 'かき氷',                    state: '終了', detail: '無料期間・通常300円ともに終了' },
-        { name: 'フルールサンド（ピーチ・メロン）', state: '終了', detail: null },
-        { name: 'アサイーかき氷',            state: '終了', detail: '夏季のみの提供' },
-        { name: 'ボタ山ソフトクリーム',      state: '継続', detail: '引き続き販売します' }
-      ]
-    },
-    {
-      when: '8月末で終了', tone: 'end',
       title: '揚げサンド', scope: null,
       items: [
         { name: 'ティラミス',          code: 'F', state: '終了', detail: '8月末で終了・定番化なし', recipe: 'as-l-02' },
@@ -94,11 +84,10 @@ var RECIPE_NOTICE = {
       when: '9月〜 開始', tone: 'start',
       title: '秋の新商品', scope: null,
       items: [
-        { name: 'スイーツサンド【嘉麻店】', state: 'ほうじ茶', detail: 'ビジュアル制作中' },
         { name: '紅蜜芋ブリュレ',   state: '揚げサンド', detail: null, recipe: 'as-l-06' },
         { name: 'マスカット',       state: '揚げサンド', detail: null, recipe: 'as-l-07' },
         { name: 'いちじく',         state: '揚げサンド', detail: null, recipe: 'as-l-08' },
-        { name: '北海道あんバター', state: '揚げサンド', detail: 'あんバターのビジュアルを変更。材料も北海道餡に変更。', recipe: 'as-08' }
+        { name: '北海道あんバター', state: '揚げサンド', detail: 'あんバターのビジュアルを変更。材料も北海道餡に変更。', recipe: 'as-08-hokkaido' }
       ]
     },
     {
