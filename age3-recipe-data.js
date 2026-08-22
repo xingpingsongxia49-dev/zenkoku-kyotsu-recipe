@@ -30,7 +30,7 @@
    ========================================================================== */
 
 var RECIPE_META = {
-  assetVersion: '20260822d',
+  assetVersion: '20260822e',
   brand: 'Age.3',
   title: 'Age.3 レシピ',
   sub: '揚げサンド スタンダードレシピ',
@@ -707,7 +707,7 @@ var RECIPES = [
   name: 'いちご大福', en: 'Strawberry Difuku(mochi)',
   serve: null, category: null, limited: false,
   video: 'uYjwgyCQF1Q',
-  yield: '1個分', kind: 'sweets', oldFormat: true, photo: false,
+  yield: '1個分', kind: 'sweets', oldFormat: true,
   ing: [
     ['揚げたパン（半分）', 'Fried bread (half piece)', null, null],
     ['ホイップクリーム', 'Whipped cream', '70〜80', 'g'],
@@ -732,26 +732,29 @@ var RECIPES = [
   name: 'メロンパフェ', en: 'Melon Parfait',
   serve: null, category: null, limited: false,
   video: '23DwD5fM-_w',
-  yield: '1個分', kind: 'sweets', oldFormat: true, photo: false,
+  yield: '1個分', kind: 'sweets', oldFormat: true,
   ing: [
     ['揚げたパン（半分）', 'Fried bread (half piece)', null, null],
     ['ホイップクリーム', 'Whipped cream', '70〜80', 'g'],
     ['メロン（幅1.5cm）', 'Melon slices (1.5 cm width)', '4', '切れ'],
-    ['メロンソース（緑）', 'Green melon sauce', '約20', 'g'],
+    ['メロンソース（緑）', 'Green melon sauce', '約15', 'g'],
     ['メロンソース（オレンジ）', 'Orange melon sauce', '約10', 'g'],
     ['さくらんぼ', 'Cherry', '1', '個'],
     ['パイシート（48カット）', 'Puff pastry sheet (cut into 48 pieces)', '1', '枚']
   ],
   steps: [
-    { jp: 'メロンをくし形に8等分にカットし、さらにそれぞれを幅1.5cmにカットする',
-      en: 'Cut the melon into 8 wedge-shaped pieces, then slice each piece into 1.5 cm widths.',
-      point: { jp: 'メロンが小さい場合はカット数を調整する', en: 'If the melon is small, adjust the number of cuts accordingly.' } },
-    { jp: '揚げたパンの中にメロン1切れを入れ、パンの内側にメロンソース（緑）をかける',
-      en: 'Place one slice of melon inside the fried bread, then drizzle green melon sauce on the inside of the bread.', point: null },
-    { jp: 'ホイップクリームを詰め、メロンを写真の図のように斜めに3切れ乗せる。メロンソース（緑）→（オレンジ）の順でかける',
-      en: 'Fill with whipped cream, then place three melon slices diagonally on top as shown. Drizzle green melon sauce, then orange melon sauce on top.', point: null },
-    { jp: 'パイシートを向かって左側に、奥側が高くなるよう斜めに挿し、メロンの1個目と2個目の間にさくらんぼを置く',
-      en: 'Insert the puff pastry on the left side at an angle, with the back side higher, and place a cherry between the first and second melon slices.', point: null }
+    { jp: 'メロンを12等分にカットする（幅1.5cm）',
+      en: 'Cut the melon into 12 equal pieces (1.5 cm width).',
+      point: { jp: 'メロンが小さい場合はカット数を調整する。', en: 'If the melon is small, adjust the number of cuts accordingly.' } },
+    { jp: '揚げたパンの中にメロン1個とメロンソース（緑）を入れる',
+      en: 'Put one piece of melon and green melon sauce inside the fried bread.', point: null },
+    { jp: 'ホイップクリームを詰め、メロンを3個斜めに乗せる',
+      en: 'Fill with whipped cream and place three melon pieces diagonally on top.', point: null },
+    { jp: 'メロンソース（緑）→（オレンジ）の順でかける',
+      en: 'Drizzle green melon sauce, then orange melon sauce on top.', point: null },
+    { jp: 'パイシートを差し、1個目と2個目の間にさくらんぼを置く',
+      en: 'Insert the puff pastry and place a cherry between the first and second melon pieces.',
+      point: { jp: 'パイシートは向かって左側に、奥側が高くなるよう斜めに挿す。', en: 'Insert the pastry on the left side at an angle, with the back side higher.' } }
   ],
   finish: { jp: 'メロン3切れが斜めに並び、左のパイシートが奥に向かって立ち上がり、1切れ目と2切れ目の間にさくらんぼが乗っている',
             en: 'Three melon slices in a diagonal line; the pastry sheet rising toward the back on the left; a cherry between the first and second slices' },
