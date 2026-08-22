@@ -791,7 +791,7 @@ var RECIPES = [
   name: 'チョコブリュレ', en: 'chocolate Brulee',
   serve: null, category: null, limited: false,
   video: 'ppqnfNudRgQ',
-  yield: '1個分', kind: 'sweets', oldFormat: true, photo: false,
+  yield: '1個分', kind: 'sweets', oldFormat: true,
   ing: [
     ['チョコレートホイップ', 'Chocolate whipped cream', '50〜60', 'g'],
     ['クリミビット', 'Cremyvit', '約30', 'g'],
@@ -817,10 +817,10 @@ var RECIPES = [
   name: 'チョコマシュマロ', en: 'chocolate marshmallow',
   serve: null, category: null, limited: false,
   video: 'jo5I4HcVI_w',
-  yield: '1個分', kind: 'sweets', oldFormat: true, photo: false,
+  yield: '1個分', kind: 'sweets', oldFormat: true,
   ing: [
     ['揚げたパン（半分）', 'Fried bread (half piece)', null, null],
-    ['チョコレートクリーム', 'Chocolate cream', '70〜80', 'g'],
+    ['チョコレートクリーム', 'Chocolate cream', '70', 'g'],
     ['マシュマロ（半分にカットしたもの）', 'Marshmallows, halved', '3', '個分'],
     ['チョコレートソース', 'Chocolate sauce', '10〜15', 'g']
   ],
@@ -870,7 +870,7 @@ var RECIPES = [
   id: 'dubai-choco', code: null, ver: null, issued: null,
   name: 'ドバイチョコ', en: 'Dubai chocolate',
   serve: null, category: null, limited: false,
-  yield: '1個分', kind: 'sweets', oldFormat: true, photo: false,
+  yield: '1個分', kind: 'sweets', oldFormat: true,
   ing: [
     ['揚げたパン（半分）', 'Fried bread (half piece)', null, null],
     ['チョコクリーム', 'Chocolate cream', '約45', 'g'],
@@ -901,6 +901,106 @@ var RECIPES = [
             en: 'Nutella spread evenly over the kataifi mixture, with pistachio crunch scattered in a vertical line' },
 }
 ,
+
+/* ---------------------------------------------------------------- 抹茶ブリュレ */
+{
+  id: 'matcha-brulee', code: null, ver: null, issued: null,
+  name: '抹茶ブリュレ', en: 'MATCHA Brulee',
+  serve: null, category: null, limited: false,
+  yield: '1個分', kind: 'sweets', oldFormat: true,
+  ing: [
+    ['揚げたパン（半分）', 'Fried bread (half piece)', null, null],
+    ['抹茶クリーム', 'Matcha whipped cream', '60', 'g'],
+    ['クリミビット', 'Cremyvit', '30', 'g'],
+    ['砂糖', 'Sugar', '10', 'g'],
+    ['抹茶パウダー', 'Matcha powder', '1.5', 'g']
+  ],
+  sub: {
+    title: '抹茶カスタードクリーム 配合レシピ',
+    ing: [
+      ['カスタードパウダー', 'Custard powder', '350', 'g'],
+      ['抹茶パウダー', 'Matcha powder', '30', 'g'],
+      ['水', 'Water', '1', 'ℓ']
+    ],
+    note: null
+  },
+  steps: [
+    { jp: '抹茶ホイップをパンの表面ギリギリまでつめる',
+      en: 'Fill the bread with matcha whipped cream up to the very edge.', point: null },
+    { jp: '抹茶カスタードクリームをホイップが見えなくなるまで塗る',
+      en: 'Cover the whipped cream completely by spreading matcha custard cream over it.', point: null },
+    { jp: 'グラニュー糖をまぶし、バーナーで焼き色が出るまで炙る',
+      en: 'Sprinkle with granulated sugar and torch until golden brown.', point: null }
+  ],
+  finish: { jp: '表面のグラニュー糖が溶けて均一に焼き色がつき、縁に抹茶の緑が見えている',
+            en: 'Granulated sugar melted to an even golden-brown surface, with the green matcha visible around the edge' },
+},
+
+/* ---------------------------------------------------------------- ローストビーフ */
+{
+  id: 'roast-beef', code: null, ver: null, issued: null,
+  name: 'ローストビーフ', en: 'roast beef',
+  serve: null, category: null, limited: false,
+  yield: '1個分', kind: 'savory', oldFormat: true,
+  ing: [
+    ['揚げたパン（半分）', 'Fried bread (half piece)', null, null],
+    ['ローストビーフ（60g）', 'Roast beef (60 g)', '5', '枚'],
+    ['ポテトサラダ', 'Potato salad', '80', 'g'],
+    ['サニーレタス', 'Green leaf lettuce', '1', '枚'],
+    ['きみプチ', 'Kimi-Puchi (egg yolk sphere)', '1', '個'],
+    ['ステーキソース', 'Steak sauce', '15', 'g'],
+    ['ホワイトソース', 'White sauce', '10', 'g'],
+    ['パセリ', 'Parsley', '0.2', 'g'],
+    ['ブラックペッパー', 'Black pepper', '0.2', 'g'],
+    ['ラディッシュパウダー', 'Radish powder', '1', 'g']
+  ],
+  steps: [
+    { jp: 'パンの内側にステーキソースをかけ、レタスを横に入れてポテトサラダを詰める',
+      en: 'Pour steak sauce on the inside of the bread, place lettuce sideways, and fill with potato salad.',
+      point: { jp: '中央が山になるように盛る。', en: 'Shape the potato salad into a mound in the center.' } },
+    { jp: 'その上からステーキソースをかけ、1枚目のローストビーフを丸く盛り付ける',
+      en: 'Drizzle more steak sauce on top, then place the first slice of roast beef in a circular shape.',
+      point: { jp: 'バラの形を意識する。', en: 'Aim for a rose shape.' } },
+    { jp: '残りのローストビーフを半分に折り、バラ状に巻き付けていく（合計5枚使用）',
+      en: 'Fold the remaining slices in half and wrap them around the first slice to form a rose shape (5 slices in total).', point: null },
+    { jp: 'すべて巻き終えたらバーガー袋に入れ、ステーキソースを追加し、中心から右側にホワイトソースを立てるようにかける',
+      en: 'Once all slices are wrapped, place the sandwich into a burger bag, add more steak sauce, and pour white sauce from the center toward the right side to create height.', point: null },
+    { jp: '中心に「きみプチ」をのせ、パセリと黒胡椒をかけて完成',
+      en: 'Place one "Kimi-Puchi" (egg yolk sphere) in the center and finish with parsley and black pepper.',
+      point: { jp: 'いくら追加の場合は、スプーン1杯（約15g）を目安にのせる。', en: 'For customers adding salmon roe, use one spoonful (approx. 15 g) as a guideline.' } }
+  ],
+  finish: { jp: 'ローストビーフがバラの形に巻かれ、その中心にきみプチがのっている',
+            en: 'The roast beef wrapped into a rose shape with the Kimi-Puchi set in the center' },
+},
+
+/* ---------------------------------------------------------------- はみ出るうなたま */
+{
+  id: 'unatama', code: null, ver: null, issued: null,
+  name: 'はみ出るうなたま', en: 'Unagi & Tamago',
+  serve: null, category: null, limited: false,
+  yield: '1個分', kind: 'savory', oldFormat: true,
+  ing: [
+    ['揚げたパン（半分）', 'Fried bread (half piece)', null, null],
+    ['鰻（1/8カット）', 'Unagi, 1/8 cut', '2', '切'],
+    ['卵焼き', 'Japanese omelet (tamagoyaki)', '1', '個'],
+    ['焼きおにぎり', 'Grilled rice ball', '1', '個'],
+    ['蒲焼のタレ', 'Unagi sauce', '10', 'g']
+  ],
+  steps: [
+    { jp: '卵焼きを16等分（約1cm）の幅でカットしておく',
+      en: 'Cut the Japanese omelet (tamagoyaki) into 16 pieces, each about 1 cm wide.', point: null },
+    { jp: 'パンの内側に鰻のタレをかける。冷凍の焼きおにぎりを電子レンジで温め、崩しながらパンにいれる',
+      en: 'Drizzle unagi sauce on the inner side of the bread. Microwave the frozen grilled rice ball and break it apart while placing it on the bread.',
+      point: { jp: 'おにぎりは、営業中は保温庫に保管しておく。', en: 'Keep the rice balls warm in a warmer during service.' } },
+    { jp: 'ご飯部分にタレを少し（5g）かけ、カットした卵を1枚乗せる（常温でOK）、うなぎを2枚乗せる',
+      en: 'Drizzle a small amount (5 g) of unagi sauce over the rice. Place one slice of the cut omelet (room temperature is fine), then add two slices of unagi.',
+      point: { jp: 'うなぎは1/8カット。', en: 'Each unagi piece is a 1/8 cut.' } },
+    { jp: 'うなぎをバーナーで少し焼き目がつくまで炙り、タレをかけて完成',
+      en: 'Lightly sear the unagi with a kitchen torch until a slight char appears, then drizzle more unagi sauce to finish.', point: null }
+  ],
+  finish: { jp: 'うなぎ2枚に焼き目がつき、卵焼きとうなぎがパンから縦にはみ出している',
+            en: 'Two seared unagi slices with light char, the omelet and unagi extending vertically beyond the bread' },
+},
 
 /* ---------------------------------------------------------------- AS-01 */
 {
