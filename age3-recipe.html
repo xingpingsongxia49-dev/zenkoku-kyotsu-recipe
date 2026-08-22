@@ -534,6 +534,11 @@ footer{margin-top:26px;padding:16px 0 8px;border-top:1px solid var(--line);font-
     return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]; }); };
 
   var K_MODE = 'a4', K_FONT = 9.5, K_PH = 16.5;   /* 早見表: 'a4'=A4縦2枚 / 'a3'=A3縦1枚 */
+  /* 写真を後から追加しても端末のキャッシュで古い状態が残らないよう、
+     画像URLにデータ側のバージョンを付ける。写真を足したらデータの assetVersion を上げる。 */
+  var AV = (typeof RECIPE_META !== "undefined" && RECIPE_META && RECIPE_META.assetVersion)
+             ? ("?v=" + encodeURIComponent(RECIPE_META.assetVersion)) : "";
+  function phUrl(id, kind){ return "/age3-recipe/" + id + "-" + kind + ".jpg" + AV; }
   var A3MARK = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHgAAAB+CAMAAADY4yX9AAAAYFBMVEVMTExMTExMTExMTExMTExMTExMTExMTEwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADWtFHJAAAAIHRSTlP6AW6Tz7BOLgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAOebvDYAAAOkSURBVHja7ZtZkqMwDECF1vvfeFgMIRjbeIP0FPpLF81DsnYSGEpEUZhhEhZCK7kFZP+HocBBmLQ7WD3qyraeYGUISx46B2wCccE+YISksHUAC1wRbQ02hmuCbcEGl4VagjO4V8nXwJwDvmZtaM8FsEZgglxpA9Zs7pVjhvaGvmZsaJGwfJEG4BKFL6gMHU74ksrQJkXnOzacNxkka2dTyAVeeqNga+SDjRgay1l7Ahdbm2o2RsHK0E1Yw2CBriJ2DlboLngGRrhByAcT3CJyBN/E/ZDhRjt/keEuvzqe8wKGW0U3sNwL5hWscLOQA/Pd4KlNgFs9eqcypBXuYZAJnDxhK/I95njShmTOkpKzwERWkhHM6agrcB6zeLgY6IWgy03kaG47EFZKgZI3yZxS57u6pBy+OUHKc4apZZFC15VIqHDSalKY2zhmqWSMTg99OCyhuQHm749nz1yRAWRYYgN3SQcFB0VnRzEcvQBP921VSRWdY++4S8qjhTvbwvyzmDpKK696PKyhLN8Os/5h8Vv2AkdQqxoq3QLDtqhm+OiIo+Kj0GmWwniHwXG/XGSrnexU1QU88p3Ied6kMFaiscSL4BZRzpFstXgikINgiWauTwLYrCaz7uRMm0gtGgZTLFfTsK8UtJKnAKIv/UMnZuFkrRAx1s5jNvficaD8lFpdz15OS2AkdQ0QNpbsn3ftRU2PpUvmqF183eUqIudcHKvHGprid+Myz034mBon0uznzo2nv5s6VyPngjKvFUQjKVPDPZfgJM4ciOsnOiwa55nXpag11pb+Qyla5HO7TETmJWfY95Ylp+Oaniyzr0ZrUgOyJwn+mEcrBlvMnp22U2StGAO4YFqchtsxM5vVDPJWNB+PBQ+xarzEhzYC9NAOhI5bH7yXe/eeC882e9Z9QN+vM6H69UPJWs/b3lpHHxOL7qsNuxjcX5XD6bcPmsJZzl4OhF5amDY5cFTLfwvTaK+UDTbPYscDEEleUgIe/Lokx+WIepdwc7Aei5h47//MTwXdwJIAD09pXATmpzTmeo35/wPLj2osRWCp17gfmH8UTEVgesH5YPxbYPxlcCKO9SmNy8D6gvPB9rfA9htg8lKKdwl6lWVoAAY67noYj+OVd0kTcOHqsOSrc/UD6gu+CK7eC8hTGpeCqVaw6S9DGskL/gmwYqVYqVe3WxK/4P8VrIVgfMEvuBfYOjaZ8SJR+Z1cKq9O3KvxSZbF8hzCid88/QOX0SRhF3tsmgAAAABJRU5ErkJggg==";
   var PLAYLIST = (RECIPE_META && RECIPE_META.videoPlaylist) || "";
   var PLAYLIST_URL = PLAYLIST ? "https://www.youtube.com/playlist?list=" + encodeURIComponent(PLAYLIST) : "";
@@ -572,9 +577,9 @@ footer{margin-top:26px;padding:16px 0 8px;border-top:1px solid var(--line);font-
   function A3card(r){
     var hero = (r.photo === false)
       ? '<div class="nop">写真 未登録</div>'
-      : '<img src="/age3-recipe/'+esc(r.id)+'-hero.jpg" alt="" onerror="this.parentNode.innerHTML=\'<div class=&quot;nop&quot;>写真 未登録</div>\'">';
+      : '<img src="'+phUrl(esc(r.id),'hero')+'" alt="" onerror="this.parentNode.innerHTML=\'<div class=&quot;nop&quot;>写真 未登録</div>\'">';
     var shot = (r.photo === false) ? '' :
-      '<div class="pshot"><img src="/age3-recipe/'+esc(r.id)+'-steps.jpg" alt="" onerror="this.parentNode.remove()"></div>';
+      '<div class="pshot"><img src="'+phUrl(esc(r.id),'steps')+'" alt="" onerror="this.parentNode.remove()"></div>';
     var mth = r.steps.map(function(s,n){
       var pt = s.point ? '<div class="ppt"><span class="lb">'+bgimg(BG_PT)+'<i>POINT</i></span><span class="tx">'+
              '<span class="j">'+esc(s.point.jp)+'</span>'+
@@ -688,7 +693,7 @@ footer{margin-top:26px;padding:16px 0 8px;border-top:1px solid var(--line);font-
   function kShort(s){ return String(s||'').replace(/\s*※.*$/,'').replace(/[（(][^）)]*[）)]/g,'').trim(); }
   function kCell(r){
     var ph = (r.photo === false) ? '<div class="nop">写真なし</div>'
-      : '<img src="/age3-recipe/'+esc(r.id)+'-hero.jpg" alt="" onerror="this.parentNode.innerHTML=\'<div class=&quot;nop&quot;>写真なし</div>\'">';
+      : '<img src="'+phUrl(esc(r.id),'hero')+'" alt="" onerror="this.parentNode.innerHTML=\'<div class=&quot;nop&quot;>写真なし</div>\'">';
     var rows = (r.ing||[]).filter(function(i){ return String(i[0]).indexOf('揚げパン') < 0; })
       .map(function(i){
         var q = (i[2]==null) ? '—' : esc(i[2]) + esc(i[3]||'');
@@ -862,7 +867,7 @@ footer{margin-top:26px;padding:16px 0 8px;border-top:1px solid var(--line);font-
     $("#grid").innerHTML = list.map(function(r){
       var ph = (r.photo === false)
         ? '<span class="ph noph"><span class="nophtx">写真<br>未登録</span></span>'
-        : '<span class="ph"><img src="/age3-recipe/'+esc(r.id)+'-hero.jpg" alt="'+esc(r.name)+'" loading="lazy" onerror="A3noph(this)"></span>';
+        : '<span class="ph"><img src="'+phUrl(esc(r.id),'hero')+'" alt="'+esc(r.name)+'" loading="lazy" onerror="A3noph(this)"></span>';
       return '<button class="tile" data-id="'+esc(r.id)+'">' + ph +
         '<span class="tx">' +
           '<span class="nm">'+esc(r.name)+'</span>' +
@@ -961,7 +966,7 @@ footer{margin-top:26px;padding:16px 0 8px;border-top:1px solid var(--line);font-
 
     var steps = (r.photo === false) ? "" :
       '<div class="sec"><div class="sech"><span class="no">03</span><span class="jp">工程写真</span><span class="en">STEPS</span></div>' +
-      '<div class="shot" data-zoom="/age3-recipe/'+esc(r.id)+'-steps.jpg"><img src="/age3-recipe/'+esc(r.id)+'-steps.jpg" alt="工程写真" onerror="A3nosteps(this)"></div>' +
+      '<div class="shot" data-zoom="'+phUrl(esc(r.id),'steps')+'"><img src="'+phUrl(esc(r.id),'steps')+'" alt="工程写真" onerror="A3nosteps(this)"></div>' +
       '<p class="cap">タップで拡大します。</p></div>';
 
     var vsec = "";
@@ -985,7 +990,7 @@ footer{margin-top:26px;padding:16px 0 8px;border-top:1px solid var(--line);font-
 
     var hero = (r.photo === false)
       ? '<div class="dhero nophoto">写真は未登録です（用紙の画像が届いていません）</div>'
-      : '<div class="dhero"><img src="/age3-recipe/'+esc(r.id)+'-hero.jpg" alt="'+esc(r.name)+'" onerror="A3nohero(this)"></div>';
+      : '<div class="dhero"><img src="'+phUrl(esc(r.id),'hero')+'" alt="'+esc(r.name)+'" onerror="A3nohero(this)"></div>';
 
     var acts = '<div class="acts">' +
           '<button class="btn pri" id="cook">作りながら見る</button>' +
@@ -1078,7 +1083,7 @@ footer{margin-top:26px;padding:16px 0 8px;border-top:1px solid var(--line);font-
           if(it.photo){
             ph = '<span class="nph"><img src="'+esc(it.photo)+'" alt="" data-zoom="'+esc(it.photo)+'" onerror="A3nomark(this)"></span>';
           }else if(it.recipe){
-            var src = '/age3-recipe/' + it.recipe + '-hero.jpg';
+            var src = phUrl(it.recipe, 'hero');
             ph = '<span class="nph"><img src="'+esc(src)+'" alt="" data-zoom="'+esc(src)+'" onerror="A3nomark(this)"></span>';
           }else{
             ph = '<span class="nph nop"><img src="'+A3MARK+'" alt=""></span>';
@@ -1368,10 +1373,10 @@ footer{margin-top:26px;padding:16px 0 8px;border-top:1px solid var(--line);font-
               (r.finish.en && showEn ? '<div class="cen">'+esc(r.finish.en)+'</div>' : '') + '</div>'
             : '<div class="cjp" style="font-size:19px">このレシピのカードには完成基準が書かれていません。</div>') +
           (r.photo === false ? ''
-            : '<img src="/age3-recipe/'+esc(r.id)+'-hero.jpg" alt="'+esc(r.name)+'" onerror="this.remove()" style="max-width:280px;margin:18px auto 0">');
+            : '<img src="'+phUrl(esc(r.id),'hero')+'" alt="'+esc(r.name)+'" onerror="this.remove()" style="max-width:280px;margin:18px auto 0">');
       }
       var sh = body.querySelector("#cshot");
-      if(sh) sh.onclick = function(){ openViewer("/age3-recipe/"+r.id+"-steps.jpg"); };
+      if(sh) sh.onclick = function(){ openViewer(phUrl(r.id, 'steps')); };
       body.scrollTop = 0;
       cookEl.querySelector("#ccnt").textContent = (i<last ? (i+1)+"/"+last : "完成");
       cookEl.querySelector("#cdots").innerHTML =
@@ -1450,8 +1455,12 @@ footer{margin-top:26px;padding:16px 0 8px;border-top:1px solid var(--line);font-
       localStorage.removeItem("age3-recipe:ok");
       localStorage.removeItem(EN_KEY);
     }catch(e){}
-    location.hash = "";
-    location.reload();
+    /* 端末に残っている写真のキャッシュも消す（写真を差し替えたのに古いまま出るのを防ぐ） */
+    var done = function(){ location.hash = ""; location.reload(true); };
+    if(window.caches && caches.keys){
+      caches.keys().then(function(ks){ return Promise.all(ks.map(function(k){ return caches.delete(k); })); })
+        .then(done, done);
+    }else{ done(); }
   });
 
   render();
