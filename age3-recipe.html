@@ -678,40 +678,47 @@ footer{margin-top:26px;padding:16px 0 8px;border-top:1px solid var(--line);font-
     }
     return v * _mmpx;
   }
-  function A3printGo(root, orient){
-    var st = document.getElementById('a3pagestyle');
-    if(!st){ st = document.createElement('style'); st.id = 'a3pagestyle'; document.head.appendChild(st); }
-    var sz = orient === 'landscape' ? 'A4 landscape' : (orient === 'kitchen-a3' ? 'A3 portrait' : 'A4 portrait');
-    st.textContent = '@page{size:' + sz + ';margin:0}';
-    /* #printroot は画面では display:none なので、そのままだと高さが 0 と判定されて縮小が効かない。
-       いったん画面外に出して実寸で測り、1ページに収めてから印刷する。 */
-    root.style.cssText = 'position:fixed;left:-10000px;top:0;display:block;z-index:-1';
-    try{ if(orient.indexOf('kitchen') === 0) kFit(root); else A3fit(root); }catch(e){}
-    root.style.cssText = '';
-    document.documentElement.classList.add('printing');
-
-    /* iOSのSafariはwindow.print()が呼び出し直後に処理を返す（印刷プレビューの表示中も
-       スクリプトが先に進む）ため、印刷が終わる前に内容を消すと、プレビューに元の画面が
-       映ってしまう。afterprintイベントで、印刷（プレビュー）が完全に終わってから後片付けする。 */
-    var cleaned = false;
-    function cleanup(){
-      if(cleaned) return; cleaned = true;
-      document.documentElement.classList.remove('printing');
-      root.innerHTML = ''; st.textContent = '';
-      window.removeEventListener('afterprint', cleanup);
+  /* 印刷専用の新しいウィンドウ（タブ）を開き、そこに印刷用HTMLを書き出す。
+     ホーム画面に追加したアプリ（スタンドアロン表示）の中では、iOSの印刷処理が
+     画面の見た目をそのまま撮ったように扱ってしまうことがあるため、
+     この画面のCSSを丸ごと持たせた「まっさらな別ウィンドウ」の中で印刷する。 */
+  function A3printDoc(bodyHtml, orient){
+    var w = null;
+    try{ w = window.open('', '_blank'); }catch(e){ w = null; }
+    if(!w){
+      alert('印刷用の画面を開けませんでした。この端末やブラウザの「ポップアップブロック」がオンになっていないか確認してください。');
+      return null;
     }
-    window.addEventListener('afterprint', cleanup);
-    setTimeout(cleanup, 20000); /* afterprintが発火しない環境向けの保険（長めに確保） */
-
-    setTimeout(function(){ window.print(); }, 150);
+    var sz = orient === 'landscape' ? 'A4 landscape' : (orient === 'kitchen-a3' ? 'A3 portrait' : 'A4 portrait');
+    var styleEl = document.querySelector('head > style');
+    var styleText = styleEl ? styleEl.textContent : '';
+    var doc = w.document;
+    doc.open();
+    doc.write(
+      '<!DOCTYPE html><html lang="ja"><head><meta charset="UTF-8">' +
+      '<meta name="viewport" content="width=device-width, initial-scale=1">' +
+      '<title>Age.3 レシピ 印刷用</title>' +
+      '<style>' + styleText + '\n@page{size:' + sz + ';margin:0}\nhtml,body{background:#fff;margin:0;padding:0}\n' +
+      '#printroot{display:block}\n.printnote{font-family:"Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif;' +
+      'padding:14px 16px;font-size:13px;color:#6E6C67;border-bottom:1px solid #DCD6CB}\n' +
+      '@media print{.printnote{display:none}}</style>' +
+      '</head><body>' +
+      '<div class="printnote">読み込みが終わると、自動的に印刷（PDF保存）の画面が開きます。開かない場合は、この画面を長押しして共有メニューから印刷してください。</div>' +
+      '<div id="printroot">' + bodyHtml + '</div></body></html>'
+    );
+    doc.close();
+    return w;
   }
-  function A3print(list){
-    var root = document.getElementById('printroot');
-    if(!root){ root = document.createElement('div'); root.id = 'printroot'; document.body.appendChild(root); }
-    root.innerHTML = list.map(A3card).join('');
-    var imgs = [].slice.call(root.querySelectorAll('img'));
+  function A3printAfterImages(w, root, fitFn){
+    function go(){
+      try{ fitFn(root); }catch(e){}
+      setTimeout(function(){
+        try{ w.focus(); }catch(e){}
+        try{ w.print(); }catch(e){}
+      }, 250);
+    }
+    var imgs = root ? [].slice.call(root.querySelectorAll('img')) : [];
     var left = imgs.length;
-    function go(){ A3printGo(root, 'portrait'); }
     if(!left) return go();
     imgs.forEach(function(im){
       if(im.complete) { if(!--left) go(); return; }
@@ -719,6 +726,12 @@ footer{margin-top:26px;padding:16px 0 8px;border-top:1px solid var(--line);font-
       im.addEventListener('error', function(){ if(!--left) go(); });
     });
     setTimeout(function(){ if(left>0){ left=0; go(); } }, 6000);
+  }
+  function A3print(list){
+    var html = list.map(A3card).join('');
+    var w = A3printDoc(html, 'portrait');
+    if(!w) return;
+    A3printAfterImages(w, w.document.getElementById('printroot'), A3fit);
   }
 
   window.A3card = A3card; window.A3print = A3print; window.A3fit = A3fit;
@@ -757,26 +770,17 @@ footer{margin-top:26px;padding:16px 0 8px;border-top:1px solid var(--line);font-
   }
   function A3kitchen(which){
     which = which || 'sweets';
-    var root = document.getElementById('printroot');
-    if(!root){ root = document.createElement('div'); root.id = 'printroot'; document.body.appendChild(root); }
     var g = (which === 'savory') ? 'regular-savory' : 'regular-sweets';
     var label = (which === 'savory') ? 'レギュラーセイボリー' : 'レギュラースイーツ';
     var en = (which === 'savory') ? 'REGULAR SAVORY' : 'REGULAR SWEETS';
     var list = RECIPES.filter(function(r){ return r.group === g; });
     if(!list.length) return;
-    root.innerHTML = kPage('',
+    var bodyHtml = kPage('',
       '<b>' + label + ' ' + list.length + '品</b><br>左＝材料 ／ 右＝使用量（揚げパンを除く）',
       '<div class="kcat">' + label + '<span>' + en + ' ／ ' + list.length + '品</span></div>' + kRows(list));
-    var imgs = [].slice.call(root.querySelectorAll('img'));
-    var left = imgs.length;
-    function done(){ A3printGo(root, 'kitchen'); }
-    if(!left) return done();
-    imgs.forEach(function(im){
-      if(im.complete){ if(!--left) done(); return; }
-      im.addEventListener('load', function(){ if(!--left) done(); });
-      im.addEventListener('error', function(){ if(!--left) done(); });
-    });
-    setTimeout(function(){ if(left > 0){ left = 0; done(); } }, 8000);
+    var w = A3printDoc(bodyHtml, 'kitchen');
+    if(!w) return;
+    A3printAfterImages(w, w.document.getElementById('printroot'), kFit);
   }
   /* 文字サイズは固定。余った高さを写真に回して、写真をできるだけ大きく見せる。
      それでも入りきらない場合だけ文字を小さくする。 */
