@@ -80,12 +80,11 @@ header{background:var(--sumi);color:var(--kinari);padding:calc(env(safe-area-ins
 #q:focus{outline:none;border-color:var(--furuki);box-shadow:0 0 0 3px rgba(126,97,65,.18)}
 #q::placeholder{color:#A8A49C}
 #clear{position:absolute;right:6px;top:50%;transform:translateY(-50%);border:0;background:none;font-size:20px;color:var(--hai);width:34px;height:34px;cursor:pointer;display:none;line-height:1}
-.chips{display:flex;gap:6px;overflow-x:auto;padding:10px 0 2px;scrollbar-width:none}
-.chips::-webkit-scrollbar{display:none}
+.chips{display:flex;flex-wrap:wrap;gap:5px;padding:10px 0 2px}
 .chip{
-  flex:0 0 auto;padding:7px 13px;font-size:12.5px;border-radius:999px;
+  flex:0 0 auto;padding:6px 10px;font-size:11px;border-radius:999px;
   border:1px solid var(--line);background:#fff;color:var(--hai);cursor:pointer;
-  font-family:inherit;white-space:nowrap;
+  font-family:inherit;white-space:nowrap;letter-spacing:0;
 }
 .chip[aria-pressed="true"]{background:var(--sumi);color:var(--kinari);border-color:var(--sumi);font-weight:700}
 .count{font-size:12px;color:var(--hai);padding:8px 2px 0}
@@ -1289,45 +1288,20 @@ footer{margin-top:26px;padding:16px 0 8px;border-top:1px solid var(--line);font-
 
   var fab = document.createElement("button");
   fab.className = "askfab"; fab.id = "askfab";
+  fab.innerHTML = '質問箱';
+  fab.setAttribute("aria-label", "レシピについて質問する");
   fab.addEventListener("click", function(){ location.hash = "#/ask"; });
   document.body.appendChild(fab);
 
-  function paintFab(){
-    var n = openCount();
-    fab.innerHTML = '質問箱<span class="n">' + (n ? n : '✓') + '</span>';
-    fab.classList.toggle("done", n === 0);
-    fab.setAttribute("aria-label", n ? ("答えていない質問が" + n + "件あります") : "質問はすべて答えました");
-  }
+  function paintFab(){}
   function showFab(on){ fab.style.display = on ? "flex" : "none"; }
   paintFab();
 
   function askHtml(){
-    var open = QUESTIONS.filter(function(q){ return !q.answered && !isAnswered(q); });
-    var done = QUESTIONS.filter(function(q){ return  q.answered ||  isAnswered(q); });
-
-    function card(q){
-      var a = answers[q.id] || { pick: [], free: "" };
-      var rec = q.recipe ? byId(q.recipe) : null;
-      var ok = isAnswered(q);
-      return '<div class="qcard'+(ok?' ok':'')+'" data-q="'+esc(q.id)+'">' +
-        '<div class="qtop">' +
-          '<span class="qtag'+(ok?' ok':'')+'">'+esc(ok ? '答えました' : q.tag)+'</span>' +
-          '<p class="qq">'+esc(q.q)+'</p>' +
-          '<p class="qwhy">'+esc(q.why)+'</p>' +
-          (rec ? '<button class="qlink" data-go="'+esc(rec.id)+'">'+esc(rec.name)+'のレシピを見る</button>' : '') +
-        '</div>' +
-        (q.options ? '<div class="qopts">' + q.options.map(function(o,i){
-            return '<button class="qopt" data-pick="'+i+'" aria-pressed="'+((a.pick||[]).indexOf(i)>=0)+'">'+esc(o)+'</button>';
-          }).join("") + '</div>' : '') +
-        '<div class="qfree"><label>補足があれば書いてください（書かなくても大丈夫です）</label>' +
-          '<textarea data-free rows="2">'+esc(a.free||"")+'</textarea></div>' +
-      '</div>';
-    }
-
     return '<div class="dbar"><button class="back" id="back">&larr; 一覧</button></div>' +
       '<div class="shell">' +
         '<div class="dhead"><div class="dserve">Age.3 レシピ</div><h2>質問箱</h2>' +
-          '<div class="den">こちらから確認したいことを、いつでも答えられるようにまとめています</div></div>' +
+          '<div class="den">材料・作り方・分量など、気になることをここで聞いてください</div></div>' +
 
         '<div class="sec"><div class="sech"><span class="jp">レシピについて質問する</span><span class="en">ASK THE APP</span></div>' +
           '<div class="faqbox">' +
@@ -1336,37 +1310,21 @@ footer{margin-top:26px;padding:16px 0 8px;border-top:1px solid var(--line);font-
               '<button class="btn pri" id="faqgo" type="button">調べる</button>' +
             '</div>' +
             '<p class="faqnote">材料・作り方・ポイント・完成基準・申し送りの中から、アプリがその場で探して答えます。' +
-            'ここで見つからない内容は、そのまま下から本部に送れます。</p>' +
+            'ここで見つからない内容は、下から本部に送ってください。</p>' +
             '<div id="faqresult"></div>' +
           '</div></div>' +
 
-        '<div class="asklead">レシピカードや動画を突き合わせたときに、<b>用紙だけでは決められなかったこと</b>を並べています。' +
-          '推測で埋めずにここへ出しています。<br>答えは<b>この端末に自動で保存</b>されるので、途中でやめても消えません。' +
-          '書き終えたら、いちばん下の<b>「答えをまとめて送る」</b>を押してください。</div>' +
-
-        (open.length
-          ? '<div class="sec"><div class="sech"><span class="no">'+(open.length<10?'0':'')+open.length+'</span>' +
-            '<span class="jp">まだ答えていない</span><span class="en">OPEN</span></div>' +
-            open.map(card).join("") + '</div>'
-          : '<div class="askdone">まだ答えていない質問はありません。ありがとうございます。</div>') +
-
-        (done.length
-          ? '<div class="sec"><div class="sech"><span class="no">'+(done.length<10?'0':'')+done.length+'</span>' +
-            '<span class="jp">答えたもの</span><span class="en">ANSWERED</span></div>' +
-            done.map(card).join("") + '</div>'
-          : '') +
-
         '<div class="sec"><div class="sech"><span class="jp">そのほかの連絡・要望</span><span class="en">FREE</span></div>' +
-          '<div class="qcard"><div class="qfree"><label>直したいところ、足したいレシピ、うまく動かないところなど</label>' +
+          '<div class="qcard"><div class="qfree"><label>アプリで見つからなかったこと、直したいところ、足したいレシピなど</label>' +
           '<textarea id="askfree" rows="4">'+esc((answers.__free && answers.__free.free) || "")+'</textarea></div></div></div>' +
 
         '<div class="asksend">' +
-          '<button class="btn pri" id="asksend" style="width:100%">答えをまとめて送る</button>' +
+          '<button class="btn pri" id="asksend" style="width:100%">本部に送る</button>' +
           '<div class="acts" style="margin-top:9px">' +
             '<button class="btn" id="askcopy">文章をコピー</button>' +
             '<button class="btn" id="askclear">書いたものを消す</button>' +
           '</div>' +
-          '<p class="asknote">「送る」を押すと、答えをまとめた文章ができます。LINEなどに貼って送ってください。' +
+          '<p class="asknote">「送る」を押すと、内容をまとめた文章ができます。LINEなどに貼って送ってください。' +
           'この端末の中だけに保存されるので、送るまではこちらに届きません。</p>' +
         '</div>' +
       '</div>';
@@ -1375,20 +1333,9 @@ footer{margin-top:26px;padding:16px 0 8px;border-top:1px solid var(--line);font-
   function answerText(){
     var d = new Date();
     var pad = function(n){ return (n<10?"0":"")+n; };
-    var lines = ["Age.3 レシピ 質問箱の答え",
+    var lines = ["Age.3 レシピ 質問箱の連絡",
                  d.getFullYear()+"年"+(d.getMonth()+1)+"月"+d.getDate()+"日 "+pad(d.getHours())+":"+pad(d.getMinutes()), ""];
     var any = false;
-    QUESTIONS.forEach(function(q){
-      var a = answers[q.id]; if(!a) return;
-      var picks = (a.pick||[]).map(function(i){ return q.options ? q.options[i] : ""; }).filter(Boolean);
-      var free = (a.free||"").trim();
-      if(!picks.length && !free) return;
-      any = true;
-      lines.push("■ " + q.q);
-      if(picks.length) lines.push("　→ " + picks.join(" ／ "));
-      if(free)         lines.push("　補足：" + free);
-      lines.push("");
-    });
     var f = (answers.__free && answers.__free.free || "").trim();
     if(f){ any = true; lines.push("■ そのほかの連絡・要望"); lines.push("　" + f); lines.push(""); }
     if(!any) return null;
@@ -1437,31 +1384,12 @@ footer{margin-top:26px;padding:16px 0 8px;border-top:1px solid var(--line);font-
     askEl.addEventListener("click", function(e){
       var g = e.target.closest("[data-go]");
       if(g){ location.hash = "#/r/" + g.dataset.go; return; }
-      var o = e.target.closest(".qopt");
-      if(o){
-        var card = o.closest(".qcard"), id = card.dataset.q, i = +o.dataset.pick;
-        var a = answers[id] || (answers[id] = { pick: [], free: "" });
-        a.pick = a.pick || [];
-        var at = a.pick.indexOf(i);
-        if(at >= 0) a.pick.splice(at, 1); else a.pick.push(i);
-        [].forEach.call(card.querySelectorAll(".qopt"), function(btn){
-          btn.setAttribute("aria-pressed", String(a.pick.indexOf(+btn.dataset.pick) >= 0));
-        });
-        saveAnswers(); paintFab();
-        card.classList.toggle("ok", isAnswered({ id:id }) );
-        return;
-      }
     });
 
     askEl.addEventListener("input", function(e){
       var t = e.target;
       if(t.id === "askfree"){
         answers.__free = { free: t.value }; saveAnswers(); return;
-      }
-      if(t.hasAttribute && t.hasAttribute("data-free")){
-        var id = t.closest(".qcard").dataset.q;
-        var a = answers[id] || (answers[id] = { pick: [], free: "" });
-        a.free = t.value; saveAnswers(); paintFab();
       }
     });
 
