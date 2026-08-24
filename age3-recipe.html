@@ -91,20 +91,28 @@ header{background:var(--sumi);color:var(--kinari);padding:calc(env(safe-area-ins
 .count{font-size:12px;color:var(--hai);padding:8px 2px 0}
 
 /* ---------- 一覧 ---------- */
-.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;padding:14px 0 8px}
-@media(min-width:620px){.grid{grid-template-columns:repeat(3,1fr)}}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;padding:14px 0 8px}
+@media(min-width:420px){.grid{gap:10px}}
+@media(min-width:620px){.grid{grid-template-columns:repeat(4,1fr);gap:12px}}
+@media(min-width:900px){.grid{grid-template-columns:repeat(5,1fr)}}
 .tile{
-  background:#fff;border:1px solid var(--line);border-radius:4px;overflow:hidden;
+  position:relative;background:#fff;border:1px solid var(--line);border-radius:4px;overflow:hidden;
   cursor:pointer;text-align:left;padding:0;font-family:inherit;color:inherit;
   box-shadow:var(--shadow);display:flex;flex-direction:column;
 }
+.tile.tile-season{border:1.5px solid var(--shu)}
+.tile-season-badge{
+  position:absolute;top:6px;left:6px;z-index:2;font-size:9px;font-weight:800;letter-spacing:.1em;
+  color:#fff;background:var(--shu);padding:3px 7px;border-radius:2px;line-height:1;
+  box-shadow:0 1px 3px rgba(0,0,0,.25);
+}
 .tile .ph{aspect-ratio:1/1;background:#fff;overflow:hidden}
 .tile .ph img{width:100%;height:100%;object-fit:contain}
-.tile .tx{padding:9px 10px 11px;border-top:1px solid var(--line)}
-.tile .nm{display:block;font-size:14.5px;font-weight:800;line-height:1.4;letter-spacing:.01em}
-.tile .en{display:block;font-size:11px;color:var(--hai);margin-top:2px;line-height:1.35}
-.tile .mt{display:flex;gap:5px;align-items:center;margin-top:7px;flex-wrap:wrap}
-.tag{font-size:9.5px;letter-spacing:.1em;padding:2px 6px;border-radius:2px;border:1px solid var(--line);color:var(--hai);white-space:nowrap}
+.tile .tx{padding:7px 8px 9px;border-top:1px solid var(--line)}
+.tile .nm{display:block;font-size:12.5px;font-weight:800;line-height:1.35;letter-spacing:.01em}
+.tile .en{display:block;font-size:9.5px;color:var(--hai);margin-top:2px;line-height:1.3}
+.tile .mt{display:flex;gap:4px;align-items:center;margin-top:6px;flex-wrap:wrap}
+.tag{font-size:8.5px;letter-spacing:.06em;padding:2px 5px;border-radius:2px;border:1px solid var(--line);color:var(--hai);white-space:nowrap}
 .tag.sw{border-color:#D9CDBA;color:#8A6A3C;background:#FBF7F1}
 .tag.sv{border-color:#D6C8C6;color:#8E4A42;background:#FBF3F2}
 .tag.lm{border-color:var(--sumi);color:var(--sumi);font-weight:700}
@@ -295,6 +303,25 @@ header{background:var(--sumi);color:var(--kinari);padding:calc(env(safe-area-ins
 }
 .askfab.done .n{background:#2E6B3A}
 .asklead{background:#EDEAE3;border-radius:3px;padding:13px 13px;font-size:13px;line-height:1.75;margin-top:14px}
+.faqbox{background:#fff;border:1.5px solid var(--sumi);border-radius:3px;padding:13px}
+.faqrow{display:flex;gap:8px}
+.faqrow input{
+  flex:1;min-width:0;padding:12px 13px;font-size:16px;border:1.5px solid var(--line);border-radius:3px;
+  background:#fff;color:var(--sumi);font-family:inherit;
+}
+.faqrow input:focus{outline:none;border-color:var(--furuki);box-shadow:0 0 0 3px rgba(126,97,65,.14)}
+.faqrow .btn{flex:0 0 auto;padding:0 18px}
+.faqnote{font-size:11.5px;color:var(--hai);line-height:1.7;margin:9px 0 0}
+.faqcard{margin-top:12px;background:#F7FBF8;border:1px solid #CFE2D3;border-radius:3px;padding:11px 12px}
+.faqhead{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.faqname{font-size:15px;font-weight:800}
+.faqhits{list-style:none;margin:9px 0 0;padding:0}
+.faqhits li{font-size:13px;line-height:1.7;padding:5px 0;border-top:1px dashed #CFE2D3}
+.faqhits li:first-child{border-top:0}
+.faqhits li b{display:inline-block;font-size:10px;font-weight:800;letter-spacing:.08em;color:#2E6B3A;
+  background:#E4F1E6;border-radius:2px;padding:1px 6px;margin-right:7px;vertical-align:1px}
+.faqempty{margin-top:12px;background:#FCF3F2;border:1px solid #E9CFCB;border-radius:3px;padding:12px;font-size:13px;color:#7E322A;line-height:1.75}
+.faqempty .faqcta{display:block;width:100%;margin-top:10px}
 .qcard{background:#fff;border:1px solid var(--line);border-radius:3px;margin-top:12px;overflow:hidden}
 .qcard.ok{border-color:#CFE2D3;background:#F7FBF8}
 .qtop{padding:13px 13px 0}
@@ -868,7 +895,9 @@ footer{margin-top:26px;padding:16px 0 8px;border-top:1px solid var(--line);font-
       var ph = (r.photo === false)
         ? '<span class="ph noph"><span class="nophtx">写真<br>未登録</span></span>'
         : '<span class="ph"><img src="'+phUrl(esc(r.id),'hero')+'" alt="'+esc(r.name)+'" loading="lazy" onerror="A3noph(this)"></span>';
-      return '<button class="tile" data-id="'+esc(r.id)+'">' + ph +
+      var isSeason = group(r) === "season";
+      var seasonBadge = isSeason ? '<span class="tile-season-badge">SEASON</span>' : '';
+      return '<button class="tile'+(isSeason?' tile-season':'')+'" data-id="'+esc(r.id)+'">' + seasonBadge + ph +
         '<span class="tx">' +
           '<span class="nm">'+esc(r.name)+'</span>' +
           '<span class="en">'+esc(r.en)+'</span>' +
@@ -1159,6 +1188,105 @@ footer{margin-top:26px;padding:16px 0 8px;border-top:1px solid var(--line);font-
   }
   function openCount(){ return QUESTIONS.filter(function(q){ return !q.answered && !isAnswered(q); }).length; }
 
+  /* ---------- レシピについて質問する（アプリ内データから自動回答） ---------- */
+  var STOP = ["ですか","ますか","ください","教えて","何g","何グラム","何個","何枚","何ですか","は？","？","?","の","を","に","が","で","です","ます","なん","なに","何","知りたい","教える"];
+  function faqNorm(s){
+    s = String(s||"").toLowerCase();
+    STOP.forEach(function(w){ s = s.split(w).join(""); });
+    return s.trim();
+  }
+  function faqTokens(q){
+    var norm = faqNorm(q);
+    var toks = norm.split(/[\s、,。・／\/]+/).filter(function(t){ return t.length >= 2; });
+    if(!toks.length && norm.length >= 2) toks = [norm];
+    return toks;
+  }
+  function faqIndexRecipe(r){
+    var fields = [];
+    fields.push({type:"品名", label:r.name, text:r.name+" "+(r.en||""), go:r.id});
+    (r.ing||[]).forEach(function(i){
+      var qt = (i[2]==null) ? "分量の記載なし" : (i[2]+(i[3]||""));
+      fields.push({type:"材料", label:i[0], text:i[0]+" "+(i[1]||"")+" "+qt, ans:i[0]+"：" + qt, go:r.id});
+    });
+    if(r.sub){
+      (r.sub.ing||[]).forEach(function(i){
+        var qt = (i[2]==null) ? "分量の記載なし" : (i[2]+(i[3]||""));
+        fields.push({type:"仕込み材料（"+r.sub.title+"）", label:i[0], text:i[0]+" "+(i[1]||"")+" "+qt, ans:i[0]+"（"+r.sub.title+"）：" + qt, go:r.id});
+      });
+    }
+    (r.steps||[]).forEach(function(s, n){
+      fields.push({type:"作り方 "+(n+1), label:s.jp, text:s.jp+" "+(s.en||""), ans:"手順"+(n+1)+"："+s.jp, go:r.id});
+      if(s.point){
+        fields.push({type:"ポイント", label:s.point.jp, text:s.point.jp+" "+(s.point.en||""), ans:"POINT（手順"+(n+1)+"）："+s.point.jp, go:r.id});
+      }
+    });
+    if(r.finish){
+      fields.push({type:"完成基準", label:r.finish.jp, text:r.finish.jp+" "+(r.finish.en||""), ans:"完成基準："+r.finish.jp, go:r.id});
+    }
+    (r.notes||[]).forEach(function(n){
+      fields.push({type:"申し送り", label:n, text:n, ans:"申し送り："+n, go:r.id});
+    });
+    return fields;
+  }
+  var FAQ_FIELDS = null;
+  function faqAllFields(){
+    if(FAQ_FIELDS) return FAQ_FIELDS;
+    FAQ_FIELDS = [];
+    RECIPES.forEach(function(r){ FAQ_FIELDS = FAQ_FIELDS.concat(faqIndexRecipe(r)); });
+    return FAQ_FIELDS;
+  }
+  function faqSearch(query){
+    var toks = faqTokens(query);
+    if(!toks.length) return { byRecipe: [], toks: toks };
+    var fields = faqAllFields();
+    var hitFields = fields.filter(function(f){
+      var hay = f.text.toLowerCase();
+      return toks.some(function(t){ return hay.indexOf(t) >= 0; });
+    });
+    var byId2 = {};
+    hitFields.forEach(function(f){
+      var sc = toks.filter(function(t){ return f.text.toLowerCase().indexOf(t) >= 0; }).length;
+      if(f.type === "品名") sc += 0.5;
+      if(!byId2[f.go]) byId2[f.go] = { r: byId(f.go), fields: [], score: 0 };
+      byId2[f.go].fields.push(f);
+      byId2[f.go].score += sc;
+    });
+    var list = Object.keys(byId2).map(function(k){ return byId2[k]; });
+    list.sort(function(a,b){ return b.score - a.score; });
+    list.forEach(function(x){
+      x.fields.sort(function(a,b){
+        var pa = a.type==="材料"?0:a.type==="完成基準"?1:a.type.indexOf("ポイント")>=0?2:a.type.indexOf("作り方")>=0?3:a.type==="品名"?9:4;
+        var pb = b.type==="材料"?0:b.type==="完成基準"?1:b.type.indexOf("ポイント")>=0?2:b.type.indexOf("作り方")>=0?3:b.type==="品名"?9:4;
+        return pa - pb;
+      });
+      x.fields = x.fields.filter(function(f){ return f.type !== "品名"; }).slice(0,4).concat(
+        x.fields.filter(function(f){ return f.type === "品名"; })
+      );
+      if(!x.fields.length) x.fields = [{type:"品名", ans: x.r.name}];
+    });
+    return { byRecipe: list.slice(0,5), toks: toks };
+  }
+  function faqAnswerHtml(query){
+    var q = (query||"").trim();
+    if(!q) return "";
+    var res = faqSearch(q);
+    if(!res.toks.length || !res.byRecipe.length){
+      return '<div class="faqempty">アプリ内のデータからは見つかりませんでした。<br>' +
+        'この内容は下の「そのほかの連絡・要望」に書いて、本部へ直接送ってください。' +
+        '<button class="btn faqcta" id="faqcta" type="button">この質問を本部への連絡に入れる</button></div>';
+    }
+    return res.byRecipe.map(function(x){
+      var r = x.r;
+      return '<div class="faqcard">' +
+        '<div class="faqhead"><span class="faqname">'+esc(r.name)+'</span>' +
+        '<button class="qlink" data-go="'+esc(r.id)+'" type="button">レシピを開く</button></div>' +
+        '<ul class="faqhits">' + x.fields.map(function(f){
+          return '<li><b>'+esc(f.type)+'</b>'+esc(f.ans || f.label)+'</li>';
+        }).join("") + '</ul>' +
+      '</div>';
+    }).join("");
+  }
+
   var fab = document.createElement("button");
   fab.className = "askfab"; fab.id = "askfab";
   fab.addEventListener("click", function(){ location.hash = "#/ask"; });
@@ -1200,6 +1328,18 @@ footer{margin-top:26px;padding:16px 0 8px;border-top:1px solid var(--line);font-
       '<div class="shell">' +
         '<div class="dhead"><div class="dserve">Age.3 レシピ</div><h2>質問箱</h2>' +
           '<div class="den">こちらから確認したいことを、いつでも答えられるようにまとめています</div></div>' +
+
+        '<div class="sec"><div class="sech"><span class="jp">レシピについて質問する</span><span class="en">ASK THE APP</span></div>' +
+          '<div class="faqbox">' +
+            '<div class="faqrow">' +
+              '<input id="faqq" type="text" inputmode="search" placeholder="例：メロンパフェ パイシート 何枚" autocomplete="off">' +
+              '<button class="btn pri" id="faqgo" type="button">調べる</button>' +
+            '</div>' +
+            '<p class="faqnote">材料・作り方・ポイント・完成基準・申し送りの中から、アプリがその場で探して答えます。' +
+            'ここで見つからない内容は、そのまま下から本部に送れます。</p>' +
+            '<div id="faqresult"></div>' +
+          '</div></div>' +
+
         '<div class="asklead">レシピカードや動画を突き合わせたときに、<b>用紙だけでは決められなかったこと</b>を並べています。' +
           '推測で埋めずにここへ出しています。<br>答えは<b>この端末に自動で保存</b>されるので、途中でやめても消えません。' +
           '書き終えたら、いちばん下の<b>「答えをまとめて送る」</b>を押してください。</div>' +
@@ -1265,6 +1405,34 @@ footer{margin-top:26px;padding:16px 0 8px;border-top:1px solid var(--line);font-
     document.body.appendChild(askEl);
     document.documentElement.classList.add("noscroll");
     askEl.querySelector("#back").onclick = function(){ history.back(); };
+
+    (function(){
+      var fq = askEl.querySelector("#faqq"), fgo = askEl.querySelector("#faqgo"), fres = askEl.querySelector("#faqresult");
+      if(!fq) return;
+      var lastQ = "";
+      function run(){
+        var v = fq.value;
+        if(v === lastQ) return;
+        lastQ = v;
+        fres.innerHTML = faqAnswerHtml(v);
+      }
+      fgo.addEventListener("click", run);
+      fq.addEventListener("keydown", function(e){ if(e.key === "Enter") run(); });
+      fq.addEventListener("blur", run);
+      fres.addEventListener("click", function(e){
+        var c = e.target.closest("#faqcta");
+        if(!c) return;
+        var free = askEl.querySelector("#askfree");
+        if(free){
+          var q = fq.value.trim();
+          var mark = "【質問】" + q;
+          free.value = free.value ? (free.value + "\n" + mark) : mark;
+          answers.__free = { free: free.value }; saveAnswers();
+          free.scrollIntoView({ behavior:"smooth", block:"center" });
+          free.focus();
+        }
+      });
+    })();
 
     askEl.addEventListener("click", function(e){
       var g = e.target.closest("[data-go]");
