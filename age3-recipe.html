@@ -689,13 +689,21 @@ footer{margin-top:26px;padding:16px 0 8px;border-top:1px solid var(--line);font-
     try{ if(orient.indexOf('kitchen') === 0) kFit(root); else A3fit(root); }catch(e){}
     root.style.cssText = '';
     document.documentElement.classList.add('printing');
-    setTimeout(function(){
-      window.print();
-      setTimeout(function(){
-        document.documentElement.classList.remove('printing');
-        root.innerHTML = ''; st.textContent = '';
-      }, 400);
-    }, 150);
+
+    /* iOSのSafariはwindow.print()が呼び出し直後に処理を返す（印刷プレビューの表示中も
+       スクリプトが先に進む）ため、印刷が終わる前に内容を消すと、プレビューに元の画面が
+       映ってしまう。afterprintイベントで、印刷（プレビュー）が完全に終わってから後片付けする。 */
+    var cleaned = false;
+    function cleanup(){
+      if(cleaned) return; cleaned = true;
+      document.documentElement.classList.remove('printing');
+      root.innerHTML = ''; st.textContent = '';
+      window.removeEventListener('afterprint', cleanup);
+    }
+    window.addEventListener('afterprint', cleanup);
+    setTimeout(cleanup, 20000); /* afterprintが発火しない環境向けの保険（長めに確保） */
+
+    setTimeout(function(){ window.print(); }, 150);
   }
   function A3print(list){
     var root = document.getElementById('printroot');
