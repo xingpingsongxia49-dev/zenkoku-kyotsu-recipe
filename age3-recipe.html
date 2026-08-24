@@ -1243,18 +1243,30 @@ footer{margin-top:26px;padding:16px 0 8px;border-top:1px solid var(--line);font-
     var byId2 = {};
     fields.forEach(function(f){
       var hay = f.text.toLowerCase();
-      var sc = 0;
       /* 前方一致：質問から取り出した語がフィールドに含まれる */
-      toks.forEach(function(tk){ if(hay.indexOf(tk) >= 0) sc += tk.length; });
+      var matchedToks = toks.filter(function(tk){ return hay.indexOf(tk) >= 0; });
       /* 逆方向一致：品名・材料名そのものが質問文の中に含まれる（助詞をまたいでいても拾える） */
-      if(f.spot && f.spot.length >= 2 && raw.indexOf(f.spot.toLowerCase()) >= 0) sc += f.spot.length * 1.5;
-      if(sc <= 0) return;
-      if(!byId2[f.go]) byId2[f.go] = { r: byId(f.go), fields: [], score: 0 };
-      byId2[f.go].fields.push(f);
-      byId2[f.go].score += sc;
+      var spotHit = !!(f.spot && f.spot.length >= 2 && raw.indexOf(f.spot.toLowerCase()) >= 0);
+      if(!matchedToks.length && !spotHit) return;
+      if(!byId2[f.go]) byId2[f.go] = { r: byId(f.go), fields: [], tokenSet: {}, spotBonus: 0 };
+      var g = byId2[f.go];
+      g.fields.push(f);
+      /* 同じ語が複数箇所でヒットしても点数は語の種類ごとに1回だけ加算する（延べ回数で膨らませない） */
+      matchedToks.forEach(function(tk){ g.tokenSet[tk] = tk.length; });
+      if(spotHit) g.spotBonus = Math.max(g.spotBonus, f.spot.length * 2.5);
     });
-    var list = Object.keys(byId2).map(function(k){ return byId2[k]; });
+    var list = Object.keys(byId2).map(function(k){
+      var g = byId2[k];
+      var tokScore = Object.keys(g.tokenSet).reduce(function(s,k2){ return s+g.tokenSet[k2]; }, 0);
+      g.score = tokScore + g.spotBonus;
+      return g;
+    });
     list.sort(function(a,b){ return b.score - a.score; });
+    /* 一番点数が高いものと差が大きい弱い一致は、無関係な商品として表示から外す */
+    if(list.length > 1){
+      var top = list[0].score;
+      list = list.filter(function(x, idx){ return idx === 0 || x.score >= top * 0.55; });
+    }
     list.forEach(function(x){
       x.fields.sort(function(a,b){
         var pa = a.type==="材料"?0:a.type==="完成基準"?1:a.type.indexOf("ポイント")>=0?2:a.type.indexOf("作り方")>=0?3:a.type==="品名"?9:4;
@@ -1266,7 +1278,7 @@ footer{margin-top:26px;padding:16px 0 8px;border-top:1px solid var(--line);font-
       );
       if(!x.fields.length) x.fields = [{type:"品名", ans: x.r.name}];
     });
-    return { byRecipe: list.slice(0,5), toks: toks, raw: raw };
+    return { byRecipe: list.slice(0,3), toks: toks, raw: raw };
   }
   function faqAnswerHtml(query){
     var q = (query||"").trim();
