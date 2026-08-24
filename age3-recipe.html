@@ -700,13 +700,31 @@ footer{margin-top:26px;padding:16px 0 8px;border-top:1px solid var(--line);font-
       '<title>Age.3 レシピ 印刷用</title>' +
       '<style>' + styleText + '\n@page{size:' + sz + ';margin:0}\nhtml,body{background:#fff;margin:0;padding:0}\n' +
       '#printroot{display:block}\n.printnote{font-family:"Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif;' +
-      'padding:14px 16px;font-size:13px;color:#6E6C67;border-bottom:1px solid #DCD6CB}\n' +
+      'padding:12px 16px;font-size:13px;color:#6E6C67;border-bottom:1px solid #DCD6CB;' +
+      'display:flex;align-items:center;justify-content:space-between;gap:10px;position:sticky;top:0;background:#F5F2EC;z-index:9}\n' +
+      '.printclose{flex:0 0 auto;font-family:inherit;font-size:13px;font-weight:700;color:#1A1917;' +
+      'background:#fff;border:1.5px solid #1A1917;border-radius:3px;padding:8px 14px;cursor:pointer}\n' +
       '@media print{.printnote{display:none}}</style>' +
       '</head><body>' +
-      '<div class="printnote">読み込みが終わると、自動的に印刷（PDF保存）の画面が開きます。開かない場合は、この画面を長押しして共有メニューから印刷してください。</div>' +
+      '<div class="printnote"><span>読み込みが終わると、自動的に印刷（PDF保存）の画面が開きます。開かない場合は、この画面を長押しして共有メニューから印刷してください。</span>' +
+      '<button type="button" class="printclose" id="printclose">閉じる</button></div>' +
       '<div id="printroot">' + bodyHtml + '</div></body></html>'
     );
     doc.close();
+    var closeBtn = doc.getElementById('printclose');
+    if(closeBtn){
+      closeBtn.addEventListener('click', function(){
+        try{ w.close(); }catch(e){}
+        /* 一部のブラウザは、開いた側からのwindow.close()しか許可しない。
+           それでも閉じられない場合に備えて、案内文に切り替える。 */
+        setTimeout(function(){
+          if(!w.closed){
+            var note = doc.querySelector('.printnote span');
+            if(note) note.textContent = 'この画面は自動では閉じられませんでした。タブを直接閉じるか、上のアプリのタブ（またはホーム画面のアイコン）に戻ってください。';
+          }
+        }, 300);
+      });
+    }
     return w;
   }
   function A3printAfterImages(w, root, fitFn){
@@ -1076,7 +1094,7 @@ footer{margin-top:26px;padding:16px 0 8px;border-top:1px solid var(--line);font-
     document.body.appendChild(detailEl);
     document.documentElement.classList.add("noscroll");
     applyEn(detailEl);
-    detailEl.querySelector("#back").onclick = function(){ history.back(); };
+    detailEl.querySelector("#back").onclick = function(){ location.hash = ""; };
     detailEl.querySelector("#entog").onclick = function(){
       showEn = !showEn; this.setAttribute("aria-pressed", String(showEn));
       try{ localStorage.setItem(EN_KEY, showEn ? "1" : "0"); }catch(e){}
@@ -1174,7 +1192,7 @@ footer{margin-top:26px;padding:16px 0 8px;border-top:1px solid var(--line);font-
     noticeEl.innerHTML = noticeHtml();
     document.body.appendChild(noticeEl);
     document.documentElement.classList.add("noscroll");
-    noticeEl.querySelector("#back").onclick = function(){ history.back(); };
+    noticeEl.querySelector("#back").onclick = function(){ location.hash = ""; };
     noticeEl.addEventListener("click", function(e){
       var z = e.target.closest("[data-zoom]");
       if(z){ openViewer(z.dataset.zoom); return; }
@@ -1378,7 +1396,7 @@ footer{margin-top:26px;padding:16px 0 8px;border-top:1px solid var(--line);font-
     askEl.innerHTML = askHtml();
     document.body.appendChild(askEl);
     document.documentElement.classList.add("noscroll");
-    askEl.querySelector("#back").onclick = function(){ history.back(); };
+    askEl.querySelector("#back").onclick = function(){ location.hash = ""; };
 
     (function(){
       var fq = askEl.querySelector("#faqq"), fgo = askEl.querySelector("#faqgo"), fres = askEl.querySelector("#faqresult");
@@ -1559,7 +1577,7 @@ footer{margin-top:26px;padding:16px 0 8px;border-top:1px solid var(--line);font-
     if(e.key === "Escape"){
       if(viewEl) closeViewer();
       else if(cookEl) closeCook();
-      else if(detailEl || noticeEl || askEl) history.back();
+      else if(detailEl || noticeEl || askEl) location.hash = "";
     }
   });
 
