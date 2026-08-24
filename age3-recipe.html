@@ -1188,29 +1188,31 @@ footer{margin-top:26px;padding:16px 0 8px;border-top:1px solid var(--line);font-
   function openCount(){ return QUESTIONS.filter(function(q){ return !q.answered && !isAnswered(q); }).length; }
 
   /* ---------- レシピについて質問する（アプリ内データから自動回答） ---------- */
-  var STOP = ["ですか","ますか","ください","教えて","何g","何グラム","何個","何枚","何ですか","は？","？","?","の","を","に","が","で","です","ます","なん","なに","何","知りたい","教える"];
-  function faqNorm(s){
-    s = String(s||"").toLowerCase();
-    STOP.forEach(function(w){ s = s.split(w).join(""); });
-    return s.trim();
+  var PUNCT_RE = /[？?！!。、，,．\.\s「」『』（）\(\)]/g;
+  var DELIM_RE = /(?:ですか|ますか|でしょうか|ください|下さい|教えてください|教えて|知りたいです|知りたい|なんですか|何ですか|何グラム|何gですか|何個|何枚|何本|何ccですか|何cc|何ml|について|とは|ばよい|ばいい|は|が|を|に|の|で|と|へ|も|や|か)/g;
+  function faqCleanRaw(s){
+    return String(s||"").toLowerCase().replace(PUNCT_RE, "");
   }
   function faqTokens(q){
-    var norm = faqNorm(q);
-    var toks = norm.split(/[\s、,。・／\/]+/).filter(function(t){ return t.length >= 2; });
-    if(!toks.length && norm.length >= 2) toks = [norm];
-    return toks;
+    var raw = faqCleanRaw(q);
+    var pieces = raw.split(DELIM_RE).map(function(t){ return t.trim(); }).filter(function(t){ return t.length >= 2; });
+    var seen = {}, out = [];
+    pieces.forEach(function(t){ if(!seen[t]){ seen[t]=1; out.push(t); } });
+    return { tokens: out, raw: raw };
   }
   function faqIndexRecipe(r){
     var fields = [];
-    fields.push({type:"品名", label:r.name, text:r.name+" "+(r.en||""), go:r.id});
+    fields.push({type:"品名", label:r.name, text:r.name+" "+(r.en||""), spot:r.name, go:r.id});
     (r.ing||[]).forEach(function(i){
       var qt = (i[2]==null) ? "分量の記載なし" : (i[2]+(i[3]||""));
-      fields.push({type:"材料", label:i[0], text:i[0]+" "+(i[1]||"")+" "+qt, ans:i[0]+"：" + qt, go:r.id});
+      var coreName = String(i[0]).replace(/[（(][^）)]*[）)]/g, "").trim();
+      fields.push({type:"材料", label:i[0], text:i[0]+" "+(i[1]||"")+" "+qt, ans:i[0]+"：" + qt, spot:coreName, go:r.id});
     });
     if(r.sub){
       (r.sub.ing||[]).forEach(function(i){
         var qt = (i[2]==null) ? "分量の記載なし" : (i[2]+(i[3]||""));
-        fields.push({type:"仕込み材料（"+r.sub.title+"）", label:i[0], text:i[0]+" "+(i[1]||"")+" "+qt, ans:i[0]+"（"+r.sub.title+"）：" + qt, go:r.id});
+        var coreName = String(i[0]).replace(/[（(][^）)]*[）)]/g, "").trim();
+        fields.push({type:"仕込み材料（"+r.sub.title+"）", label:i[0], text:i[0]+" "+(i[1]||"")+" "+qt, ans:i[0]+"（"+r.sub.title+"）：" + qt, spot:coreName, go:r.id});
       });
     }
     (r.steps||[]).forEach(function(s, n){
@@ -1235,17 +1237,18 @@ footer{margin-top:26px;padding:16px 0 8px;border-top:1px solid var(--line);font-
     return FAQ_FIELDS;
   }
   function faqSearch(query){
-    var toks = faqTokens(query);
-    if(!toks.length) return { byRecipe: [], toks: toks };
+    var t = faqTokens(query);
+    var toks = t.tokens, raw = t.raw;
     var fields = faqAllFields();
-    var hitFields = fields.filter(function(f){
-      var hay = f.text.toLowerCase();
-      return toks.some(function(t){ return hay.indexOf(t) >= 0; });
-    });
     var byId2 = {};
-    hitFields.forEach(function(f){
-      var sc = toks.filter(function(t){ return f.text.toLowerCase().indexOf(t) >= 0; }).length;
-      if(f.type === "品名") sc += 0.5;
+    fields.forEach(function(f){
+      var hay = f.text.toLowerCase();
+      var sc = 0;
+      /* 前方一致：質問から取り出した語がフィールドに含まれる */
+      toks.forEach(function(tk){ if(hay.indexOf(tk) >= 0) sc += tk.length; });
+      /* 逆方向一致：品名・材料名そのものが質問文の中に含まれる（助詞をまたいでいても拾える） */
+      if(f.spot && f.spot.length >= 2 && raw.indexOf(f.spot.toLowerCase()) >= 0) sc += f.spot.length * 1.5;
+      if(sc <= 0) return;
       if(!byId2[f.go]) byId2[f.go] = { r: byId(f.go), fields: [], score: 0 };
       byId2[f.go].fields.push(f);
       byId2[f.go].score += sc;
@@ -1263,13 +1266,13 @@ footer{margin-top:26px;padding:16px 0 8px;border-top:1px solid var(--line);font-
       );
       if(!x.fields.length) x.fields = [{type:"品名", ans: x.r.name}];
     });
-    return { byRecipe: list.slice(0,5), toks: toks };
+    return { byRecipe: list.slice(0,5), toks: toks, raw: raw };
   }
   function faqAnswerHtml(query){
     var q = (query||"").trim();
     if(!q) return "";
     var res = faqSearch(q);
-    if(!res.toks.length || !res.byRecipe.length){
+    if(!res.byRecipe.length){
       return '<div class="faqempty">アプリ内のデータからは見つかりませんでした。<br>' +
         'この内容は下の「そのほかの連絡・要望」に書いて、本部へ直接送ってください。' +
         '<button class="btn faqcta" id="faqcta" type="button">この質問を本部への連絡に入れる</button></div>';
