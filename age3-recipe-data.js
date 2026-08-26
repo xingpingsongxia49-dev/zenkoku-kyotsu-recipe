@@ -815,7 +815,7 @@ var RECIPES = [
 {
   id: 'matcha-brulee', code: null, ver: null, issued: null,
   name: '抹茶ブリュレ', en: 'MATCHA Brulee',
-  serve: null, category: null, limited: false,
+  serve: null, category: null, limited: false, stores: ['asakusa'],
   yield: '1個分', kind: 'sweets', oldFormat: true,
   ing: [
     ['揚げたパン（半分）', 'Fried bread (half piece)', null, null],
@@ -886,7 +886,7 @@ var RECIPES = [
 {
   id: 'unatama', code: null, ver: null, issued: null,
   name: 'はみ出るうなたま', en: 'Unagi & Tamago',
-  serve: null, category: null, limited: false,
+  serve: null, category: null, limited: false, stores: ['asakusa'],
   yield: '1個分', kind: 'savory', oldFormat: true,
   ing: [
     ['揚げたパン（半分）', 'Fried bread (half piece)', null, null],
@@ -2032,8 +2032,41 @@ var RECIPES = [
   ],
   finish: { jp: 'チーズが中央で溶けて焼き目がつき、サーモンとアボカドの緑が見えている',
             en: 'Cheese melted and browned in the center; salmon and green avocado visible' }
+},
+
+/* ---------------------------------------------------------------- 飛騨牛ステーキ（飛騨高山店限定） */
+{
+  id: 'hida-gyu-steak', code: null, ver: null, issued: null,
+  name: '飛騨牛ステーキ', en: 'Hida Beef Steak',
+  serve: 'Savory 提供 / SERVE', category: '揚げサンド', limited: false,
+  group: 'season', stores: ['hida'],
+  yield: '1個分', kind: 'savory',
+  ing: [
+    ['揚げたパン（半分）', 'Fried bread (half)', '1/2', '枚'],
+    ['肉', 'Beef', '100', 'g'],
+    ['ステーキソース', 'Steak sauce', '30', 'g'],
+    ['ポテトサラダ', 'Potato salad', '100', 'g'],
+    ['バター', 'Butter', '1/8', '個'],
+    ['パセリ', 'Parsley', '適量', null],
+    ['黒胡椒', 'Black pepper', '1', 'g'],
+    ['塩', 'Salt', '2', 'g'],
+    ['ニンニクチップ', 'Garlic chips', '3', '枚']
+  ],
+  steps: [
+    { jp: '冷蔵の状態の肉を使用し、600Wの電子レンジで片面5秒ずつ加熱した後、全体に均一に塩を両面に振る。190〜200℃の油で約1分揚げる。揚げた肉は断面がきれいに見えるよう、斜めに6等分にカットする。',
+      en: 'Use the beef straight from the fridge. Microwave at 600W for 5 seconds per side, then season both sides evenly with salt. Deep-fry in 190-200°C oil for about 1 minute. Cut the fried beef diagonally into 6 pieces so the cut surface looks clean.',
+      point: null },
+    { jp: 'カットしたパンの内側にステーキソース約10gをかけ、ポテトサラダ約100gを詰め、ポテトサラダの上にステーキソース約10gをかける。',
+      en: 'Drizzle about 10g of steak sauce inside the cut bread, fill with about 100g of potato salad, then drizzle another 10g of steak sauce over the potato salad.',
+      point: null },
+    { jp: 'カットした肉をやや右寄りに盛り付け、中央の2枚のみ断面が見えるよう配置しつつ、左中央にはトッピング用のスペースを確保する。ステーキソース約10gをかけ、8分の1サイズにカットしたバターを乗せて軽く炙る。',
+      en: 'Arrange the cut beef slightly to the right, positioning it so only the center two pieces show their cut surface, while leaving space in the center-left for toppings. Drizzle about 10g of steak sauce, place a 1/8-cut piece of butter on top, and lightly torch it.',
+      point: null },
+    { jp: 'バーガー袋に入れ、空けておいた左中央のスペースに、人参とインゲンをクロスになるように盛り付け、その横にニンニクチップを乗せる。黒胡椒を振り、後にパセリを振って完成。',
+      en: 'Place in a burger bag. In the space left in the center-left, arrange the carrot and green beans crossed over each other, then place the garlic chips beside them. Sprinkle with black pepper, then finish with parsley on top.',
+      point: null }
+  ],
+  notes: ['飛騨高山店限定。提供元資料（Pages文書）から登録。完成基準の記載なし。写真は未登録。']
 }
-
-
 
 ];
