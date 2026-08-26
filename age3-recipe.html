@@ -105,6 +105,11 @@ header{background:var(--sumi);color:var(--kinari);padding:calc(env(safe-area-ins
   color:#fff;background:var(--shu);padding:3px 7px;border-radius:2px;line-height:1;
   box-shadow:0 1px 3px rgba(0,0,0,.25);
 }
+.tile-store-badge{
+  position:absolute;top:6px;right:6px;z-index:2;font-size:9px;font-weight:800;letter-spacing:.06em;
+  color:#fff;background:var(--sumi);padding:3px 7px;border-radius:2px;line-height:1;
+  box-shadow:0 1px 3px rgba(0,0,0,.25);
+}
 .tile .ph{aspect-ratio:1/1;background:#fff;overflow:hidden}
 .tile .ph img{width:100%;height:100%;object-fit:contain}
 .tile .tx{padding:7px 8px 9px;border-top:1px solid var(--line)}
@@ -914,6 +919,12 @@ footer{margin-top:26px;padding:16px 0 8px;border-top:1px solid var(--line);font-
     return h;
   }
 
+  var STORE_LABEL = { ginza:'銀座', asakusa:'浅草', harajuku:'原宿', kama:'嘉麻', hida:'飛騨' };
+  function storeBadgeText(r){
+    if(!r.stores || !r.stores.length) return "";
+    return r.stores.map(function(s){ return STORE_LABEL[s] || s; }).join("・") + "限定";
+  }
+
   function render(){
     var q = query.trim().toLowerCase();
     var f = FILTERS.filter(function(x){ return x.id===filter; })[0];
@@ -926,7 +937,9 @@ footer{margin-top:26px;padding:16px 0 8px;border-top:1px solid var(--line);font-
         : '<span class="ph"><img src="'+phUrl(esc(r.id),'hero')+'" alt="'+esc(r.name)+'" loading="lazy" onerror="A3noph(this)"></span>';
       var isSeason = group(r) === "season";
       var seasonBadge = isSeason ? '<span class="tile-season-badge">SEASON</span>' : '';
-      return '<button class="tile'+(isSeason?' tile-season':'')+'" data-id="'+esc(r.id)+'">' + seasonBadge + ph +
+      var storeTxt = storeBadgeText(r);
+      var storeBadge = storeTxt ? '<span class="tile-store-badge">'+esc(storeTxt)+'</span>' : '';
+      return '<button class="tile'+(isSeason?' tile-season':'')+'" data-id="'+esc(r.id)+'">' + seasonBadge + storeBadge + ph +
         '<span class="tx">' +
           '<span class="nm">'+esc(r.name)+'</span>' +
           '<span class="en">'+esc(r.en)+'</span>' +
@@ -1225,7 +1238,7 @@ footer{margin-top:26px;padding:16px 0 8px;border-top:1px solid var(--line);font-
   }
   function faqTokens(q){
     var raw = faqCleanRaw(q);
-    var pieces = raw.split(DELIM_RE).map(function(t){ return t.trim(); }).filter(function(t){ return t.length >= 2; });
+    var pieces = raw.split(DELIM_RE).map(function(t){ return t.trim(); }).filter(function(t){ return t.length >= 1; });
     var seen = {}, out = [];
     pieces.forEach(function(t){ if(!seen[t]){ seen[t]=1; out.push(t); } });
     return { tokens: out, raw: raw };
