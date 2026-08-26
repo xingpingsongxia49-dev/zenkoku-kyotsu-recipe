@@ -65,6 +65,10 @@ img{max-width:100%;display:block}
 /* ---------- header ---------- */
 header{background:var(--sumi);color:var(--kinari);padding:calc(env(safe-area-inset-top) + 18px) 0 15px}
 .brand{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.storebadge{
+  font-size:11px;font-weight:800;letter-spacing:.08em;color:#fff;background:var(--shu);
+  padding:3px 9px;border-radius:999px;vertical-align:middle;
+}
 .brand .mark{font-size:11px;letter-spacing:.28em;color:var(--shiraki);border:1px solid var(--furuki);padding:3px 8px;border-radius:2px}
 .brand h1{font-size:19px;font-weight:800;margin:0;letter-spacing:.02em}
 .lede{margin:9px 0 0;font-size:12.5px;color:var(--gin);line-height:1.6}
@@ -496,17 +500,34 @@ footer{margin-top:26px;padding:16px 0 8px;border-top:1px solid var(--line);font-
 </div>
 <script>
 (function(){
-  var KEY="age3-recipe:ok3", CHECK=609101957;
+  var KEY="age3-recipe:ok3", STORE_KEY="age3-recipe:store";
+  /* 既存の4桁（本部・全店共通）に加えて、店舗ごとのPINを追加。
+     どれも平文はソースに残さず、ハッシュ値だけを照合する。 */
+  var CHECK = 609101957; /* 既存PIN＝全店舗（本部）扱い。これまで通り制限なしで閲覧できる */
+  var STORE_CHECKS = {
+    2083305497: "ginza",
+    2032972640: "harajuku",
+    2049750259: "asakusa",
+    2133638354: "kama",
+    1486455010: "hida"
+  };
   var gate=document.getElementById("gate");
-  try{ if(localStorage.getItem(KEY)==="1"){ gate.remove(); return; } }catch(e){}
+  try{
+    if(localStorage.getItem(KEY)==="1"){ gate.remove(); return; }
+  }catch(e){}
   document.documentElement.classList.add("locked");
   var pin=document.getElementById("gpin"), err=document.getElementById("gerr");
   function hash(s){var x=2166136261;for(var j=0;j<s.length;j++){x^=s.charCodeAt(j);x=Math.imul(x,16777619);}return x>>>0;}
   pin.addEventListener("input",function(){
     err.hidden=true;
     if(pin.value.length<4) return;
-    if(hash(pin.value)===CHECK){
-      try{ localStorage.setItem(KEY,"1"); }catch(e){}
+    var h = hash(pin.value);
+    if(h === CHECK){
+      try{ localStorage.setItem(KEY,"1"); localStorage.removeItem(STORE_KEY); }catch(e){}
+      document.documentElement.classList.remove("locked");
+      gate.remove();
+    }else if(STORE_CHECKS[h]){
+      try{ localStorage.setItem(KEY,"1"); localStorage.setItem(STORE_KEY, STORE_CHECKS[h]); }catch(e){}
       document.documentElement.classList.remove("locked");
       gate.remove();
     }else{ err.hidden=false; pin.value=""; pin.focus(); }
@@ -520,6 +541,7 @@ footer{margin-top:26px;padding:16px 0 8px;border-top:1px solid var(--line);font-
     <div class="brand">
       <span class="mark">Age.3</span>
       <h1>レシピ</h1>
+      <span id="storebadge" class="storebadge" hidden></span>
     </div>
     <p class="lede">揚げサンドのスタンダードレシピ。材料・作り方・ポイント・完成基準は、レシピカードに書かれているとおりに載せています。</p>
   </div>
@@ -580,6 +602,16 @@ footer{margin-top:26px;padding:16px 0 8px;border-top:1px solid var(--line);font-
   var EN_KEY = "age3-recipe:en";
   var showEn = true;
   try{ var v = localStorage.getItem(EN_KEY); if(v==="0") showEn = false; }catch(e){}
+
+  /* ---------- 店舗によるレシピの絞り込み ---------- */
+  var STORE_LABEL = { ginza:'銀座', asakusa:'浅草', harajuku:'原宿', kama:'嘉麻', hida:'飛騨高山' };
+  var MY_STORE = null;
+  try{ MY_STORE = localStorage.getItem("age3-recipe:store") || null; }catch(e){}
+  if(MY_STORE){
+    RECIPES = RECIPES.filter(function(r){ return !r.stores || !r.stores.length || r.stores.indexOf(MY_STORE) >= 0; });
+    var sb = document.getElementById("storebadge");
+    if(sb){ sb.hidden = false; sb.textContent = (STORE_LABEL[MY_STORE] || MY_STORE) + "店"; }
+  }
 
   /* ---------- 一覧 ---------- */
 
@@ -919,7 +951,6 @@ footer{margin-top:26px;padding:16px 0 8px;border-top:1px solid var(--line);font-
     return h;
   }
 
-  var STORE_LABEL = { ginza:'銀座', asakusa:'浅草', harajuku:'原宿', kama:'嘉麻', hida:'飛騨' };
   function storeBadgeText(r){
     if(!r.stores || !r.stores.length) return "";
     return r.stores.map(function(s){ return STORE_LABEL[s] || s; }).join("・") + "限定";
@@ -1607,6 +1638,7 @@ footer{margin-top:26px;padding:16px 0 8px;border-top:1px solid var(--line);font-
       localStorage.removeItem("age3-recipe:ok3");
       localStorage.removeItem("age3-recipe:ok2");
       localStorage.removeItem("age3-recipe:ok");
+      localStorage.removeItem("age3-recipe:store");
       localStorage.removeItem(EN_KEY);
     }catch(e){}
     /* 端末に残っている写真のキャッシュも消す（写真を差し替えたのに古いまま出るのを防ぐ） */
