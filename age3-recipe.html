@@ -53,6 +53,27 @@ html.locked,html.noscroll{overflow:hidden}
 .gerr{margin:12px 0 0;font-size:13px;color:#E0A79C;font-weight:700}
 .gnote{margin:22px 0 0;font-size:11.5px;color:#6E6C67;line-height:1.8}
 
+/* ---------- 店舗を選ぶホーム画面（本部PINのみ） ---------- */
+.shbox{width:100%;max-width:460px;text-align:center}
+.shbox h1{font-size:22px;font-weight:800;margin:14px 0 0;letter-spacing:.02em}
+.shlead{margin:12px 0 26px;font-size:13px;color:#B9BCBE}
+.shgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:420px){.shgrid{grid-template-columns:1fr}}
+.shcard{
+  background:#232120;border:1.5px solid #56504A;border-radius:6px;padding:20px 14px;
+  cursor:pointer;font-family:inherit;color:#F5F2EC;text-align:center;
+  display:flex;flex-direction:column;gap:6px;transition:border-color .15s;
+}
+.shcard:hover, .shcard:focus-visible{outline:none;border-color:#C9A87C}
+.shname{font-size:17px;font-weight:800;letter-spacing:.02em}
+.shsub{font-size:11px;color:#8A8783}
+.shall{
+  display:block;width:100%;margin-top:16px;padding:13px;font-size:13px;font-weight:700;
+  font-family:inherit;color:#C9A87C;background:transparent;border:1.5px solid #7E6141;border-radius:4px;cursor:pointer;
+}
+.shall:hover, .shall:focus-visible{outline:none;background:rgba(201,168,124,.1)}
+.shnote{margin:20px 0 0;font-size:11px;color:#6E6C67;line-height:1.8}
+
 body{
   background:var(--kinari);color:var(--sumi);
   font-family:"Hiragino Kaku Gothic ProN","Yu Gothic","Noto Sans JP",sans-serif;
@@ -67,8 +88,10 @@ header{background:var(--sumi);color:var(--kinari);padding:calc(env(safe-area-ins
 .brand{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
 .storebadge{
   font-size:11px;font-weight:800;letter-spacing:.08em;color:#fff;background:var(--shu);
-  padding:3px 9px;border-radius:999px;vertical-align:middle;
+  padding:3px 9px;border-radius:999px;vertical-align:middle;border:none;font-family:inherit;
 }
+.storebadge.clickable{cursor:pointer}
+.storebadge.clickable:after{content:" ▾";font-weight:400;opacity:.8}
 .brand .mark{font-size:11px;letter-spacing:.28em;color:var(--shiraki);border:1px solid var(--furuki);padding:3px 8px;border-radius:2px}
 .brand h1{font-size:19px;font-weight:800;margin:0;letter-spacing:.02em}
 .lede{margin:9px 0 0;font-size:12.5px;color:var(--gin);line-height:1.6}
@@ -498,9 +521,21 @@ footer{margin-top:26px;padding:16px 0 8px;border-top:1px solid var(--line);font-
     <p class="gnote">番号は店長または本部に聞いてください。<br>一度入れると、この端末では次から聞かれません。</p>
   </div>
 </div>
+
+<div class="gate" id="storehome" hidden>
+  <div class="shbox">
+    <span class="gmark">Age.3</span>
+    <h1>店舗を選んでください</h1>
+    <p class="shlead">見たい店舗を選ぶと、その店舗のレシピだけが表示されます。</p>
+    <div class="shgrid" id="shgrid"></div>
+    <button type="button" class="shall" id="shall">全店舗を見る（本部）</button>
+    <p class="shnote">あとからいつでも、ヘッダーの「店舗を変更」から選び直せます。</p>
+  </div>
+</div>
+
 <script>
 (function(){
-  var KEY="age3-recipe:ok3", STORE_KEY="age3-recipe:store";
+  var KEY="age3-recipe:ok3", STORE_KEY="age3-recipe:store", VIEW_KEY="age3-recipe:viewstore";
   /* 既存の4桁（本部・全店共通）に加えて、店舗ごとのPINを追加。
      どれも平文はソースに残さず、ハッシュ値だけを照合する。 */
   var CHECK = 609101957; /* 既存PIN＝全店舗（本部）扱い。これまで通り制限なしで閲覧できる */
@@ -511,9 +546,45 @@ footer{margin-top:26px;padding:16px 0 8px;border-top:1px solid var(--line);font-
     2133638354: "kama",
     1486455010: "hida"
   };
+  var STORE_NAMES = { ginza:"銀座店", harajuku:"原宿店", asakusa:"浅草店", kama:"嘉麻店", hida:"飛騨高山店" };
+  var STORE_ORDER = ["ginza","harajuku","asakusa","kama","hida"];
+
   var gate=document.getElementById("gate");
+  var home=document.getElementById("storehome");
+
+  function showHome(){
+    var g = document.getElementById("shgrid");
+    g.innerHTML = STORE_ORDER.map(function(id){
+      return '<button type="button" class="shcard" data-store="'+id+'">' +
+        '<span class="shname">'+STORE_NAMES[id]+'</span>' +
+        '<span class="shsub">この店舗のレシピを開く</span></button>';
+    }).join("");
+    document.documentElement.classList.add("locked");
+    home.hidden = false;
+    g.addEventListener("click", function(e){
+      var b = e.target.closest("[data-store]"); if(!b) return;
+      try{ localStorage.setItem(VIEW_KEY, b.dataset.store); }catch(e2){}
+      location.reload();
+    });
+    document.getElementById("shall").addEventListener("click", function(){
+      try{ localStorage.setItem(VIEW_KEY, "ALL"); }catch(e2){}
+      location.reload();
+    });
+  }
+  window.A3reopenStoreHome = function(){
+    try{ localStorage.removeItem(VIEW_KEY); }catch(e){}
+    location.reload();
+  };
+
   try{
-    if(localStorage.getItem(KEY)==="1"){ gate.remove(); return; }
+    if(localStorage.getItem(KEY)==="1"){
+      gate.remove();
+      /* 本部（全店舗）PINで、まだ「見る店舗」を選んでいない場合だけ、店舗選択ホームを出す */
+      var isMaster = !localStorage.getItem(STORE_KEY);
+      var chosen = localStorage.getItem(VIEW_KEY);
+      if(isMaster && !chosen){ showHome(); }
+      return;
+    }
   }catch(e){}
   document.documentElement.classList.add("locked");
   var pin=document.getElementById("gpin"), err=document.getElementById("gerr");
@@ -523,13 +594,12 @@ footer{margin-top:26px;padding:16px 0 8px;border-top:1px solid var(--line);font-
     if(pin.value.length<4) return;
     var h = hash(pin.value);
     if(h === CHECK){
-      try{ localStorage.setItem(KEY,"1"); localStorage.removeItem(STORE_KEY); }catch(e){}
-      document.documentElement.classList.remove("locked");
-      gate.remove();
+      try{ localStorage.setItem(KEY,"1"); localStorage.removeItem(STORE_KEY); localStorage.removeItem(VIEW_KEY); }catch(e){}
+      /* PIN確定直後はまだ本編のスクリプトが絞り込みを反映していないため、reloadして正しい状態で開く */
+      location.reload();
     }else if(STORE_CHECKS[h]){
-      try{ localStorage.setItem(KEY,"1"); localStorage.setItem(STORE_KEY, STORE_CHECKS[h]); }catch(e){}
-      document.documentElement.classList.remove("locked");
-      gate.remove();
+      try{ localStorage.setItem(KEY,"1"); localStorage.setItem(STORE_KEY, STORE_CHECKS[h]); localStorage.removeItem(VIEW_KEY); }catch(e){}
+      location.reload();
     }else{ err.hidden=false; pin.value=""; pin.focus(); }
   });
   setTimeout(function(){ pin.focus(); },120);
@@ -541,7 +611,7 @@ footer{margin-top:26px;padding:16px 0 8px;border-top:1px solid var(--line);font-
     <div class="brand">
       <span class="mark">Age.3</span>
       <h1>レシピ</h1>
-      <span id="storebadge" class="storebadge" hidden></span>
+      <button type="button" id="storebadge" class="storebadge" hidden></button>
     </div>
     <p class="lede">揚げサンドのスタンダードレシピ。材料・作り方・ポイント・完成基準は、レシピカードに書かれているとおりに載せています。</p>
   </div>
@@ -605,13 +675,38 @@ footer{margin-top:26px;padding:16px 0 8px;border-top:1px solid var(--line);font-
 
   /* ---------- 店舗によるレシピの絞り込み ---------- */
   var STORE_LABEL = { ginza:'銀座', asakusa:'浅草', harajuku:'原宿', kama:'嘉麻', hida:'飛騨高山' };
-  var MY_STORE = null;
-  try{ MY_STORE = localStorage.getItem("age3-recipe:store") || null; }catch(e){}
-  if(MY_STORE){
-    RECIPES = RECIPES.filter(function(r){ return !r.stores || !r.stores.length || r.stores.indexOf(MY_STORE) >= 0; });
-    var sb = document.getElementById("storebadge");
-    if(sb){ sb.hidden = false; sb.textContent = (STORE_LABEL[MY_STORE] || MY_STORE) + "店"; }
+  var IDENTITY_STORE = null, VIEW_STORE = null, IS_MASTER = false;
+  try{ IDENTITY_STORE = localStorage.getItem("age3-recipe:store") || null; }catch(e){}
+  if(IDENTITY_STORE){
+    VIEW_STORE = IDENTITY_STORE;
+  }else{
+    IS_MASTER = true;
+    try{
+      var vs = localStorage.getItem("age3-recipe:viewstore");
+      if(vs && vs !== "ALL") VIEW_STORE = vs;
+    }catch(e){}
   }
+  if(VIEW_STORE){
+    RECIPES = RECIPES.filter(function(r){ return !r.stores || !r.stores.length || r.stores.indexOf(VIEW_STORE) >= 0; });
+  }
+  (function(){
+    var sb = document.getElementById("storebadge");
+    if(!sb) return;
+    if(VIEW_STORE){
+      sb.hidden = false;
+      sb.textContent = (STORE_LABEL[VIEW_STORE] || VIEW_STORE) + "店" + (IS_MASTER ? "（表示中）" : "");
+    }else if(IS_MASTER){
+      sb.hidden = false;
+      sb.textContent = "全店舗（本部）";
+    }
+    if(IS_MASTER){
+      sb.classList.add("clickable");
+      sb.title = "タップして店舗を選び直す";
+      sb.addEventListener("click", function(){
+        if(window.A3reopenStoreHome) window.A3reopenStoreHome();
+      });
+    }
+  })();
 
   /* ---------- 一覧 ---------- */
 
@@ -1639,6 +1734,7 @@ footer{margin-top:26px;padding:16px 0 8px;border-top:1px solid var(--line);font-
       localStorage.removeItem("age3-recipe:ok2");
       localStorage.removeItem("age3-recipe:ok");
       localStorage.removeItem("age3-recipe:store");
+      localStorage.removeItem("age3-recipe:viewstore");
       localStorage.removeItem(EN_KEY);
     }catch(e){}
     /* 端末に残っている写真のキャッシュも消す（写真を差し替えたのに古いまま出るのを防ぐ） */
