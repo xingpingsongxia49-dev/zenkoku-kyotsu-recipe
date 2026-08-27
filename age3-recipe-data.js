@@ -427,6 +427,7 @@ var RECIPES = [
   id: 'as-08-hokkaido', code: 'AS-08', ver: '2.0', issued: '2026.08',
   name: '北海道あんバター', en: 'Hokkaido Anko & Butter',
   serve: 'SWEETS 提供 / SERVE', category: '揚げサンド', limited: false,
+  group: 'regular-sweets',
   status: { tone: 'start', label: '9月〜',      detail: '秋の新商品。ビジュアルを変更し、材料も北海道餡に変更' },
   yield: '1個分', kind: 'sweets',
   ing: [
@@ -1158,6 +1159,7 @@ var RECIPES = [
   name: 'あんバター', en: 'Red Bean & Butter',
   serve: 'SWEETS 提供 / SERVE', category: '揚げサンド', limited: false,
   group: 'regular-sweets',
+  status: { tone: 'end', label: '8月末で終了', detail: '9月より「北海道あんバター」に切り替わります' },
   video: 'SFNCoAqnx-c',
   yield: '1個分', kind: 'sweets',
   ing: [
