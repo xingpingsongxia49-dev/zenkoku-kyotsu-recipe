@@ -536,12 +536,11 @@ footer{margin-top:26px;padding:16px 0 8px;border-top:1px solid var(--line);font-
 
 <script>
 (function(){
-  var KEY="age3-recipe:ok3", VIEW_KEY="age3-recipe:viewstore";
-  /* 銀座・原宿・浅草・嘉麻・飛騨高山の店舗別PINと、既存の本部PIN。
-     どれも「入口を通過できるかどうか」だけを判定し、平文はソースに残さずハッシュ値だけを照合する。
-     どの4桁で入っても、実際に見る店舗は毎回この後の「店舗を選ぶ画面」で決める。
-     （店舗をPINから自動で決め打ちすることはしない） */
-  var CHECK = 609101957;
+  var KEY="age3-recipe:ok3", STORE_KEY="age3-recipe:store", VIEW_KEY="age3-recipe:viewstore";
+  /* 店舗PIN（銀座1111／原宿1112／浅草1113／嘉麻1114／飛騨高山2111）＝その店舗に固定。
+     本部PIN（既存4桁）＝店舗選択画面を出し、いつでも選び直せる。
+     平文はソースに残さず、ハッシュ値だけを照合する。 */
+  var CHECK = 609101957; /* 本部PIN */
   var STORE_CHECKS = {
     2083305497: "ginza",
     2032972640: "harajuku",
@@ -574,6 +573,7 @@ footer{margin-top:26px;padding:16px 0 8px;border-top:1px solid var(--line);font-
       location.reload();
     });
   }
+  /* 本部PINだけが呼べる（店舗バッジのクリック時に本編スクリプト側でIS_MASTERを見て判定する） */
   window.A3reopenStoreHome = function(){
     try{ localStorage.removeItem(VIEW_KEY); }catch(e){}
     location.reload();
@@ -582,7 +582,12 @@ footer{margin-top:26px;padding:16px 0 8px;border-top:1px solid var(--line);font-
   try{
     if(localStorage.getItem(KEY)==="1"){
       gate.remove();
-      /* PINの種類に関わらず、まだ「見る店舗」を選んでいなければ必ず選択画面を出す */
+      var identityStore = localStorage.getItem(STORE_KEY) || null;
+      if(identityStore){
+        /* 店舗PINでログイン済み：その店舗に固定。選択画面は出さない */
+        return;
+      }
+      /* 本部PIN：まだ「見る店舗」を選んでいなければ選択画面を出す */
       var chosen = localStorage.getItem(VIEW_KEY);
       if(!chosen){ showHome(); }
       return;
@@ -595,9 +600,20 @@ footer{margin-top:26px;padding:16px 0 8px;border-top:1px solid var(--line);font-
     err.hidden=true;
     if(pin.value.length<4) return;
     var h = hash(pin.value);
-    if(h === CHECK || STORE_CHECKS[h]){
-      try{ localStorage.setItem(KEY,"1"); localStorage.removeItem(VIEW_KEY); }catch(e){}
+    if(h === CHECK){
+      try{
+        localStorage.setItem(KEY,"1");
+        localStorage.removeItem(STORE_KEY); /* 本部PINで入った時点で必ずクリア（店舗PINの残骸対策） */
+        localStorage.removeItem(VIEW_KEY);
+      }catch(e){}
       /* PIN確定直後はまだ本編のスクリプトが絞り込みを反映していないため、reloadして正しい状態で開く */
+      location.reload();
+    }else if(STORE_CHECKS[h]){
+      try{
+        localStorage.setItem(KEY,"1");
+        localStorage.setItem(STORE_KEY, STORE_CHECKS[h]);
+        localStorage.removeItem(VIEW_KEY);
+      }catch(e){}
       location.reload();
     }else{ err.hidden=false; pin.value=""; pin.focus(); }
   });
@@ -674,24 +690,41 @@ footer{margin-top:26px;padding:16px 0 8px;border-top:1px solid var(--line);font-
 
   /* ---------- 店舗によるレシピの絞り込み ---------- */
   var STORE_LABEL = { ginza:'銀座', asakusa:'浅草', harajuku:'原宿', kama:'嘉麻', hida:'飛騨高山' };
-  var VIEW_STORE = null;
-  try{
-    var vs = localStorage.getItem("age3-recipe:viewstore");
-    if(vs && vs !== "ALL") VIEW_STORE = vs;
-  }catch(e){}
+  var IDENTITY_STORE = null, VIEW_STORE = null, IS_MASTER = false;
+  try{ IDENTITY_STORE = localStorage.getItem("age3-recipe:store") || null; }catch(e){}
+  if(IDENTITY_STORE){
+    /* 店舗PINでログイン：その店舗に固定。切り替え不可 */
+    VIEW_STORE = IDENTITY_STORE;
+  }else{
+    /* 本部PIN：選んだ店舗（未選択なら全店舗）。いつでも選び直せる */
+    IS_MASTER = true;
+    try{
+      var vs = localStorage.getItem("age3-recipe:viewstore");
+      if(vs && vs !== "ALL") VIEW_STORE = vs;
+    }catch(e){}
+  }
   if(VIEW_STORE){
     RECIPES = RECIPES.filter(function(r){ return !r.stores || !r.stores.length || r.stores.indexOf(VIEW_STORE) >= 0; });
   }
   (function(){
     var sb = document.getElementById("storebadge");
     if(!sb) return;
-    sb.hidden = false;
-    sb.textContent = VIEW_STORE ? ((STORE_LABEL[VIEW_STORE] || VIEW_STORE) + "店") : "全店舗（本部）";
-    sb.classList.add("clickable");
-    sb.title = "タップして店舗を選び直す";
-    sb.addEventListener("click", function(){
-      if(window.A3reopenStoreHome) window.A3reopenStoreHome();
-    });
+    if(VIEW_STORE){
+      sb.hidden = false;
+      sb.textContent = (STORE_LABEL[VIEW_STORE] || VIEW_STORE) + "店";
+    }else if(IS_MASTER){
+      sb.hidden = false;
+      sb.textContent = "全店舗（本部）";
+    }
+    if(IS_MASTER){
+      /* 本部PINだけ、バッジから店舗を選び直せる */
+      sb.classList.add("clickable");
+      sb.title = "タップして店舗を選び直す";
+      sb.addEventListener("click", function(){
+        if(window.A3reopenStoreHome) window.A3reopenStoreHome();
+      });
+    }
+    /* 店舗PIN（IS_MASTER===false）の場合はクリック不可のまま。他店舗への切り替えはできない */
   })();
 
   /* ---------- 一覧 ---------- */
