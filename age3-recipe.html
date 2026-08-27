@@ -87,14 +87,12 @@ img{max-width:100%;display:block}
 /* ---------- header ---------- */
 header{background:var(--sumi);color:var(--kinari);padding:calc(env(safe-area-inset-top) + 18px) 0 15px}
 .brand{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
-.storebadge{
-  font-size:11px;font-weight:800;letter-spacing:.08em;color:#fff;background:var(--shu);
-  padding:3px 9px;border-radius:999px;vertical-align:middle;border:none;font-family:inherit;
-}
-.storebadge.clickable{cursor:pointer}
-.storebadge.clickable:after{content:" ▾";font-weight:400;opacity:.8}
 .brand .mark{font-size:11px;letter-spacing:.28em;color:var(--shiraki);border:1px solid var(--furuki);padding:3px 8px;border-radius:2px}
-.brand h1{font-size:19px;font-weight:800;margin:0;letter-spacing:.02em}
+.hometitle{
+  font-size:19px;font-weight:800;margin:0;letter-spacing:.02em;
+  background:none;border:none;padding:0;color:inherit;font-family:inherit;cursor:pointer;
+}
+.hometitle:active{opacity:.7}
 .lede{margin:9px 0 0;font-size:12.5px;color:var(--gin);line-height:1.6}
 
 /* ---------- search / filter ---------- */
@@ -539,13 +537,14 @@ footer{margin-top:26px;padding:16px 0 8px;border-top:1px solid var(--line);font-
   /* ==== 保存キーのバージョン管理 ====
      この番号を上げると、旧バージョンの保存データ（ok3/store/viewstore等）を
      問答無用で全消去し、必ず新しい「店舗選択」から始まる状態に戻す。 */
-  var VER_KEY = "age3-recipe:authver", CUR_VER = "2";
+  var VER_KEY = "age3-recipe:authver", CUR_VER = "3";
   var AUTH_KEY = "age3-recipe:auth";       /* 店舗ごとのPIN通過日時（localStorage・30日有効） */
   var SESSION_KEY = "age3-recipe:session"; /* 今回開いている間だけ覚える「今見ている店舗」（sessionStorage） */
   try{
     if(localStorage.getItem(VER_KEY) !== CUR_VER){
       ["age3-recipe:ok3","age3-recipe:ok2","age3-recipe:ok","age3-recipe:store","age3-recipe:viewstore", AUTH_KEY]
         .forEach(function(k){ localStorage.removeItem(k); });
+      try{ sessionStorage.removeItem(SESSION_KEY); }catch(e2){}
       localStorage.setItem(VER_KEY, CUR_VER);
     }
   }catch(e){}
@@ -643,8 +642,7 @@ footer{margin-top:26px;padding:16px 0 8px;border-top:1px solid var(--line);font-
   <div class="shell">
     <div class="brand">
       <span class="mark">Age.3</span>
-      <h1>レシピ</h1>
-      <button type="button" id="storebadge" class="storebadge" hidden></button>
+      <button type="button" id="hometitle" class="hometitle">レシピ</button>
     </div>
     <p class="lede">揚げサンドのスタンダードレシピ。材料・作り方・ポイント・完成基準は、レシピカードに書かれているとおりに載せています。</p>
   </div>
@@ -707,28 +705,18 @@ footer{margin-top:26px;padding:16px 0 8px;border-top:1px solid var(--line);font-
   try{ var v = localStorage.getItem(EN_KEY); if(v==="0") showEn = false; }catch(e){}
 
   /* ---------- 店舗によるレシピの絞り込み ---------- */
-  var STORE_LABEL = { ginza:'銀座', asakusa:'浅草', harajuku:'原宿', kama:'嘉麻', hida:'飛騨高山' };
-  var CUR_STORE = null; /* 'ginza'などの店舗id、または"ALL"（全店舗＝本部） */
+  var CUR_STORE = null; /* 'ginza'などの店舗id、または"ALL"（本部） */
   try{ CUR_STORE = sessionStorage.getItem("age3-recipe:session") || null; }catch(e){}
-  var VIEW_STORE = (CUR_STORE && CUR_STORE !== "ALL") ? CUR_STORE : null;
+  /* 嘉麻(kama)は例外：この店舗のPINだけは全店舗のレシピを閲覧できる */
+  var NO_FILTER = { ALL:true, kama:true };
+  var VIEW_STORE = (CUR_STORE && !NO_FILTER[CUR_STORE]) ? CUR_STORE : null;
   if(VIEW_STORE){
     RECIPES = RECIPES.filter(function(r){ return !r.stores || !r.stores.length || r.stores.indexOf(VIEW_STORE) >= 0; });
   }
   (function(){
-    var sb = document.getElementById("storebadge");
-    if(!sb) return;
-    if(VIEW_STORE){
-      sb.hidden = false;
-      sb.textContent = (STORE_LABEL[VIEW_STORE] || VIEW_STORE) + "店";
-    }else if(CUR_STORE === "ALL"){
-      sb.hidden = false;
-      sb.textContent = "全店舗（本部）";
-    }
-    /* 店舗選択画面へはどのPINで入った人も戻れる。他店舗への実際のアクセスは
-       その店舗自身のPINで守られているので、ここは誰でもクリック可でよい。 */
-    sb.classList.add("clickable");
-    sb.title = "タップして店舗を選び直す";
-    sb.addEventListener("click", function(){
+    var ht = document.getElementById("hometitle");
+    if(!ht) return;
+    ht.addEventListener("click", function(){
       if(window.A3reopenStoreHome) window.A3reopenStoreHome();
     });
   })();
@@ -1071,6 +1059,7 @@ footer{margin-top:26px;padding:16px 0 8px;border-top:1px solid var(--line);font-
     return h;
   }
 
+  var STORE_LABEL = { ginza:'銀座', asakusa:'浅草', harajuku:'原宿', kama:'嘉麻', hida:'飛騨高山' };
   function storeBadgeText(r){
     if(!r.stores || !r.stores.length) return "";
     return r.stores.map(function(s){ return STORE_LABEL[s] || s; }).join("・") + "限定";
