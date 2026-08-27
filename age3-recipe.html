@@ -697,7 +697,7 @@ footer{margin-top:26px;padding:16px 0 8px;border-top:1px solid var(--line);font-
   var PLAYLIST = (RECIPE_META && RECIPE_META.videoPlaylist) || "";
   var PLAYLIST_URL = PLAYLIST ? "https://www.youtube.com/playlist?list=" + encodeURIComponent(PLAYLIST) : "";
   var PLAYLIST_REG = (RECIPE_META && RECIPE_META.videoPlaylistRegular) || PLAYLIST;
-  function plId(r){ return (r && r.group && r.group.indexOf("regular") === 0) ? PLAYLIST_REG : PLAYLIST; }
+  function plId(r){ return (r && group(r).indexOf("regular") === 0) ? PLAYLIST_REG : PLAYLIST; }
   function plUrl(r){ var p = plId(r); return p ? "https://www.youtube.com/playlist?list=" + encodeURIComponent(p) : ""; }
 
   var EN_KEY = "age3-recipe:en";
@@ -936,7 +936,7 @@ footer{margin-top:26px;padding:16px 0 8px;border-top:1px solid var(--line);font-
     var g = (which === 'savory') ? 'regular-savory' : 'regular-sweets';
     var label = (which === 'savory') ? 'レギュラーセイボリー' : 'レギュラースイーツ';
     var en = (which === 'savory') ? 'REGULAR SAVORY' : 'REGULAR SWEETS';
-    var list = RECIPES.filter(function(r){ return r.group === g; });
+    var list = RECIPES.filter(function(r){ return group(r) === g; });
     if(!list.length) return;
     var bodyHtml = kPage('',
       '<b>' + label + ' ' + list.length + '品</b><br>左＝材料 ／ 右＝使用量（揚げパンを除く）',
@@ -1029,8 +1029,17 @@ footer{margin-top:26px;padding:16px 0 8px;border-top:1px solid var(--line);font-
   };
   /* 商品区分。データ側に group を持たせる。
      "regular-sweets" = レギュラースイーツ / "regular-savory" = レギュラーセイボリー / "season" = シーズン
-     未指定は season。現行の登録品はすべてシーズン商品のため、既存データの変更は不要。 */
-  function group(r){ return r.group || "season"; }
+     未指定は season。
+
+     例外：あんバター(as-08) ↔ 北海道あんバター(as-08-hokkaido) は9/1で自動入れ替え。
+     8月中は as-08 がレギュラースイーツ、as-08-hokkaido はシーズン（9月〜予告）。
+     9月以降は as-08 がシーズン（終了扱い）、as-08-hokkaido がレギュラースイーツになる。 */
+  var ANKO_SWITCH_TS = new Date(2026, 8, 1).getTime(); /* 2026-09-01 0:00 */
+  function group(r){
+    if(r.id === "as-08")          return (Date.now() >= ANKO_SWITCH_TS) ? "season" : (r.group || "season");
+    if(r.id === "as-08-hokkaido") return (Date.now() >= ANKO_SWITCH_TS) ? "regular-sweets" : "season";
+    return r.group || "season";
+  }
 
   var FILTERS = [
     { id:"all",        label:"すべて",             test:function(){ return true; } },
@@ -1089,8 +1098,8 @@ footer{margin-top:26px;padding:16px 0 8px;border-top:1px solid var(--line);font-
     $("#empty").hidden = list.length > 0;
     var pa = $("#printall");
     if(pa){ pa.hidden = list.length === 0; pa.textContent = "表示中の" + list.length + "品をまとめて印刷 / PDF"; pa.__list = list; }
-    var nsw = RECIPES.filter(function(r){ return r.group === "regular-sweets"; }).length;
-    var nsv = RECIPES.filter(function(r){ return r.group === "regular-savory"; }).length;
+    var nsw = RECIPES.filter(function(r){ return group(r) === "regular-sweets"; }).length;
+    var nsv = RECIPES.filter(function(r){ return group(r) === "regular-savory"; }).length;
     var pk = $("#printkitchen");
     if(pk){
       pk.hidden = nsw === 0;
