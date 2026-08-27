@@ -45,12 +45,12 @@ html.locked,html.noscroll{overflow:hidden}
 .gmark{display:inline-block;font-size:11px;letter-spacing:.28em;color:#C9A87C;border:1px solid #7E6141;padding:3px 9px;border-radius:2px}
 .gate h1{font-size:21px;font-weight:800;margin:14px 0 0;letter-spacing:.02em}
 .glead{margin:22px 0 12px;font-size:13px;color:#B9BCBE}
-#gpin{
+#gpin, #spinInput{
   width:100%;padding:16px;font-size:26px;letter-spacing:.6em;text-align:center;
   border:1.5px solid #56504A;border-radius:3px;background:#232120;color:#F5F2EC;
   font-family:inherit;-webkit-appearance:none;appearance:none;
 }
-#gpin:focus{outline:none;border-color:#C9A87C;box-shadow:0 0 0 3px rgba(201,168,124,.2)}
+#gpin:focus, #spinInput:focus{outline:none;border-color:#C9A87C;box-shadow:0 0 0 3px rgba(201,168,124,.2)}
 .gerr{margin:12px 0 0;font-size:13px;color:#E0A79C;font-weight:700}
 .gnote{margin:22px 0 0;font-size:11.5px;color:#6E6C67;line-height:1.8}
 
@@ -512,17 +512,6 @@ footer{margin-top:26px;padding:16px 0 8px;border-top:1px solid var(--line);font-
 </head>
 <body>
 
-<div class="gate" id="gate">
-  <div class="gbox">
-    <span class="gmark">Age.3</span>
-    <h1>レシピ</h1>
-    <p class="glead">4桁の番号を入れてください</p>
-    <input id="gpin" type="password" inputmode="numeric" pattern="[0-9]*" maxlength="4" autocomplete="off" aria-label="4桁の番号">
-    <p class="gerr" id="gerr" hidden>番号がちがいます</p>
-    <p class="gnote">番号は店長または本部に聞いてください。<br>一度入れると、この端末では次から聞かれません。</p>
-  </div>
-</div>
-
 <div class="gate" id="storehome" hidden>
   <div class="shbox">
     <span class="gmark">Age.3</span>
@@ -530,31 +519,64 @@ footer{margin-top:26px;padding:16px 0 8px;border-top:1px solid var(--line);font-
     <p class="shlead">見たい店舗を選ぶと、その店舗のレシピだけが表示されます。</p>
     <div class="shgrid" id="shgrid"></div>
     <button type="button" class="shall" id="shall">全店舗を見る（本部）</button>
-    <p class="shnote">あとからいつでも、ヘッダーの「店舗を変更」から選び直せます。</p>
+  </div>
+</div>
+
+<div class="gate" id="storepin" hidden>
+  <div class="gbox">
+    <span class="gmark">Age.3</span>
+    <h1 id="storepinTitle">店舗</h1>
+    <p class="glead">4桁の番号を入れてください</p>
+    <input id="spinInput" type="password" inputmode="numeric" pattern="[0-9]*" maxlength="4" autocomplete="off" aria-label="4桁の番号">
+    <p class="gerr" id="spinErr" hidden>番号がちがいます</p>
+    <p class="gnote">番号は店長または本部に聞いてください。<br>一度正しく入れると、この端末ではこの店舗だけ30日間聞かれません。</p>
+    <button type="button" class="shall" id="spinBack" style="margin-top:20px">店舗選択に戻る</button>
   </div>
 </div>
 
 <script>
 (function(){
-  var KEY="age3-recipe:ok3", STORE_KEY="age3-recipe:store", VIEW_KEY="age3-recipe:viewstore";
-  /* 店舗PIN（銀座1111／原宿1112／浅草1113／嘉麻1114／飛騨高山2111）＝その店舗に固定。
-     本部PIN（既存4桁）＝店舗選択画面を出し、いつでも選び直せる。
-     平文はソースに残さず、ハッシュ値だけを照合する。 */
-  var CHECK = 609101957; /* 本部PIN */
-  var STORE_CHECKS = {
-    2083305497: "ginza",
-    2032972640: "harajuku",
-    2049750259: "asakusa",
-    2133638354: "kama",
-    1486455010: "hida"
+  /* ==== 保存キーのバージョン管理 ====
+     この番号を上げると、旧バージョンの保存データ（ok3/store/viewstore等）を
+     問答無用で全消去し、必ず新しい「店舗選択」から始まる状態に戻す。 */
+  var VER_KEY = "age3-recipe:authver", CUR_VER = "2";
+  var AUTH_KEY = "age3-recipe:auth";       /* 店舗ごとのPIN通過日時（localStorage・30日有効） */
+  var SESSION_KEY = "age3-recipe:session"; /* 今回開いている間だけ覚える「今見ている店舗」（sessionStorage） */
+  try{
+    if(localStorage.getItem(VER_KEY) !== CUR_VER){
+      ["age3-recipe:ok3","age3-recipe:ok2","age3-recipe:ok","age3-recipe:store","age3-recipe:viewstore", AUTH_KEY]
+        .forEach(function(k){ localStorage.removeItem(k); });
+      localStorage.setItem(VER_KEY, CUR_VER);
+    }
+  }catch(e){}
+
+  var CHECK = 609101957; /* 全店舗（本部）PIN */
+  var STORE_PIN_HASH = {
+    ginza: 2083305497, harajuku: 2032972640, asakusa: 2049750259, kama: 2133638354, hida: 1486455010
   };
   var STORE_NAMES = { ginza:"銀座店", harajuku:"原宿店", asakusa:"浅草店", kama:"嘉麻店", hida:"飛騨高山店" };
   var STORE_ORDER = ["ginza","harajuku","asakusa","kama","hida"];
+  var THIRTY_DAYS = 30*24*60*60*1000;
 
-  var gate=document.getElementById("gate");
-  var home=document.getElementById("storehome");
+  var home = document.getElementById("storehome");
+  var pinScreen = document.getElementById("storepin");
 
-  function showHome(){
+  function hash(s){var x=2166136261;for(var j=0;j<s.length;j++){x^=s.charCodeAt(j);x=Math.imul(x,16777619);}return x>>>0;}
+  function getAuth(){ try{ return JSON.parse(localStorage.getItem(AUTH_KEY) || "{}") || {}; }catch(e){ return {}; } }
+  function setAuthNow(id){
+    var a = getAuth(); a[id] = Date.now();
+    try{ localStorage.setItem(AUTH_KEY, JSON.stringify(a)); }catch(e){}
+  }
+  function isAuthValid(id){
+    var a = getAuth(), ts = a[id];
+    return !!ts && (Date.now() - ts) < THIRTY_DAYS;
+  }
+  function enterStore(id){
+    try{ sessionStorage.setItem(SESSION_KEY, id); }catch(e){}
+    location.reload();
+  }
+
+  function showPicker(){
     var g = document.getElementById("shgrid");
     g.innerHTML = STORE_ORDER.map(function(id){
       return '<button type="button" class="shcard" data-store="'+id+'">' +
@@ -562,62 +584,58 @@ footer{margin-top:26px;padding:16px 0 8px;border-top:1px solid var(--line);font-
         '<span class="shsub">この店舗のレシピを開く</span></button>';
     }).join("");
     document.documentElement.classList.add("locked");
+    pinScreen.hidden = true;
     home.hidden = false;
-    g.addEventListener("click", function(e){
-      var b = e.target.closest("[data-store]"); if(!b) return;
-      try{ localStorage.setItem(VIEW_KEY, b.dataset.store); }catch(e2){}
-      location.reload();
-    });
-    document.getElementById("shall").addEventListener("click", function(){
-      try{ localStorage.setItem(VIEW_KEY, "ALL"); }catch(e2){}
-      location.reload();
-    });
   }
-  /* 本部PINだけが呼べる（店舗バッジのクリック時に本編スクリプト側でIS_MASTERを見て判定する） */
+  function showPinFor(id, label){
+    document.getElementById("storepinTitle").textContent = label;
+    var inp = document.getElementById("spinInput"), err = document.getElementById("spinErr");
+    inp.value = ""; err.hidden = true;
+    document.documentElement.classList.add("locked");
+    home.hidden = true;
+    pinScreen.hidden = false;
+    setTimeout(function(){ inp.focus(); }, 100);
+
+    function onInput(){
+      if(inp.value.length < 4) return;
+      inp.removeEventListener("input", onInput);
+      var expected = (id === "ALL") ? CHECK : STORE_PIN_HASH[id];
+      if(hash(inp.value) === expected){
+        setAuthNow(id);
+        enterStore(id);
+      }else{
+        err.hidden = false;
+        setTimeout(showPicker, 700); /* 間違いは一瞬見せてから店舗選択に戻す */
+      }
+    }
+    inp.addEventListener("input", onInput);
+  }
+
+  home.addEventListener("click", function(e){
+    var b = e.target.closest("[data-store]"); if(!b) return;
+    var id = b.dataset.store;
+    if(isAuthValid(id)) enterStore(id); else showPinFor(id, STORE_NAMES[id]);
+  });
+  document.getElementById("shall").addEventListener("click", function(){
+    if(isAuthValid("ALL")) enterStore("ALL"); else showPinFor("ALL", "全店舗（本部）");
+  });
+  document.getElementById("spinBack").addEventListener("click", showPicker);
+
+  /* ヘッダーの店舗バッジから呼ばれる：店舗選択画面に戻す（権限は個別PINで守られたまま） */
   window.A3reopenStoreHome = function(){
-    try{ localStorage.removeItem(VIEW_KEY); }catch(e){}
+    try{ sessionStorage.removeItem(SESSION_KEY); }catch(e){}
     location.reload();
   };
 
-  try{
-    if(localStorage.getItem(KEY)==="1"){
-      gate.remove();
-      var identityStore = localStorage.getItem(STORE_KEY) || null;
-      if(identityStore){
-        /* 店舗PINでログイン済み：その店舗に固定。選択画面は出さない */
-        return;
-      }
-      /* 本部PIN：まだ「見る店舗」を選んでいなければ選択画面を出す */
-      var chosen = localStorage.getItem(VIEW_KEY);
-      if(!chosen){ showHome(); }
-      return;
-    }
-  }catch(e){}
-  document.documentElement.classList.add("locked");
-  var pin=document.getElementById("gpin"), err=document.getElementById("gerr");
-  function hash(s){var x=2166136261;for(var j=0;j<s.length;j++){x^=s.charCodeAt(j);x=Math.imul(x,16777619);}return x>>>0;}
-  pin.addEventListener("input",function(){
-    err.hidden=true;
-    if(pin.value.length<4) return;
-    var h = hash(pin.value);
-    if(h === CHECK){
-      try{
-        localStorage.setItem(KEY,"1");
-        localStorage.removeItem(STORE_KEY); /* 本部PINで入った時点で必ずクリア（店舗PINの残骸対策） */
-        localStorage.removeItem(VIEW_KEY);
-      }catch(e){}
-      /* PIN確定直後はまだ本編のスクリプトが絞り込みを反映していないため、reloadして正しい状態で開く */
-      location.reload();
-    }else if(STORE_CHECKS[h]){
-      try{
-        localStorage.setItem(KEY,"1");
-        localStorage.setItem(STORE_KEY, STORE_CHECKS[h]);
-        localStorage.removeItem(VIEW_KEY);
-      }catch(e){}
-      location.reload();
-    }else{ err.hidden=false; pin.value=""; pin.focus(); }
-  });
-  setTimeout(function(){ pin.focus(); },120);
+  /* ---- 起動時の分岐 ---- */
+  var curSession = null;
+  try{ curSession = sessionStorage.getItem(SESSION_KEY); }catch(e){}
+  if(curSession){
+    /* 今回すでに店舗を選んでいる（この端末を開いている間だけ有効）：そのまま一覧へ */
+    home.hidden = true; pinScreen.hidden = true;
+    return;
+  }
+  showPicker();
 })();
 </script>
 
@@ -656,8 +674,8 @@ footer{margin-top:26px;padding:16px 0 8px;border-top:1px solid var(--line);font-
     分量・手順・ポイントは、すべてカードに書かれているとおりに写しています。カードに書かれていないことは載せていません。
     <div class="reset">
       <button id="reset" class="rbtn">この端末の記録を消す（リセット）</button>
-      <p class="rnote">合言葉をおぼえている記録と、英語表示の設定を消します。<br>
-      次に開くときは、また4桁の番号を入れることになります。<br>
+      <p class="rnote">各店舗のPINをおぼえている記録と、英語表示の設定を消します。<br>
+      次に開くときは、また店舗選択・PIN入力からになります。<br>
       レシピそのものは消えません。端末を人に渡すときや、番号が変わったときに押してください。</p>
     </div>
   </footer>
@@ -690,19 +708,9 @@ footer{margin-top:26px;padding:16px 0 8px;border-top:1px solid var(--line);font-
 
   /* ---------- 店舗によるレシピの絞り込み ---------- */
   var STORE_LABEL = { ginza:'銀座', asakusa:'浅草', harajuku:'原宿', kama:'嘉麻', hida:'飛騨高山' };
-  var IDENTITY_STORE = null, VIEW_STORE = null, IS_MASTER = false;
-  try{ IDENTITY_STORE = localStorage.getItem("age3-recipe:store") || null; }catch(e){}
-  if(IDENTITY_STORE){
-    /* 店舗PINでログイン：その店舗に固定。切り替え不可 */
-    VIEW_STORE = IDENTITY_STORE;
-  }else{
-    /* 本部PIN：選んだ店舗（未選択なら全店舗）。いつでも選び直せる */
-    IS_MASTER = true;
-    try{
-      var vs = localStorage.getItem("age3-recipe:viewstore");
-      if(vs && vs !== "ALL") VIEW_STORE = vs;
-    }catch(e){}
-  }
+  var CUR_STORE = null; /* 'ginza'などの店舗id、または"ALL"（全店舗＝本部） */
+  try{ CUR_STORE = sessionStorage.getItem("age3-recipe:session") || null; }catch(e){}
+  var VIEW_STORE = (CUR_STORE && CUR_STORE !== "ALL") ? CUR_STORE : null;
   if(VIEW_STORE){
     RECIPES = RECIPES.filter(function(r){ return !r.stores || !r.stores.length || r.stores.indexOf(VIEW_STORE) >= 0; });
   }
@@ -712,19 +720,17 @@ footer{margin-top:26px;padding:16px 0 8px;border-top:1px solid var(--line);font-
     if(VIEW_STORE){
       sb.hidden = false;
       sb.textContent = (STORE_LABEL[VIEW_STORE] || VIEW_STORE) + "店";
-    }else if(IS_MASTER){
+    }else if(CUR_STORE === "ALL"){
       sb.hidden = false;
       sb.textContent = "全店舗（本部）";
     }
-    if(IS_MASTER){
-      /* 本部PINだけ、バッジから店舗を選び直せる */
-      sb.classList.add("clickable");
-      sb.title = "タップして店舗を選び直す";
-      sb.addEventListener("click", function(){
-        if(window.A3reopenStoreHome) window.A3reopenStoreHome();
-      });
-    }
-    /* 店舗PIN（IS_MASTER===false）の場合はクリック不可のまま。他店舗への切り替えはできない */
+    /* 店舗選択画面へはどのPINで入った人も戻れる。他店舗への実際のアクセスは
+       その店舗自身のPINで守られているので、ここは誰でもクリック可でよい。 */
+    sb.classList.add("clickable");
+    sb.title = "タップして店舗を選び直す";
+    sb.addEventListener("click", function(){
+      if(window.A3reopenStoreHome) window.A3reopenStoreHome();
+    });
   })();
 
   /* ---------- 一覧 ---------- */
@@ -1743,9 +1749,9 @@ footer{margin-top:26px;padding:16px 0 8px;border-top:1px solid var(--line);font-
   $("#reset").addEventListener("click", function(){
     var ok = window.confirm(
       "この端末の記録を消します。\n\n" +
-      "・合言葉をおぼえている記録\n" +
+      "・各店舗のPINをおぼえている記録\n" +
       "・英語表示の設定\n\n" +
-      "次に開くときは、また4桁の番号を入れることになります。\n" +
+      "次に開くときは、また店舗選択・PIN入力からになります。\n" +
       "レシピそのものは消えません。\n\nよろしいですか？");
     if(!ok) return;
     try{
@@ -1754,6 +1760,8 @@ footer{margin-top:26px;padding:16px 0 8px;border-top:1px solid var(--line);font-
       localStorage.removeItem("age3-recipe:ok");
       localStorage.removeItem("age3-recipe:store");
       localStorage.removeItem("age3-recipe:viewstore");
+      localStorage.removeItem("age3-recipe:auth");
+      sessionStorage.removeItem("age3-recipe:session");
       localStorage.removeItem(EN_KEY);
     }catch(e){}
     /* 端末に残っている写真のキャッシュも消す（写真を差し替えたのに古いまま出るのを防ぐ） */
