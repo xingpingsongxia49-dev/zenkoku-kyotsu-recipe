@@ -779,7 +779,7 @@ var RECIPES = [
 {
   id: 'dubai-choco', code: null, ver: null, issued: null,
   name: 'ドバイチョコ', en: 'Dubai chocolate',
-  serve: null, category: null, limited: false,
+  serve: null, category: null, limited: false, stores: ['harajuku','kama'],
   yield: '1個分', kind: 'sweets', oldFormat: true,
   ing: [
     ['揚げたパン（半分）', 'Fried bread (half piece)', null, null],
