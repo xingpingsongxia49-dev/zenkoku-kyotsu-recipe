@@ -330,6 +330,14 @@ var RECIPES = [
     ['グラニュー糖（表面用）', 'Granulated sugar (for surface)', '5', 'g'],
     ['大学芋', 'Candied sweet potato', '3', '個']
   ],
+  sub: {
+    title: '紫芋クリミビット 1L仕込み',
+    ing: [
+      ['クリミビット', 'Kurimibit', '350', 'g'],
+      ['芋パウダー', 'Sweet potato powder', '35', 'g'],
+      ['水', 'Water', '1', 'L']
+    ]
+  },
   steps: [
     { jp: 'パンの底に芋餡（10g）を敷き、カスタードホイップ（60g）を詰める。',
       en: 'Spread sweet potato paste (10g) on the bottom of the bread, then fill with custard whipped cream (60g).',
