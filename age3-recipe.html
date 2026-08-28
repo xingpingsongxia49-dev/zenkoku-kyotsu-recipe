@@ -146,6 +146,7 @@ header{background:var(--sumi);color:var(--kinari);padding:calc(env(safe-area-ins
 .tag.sw{border-color:#D9CDBA;color:#8A6A3C;background:#FBF7F1}
 .tag.sv{border-color:#D6C8C6;color:#8E4A42;background:#FBF3F2}
 .tag.lm{border-color:var(--sumi);color:var(--sumi);font-weight:700}
+.tag.st-store{border-color:var(--sumi);background:var(--sumi);color:#fff;font-weight:800;letter-spacing:.04em}
 .tag.se{border-color:#C6CBD2;color:#4A5A70;background:#F2F5F9}
 .tag.st-end{border-color:#E0B4AE;color:#A6392E;background:#FCF3F2;font-weight:700}
 .tag.st-start{border-color:#A9C9AE;color:#2E6B3A;background:#F1F8F2;font-weight:700}
@@ -707,8 +708,8 @@ footer{margin-top:26px;padding:16px 0 8px;border-top:1px solid var(--line);font-
   /* ---------- 店舗によるレシピの絞り込み ---------- */
   var CUR_STORE = null; /* 'ginza'などの店舗id、または"ALL"（本部） */
   try{ CUR_STORE = sessionStorage.getItem("age3-recipe:session") || null; }catch(e){}
-  /* 嘉麻(kama)は例外：この店舗のPINだけは全店舗のレシピを閲覧できる */
-  var NO_FILTER = { ALL:true, kama:true };
+  /* 銀座・嘉麻は例外：この2店舗のPINだけは全店舗のレシピを閲覧できる */
+  var NO_FILTER = { ALL:true, kama:true, ginza:true };
   var VIEW_STORE = (CUR_STORE && !NO_FILTER[CUR_STORE]) ? CUR_STORE : null;
   if(VIEW_STORE){
     RECIPES = RECIPES.filter(function(r){ return !r.stores || !r.stores.length || r.stores.indexOf(VIEW_STORE) >= 0; });
@@ -1153,6 +1154,8 @@ footer{margin-top:26px;padding:16px 0 8px;border-top:1px solid var(--line);font-
 
   function detailHtml(r){
     var meta = [];
+    var storeTxt0 = storeBadgeText(r);
+    if(storeTxt0) meta.push('<span class="tag st-store">'+esc(storeTxt0)+'</span>');
     if(r.series)   meta.push('<span class="tag se">'+esc(r.series)+'</span>');
     if(r.code)     meta.push('<span class="tag cd">CODE '+esc(r.code)+'</span>');
     if(r.ver)      meta.push('<span class="tag">VER '+esc(r.ver)+(r.issued?' / '+esc(r.issued):'')+'</span>');
