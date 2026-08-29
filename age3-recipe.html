@@ -103,6 +103,34 @@ header{background:var(--sumi);color:var(--kinari);padding:calc(env(safe-area-ins
 
 /* ---------- search / filter ---------- */
 .tools{position:sticky;top:0;z-index:20;background:var(--kinari);padding:12px 0 8px;border-bottom:1px solid var(--line)}
+.adminbtn{
+  display:block;width:100%;margin-top:10px;padding:10px;font-size:12.5px;font-weight:700;
+  font-family:inherit;color:#fff;background:#1A1917;border:none;border-radius:3px;cursor:pointer;
+}
+.adminbtn:active{opacity:.8}
+
+/* ---------- 店舗ごとの表示・非表示を管理（本部専用） ---------- */
+.adminsearch{
+  width:100%;padding:11px 13px;margin:16px 0 12px;font-size:14px;font-family:inherit;
+  border:1px solid var(--line);border-radius:3px;background:#fff;color:var(--sumi);
+}
+.adminsearch:focus{outline:none;border-color:var(--furuki)}
+table.admintbl{width:100%;border-collapse:collapse;font-size:12.5px;min-width:520px}
+table.admintbl th{
+  background:var(--sumi);color:var(--kinari);text-align:center;font-weight:700;
+  padding:8px 6px;font-size:11.5px;white-space:nowrap;position:sticky;top:0;
+}
+table.admintbl th.anm, table.admintbl td.anm{text-align:left;padding-left:12px}
+table.admintbl td{padding:8px 6px;border-bottom:1px solid var(--line);text-align:center}
+table.admintbl tr:nth-child(even){background:#F7F5EF}
+table.admintbl input[type=checkbox]{width:18px;height:18px;cursor:pointer}
+.adminbar{
+  position:sticky;bottom:0;display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+  background:var(--kinari);border-top:1px solid var(--line);padding:12px 0;margin-top:4px;
+}
+.adminbar span{font-size:12.5px;font-weight:700;color:var(--sumi)}
+.adminbar .btn{margin:0}
+.pinnote2{font-size:11.5px;color:var(--hai);line-height:1.7;margin-top:10px}
 .searchbox{position:relative}
 #q{
   width:100%;padding:14px 44px 14px 15px;font-size:16px;
@@ -663,6 +691,7 @@ footer{margin-top:26px;padding:16px 0 8px;border-top:1px solid var(--line);font-
       <button id="clear" aria-label="消す">×</button>
     </div>
     <div class="chips" id="chips"></div>
+    <button type="button" class="adminbtn" id="adminbtn" hidden>⚙️ 店舗ごとの表示・非表示を管理（本部）</button>
   </div>
 </div>
 
@@ -727,6 +756,17 @@ footer{margin-top:26px;padding:16px 0 8px;border-top:1px solid var(--line);font-
     ht.addEventListener("click", function(){
       if(window.A3reopenStoreHome) window.A3reopenStoreHome();
     });
+  })();
+
+  /* 本部PIN（全店舗を見る）でログインした人だけ、店舗ごとの表示・非表示を管理できる */
+  var IS_HQ = (CUR_STORE === "ALL");
+  (function(){
+    var ab = document.getElementById("adminbtn");
+    if(!ab) return;
+    if(IS_HQ){
+      ab.hidden = false;
+      ab.addEventListener("click", function(){ location.hash = "#/admin"; });
+    }
   })();
 
   /* ---------- 一覧 ---------- */
@@ -1382,7 +1422,7 @@ footer{margin-top:26px;padding:16px 0 8px;border-top:1px solid var(--line);font-
   }
   function closeNotice(){
     if(noticeEl){ noticeEl.remove(); noticeEl = null; }
-    if(!detailEl) document.documentElement.classList.remove("noscroll");
+    if(!detailEl && !adminEl) document.documentElement.classList.remove("noscroll");
   }
 
   /* ---------- 質問箱 ---------- */
@@ -1569,6 +1609,7 @@ footer{margin-top:26px;padding:16px 0 8px;border-top:1px solid var(--line);font-
   }
 
   var askEl = null;
+  var adminEl = null;
   function openAsk(){
     closeAsk();
     askEl = document.createElement("div");
@@ -1641,7 +1682,105 @@ footer{margin-top:26px;padding:16px 0 8px;border-top:1px solid var(--line);font-
   }
   function closeAsk(){
     if(askEl){ askEl.remove(); askEl = null; }
-    if(!detailEl && !noticeEl) document.documentElement.classList.remove("noscroll");
+    if(!detailEl && !noticeEl && !adminEl) document.documentElement.classList.remove("noscroll");
+  }
+
+  /* ---------- 店舗ごとの表示・非表示を管理（本部専用） ---------- */
+  var ADMIN_STORES = ['ginza','harajuku','asakusa','kama','hida'];
+  function adminOrigStores(r){
+    return (r.stores && r.stores.length) ? r.stores.slice() : ADMIN_STORES.slice();
+  }
+  function adminSameSet(a, b){
+    if(a.length !== b.length) return false;
+    return a.slice().sort().join(",") === b.slice().sort().join(",");
+  }
+  function adminLabel(arr){
+    if(arr.length === ADMIN_STORES.length) return "共通（全店舗表示）";
+    if(!arr.length) return "非表示（全店舗で表示されない）";
+    return arr.map(function(s){ return STORE_LABEL[s]; }).join("・") + "限定";
+  }
+  function adminHtml(){
+    var head = '<tr><th class="anm">品名</th>' +
+      ADMIN_STORES.map(function(s){ return '<th>'+esc(STORE_LABEL[s])+'</th>'; }).join('') + '</tr>';
+    return '<div class="dbar"><button class="back" id="back">&larr; 一覧</button></div>' +
+      '<div class="shell">' +
+        '<div class="dhead"><div class="dserve">Age.3 レシピ（本部専用）</div><h2>店舗ごとの表示・非表示</h2>' +
+          '<div class="den">チェックを外すと、その店舗の一覧から非表示になります。全部チェック＝共通（全店舗で表示）です。</div></div>' +
+        '<input id="aq" type="text" placeholder="品名で絞り込む" class="adminsearch">' +
+        '<div style="overflow-x:auto"><table class="admintbl"><thead>'+head+'</thead><tbody id="adminbody"></tbody></table></div>' +
+        '<div class="adminbar">' +
+          '<span id="adminchanged">変更：0件</span>' +
+          '<button type="button" class="btn" id="adminreset">変更を取り消す</button>' +
+          '<button type="button" class="btn pri" id="admincopy">変更内容をコピーする</button>' +
+        '</div>' +
+        '<p class="pinnote2">コピーした内容をクロードに貼って送ると、実際のアプリに反映されます。<br>この画面の操作だけでは、まだ他の端末には反映されません。</p>' +
+      '</div>';
+  }
+  function openAdmin(){
+    closeAdmin();
+    adminEl = document.createElement("div");
+    adminEl.className = "detail";
+    adminEl.innerHTML = adminHtml();
+    document.body.appendChild(adminEl);
+    document.documentElement.classList.add("noscroll");
+    adminEl.querySelector("#back").onclick = function(){ location.hash = ""; };
+
+    var changes = {}; /* id -> チェック済み店舗id配列（元と違う場合だけ持つ） */
+
+    function updateChangedCount(){
+      adminEl.querySelector("#adminchanged").textContent = "変更：" + Object.keys(changes).length + "件";
+    }
+    function renderRows(q){
+      q = (q || "").toLowerCase();
+      var list = RECIPES.filter(function(r){ return !q || r.name.toLowerCase().indexOf(q) >= 0; });
+      adminEl.querySelector("#adminbody").innerHTML = list.map(function(r){
+        var cur = changes[r.id] || adminOrigStores(r);
+        return '<tr>' +
+          '<td class="anm">'+esc(r.name)+'</td>' +
+          ADMIN_STORES.map(function(s){
+            var checked = cur.indexOf(s) >= 0;
+            return '<td class="acell"><input type="checkbox" data-id="'+esc(r.id)+'" data-store="'+s+'"'+(checked?' checked':'')+'></td>';
+          }).join('') +
+          '</tr>';
+      }).join('');
+    }
+    renderRows("");
+
+    adminEl.querySelector("#adminbody").addEventListener("change", function(e){
+      var cb = e.target.closest("input[type=checkbox]"); if(!cb) return;
+      var id = cb.dataset.id, s = cb.dataset.store;
+      var r = byId(id); if(!r) return;
+      var cur = (changes[id] || adminOrigStores(r)).slice();
+      var idx = cur.indexOf(s);
+      if(cb.checked){ if(idx < 0) cur.push(s); } else { if(idx >= 0) cur.splice(idx, 1); }
+      if(adminSameSet(cur, adminOrigStores(r))) delete changes[id]; else changes[id] = cur;
+      updateChangedCount();
+    });
+
+    adminEl.querySelector("#aq").addEventListener("input", function(e){ renderRows(e.target.value); });
+
+    adminEl.querySelector("#adminreset").onclick = function(){
+      if(!Object.keys(changes).length) return;
+      if(!window.confirm("この画面での変更をすべて取り消します。よろしいですか？")) return;
+      changes = {};
+      updateChangedCount();
+      renderRows(adminEl.querySelector("#aq").value);
+    };
+
+    adminEl.querySelector("#admincopy").onclick = function(){
+      var ids = Object.keys(changes);
+      if(!ids.length){ alert("変更がありません。"); return; }
+      var lines = ["【店舗表示設定の変更】"];
+      ids.forEach(function(id){
+        var r = byId(id);
+        lines.push("- " + r.name + " (" + id + ")： " + adminLabel(adminOrigStores(r)) + " → " + adminLabel(changes[id]));
+      });
+      copyText(lines.join("\n"), "変更内容をコピーしました。クロードに貼って送ってください。");
+    };
+  }
+  function closeAdmin(){
+    if(adminEl){ adminEl.remove(); adminEl = null; }
+    if(!detailEl && !noticeEl && !askEl) document.documentElement.classList.remove("noscroll");
   }
 
   function copyText(txt, msg){
@@ -1744,6 +1883,12 @@ footer{margin-top:26px;padding:16px 0 8px;border-top:1px solid var(--line);font-
   function route(){
     closeCook(); closeViewer();
     var h = location.hash || "";
+    if(h === "#/admin"){
+      closeDetail(); closeNotice(); closeAsk();
+      if(IS_HQ) openAdmin(); else { location.hash = ""; return; }
+      syncFab(); return;
+    }
+    closeAdmin();
     if(h === "#/ask"){ closeDetail(); closeNotice(); openAsk(); syncFab(); return; }
     closeAsk();
     if(h === "#/notice"){ closeDetail(); openNotice(); syncFab(); return; }
@@ -1757,7 +1902,7 @@ footer{margin-top:26px;padding:16px 0 8px;border-top:1px solid var(--line);font-
     if(e.key === "Escape"){
       if(viewEl) closeViewer();
       else if(cookEl) closeCook();
-      else if(detailEl || noticeEl || askEl) location.hash = "";
+      else if(detailEl || noticeEl || askEl || adminEl) location.hash = "";
     }
   });
 
