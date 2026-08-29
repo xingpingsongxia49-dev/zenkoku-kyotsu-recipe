@@ -4,7 +4,7 @@
  * - 画面（HTML）: ネット優先。オフライン時だけキャッシュで開く（更新が届かなくなるのを防ぐ）
  * - ハッシュ付きの静的ファイル（JS・画像）: キャッシュ優先（内容が変わればファイル名も変わるため安全）
  */
-const RUNTIME = 'starlist8-v3';
+const RUNTIME = 'starlist8-v4';
 
 self.addEventListener('install', () => {
   self.skipWaiting();
