@@ -56,27 +56,26 @@ html.locked,html.noscroll{overflow:hidden}
 .gnote{margin:22px 0 0;font-size:11.5px;color:#6E6C67;line-height:1.8}
 
 /* ---------- 店舗を選ぶホーム画面（本部PINのみ） ---------- */
-.shbox{width:100%;max-width:460px;text-align:center;margin:auto 0;padding:12px 0}
-.shbox h1{font-size:22px;font-weight:800;margin:14px 0 0;letter-spacing:.02em}
-.shlead{margin:12px 0 20px;font-size:13px;color:#B9BCBE}
-.shgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-@media(max-width:420px){.shgrid{gap:8px}}
+.shbox{width:100%;max-width:420px;text-align:center;margin:auto 0;padding:10px 0}
+.shbox h1{font-size:19px;font-weight:800;margin:10px 0 0;letter-spacing:.02em}
+.shlead{margin:8px 0 14px;font-size:11.5px;color:#B9BCBE;line-height:1.5}
+.shgrid{display:flex;flex-direction:column;gap:6px}
 .shcard{
-  background:#232120;border:1.5px solid #56504A;border-radius:6px;padding:14px 10px 16px;
-  cursor:pointer;font-family:inherit;color:#F5F2EC;text-align:center;
-  display:flex;flex-direction:column;align-items:center;gap:6px;transition:border-color .15s;
+  background:#232120;border:1.5px solid #56504A;border-radius:6px;padding:8px 12px;
+  cursor:pointer;font-family:inherit;color:#F5F2EC;text-align:left;
+  display:flex;flex-direction:row;align-items:center;gap:10px;transition:border-color .15s;
 }
 .shcard:hover, .shcard:focus-visible{outline:none;border-color:#C9A87C}
 .shlogo{
-  width:56px;height:56px;border-radius:50%;overflow:hidden;background:#F5F2EC;
+  width:36px;height:36px;flex:0 0 auto;border-radius:50%;overflow:hidden;background:#F5F2EC;
   border:1px solid #56504A;
 }
 .shlogo img{width:100%;height:100%;object-fit:cover;display:block}
 .shlogo.noimg{display:none}
-.shname{font-size:15px;font-weight:800;letter-spacing:.02em}
-.shsub{font-size:10px;color:#8A8783}
+.shname{font-size:14.5px;font-weight:800;letter-spacing:.02em}
+.shsub{font-size:9.5px;color:#8A8783;margin-top:1px}
 .shall{
-  display:block;width:100%;margin-top:14px;padding:13px;font-size:13px;font-weight:700;
+  display:block;width:100%;margin-top:12px;padding:11px;font-size:12.5px;font-weight:700;
   font-family:inherit;color:#C9A87C;background:transparent;border:1.5px solid #7E6141;border-radius:4px;cursor:pointer;
 }
 .shall:hover, .shall:focus-visible{outline:none;background:rgba(201,168,124,.1)}
