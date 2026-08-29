@@ -132,6 +132,9 @@ table.admintbl input[type=checkbox]{width:18px;height:18px;cursor:pointer}
 .adminbar span{font-size:12.5px;font-weight:700;color:var(--sumi)}
 .adminbar .btn{margin:0}
 .pinnote2{font-size:11.5px;color:var(--hai);line-height:1.7;margin-top:10px}
+.adminresult{font-size:12.5px;font-weight:700;padding:10px 12px;border-radius:3px;margin-top:10px}
+.adminresult.ok{background:#F1F8F2;border:1px solid #CFE2D3;color:#2E6B3A}
+.adminresult.err{background:#FCF3F2;border:1px solid #E9CFCB;color:#A6392E}
 .searchbox{position:relative}
 #q{
   width:100%;padding:14px 44px 14px 15px;font-size:16px;
@@ -1687,6 +1690,7 @@ footer{margin-top:26px;padding:16px 0 8px;border-top:1px solid var(--line);font-
   }
 
   /* ---------- 店舗ごとの表示・非表示を管理（本部専用） ---------- */
+  var ADMIN_API_SECRET = "nDGE7SH9Y_gyHJllBbmhLleFZRitU9yyyXYQGaVwCp0";
   var ADMIN_STORES = ['ginza','harajuku','asakusa','kama','hida'];
   function adminOrigStores(r){
     return (r.stores && r.stores.length) ? r.stores.slice() : ADMIN_STORES.slice();
@@ -1712,9 +1716,12 @@ footer{margin-top:26px;padding:16px 0 8px;border-top:1px solid var(--line);font-
         '<div class="adminbar">' +
           '<span id="adminchanged">変更：0件</span>' +
           '<button type="button" class="btn" id="adminreset">変更を取り消す</button>' +
-          '<button type="button" class="btn pri" id="admincopy">変更内容をコピーする</button>' +
+          '<button type="button" class="btn" id="admincopy">コピーする（手動）</button>' +
+          '<button type="button" class="btn pri" id="adminsave">保存する（今すぐ反映）</button>' +
         '</div>' +
-        '<p class="pinnote2">コピーした内容をクロードに貼って送ると、実際のアプリに反映されます。<br>この画面の操作だけでは、まだ他の端末には反映されません。</p>' +
+        '<p class="adminresult" id="adminresult" hidden></p>' +
+        '<p class="pinnote2">「保存する」で今すぐGitHubに反映されます（実際に全店舗の画面に出るまで30〜60秒ほどかかります）。<br>' +
+        'もし失敗する場合は「コピーする」で内容をコピーし、クロードに貼って送ってください。</p>' +
       '</div>';
   }
   function openAdmin(){
@@ -1777,6 +1784,51 @@ footer{margin-top:26px;padding:16px 0 8px;border-top:1px solid var(--line);font-
         lines.push("- " + r.name + " (" + id + ")： " + adminLabel(adminOrigStores(r)) + " → " + adminLabel(changes[id]));
       });
       copyText(lines.join("\n"), "変更内容をコピーしました。クロードに貼って送ってください。");
+    };
+
+    adminEl.querySelector("#adminsave").onclick = function(){
+      var ids = Object.keys(changes);
+      if(!ids.length){ alert("変更がありません。"); return; }
+      var btn = adminEl.querySelector("#adminsave");
+      var resultEl = adminEl.querySelector("#adminresult");
+      btn.disabled = true; btn.textContent = "保存中…";
+      resultEl.hidden = true;
+
+      var payload = { changes: ids.map(function(id){ return { id: id, stores: changes[id] }; }) };
+
+      fetch("/api/update-stores", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", "x-admin-secret": ADMIN_API_SECRET },
+        body: JSON.stringify(payload)
+      })
+      .then(function(res){ return res.json().then(function(data){ return { status: res.status, data: data }; }); })
+      .then(function(r){
+        if(r.status === 200 && r.data && r.data.ok){
+          /* 保存できた分は、この画面の「元の状態」も更新しておく（もう一度いじれるように） */
+          ids.forEach(function(id){
+            var rec = byId(id);
+            if(rec){ if(changes[id].length >= ADMIN_STORES.length) delete rec.stores; else rec.stores = changes[id]; }
+          });
+          changes = {};
+          updateChangedCount();
+          renderRows(adminEl.querySelector("#aq").value);
+          resultEl.hidden = false;
+          resultEl.className = "adminresult ok";
+          resultEl.textContent = "保存しました（" + r.data.applied + "件）。30〜60秒ほどで全店舗の画面に反映されます。";
+        }else{
+          resultEl.hidden = false;
+          resultEl.className = "adminresult err";
+          resultEl.textContent = "保存に失敗しました（" + (r.data && r.data.error ? r.data.error : ("HTTP " + r.status)) + "）。「コピーする」からクロードに送ってください。";
+        }
+      })
+      .catch(function(err){
+        resultEl.hidden = false;
+        resultEl.className = "adminresult err";
+        resultEl.textContent = "保存に失敗しました（通信エラー）。「コピーする」からクロードに送ってください。";
+      })
+      .finally(function(){
+        btn.disabled = false; btn.textContent = "保存する（今すぐ反映）";
+      });
     };
   }
   function closeAdmin(){
