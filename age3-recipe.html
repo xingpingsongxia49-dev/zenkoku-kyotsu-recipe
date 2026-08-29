@@ -33,6 +33,8 @@
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{margin:0;padding:0}
 html.locked,html.noscroll{overflow:hidden}
+/* hiddenで隠す要素は、他のどんなdisplay指定より必ず優先させる（詳細度事故の再発防止） */
+[hidden]{ display:none !important; }
 
 /* ---------- 入口（4桁） ---------- */
 .gate{
@@ -115,12 +117,17 @@ header{background:var(--sumi);color:var(--kinari);padding:calc(env(safe-area-ins
   border:1px solid var(--line);border-radius:3px;background:#fff;color:var(--sumi);
 }
 .adminsearch:focus{outline:none;border-color:var(--furuki)}
-table.admintbl{width:100%;border-collapse:collapse;font-size:12.5px;min-width:520px}
+table.admintbl{width:100%;border-collapse:separate;border-spacing:0;font-size:12.5px;min-width:520px}
 table.admintbl th{
   background:var(--sumi);color:var(--kinari);text-align:center;font-weight:700;
-  padding:8px 6px;font-size:11.5px;white-space:nowrap;position:sticky;top:0;
+  padding:8px 6px;font-size:11.5px;white-space:nowrap;position:sticky;top:0;z-index:2;
 }
-table.admintbl th.anm, table.admintbl td.anm{text-align:left;padding-left:12px}
+table.admintbl th.anm, table.admintbl td.anm{
+  text-align:left;padding-left:12px;position:sticky;left:0;white-space:nowrap;
+}
+table.admintbl th.anm{z-index:3;background:var(--sumi)}
+table.admintbl td.anm{z-index:1;background:#fff;box-shadow:1px 0 0 var(--line)}
+table.admintbl tr:nth-child(even) td.anm{background:#F7F5EF}
 table.admintbl td{padding:8px 6px;border-bottom:1px solid var(--line);text-align:center}
 table.admintbl tr:nth-child(even){background:#F7F5EF}
 table.admintbl input[type=checkbox]{width:18px;height:18px;cursor:pointer}
@@ -575,9 +582,11 @@ footer{margin-top:26px;padding:16px 0 8px;border-top:1px solid var(--line);font-
   var VER_KEY = "age3-recipe:authver", CUR_VER = "3";
   var AUTH_KEY = "age3-recipe:auth";       /* 店舗ごとのPIN通過日時（localStorage・30日有効） */
   var SESSION_KEY = "age3-recipe:session"; /* 今回開いている間だけ覚える「今見ている店舗」（sessionStorage） */
+  var CURSTORE_KEY = "age3-recipe:curstore"; /* SESSION_KEYの控え（localStorage）。
+    iOSでタブが裏で作り直され sessionStorage が消えても、選んでいた店舗を失わないための保険。 */
   try{
     if(localStorage.getItem(VER_KEY) !== CUR_VER){
-      ["age3-recipe:ok3","age3-recipe:ok2","age3-recipe:ok","age3-recipe:store","age3-recipe:viewstore", AUTH_KEY]
+      ["age3-recipe:ok3","age3-recipe:ok2","age3-recipe:ok","age3-recipe:store","age3-recipe:viewstore", AUTH_KEY, CURSTORE_KEY]
         .forEach(function(k){ localStorage.removeItem(k); });
       try{ sessionStorage.removeItem(SESSION_KEY); }catch(e2){}
       localStorage.setItem(VER_KEY, CUR_VER);
@@ -607,6 +616,7 @@ footer{margin-top:26px;padding:16px 0 8px;border-top:1px solid var(--line);font-
   }
   function enterStore(id){
     try{ sessionStorage.setItem(SESSION_KEY, id); }catch(e){}
+    try{ localStorage.setItem(CURSTORE_KEY, id); }catch(e){}
     location.reload();
   }
 
@@ -659,14 +669,17 @@ footer{margin-top:26px;padding:16px 0 8px;border-top:1px solid var(--line);font-
   /* ヘッダーの店舗バッジから呼ばれる：店舗選択画面に戻す（権限は個別PINで守られたまま） */
   window.A3reopenStoreHome = function(){
     try{ sessionStorage.removeItem(SESSION_KEY); }catch(e){}
+    try{ localStorage.removeItem(CURSTORE_KEY); }catch(e){}
     location.reload();
   };
 
   /* ---- 起動時の分岐 ---- */
   var curSession = null;
-  try{ curSession = sessionStorage.getItem(SESSION_KEY); }catch(e){}
+  try{ curSession = sessionStorage.getItem(SESSION_KEY) || localStorage.getItem(CURSTORE_KEY); }catch(e){}
   if(curSession){
-    /* 今回すでに店舗を選んでいる（この端末を開いている間だけ有効）：そのまま一覧へ */
+    /* すでに店舗を選んでいる状態。sessionStorageが（iOSの都合などで）消えていても
+       localStorage側の控えから復元し、本部状態などを失わないようにする。 */
+    try{ sessionStorage.setItem(SESSION_KEY, curSession); }catch(e){}
     home.hidden = true; pinScreen.hidden = true;
     return;
   }
@@ -743,7 +756,7 @@ footer{margin-top:26px;padding:16px 0 8px;border-top:1px solid var(--line);font-
 
   /* ---------- 店舗によるレシピの絞り込み ---------- */
   var CUR_STORE = null; /* 'ginza'などの店舗id、または"ALL"（本部） */
-  try{ CUR_STORE = sessionStorage.getItem("age3-recipe:session") || null; }catch(e){}
+  try{ CUR_STORE = sessionStorage.getItem("age3-recipe:session") || localStorage.getItem("age3-recipe:curstore") || null; }catch(e){}
   /* 銀座・嘉麻は例外：この2店舗のPINだけは全店舗のレシピを閲覧できる */
   var NO_FILTER = { ALL:true, kama:true, ginza:true };
   var VIEW_STORE = (CUR_STORE && !NO_FILTER[CUR_STORE]) ? CUR_STORE : null;
@@ -1922,6 +1935,7 @@ footer{margin-top:26px;padding:16px 0 8px;border-top:1px solid var(--line);font-
       localStorage.removeItem("age3-recipe:store");
       localStorage.removeItem("age3-recipe:viewstore");
       localStorage.removeItem("age3-recipe:auth");
+      localStorage.removeItem("age3-recipe:curstore");
       sessionStorage.removeItem("age3-recipe:session");
       localStorage.removeItem(EN_KEY);
     }catch(e){}
