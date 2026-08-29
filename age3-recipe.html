@@ -1088,6 +1088,14 @@ footer{margin-top:26px;padding:16px 0 8px;border-top:1px solid var(--line);font-
     var list = RECIPES.filter(function(r){
       return f.test(r) && (!q || r._hay.indexOf(q) >= 0);
     });
+    /* 店舗限定商品を先頭に（限定・非限定それぞれの中の並び順はそのまま維持） */
+    list = list.map(function(r, i){ return { r:r, i:i }; })
+      .sort(function(a, b){
+        var la = (a.r.stores && a.r.stores.length) ? 0 : 1;
+        var lb = (b.r.stores && b.r.stores.length) ? 0 : 1;
+        return (la - lb) || (a.i - b.i);
+      })
+      .map(function(x){ return x.r; });
     $("#grid").innerHTML = list.map(function(r){
       var ph = (r.photo === false)
         ? '<span class="ph noph"><span class="nophtx">写真<br>未登録</span></span>'
