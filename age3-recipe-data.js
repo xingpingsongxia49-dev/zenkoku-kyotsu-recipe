@@ -788,6 +788,7 @@ var RECIPES = [
   id: 'dubai-choco', code: null, ver: null, issued: null,
   name: 'ドバイチョコ', en: 'Dubai chocolate',
   serve: null, category: null, limited: false, stores: ['harajuku','kama'],
+  video: 'vv-e8lpZxbc',
   yield: '1個分', kind: 'sweets', oldFormat: true,
   ing: [
     ['揚げたパン（半分）', 'Fried bread (half piece)', null, null],
@@ -897,6 +898,7 @@ var RECIPES = [
   id: 'unatama', code: null, ver: null, issued: null,
   name: 'はみ出るうなたま', en: 'Unagi & Tamago',
   serve: null, category: null, limited: false, stores: ['asakusa'],
+  video: 'cW5_FikGY74',
   yield: '1個分', kind: 'savory', oldFormat: true,
   ing: [
     ['揚げたパン（半分）', 'Fried bread (half piece)', null, null],
