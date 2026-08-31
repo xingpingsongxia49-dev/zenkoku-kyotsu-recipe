@@ -825,6 +825,7 @@ var RECIPES = [
   id: 'matcha-brulee', code: null, ver: null, issued: null,
   name: '抹茶ブリュレ', en: 'MATCHA Brulee',
   serve: null, category: null, limited: false, stores: ['asakusa'],
+  video: '8emJIw6_b2k',
   yield: '1個分', kind: 'sweets', oldFormat: true,
   ing: [
     ['揚げたパン（半分）', 'Fried bread (half piece)', null, null],
@@ -950,6 +951,7 @@ var RECIPES = [
   id: 'tendon', code: null, ver: null, issued: null,
   name: '天丼', en: 'TENDON',
   serve: null, category: null, limited: false,
+  video: 'JRYjwQBDnTM',
   yield: '1個分', kind: 'savory', oldFormat: true,
   ing: [
     ['揚げたパン（半分）', 'Fried bread (half piece)', null, null],
@@ -2049,7 +2051,7 @@ var RECIPES = [
   id: 'hida-gyu-steak', code: null, ver: null, issued: null,
   name: '飛騨牛ステーキ', en: 'Hida Beef Steak',
   serve: 'Savory 提供 / SERVE', category: '揚げサンド', limited: false,
-  group: 'season', stores: ['hida'],
+  group: 'season', stores: ['hida'], video: 'p9ylrlgzf7I',
   yield: '1個分', kind: 'savory',
   ing: [
     ['揚げたパン（半分）', 'Fried bread (half)', '1/2', '枚'],
