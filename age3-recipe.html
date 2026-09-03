@@ -1023,14 +1023,16 @@ footer{margin-top:26px;padding:16px 0 8px;border-top:1px solid var(--line);font-
     }
     if(!list.length && !extra.length) return;
 
-    var total = list.length + extra.length;
-    var body = '<div class="kcat">' + label + '<span>' + en + ' ／ ' + list.length + '品</span></div>' + kRows(list);
-    if(extra.length){
-      var storeName = STORE_LABEL[VIEW_STORE] || VIEW_STORE;
-      body += '<div class="kcat">' + esc(storeName) + '限定<span>STORE ONLY ／ ' + extra.length + '品</span></div>' + kRows(extra);
-    }
+    /* 限定品は見出しを分けず、レギュラーの続きとして同じ表に並べる。
+       セクションを分けると必ず新しい行から始まってしまい、行数が増えて
+       写真が小さくなるため（例：23品＋1品で5段に収まるところが6段になる）。 */
+    var all = list.concat(extra);
+    var storeNote = extra.length
+      ? '（' + esc(STORE_LABEL[VIEW_STORE] || VIEW_STORE) + '限定 ' + extra.length + '品を含む）'
+      : '';
+    var body = '<div class="kcat">' + label + '<span>' + en + ' ／ ' + all.length + '品' + storeNote + '</span></div>' + kRows(all);
     var bodyHtml = kPage('',
-      '<b>' + label + ' ' + total + '品</b><br>左＝材料 ／ 右＝使用量（揚げパンを除く）',
+      '<b>' + label + ' ' + all.length + '品</b><br>左＝材料 ／ 右＝使用量（揚げパンを除く）',
       body);
     var w = A3printDoc(bodyHtml, 'kitchen');
     if(!w) return;
