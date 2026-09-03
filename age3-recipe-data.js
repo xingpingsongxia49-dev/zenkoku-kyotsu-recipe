@@ -830,10 +830,9 @@ var RECIPES = [
   yield: '1個分', kind: 'sweets', oldFormat: true,
   ing: [
     ['揚げたパン（半分）', 'Fried bread (half piece)', null, null],
-    ['抹茶クリーム', 'Matcha whipped cream', '60', 'g'],
-    ['クリミビット', 'Cremyvit', '30', 'g'],
-    ['砂糖', 'Sugar', '10', 'g'],
-    ['抹茶パウダー', 'Matcha powder', '1.5', 'g']
+    ['抹茶ホイップ', 'Matcha whipped cream', '60', 'g'],
+    ['抹茶クリミビット', 'Matcha Cremyvit', '30', 'g'],
+    ['砂糖', 'Sugar', '5', 'g']
   ],
   sub: {
     title: '抹茶カスタードクリーム 配合レシピ',
