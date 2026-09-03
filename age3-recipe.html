@@ -992,16 +992,46 @@ footer{margin-top:26px;padding:16px 0 8px;border-top:1px solid var(--line);font-
       '<div class="kfoot"><span>Age.3 STANDARD RECIPE ／ 分量はレシピカードの記載に準拠</span>' +
         '<span>CONFIDENTIAL — DO NOT COPY</span></div></section>';
   }
+  /* 商品コード（AS-08 など）の数字部分で並べる。コードなしは最後にまわす。 */
+  function kCodeNo(r){
+    var m = /(\d+)\s*$/.exec(String(r.code || ""));
+    return m ? parseInt(m[1], 10) : 9999;
+  }
+  function kSortByCode(list){
+    return list.map(function(r, i){ return { r:r, i:i }; })
+      .sort(function(a, b){ return (kCodeNo(a.r) - kCodeNo(b.r)) || (a.i - b.i); })
+      .map(function(x){ return x.r; });
+  }
   function A3kitchen(which){
     which = which || 'sweets';
     var g = (which === 'savory') ? 'regular-savory' : 'regular-sweets';
+    var kindWanted = (which === 'savory') ? 'savory' : 'sweets';
     var label = (which === 'savory') ? 'レギュラーセイボリー' : 'レギュラースイーツ';
     var en = (which === 'savory') ? 'REGULAR SAVORY' : 'REGULAR SWEETS';
-    var list = RECIPES.filter(function(r){ return group(r) === g; });
-    if(!list.length) return;
+
+    var list = kSortByCode(RECIPES.filter(function(r){ return group(r) === g; }));
+
+    /* 今見ている店舗（VIEW_STORE）の限定メニューを、同じ種類（スイーツ／セイボリー）だけ拾う。
+       本部や銀座・嘉麻のように全店舗が見える状態では、限定品はどの店のものか判別できないので
+       早見表には載せない（現場の掲示物なので、その店で出す品だけにする）。 */
+    var extra = [];
+    if(VIEW_STORE){
+      extra = kSortByCode(RECIPES.filter(function(r){
+        if(!r.stores || r.stores.indexOf(VIEW_STORE) < 0) return false;
+        return (r.kind || 'sweets') === kindWanted;
+      }));
+    }
+    if(!list.length && !extra.length) return;
+
+    var total = list.length + extra.length;
+    var body = '<div class="kcat">' + label + '<span>' + en + ' ／ ' + list.length + '品</span></div>' + kRows(list);
+    if(extra.length){
+      var storeName = STORE_LABEL[VIEW_STORE] || VIEW_STORE;
+      body += '<div class="kcat">' + esc(storeName) + '限定<span>STORE ONLY ／ ' + extra.length + '品</span></div>' + kRows(extra);
+    }
     var bodyHtml = kPage('',
-      '<b>' + label + ' ' + list.length + '品</b><br>左＝材料 ／ 右＝使用量（揚げパンを除く）',
-      '<div class="kcat">' + label + '<span>' + en + ' ／ ' + list.length + '品</span></div>' + kRows(list));
+      '<b>' + label + ' ' + total + '品</b><br>左＝材料 ／ 右＝使用量（揚げパンを除く）',
+      body);
     var w = A3printDoc(bodyHtml, 'kitchen');
     if(!w) return;
     A3printAfterImages(w, w.document.getElementById('printroot'), kFit);
