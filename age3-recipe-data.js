@@ -1274,8 +1274,8 @@ var RECIPES = [
     { jp: 'その上にクリミビットを塗る。',
       en: 'Spread Kurimibit on top.',
       point: { jp: 'クリミビット30gをムラなく覆う（薄い部分を作らない）。薄いと下のクリームに熱が伝わって溶け出す。', en: 'Cover evenly with 30g of Kurimibit — no thin spots. Thin areas let heat reach the cream below and melt it.' } },
-    { jp: '表面にグラニュー糖をまぶし、バーナーであぶって焦げ目をつけて完成。',
-      en: 'Coat the surface with granulated sugar, then heat with a burner to make it golden to finish.',
+    { jp: '表面にグラニュー糖をつけ1分放置し、グラニュー糖が満遍なくついたら炙る。',
+      en: 'Coat the surface with granulated sugar and leave for 1 minute; once the sugar has settled evenly, torch it.',
       point: { jp: '全体がきつね色になるまで、バーナーであぶる。', en: 'Heat with a burner until golden all over.' } }
   ],
   finish: { jp: '表面はパリッと全体がきつね色／クリミビットが全面を覆い下のクリームが透',
