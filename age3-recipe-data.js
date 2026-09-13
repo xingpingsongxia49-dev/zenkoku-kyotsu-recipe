@@ -198,7 +198,7 @@ var RECIPES = [
 /* ---------------------------------------------------------------- AS-L-03 */
 {
   id: 'as-l-03', code: 'AS-L-03', ver: '1.0', issued: '2026.06',
-  name: '旨辛焼肉', en: 'Hot Beef Yakiniku',
+  name: '旨辛焼肉', en: 'Spicy Japanese BBQ Beef',
   serve: 'Savory 提供 / SERVE', category: '揚げサンド', limited: false,
   video: 'fHcaqgIRPRA',
   status: { tone: 'end', label: '8月末で終了', detail: '旨辛シリーズ S-3' },
@@ -241,7 +241,7 @@ var RECIPES = [
 /* ---------------------------------------------------------------- AS-L-04 */
 {
   id: 'as-l-04', code: 'AS-L-04', ver: '1.0', issued: '2026.06',
-  name: '旨辛ナポリタン', en: 'Hot Napolitan Noodle',
+  name: '旨辛ナポリタン', en: 'Spicy Ketchup Spaghetti',
   serve: 'Savory 提供 / SERVE', category: '揚げサンド', limited: false,
   video: 'bnu34XCQaRo',
   status: { tone: 'end', label: '8月末で終了', detail: '旨辛シリーズ S-1' },
@@ -279,7 +279,7 @@ var RECIPES = [
 /* ---------------------------------------------------------------- AS-L-05 */
 {
   id: 'as-l-05', code: 'AS-L-05', ver: '1.0', issued: '2026.06',
-  name: '旨辛チーズカレー', en: 'Hot Cheese Curry',
+  name: '旨辛チーズカレー', en: 'Spicy Grilled Cheese Curry',
   serve: 'Savory 提供 / SERVE', category: '揚げサンド', limited: false,
   video: 'PWr7owjii3I',
   status: { tone: 'end', label: '8月末で終了', detail: '旨辛シリーズ S-2' },
@@ -362,7 +362,7 @@ var RECIPES = [
 /* ---------------------------------------------------------------- AS-L-07 */
 {
   id: 'as-l-07', code: 'AS-L-07', ver: '1.0', issued: '2026.06',
-  name: 'シャインマスカット', en: 'Shine Muscat',
+  name: 'シャインマスカット', en: 'Muscat Grape',
   serve: 'SWEETS 提供 / SERVE', category: '揚げサンド', limited: false,
   video: 'uwg8lxcTATA',
   status: { tone: 'start', label: '9月〜', detail: '秋の新商品（お知らせでは「マスカット」）' },
@@ -469,7 +469,7 @@ var RECIPES = [
 /* ------------------------------------------------------------------- 旧版 */
 {
   id: 'ice', code: 'AS-02', ver: '1.0', issued: '2026.05',
-  name: 'アイスクリームブリュレ', en: 'Vanilla Ice Brûlée',
+  name: 'アイスクリームブリュレ', en: 'Ice Cream Brûlée',
   serve: 'SWEETS 提供 / SERVE', category: null, limited: false,
   video: 'LRvSJbXvQs0',
   videoNote: 'プレイリストの動画名は「Ice Cream Brûlée / アイスクリームブリュレ」。この品の名前（アイスブリュレ）と完全には一致していない。違っていたら差し替える。',
@@ -503,7 +503,7 @@ var RECIPES = [
 /* ------------------------------------------- アイス揚げサンド（旧フォーマット） */
 {
   id: 'ice-choco-banana', code: 'AS-06', ver: '1.0', issued: '2026.05',
-  name: 'チョコバナナ', en: 'Ice Fried Sandwich — Chocolate Banana',
+  name: 'チョコバナナ', en: 'Chocolate Banana Ice Cream',
   serve: 'SWEETS 提供 / SERVE', category: null, series: 'アイス揚げサンド', limited: false,
   video: 'Wj5VU-r3Uys',
   yield: '1個分', kind: 'sweets',
@@ -538,7 +538,7 @@ var RECIPES = [
 
 {
   id: 'ice-matcha-anko', code: 'AS-03', ver: '1.0', issued: '2026.05',
-  name: '抹茶あんこ', en: 'Ice Fried Sandwich — Matcha Red Bean',
+  name: '抹茶あんこ', en: 'Matcha Anko Ice Cream',
   serve: 'SWEETS 提供 / SERVE', category: null, series: 'アイス揚げサンド', limited: false,
   video: 'XRr4N72KUng',
   yield: '1個分', kind: 'sweets',
@@ -574,7 +574,7 @@ var RECIPES = [
 
 {
   id: 'ice-vanilla-strawberry', code: 'AS-04', ver: '1.1', issued: '2026.05',
-  name: 'ジャムいちご', en: 'Ice Fried Sandwich — Strawberry',
+  name: 'ジャムいちご', en: 'Strawberry Jam Ice Cream',
   serve: 'SWEETS 提供 / SERVE', category: null, series: 'アイス揚げサンド', limited: false,
   video: 'Er1oZFpMRbw',
   videoNote: 'プレイリストの動画名は「Jam Strawberry Ice / アイスジャムいちご」。この品の名前（バニラいちご）と一致していない。アイス揚げサンド4品のうち他の3品が決まったため、残りとして当てている。違っていたら差し替える。',
@@ -610,7 +610,7 @@ var RECIPES = [
 
 {
   id: 'ice-choco-strawberry', code: 'AS-05', ver: '1.0', issued: '2026.05',
-  name: 'チョコいちご', en: 'Ice Fried Sandwich — Chocolate Strawberry',
+  name: 'チョコいちご', en: 'Chocolate Strawberry Ice Cream',
   serve: 'SWEETS 提供 / SERVE', category: null, series: 'アイス揚げサンド', limited: false,
   video: 'GFgLSeysUcc',
   yield: '1個分', kind: 'sweets',
@@ -648,7 +648,7 @@ var RECIPES = [
 /* ------------------------------------------------ 追加分（写真は未登録） */
 {
   id: 'ichigo-daifuku', code: null, ver: null, issued: null,
-  name: 'いちご大福', en: 'Strawberry Difuku(mochi)',
+  name: 'いちご大福', en: 'Strawberry Daifuku',
   serve: null, category: null, limited: false,
   video: 'uYjwgyCQF1Q',
   yield: '1個分', kind: 'sweets', oldFormat: true,
@@ -824,7 +824,7 @@ var RECIPES = [
 /* ---------------------------------------------------------------- 抹茶ブリュレ */
 {
   id: 'matcha-brulee', code: null, ver: null, issued: null,
-  name: '抹茶ブリュレ', en: 'MATCHA Brulee',
+  name: '抹茶ブリュレ', en: 'Matcha Brûlée',
   serve: null, category: null, limited: false, stores: ['asakusa'],
   video: '8emJIw6_b2k',
   yield: '1個分', kind: 'sweets', oldFormat: true,
@@ -925,7 +925,7 @@ var RECIPES = [
 /* ---------------------------------------------------------------- 白身フライ */
 {
   id: 'shiromi-fry', code: null, ver: null, issued: null,
-  name: '白身フライ', en: 'fried white-fish fillet',
+  name: '白身フライ', en: 'Fried Fish & Tartar',
   serve: null, category: null, limited: false,
   yield: '1個分', kind: 'savory', oldFormat: true,
   ing: [
@@ -999,7 +999,7 @@ var RECIPES = [
 /* ---------------------------------------------------------------- AS-02 */
 {
   id: 'as-02', code: 'AS-02', ver: '1.0', issued: '2026.05',
-  name: 'ジャムいちご', en: 'Jam Strawberry',
+  name: 'ジャムいちご', en: 'Strawberry Jam',
   serve: 'SWEETS 提供 / SERVE', category: '揚げサンド', limited: false,
   group: 'regular-sweets',
   video: 'Ns69FoVChcE',
@@ -1167,7 +1167,7 @@ var RECIPES = [
 /* ---------------------------------------------------------------- AS-08 */
 {
   id: 'as-08', code: 'AS-08', ver: '1.0', issued: '2026.05',
-  name: 'あんバター', en: 'Red Bean & Butter',
+  name: 'あんバター', en: 'Red Bean Butter',
   serve: 'SWEETS 提供 / SERVE', category: '揚げサンド', limited: false,
   group: 'regular-sweets',
   status: { tone: 'end', label: '8月末で終了', detail: '9月より「北海道あんバター」に切り替わります' },
@@ -1228,7 +1228,7 @@ var RECIPES = [
 /* ---------------------------------------------------------------- AS-10 */
 {
   id: 'as-10', code: 'AS-10', ver: '1.1', issued: '2026.08',
-  name: 'モンブラン', en: 'Mont Blanc',
+  name: 'モンブラン', en: 'Chestnut Cream',
   serve: 'SWEETS 提供 / SERVE', category: '揚げサンド', limited: false,
   group: 'regular-sweets',
   video: 'U-IJwKHStu8',
@@ -1463,7 +1463,7 @@ var RECIPES = [
 /* ---------------------------------------------------------------- AS-18 */
 {
   id: 'as-18', code: 'AS-18', ver: '1.0', issued: '2026.06',
-  name: '生チョコチョコ', en: 'Ganache Chocolate',
+  name: '生チョコチョコ', en: 'Ganache',
   serve: 'SWEETS 提供 / SERVE', category: '揚げサンド', limited: false,
   group: 'regular-sweets',
   video: 'kwHfvb0aRrA',
@@ -1519,7 +1519,7 @@ var RECIPES = [
 /* ---------------------------------------------------------------- AS-20 */
 {
   id: 'as-20', code: 'AS-20', ver: '1.0', issued: '2026.06',
-  name: 'はちみつレアチーズ', en: 'Honey Rare Cheese',
+  name: 'はちみつレアチーズ', en: 'Honey Cheesecake Cream',
   serve: 'SWEETS 提供 / SERVE', category: '揚げサンド', limited: false,
   group: 'regular-sweets',
   video: 'PB0Ar_wPeZQ',
@@ -1644,7 +1644,7 @@ var RECIPES = [
 /* ---------------------------------------------------------------- AS-22 */
 {
   id: 'as-22', code: 'AS-22', ver: '1.1', issued: '2026.08',
-  name: '月見照り焼き', en: 'Tsukimi Teriyaki',
+  name: '月見照り焼き', en: 'Teriyaki Burger + Egg',
   serve: 'Savory 提供 / SERVE', category: '揚げサンド', limited: false,
   group: 'regular-savory',
   video: 'XdlAsvxL-Is',
@@ -1758,7 +1758,7 @@ var RECIPES = [
 /* ---------------------------------------------------------------- AS-26 */
 {
   id: 'as-26', code: 'AS-26', ver: '1.0', issued: '2026.06',
-  name: '焼きチーズクリームシチュー', en: 'Grilled Cheese Cream Stew',
+  name: '焼きチーズクリームシチュー', en: 'Grilled Cheesy Cream Stew',
   serve: 'Savory 提供 / SERVE', category: '揚げサンド', limited: false,
   group: 'regular-savory',
   video: 'fDBvPTzM1ew',
@@ -1790,7 +1790,7 @@ var RECIPES = [
 /* ---------------------------------------------------------------- AS-27 */
 {
   id: 'as-27', code: 'AS-27', ver: '1.0', issued: '2026.06',
-  name: '焼きキーマカレー', en: 'Baked Keema Curry',
+  name: '焼きキーマカレー', en: 'Grilled Keema Curry',
   serve: 'Savory 提供 / SERVE', category: '揚げサンド', limited: false,
   group: 'regular-savory',
   video: 'hMb3xyBHXKk',
@@ -1821,7 +1821,7 @@ var RECIPES = [
 /* ---------------------------------------------------------------- AS-28 */
 {
   id: 'as-28', code: 'AS-28', ver: '1.1', issued: '2026.08',
-  name: '激辛！焼きキーマカレー', en: 'Hot Grill Keema Curry',
+  name: '激辛！焼きキーマカレー', en: 'Hot! Grilled Keema Curry',
   serve: 'Savory 提供 / SERVE', category: '揚げサンド', limited: false,
   group: 'regular-savory',
   video: 'Lmj704VxHY4',
@@ -1857,7 +1857,7 @@ var RECIPES = [
 /* ---------------------------------------------------------------- AS-29 */
 {
   id: 'as-29', code: 'AS-29', ver: '1.1', issued: '2026.08',
-  name: 'とろたまナポリタン', en: 'Egg + Napolitan',
+  name: 'とろたまナポリタン', en: 'Ketchup Spaghetti + Egg',
   serve: 'Savory 提供 / SERVE', category: '揚げサンド', limited: false,
   group: 'regular-savory',
   video: '-0w8zAdAW4A',
@@ -1885,7 +1885,7 @@ var RECIPES = [
 /* ---------------------------------------------------------------- AS-30 */
 {
   id: 'as-30', code: 'AS-30', ver: '1.1', issued: '2026.08',
-  name: 'とろたまナポリタン 追いチーズ', en: 'Egg + Napolitan Extra Cheese',
+  name: 'とろたまナポリタン 追いチーズ', en: 'Ketchup Spaghetti + Egg, Extra Cheese',
   serve: 'Savory 提供 / SERVE', category: '揚げサンド', limited: false,
   group: 'regular-savory',
   video: 'H0OhVkor01k',
@@ -1913,7 +1913,7 @@ var RECIPES = [
 /* ---------------------------------------------------------------- AS-31 */
 {
   id: 'as-31', code: 'AS-31', ver: '1.1', issued: '2026.08',
-  name: 'とろタマ焼きそば', en: 'Egg + Fried Noodle',
+  name: 'とろタマ焼きそば', en: 'Yakisoba Noodles + Egg',
   serve: 'Savory 提供 / SERVE', category: '揚げサンド', limited: false,
   group: 'regular-savory',
   video: 'nuQiq05uMjg',
@@ -1943,7 +1943,7 @@ var RECIPES = [
 /* ---------------------------------------------------------------- AS-32 */
 {
   id: 'as-32', code: 'AS-32', ver: '1.0', issued: '2026.06',
-  name: '旨だれ牛カルビ焼肉', en: 'Beef Short Rib Yakiniku with Special BBQ Sauce',
+  name: '旨だれ牛カルビ焼肉', en: 'Japanese BBQ Beef + Egg',
   serve: 'Savory 提供 / SERVE', category: '揚げサンド', limited: false,
   group: 'regular-savory',
   video: 'KGa9H1QcQwU',
@@ -1973,7 +1973,7 @@ var RECIPES = [
 /* ---------------------------------------------------------------- AS-33 */
 {
   id: 'as-33', code: 'AS-33', ver: '1.0', issued: '2026.06',
-  name: 'チキン南蛮', en: 'Chicken Nanban',
+  name: 'チキン南蛮', en: 'Sweet & Sour Chicken with Tartar',
   serve: 'Savory 提供 / SERVE', category: '揚げサンド', limited: false,
   group: 'regular-savory',
   video: 'mgzGwkJpu8Q',
