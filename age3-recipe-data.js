@@ -169,6 +169,43 @@ var RECIPES = [
             en: 'Lettuce has height / 3 chicken pieces lined up vertically / 5 tteokbokki used / sauce fully coats tteokbokki and chicken / cheese torched and sesame sprinkled' }
 },
 
+/* ---------------------------------------------------------------- すき焼き揚げサンド */
+{
+  id: 'sukiyaki-sand', code: null, ver: null, issued: null,
+  name: 'すき焼き揚げサンド', en: 'Sukiyaki Fried Sandwich',
+  serve: 'Savory 提供 / SERVE', category: '揚げサンド', limited: true,
+  top: true,
+  yield: '1個分', kind: 'savory',
+  ing: [
+    ['揚げパン', 'Fried bread', '1/2', '個'],
+    ['牛すき焼き重の具', 'Beef sukiyaki topping', '1', 'パック'],
+    ['焼きおにぎり', 'Grilled rice ball', '1', '個'],
+    ['黄身プチ', 'Egg yolk (Kimi Puchi)', '1', '個'],
+    ['刻みネギ（青）', 'Chopped green onion', '1', 'g']
+  ],
+  steps: [
+    { jp: '焼きおにぎりを入れる：焼きおにぎり1個を、大きな塊が残らないようにほぐしながらパンに入れる。パンの端まで均等に敷く。',
+      en: 'Rice ball: Break up 1 grilled rice ball into the bread so no large lumps remain. Spread it evenly to the edges.',
+      point: null },
+    { jp: 'すき焼きの具を混ぜる：牛すき焼き重の具のパックを開け、箸で牛肉をほぐしながらしっかり混ぜ、タレを絡める。豆腐やネギは崩さないように扱う。',
+      en: 'Mix: Open the sukiyaki pack, loosen the beef with chopsticks and mix well to coat with sauce. Handle the tofu and leek gently so they keep their shape.',
+      point: null },
+    { jp: 'すき焼きの具を盛り付ける：豆腐をサンドの一番上に置き、残りの具をパン全体に盛り付ける。すき焼きの具に入っているネギ2個を、豆腐の近くの左側に配置する。タレ・汁は入れすぎないようにする。',
+      en: 'Arrange: Place the tofu at the very top, then spread the rest over the whole bread. Put the 2 leek pieces on the left, near the tofu. Do not add too much sauce/liquid.',
+      point: { jp: '豆腐の表面とネギ2個が、写真のようにはっきり見えるように整える。牛肉やその他の具は一か所に偏らせず、全体のバランスをそろえる。',
+               en: 'Make the tofu surface and 2 leek pieces clearly visible as in the photo. Keep the beef and other fillings balanced, not bunched in one spot.' } },
+    { jp: '黄身プチを置く：中央の具を軽く整え、黄身プチ1個を真ん中に置く。形を崩さず、具に埋もれないようにする。',
+      en: 'Yolk: Lightly level the center and place 1 egg yolk in the middle. Keep its shape and do not bury it.',
+      point: null },
+    { jp: '刻みネギを添える：刻みネギ（青）1gを、黄身プチの右側から下側にかけて添える。',
+      en: 'Green onion: Add 1g of chopped green onion from the right side to below the yolk.',
+      point: { jp: '黄身プチが見えるように、刻みネギは右側にまとめる。広く散らしすぎず、写真の位置・広がりに合わせて整える。',
+               en: 'Keep the green onion on the right so the yolk stays visible. Do not scatter it widely; match the position and spread in the photo.' } }
+  ],
+  finish: { jp: '豆腐が一番上に見えている／すき焼きの具に入っているネギ2個が、豆腐の近くの左側に見えるよう、きれいに整えられている／タレ・汁を入れすぎず、焼きおにぎりやパンがべちょべちょになっていない。パンのサクサクした食感が残るようにする／全体のバランスと盛り付けが、完成写真にそろっている',
+            en: 'Tofu visible at the top / 2 leek pieces neatly visible on the left near the tofu / not too much sauce — rice ball and bread not soggy, bread stays crisp / overall balance and plating match the sample photo' }
+},
+
 /* ---------------------------------------------------------------- AS-L-01 */
 {
   id: 'as-l-01', code: 'AS-L-01', ver: 'Ver.1.0', issued: '2026.06',
