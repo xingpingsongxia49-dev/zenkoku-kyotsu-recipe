@@ -2080,6 +2080,52 @@ var RECIPES = [
       point: null }
   ],
   notes: ['飛騨高山店限定。提供元資料（Pages文書）から登録。完成基準の記載なし。写真は未登録。']
+},
+
+/* ---------------------------------------------------------------- ヤンニョムチキン */
+{
+  id: 'yangnyeom-chicken', code: null, ver: null, issued: null,
+  name: 'ヤンニョムチキン', en: 'Yangnyeom Chicken',
+  serve: 'Savory 提供 / SERVE', category: '揚げサンド', limited: false,
+  status: { tone: 'start', label: '11月〜', detail: '冬メニュー（予定）' },
+  yield: '1個分', kind: 'savory',
+  ing: [
+    ['パン', 'Bread', '1', '個'],
+    ['レタス', 'Lettuce', '1', '枚'],
+    ['ポテトサラダ', 'Potato salad', '40', 'g'],
+    ['トッポギ', 'Tteokbokki rice cake', '5', '本'],
+    ['唐揚げ', 'Fried chicken', '3', '個'],
+    ['ヤンニョムソース', 'Yangnyeom sauce', '35', 'g'],
+    ['チーズ', 'Cheese', '適量', null],
+    ['白ごま', 'White sesame', '適量', null]
+  ],
+  sub: {
+    title: 'トッポギの戻し方',
+    ing: [
+      ['トッポギ', 'Tteokbokki rice cake', '5', '本'],
+      ['水', 'Water', '300', 'ml']
+    ],
+    note: 'ボウルに入れ、電子レンジ600Wで5分加熱する。加熱後は水気を切り、常温で保管する。注文ごとに20秒揚げる。硬い状態のトッポギは使用しない。'
+  },
+  steps: [
+    { jp: '土台を作る：パンの左側にレタスを1枚入れ、高さ3〜5cmが出るように整える。',
+      en: 'Base: Place 1 lettuce leaf on the left side of the bread, standing 3–5cm tall.',
+      point: { jp: 'レタスの高さを出す。', en: 'Give the lettuce height.' } },
+    { jp: 'ポテトサラダを敷く：ポテトサラダ40gをパン全体に均一に敷き詰める。',
+      en: 'Salad: Spread 40g of potato salad evenly over the whole bread.',
+      point: { jp: '量と広がりをそろえる。', en: 'Keep the amount and spread consistent.' } },
+    { jp: '具材を揚げる：水気を切ったトッポギを20秒、唐揚げを40秒揚げる。',
+      en: 'Fry: Fry the drained tteokbokki for 20 seconds and the fried chicken for 40 seconds.',
+      point: { jp: 'トッポギが硬くないことを確認する。', en: 'Make sure the tteokbokki is not hard.' } },
+    { jp: 'ソースを絡めて盛り付ける：ヤンニョムソース35gを具材に絡める。唐揚げ3個を縦に並べ、トッポギは2本を先に盛り、残り3本を隙間に盛り付ける。',
+      en: 'Sauce & arrange: Coat the fillings with 35g of yangnyeom sauce. Line up 3 pieces of chicken vertically; place 2 tteokbokki first, then the remaining 3 in the gaps.',
+      point: { jp: '唐揚げは縦に3個並べ、トッポギと唐揚げ全体にソースをしっかり絡める。', en: 'Line the 3 chicken pieces vertically and coat the tteokbokki and chicken fully with sauce.' } },
+    { jp: '仕上げる：チーズをのせて炙り、白ごまをかける。',
+      en: 'Finish: Top with cheese, torch it, and sprinkle white sesame.',
+      point: { jp: '見本の完成写真に合わせて形を整える。', en: 'Shape it to match the sample photo.' } }
+  ],
+  finish: { jp: 'レタスに高さがある／唐揚げ3個が縦に並んでいる／トッポギを5本使用している／ソースがトッポギと唐揚げ全体にしっかり絡んでいる／チーズを炙り、白ごまをかけている',
+            en: 'Lettuce has height / 3 chicken pieces lined up vertically / 5 tteokbokki used / sauce fully coats tteokbokki and chicken / cheese torched and sesame sprinkled' }
 }
 
 ];
