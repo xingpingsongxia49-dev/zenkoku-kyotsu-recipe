@@ -129,6 +129,7 @@ var RECIPES = [
   serve: 'Savory 提供 / SERVE', category: '揚げサンド', limited: false,
   top: true,
   status: { tone: 'start', label: '11月〜', detail: '冬メニュー（予定）' },
+  video: 'fJKExb-Yz78',
   yield: '1個分', kind: 'savory',
   ing: [
     ['パン', 'Bread', '1', '個'],
