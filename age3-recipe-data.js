@@ -101,11 +101,12 @@ var RECIPE_NOTICE = {
       ]
     },
     {
-      when: '11月', tone: 'plan',
-      title: '冬メニュー（予定）', scope: null,
-      lines: [
-        'ヤンニョムチキンを投入（白身フライを入れるかは未定）。',
-        '紅蜜芋ブリュレは継続。'
+      when: '11月〜 発売', tone: 'start',
+      title: '冬の新商品', scope: null,
+      items: [
+        { name: 'ヤンニョムチキン',   state: '揚げサンド', detail: '白身フライを入れるかは未定。', recipe: 'yangnyeom-chicken' },
+        { name: 'すき焼き揚げサンド', state: '揚げサンド', detail: null, recipe: 'sukiyaki-sand' },
+        { name: '紅蜜芋ブリュレ',     state: '継続',       detail: null, recipe: 'as-l-06' }
       ]
     }
   ]
@@ -128,7 +129,7 @@ var RECIPES = [
   name: 'ヤンニョムチキン', en: 'Yangnyeom Chicken',
   serve: 'Savory 提供 / SERVE', category: '揚げサンド', limited: false,
   top: true,
-  status: { tone: 'start', label: '11月〜', detail: '冬メニュー（予定）' },
+  status: { tone: 'start', label: '11月〜', detail: '11月発売' },
   video: 'fJKExb-Yz78',
   yield: '1個分', kind: 'savory',
   ing: [
@@ -176,6 +177,7 @@ var RECIPES = [
   name: 'すき焼き揚げサンド', en: 'Sukiyaki Fried Sandwich',
   serve: 'Savory 提供 / SERVE', category: '揚げサンド', limited: true,
   top: true,
+  status: { tone: 'start', label: '11月〜', detail: '11月発売' },
   video: 'ErhPHJplNnk',
   yield: '1個分', kind: 'savory',
   ing: [
