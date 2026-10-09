@@ -176,6 +176,7 @@ var RECIPES = [
   name: 'すき焼き揚げサンド', en: 'Sukiyaki Fried Sandwich',
   serve: 'Savory 提供 / SERVE', category: '揚げサンド', limited: true,
   top: true,
+  video: 'ErhPHJplNnk',
   yield: '1個分', kind: 'savory',
   ing: [
     ['揚げパン', 'Fried bread', '1/2', '個'],
