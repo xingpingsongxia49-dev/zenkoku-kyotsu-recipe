@@ -1265,6 +1265,7 @@ var RECIPES = [
   name: '北海道あんバター', en: 'Hokkaido Anko & Butter',
   serve: 'SWEETS 提供 / SERVE', category: '揚げサンド', limited: false,
   group: 'regular-sweets',
+  video: 'KNrWLIq5Ad8',
   yield: '1個分', kind: 'sweets',
   ing: [
     ['揚げパン（半分）', 'Fried bread (half)', '1/2', '個'],
