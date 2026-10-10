@@ -108,6 +108,13 @@ var RECIPE_NOTICE = {
         { name: 'すき焼き揚げサンド', state: '揚げサンド', detail: null, recipe: 'sukiyaki-sand' },
         { name: '紅蜜芋ブリュレ',     state: '継続',       detail: null, recipe: 'as-l-06' }
       ]
+    },
+    {
+      when: '12月〜 発売', tone: 'start',
+      title: '12月の新商品', scope: null,
+      items: [
+        { name: 'ミックスベリーオペラ', state: '揚げサンド', detail: null, recipe: 'mixberry-opera' }
+      ]
     }
   ]
 };
@@ -208,6 +215,39 @@ var RECIPES = [
   ],
   finish: { jp: '豆腐が一番上に見えている／すき焼きの具に入っているネギ2個が、豆腐の近くの左側に見えるよう、きれいに整えられている／タレ・汁を入れすぎず、焼きおにぎりやパンがべちょべちょになっていない。パンのサクサクした食感が残るようにする／全体のバランスと盛り付けが、完成写真にそろっている',
             en: 'Tofu visible at the top / 2 leek pieces neatly visible on the left near the tofu / not too much sauce — rice ball and bread not soggy, bread stays crisp / overall balance and plating match the sample photo' }
+},
+
+/* ---------------------------------------------------------------- ミックスベリーオペラ */
+{
+  id: 'mixberry-opera', code: null, ver: null, issued: null,
+  name: 'ミックスベリーオペラ', en: 'Mixed Berry Opera',
+  serve: 'Sweets 提供 / SERVE', category: '揚げサンド', limited: false,
+  top: true,
+  status: { tone: 'start', label: '12月〜', detail: '12月発売' },
+  yield: '1個分', kind: 'sweets',
+  ing: [
+    ['パン・油・袋', 'Bread, oil, bag', null, null],
+    ['チョコクリーム', 'Chocolate cream', '80', 'g'],
+    ['ヌテラ', 'Nutella', '30', 'g'],
+    ['ラズベリー', 'Raspberry', '20', 'g'],
+    ['ブルーベリー', 'Blueberry', '8', 'g'],
+    ['ラズベリーソース', 'Raspberry sauce', '15', 'g'],
+    ['金箔（スプレー）', 'Gold leaf (spray)', '0.2', 'g']
+  ],
+  steps: [
+    { jp: 'ソースをかける：切ったパンの内側にラズベリーソースをかける。',
+      en: 'Sauce: Pour raspberry sauce on the inside of the sliced bread.',
+      point: null },
+    { jp: 'クリームを詰める：チョコクリーム（80g）を詰め、上からヌテラ（約30g）を塗る。',
+      en: 'Cream: Fill with chocolate cream (80g) and spread Nutella (about 30g) on top.',
+      point: null },
+    { jp: 'ベリーをのせる：ラズベリー5個を並べ、空いたところにソースで和えたブルーベリーを6個散らして置く。',
+      en: 'Berries: Arrange five raspberries and scatter six blueberries mixed with sauce in the empty spaces.',
+      point: null },
+    { jp: '仕上げる：ラズベリーソース、金箔をかけて完成。',
+      en: 'Finish: Drizzle with raspberry sauce and add gold leaf to finish.',
+      point: null }
+  ]
 },
 
 /* ---------------------------------------------------------------- AS-L-01 */
