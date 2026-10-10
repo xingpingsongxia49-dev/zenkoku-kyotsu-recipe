@@ -224,6 +224,7 @@ var RECIPES = [
   serve: 'Sweets 提供 / SERVE', category: '揚げサンド', limited: false,
   top: true,
   status: { tone: 'start', label: '12月〜', detail: '12月発売' },
+  video: 'knhcRG_49Hw',
   yield: '1個分', kind: 'sweets',
   ing: [
     ['パン・油・袋', 'Bread, oil, bag', null, null],
