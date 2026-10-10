@@ -247,7 +247,9 @@ var RECIPES = [
     { jp: '仕上げる：ラズベリーソース、金箔をかけて完成。',
       en: 'Finish: Drizzle with raspberry sauce and add gold leaf to finish.',
       point: null }
-  ]
+    ],
+  finish: { jp: 'ラズベリー・ブルーベリーがバランスよくのっている／ヌテラに下のチョコクリームがにじんでいない',
+            en: 'Raspberries and blueberries are evenly balanced / the chocolate cream underneath does not bleed into the Nutella' }
 },
 
 /* ---------------------------------------------------------------- AS-L-01 */
