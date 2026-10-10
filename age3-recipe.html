@@ -1122,15 +1122,8 @@ footer{margin-top:26px;padding:16px 0 8px;border-top:1px solid var(--line);font-
   };
   /* 商品区分。データ側に group を持たせる。
      "regular-sweets" = レギュラースイーツ / "regular-savory" = レギュラーセイボリー / "season" = シーズン
-     未指定は season。
-
-     例外：あんバター(as-08) ↔ 北海道あんバター(as-08-hokkaido) は9/1で自動入れ替え。
-     8月中は as-08 がレギュラースイーツ、as-08-hokkaido はシーズン（9月〜予告）。
-     9月以降は as-08 がシーズン（終了扱い）、as-08-hokkaido がレギュラースイーツになる。 */
-  var ANKO_SWITCH_TS = new Date(2026, 8, 1).getTime(); /* 2026-09-01 0:00 */
+     未指定は season。 */
   function group(r){
-    if(r.id === "as-08")          return (Date.now() >= ANKO_SWITCH_TS) ? "season" : (r.group || "season");
-    if(r.id === "as-08-hokkaido") return (Date.now() >= ANKO_SWITCH_TS) ? "regular-sweets" : "season";
     return r.group || "season";
   }
 

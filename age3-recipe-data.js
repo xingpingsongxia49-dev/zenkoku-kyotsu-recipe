@@ -561,42 +561,6 @@ var RECIPES = [
             en: '4 fig wedges arranged diagonally; 6 blueberries and red sauce visible' }
 },
 
-/* ------------------------------------------------------------------ AS-08 */
-{
-  id: 'as-08-hokkaido', code: 'AS-08', ver: '2.0', issued: '2026.08',
-  name: '北海道あんバター', en: 'Hokkaido Anko & Butter',
-  serve: 'SWEETS 提供 / SERVE', category: '揚げサンド', limited: false,
-  group: 'regular-sweets',
-  status: { tone: 'start', label: '9月〜',      detail: '秋の新商品。ビジュアルを変更し、材料も北海道餡に変更' },
-  yield: '1個分', kind: 'sweets',
-  ing: [
-    ['揚げパン（半分）', 'Fried bread (half)', '1/2', '個'],
-    ['ホイップ', 'Whipped cream', '80', 'g'],
-    ['北海道あんこ', 'Hokkaido red bean paste', '50', 'g'],
-    ['バター（1/2カット）', 'Butter (half-cut pieces)', '3', '個'],
-    ['塩', 'Salt', '0.2', 'g']
-  ],
-  steps: [
-    { jp: '揚げパンにホイップ（80g）を詰め、表面を平らにならす。',
-      en: 'Fill the fried bread with whipped cream (80g) and level the surface.',
-      point: { jp: '側面にクリームをつけない。表面は平らにならす。', en: 'Keep cream off the sides and smooth the surface flat.' } },
-    { jp: '北海道あんこ（50g）を平らに広げて乗せる。',
-      en: 'Spread Hokkaido red bean paste (50g) flat on top.',
-      point: { jp: '縁に白いホイップが見える幅を必ず残す。全面を覆わない。', en: 'Always leave white cream showing around the edge; do not cover the whole surface.' } },
-    { jp: '1/2カットのバター3個を、菱形の向きで縦一列に並べる。',
-      en: 'Set 3 half-cut butter pieces in a vertical line, turned diamond-wise.',
-      point: { jp: '必ずあんこの上に置く。ホイップの上に直接置くと、炙った時にクリームが溶ける。', en: 'Always place on the bean paste — butter set on cream will melt the cream when torched.' } },
-    { jp: 'バター部分だけをバーナーで炙り、少し溶かす。',
-      en: 'Torch only the butter until it just starts to melt.',
-      point: { jp: '遠火で角が丸くなる程度まで。溶かし切らない。', en: 'Torch from a distance until the corners round off; do not melt it fully.' } },
-    { jp: '塩（0.2g）を全体にふりかけて完成。',
-      en: 'Sprinkle salt (0.2g) over the whole surface to finish.',
-      point: { jp: '全体に薄く散らす。1か所に固めない。', en: 'Scatter thinly over the whole piece; do not concentrate it in one spot.' } }
-  ],
-  finish: { jp: 'あんこの縁に白いホイップが見え、菱形のバター3個が縦に並んで表面が少し溶けている',
-            en: 'White cream visible around the bean paste; 3 diamond-set butter pieces in a line, lightly melted' },
-},
-
 /* ------------------------------------------------------------------- 旧版 */
 {
   id: 'ice', code: 'AS-02', ver: '1.0', issued: '2026.05',
@@ -1295,35 +1259,41 @@ var RECIPES = [
   finish: { jp: 'マンゴーが等間隔に見え、ソースが全体にかかっている',
             en: 'Mango evenly spaced, sauce covering the whole top' }
 },
-/* ---------------------------------------------------------------- AS-08 */
+/* ------------------------------------------------------------------ AS-08 */
 {
-  id: 'as-08', code: 'AS-08', ver: '1.0', issued: '2026.05',
-  name: 'あんバター', en: 'Red Bean Butter',
+  id: 'as-08-hokkaido', code: 'AS-08', ver: '2.0', issued: '2026.08',
+  name: '北海道あんバター', en: 'Hokkaido Anko & Butter',
   serve: 'SWEETS 提供 / SERVE', category: '揚げサンド', limited: false,
   group: 'regular-sweets',
-  status: { tone: 'end', label: '8月末で終了', detail: '9月より「北海道あんバター」に切り替わります' },
-  video: 'SFNCoAqnx-c',
   yield: '1個分', kind: 'sweets',
   ing: [
     ['揚げパン（半分）', 'Fried bread (half)', '1/2', '個'],
     ['ホイップ', 'Whipped cream', '80', 'g'],
-    ['あんこ', 'Red bean paste', '25', 'g'],
-    ['バター（スライス）', 'Butter, sliced', '1', '枚/10g']
+    ['北海道あんこ', 'Hokkaido red bean paste', '50', 'g'],
+    ['バター（1/2カット）', 'Butter (half-cut pieces)', '3', '個'],
+    ['塩', 'Salt', '0.2', 'g']
   ],
   steps: [
-    { jp: 'パンにクリーム（約80g）を詰める。',
-      en: 'Fill the bread with cream (about 80g).',
+    { jp: '揚げパンにホイップ（80g）を詰め、表面を平らにならす。',
+      en: 'Fill the fried bread with whipped cream (80g) and level the surface.',
       point: { jp: '側面にクリームをつけない。表面は平らにならす。', en: 'Keep cream off the sides and smooth the surface flat.' } },
-    { jp: 'あんこ（25g）を絞り袋で中央に絞り、自然な形に整える。',
-      en: 'Pipe red bean paste (25g) into the center, then shape it naturally.',
-      point: { jp: '絞ったあと表面を軽くならし、絞り目を残さず自然な形に。', en: 'After piping, lightly smooth the surface so no piping lines remain.' } },
-    { jp: 'バター（スライス1枚 10g）をあんの右側のクリームに挿して完成。',
-      en: 'Insert one butter slice (10g) into the cream on the right side of the bean paste to finish.',
-      point: { jp: 'バターが半分見えるくらいの位置までクリームに挿す。', en: 'Insert into the cream until about half of the butter remains visible.' } }
+    { jp: '北海道あんこ（50g）を平らに広げて乗せる。',
+      en: 'Spread Hokkaido red bean paste (50g) flat on top.',
+      point: { jp: '縁に白いホイップが見える幅を必ず残す。全面を覆わない。', en: 'Always leave white cream showing around the edge; do not cover the whole surface.' } },
+    { jp: '1/2カットのバター3個を、菱形の向きで縦一列に並べる。',
+      en: 'Set 3 half-cut butter pieces in a vertical line, turned diamond-wise.',
+      point: { jp: '必ずあんこの上に置く。ホイップの上に直接置くと、炙った時にクリームが溶ける。', en: 'Always place on the bean paste — butter set on cream will melt the cream when torched.' } },
+    { jp: 'バター部分だけをバーナーで炙り、少し溶かす。',
+      en: 'Torch only the butter until it just starts to melt.',
+      point: { jp: '遠火で角が丸くなる程度まで。溶かし切らない。', en: 'Torch from a distance until the corners round off; do not melt it fully.' } },
+    { jp: '塩（0.2g）を全体にふりかけて完成。',
+      en: 'Sprinkle salt (0.2g) over the whole surface to finish.',
+      point: { jp: '全体に薄く散らす。1か所に固めない。', en: 'Scatter thinly over the whole piece; do not concentrate it in one spot.' } }
   ],
-  finish: { jp: 'あんが自然な形で中央にあり、バターが右側に挿さっている',
-            en: 'Bean paste sits naturally in the center, butter inserted on the right side' }
+  finish: { jp: 'あんこの縁に白いホイップが見え、菱形のバター3個が縦に並んで表面が少し溶けている',
+            en: 'White cream visible around the bean paste; 3 diamond-set butter pieces in a line, lightly melted' },
 },
+
 /* ---------------------------------------------------------------- AS-09 */
 {
   id: 'as-09', code: 'AS-09', ver: '1.0', issued: '2026.05',
