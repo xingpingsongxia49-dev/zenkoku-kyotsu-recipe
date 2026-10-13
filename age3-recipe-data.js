@@ -253,6 +253,46 @@ var RECIPES = [
             en: 'Raspberries and blueberries are evenly balanced / the chocolate cream underneath does not bleed into the Nutella' }
 },
 
+/* ---------------------------------------------------------------- バインミー揚げサンド（銀座店限定・ベトナム向け） */
+{
+  id: 'banhmi-sand', code: null, ver: null, issued: null,
+  name: 'バインミー揚げサンド', en: 'Banh Mi Fried Sandwich',
+  serve: 'Savory 提供 / SERVE', category: '揚げサンド', limited: false,
+  stores: ['ginza'],
+  yield: '1個分', kind: 'savory',
+  ing: [
+    ['揚げパン', 'Fried bread', '1/2', '個'],
+    ['レタス', 'Lettuce', '1', '枚'],
+    ['唐揚げ', 'Fried chicken', '4', '個'],
+    ['紅白なます', 'Pickled daikon & carrot', '20', 'g'],
+    ['パクチー（茎と葉に分けて使用）', 'Cilantro (stems and leaves used separately)', '10', 'g'],
+    ['赤唐辛子（輪切り）', 'Red chili (sliced into rings)', '1', '本'],
+    ['マヨネーズ', 'Mayonnaise', '10', 'g'],
+    ['チリソース（パンの内側10g＋仕上げ10g）', 'Chili sauce (10g inside + 10g to finish)', '20', 'g'],
+    ['魚醤', 'Fish sauce', '未定', null]
+  ],
+  steps: [
+    { jp: 'パンの内側にソースをかける：揚げパンの内側に、マヨネーズ10gとチリソース10gをかける。',
+      en: 'Sauce inside: Put 10g of mayonnaise and 10g of chili sauce on the inside of the fried bread.',
+      point: null },
+    { jp: 'レタスとパクチーの茎を入れる：レタス1枚をパンの左側に添え、パンの中にパクチーの茎の部分を入れる。',
+      en: 'Lettuce & cilantro stems: Set 1 lettuce leaf on the left side of the bread and put the cilantro stems inside.',
+      point: { jp: 'レタスは広がりすぎないように整え、なますと唐揚げを盛るスペースを確保する。', en: 'Keep the lettuce from spreading too wide, leaving room for the pickles and chicken.' } },
+    { jp: '底に唐揚げを敷く：揚げた唐揚げ4個をそれぞれ4等分にする。そのうち唐揚げ1個分を、パンの底に偏りなく敷き詰める。',
+      en: 'Chicken base: Cut each of the 4 fried chicken pieces into quarters. Spread 1 piece worth evenly over the bottom of the bread.',
+      point: null },
+    { jp: '紅白なますと残りの唐揚げを盛る：紅白なます20gを、レタスより左側に、端から端までしっかり詰めて盛る。残りの唐揚げ3個分は右側に盛る。',
+      en: 'Pickles & chicken: Pack 20g of pickled daikon & carrot firmly end to end on the left, beside the lettuce. Place the remaining 3 pieces worth of chicken on the right.',
+      point: { jp: '紅白なますは人参が上に見えるように整える。左側のなますと右側の唐揚げがそれぞれ見えるように盛る。', en: 'Arrange the pickles so the carrot shows on top. Make both the pickles on the left and the chicken on the right visible.' } },
+    { jp: 'トッピングと仕上げ：輪切りにした赤唐辛子を散らす。残りのパクチーの葉を3か所に分けて盛り、最後にチリソース10gを全体にかける。',
+      en: 'Topping & finish: Scatter the sliced red chili. Place the remaining cilantro leaves in 3 spots, then drizzle 10g of chili sauce over the whole piece.',
+      point: { jp: 'パクチーの葉はそれぞれまとまりが出るように盛る。赤唐辛子とチリソースは一部分に偏らないようにする。', en: 'Keep each cluster of cilantro leaves together. Do not let the chili or chili sauce concentrate in one spot.' } }
+  ],
+  finish: { jp: '完成写真に合わせ、左側に紅白なます、右側に唐揚げが盛られている／紅白なますの人参が上に見え、パクチーの葉が3か所にまとまっている／赤唐辛子とチリソースが全体にバランスよくかかっている',
+            en: 'Pickles on the left and chicken on the right, as in the sample photo / carrot visible on top of the pickles, cilantro leaves in 3 clusters / chili and chili sauce evenly balanced over the whole piece' },
+  notes: ['魚醤の分量・使用タイミングは未定。決まり次第追記する。']
+},
+
 /* ---------------------------------------------------------------- AS-L-01 */
 {
   id: 'as-l-01', code: 'AS-L-01', ver: 'Ver.1.0', issued: '2026.06',
