@@ -1031,7 +1031,7 @@ var RECIPES = [
 {
   id: 'unatama', code: null, ver: null, issued: null,
   name: 'はみ出るうなたま', en: 'Unagi & Tamago',
-  serve: null, category: null, limited: false, stores: ['asakusa'],
+  serve: null, category: null, limited: false, stores: ['asakusa','hida'],
   video: 'cW5_FikGY74',
   yield: '1個分', kind: 'savory', oldFormat: true,
   ing: [
