@@ -253,10 +253,10 @@ var RECIPES = [
             en: 'Raspberries and blueberries are evenly balanced / the chocolate cream underneath does not bleed into the Nutella' }
 },
 
-/* ---------------------------------------------------------------- バインミー揚げサンド（ベトナム限定） */
+/* ---------------------------------------------------------------- チキンバインミー（ベトナム限定） */
 {
   id: 'banhmi-sand', code: null, ver: null, issued: null,
-  name: 'バインミー揚げサンド', en: 'Banh Mi Fried Sandwich',
+  name: 'チキンバインミー', en: 'Chicken Banh Mi',
   serve: 'Savory 提供 / SERVE', category: '揚げサンド', limited: false,
   stores: ['vietnam'],
   yield: '1個分', kind: 'savory',
