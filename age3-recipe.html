@@ -1154,7 +1154,7 @@ footer{margin-top:26px;padding:16px 0 8px;border-top:1px solid var(--line);font-
     return h;
   }
 
-  var STORE_LABEL = { ginza:'銀座', asakusa:'浅草', harajuku:'原宿', kama:'嘉麻', hida:'飛騨高山' };
+  var STORE_LABEL = { ginza:'銀座', asakusa:'浅草', harajuku:'原宿', kama:'嘉麻', hida:'飛騨高山', vietnam:'ベトナム' };
   function storeBadgeText(r){
     if(!r.stores || !r.stores.length) return "";
     return r.stores.map(function(s){ return STORE_LABEL[s] || s; }).join("・") + "限定";
