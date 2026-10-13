@@ -498,7 +498,7 @@ footer{margin-top:26px;padding:16px 0 8px;border-top:1px solid var(--line);font-
 .pshot img{width:100%;display:block}
 .pnote{margin-top:4mm;font-size:6.75pt;line-height:1.6;color:#777}
 .pnote b{display:block;font-size:6.75pt;font-weight:700;letter-spacing:.1em;color:#AAA;margin-bottom:.9mm}
-.pfin{top:261.94mm;height:24.09mm;background:#ECECEC;padding:3.91mm 5.82mm 0}
+.pfin{top:261.94mm;height:24.09mm;background:#ECECEC;padding:3.91mm 5.82mm 0;overflow:hidden}
 .pfin .lb{font-size:8.25pt;line-height:1;letter-spacing:.2em;color:#888}
 .pfin .j{font-size:13.5pt;line-height:1.2;color:#4C4948;margin-top:2.8mm}
 .pfin .e{font-size:8.25pt;line-height:1.2;color:#888;margin-top:.7mm}
@@ -853,19 +853,40 @@ footer{margin-top:26px;padding:16px 0 8px;border-top:1px solid var(--line);font-
       '</section>';
   }
   /* 1品1ページに必ず収める。はみ出す分だけ本文（2段組み）を縮小する。 */
+  /* 完成基準の枠：文章が長いときは文字を小さくし、それでも入らなければ枠を上へ広げる。
+     下端（286.03mm）は固定。広げた分だけ本文に使える高さを減らす。 */
+  var FIN_BOTTOM = 286.03, FIN_H0 = 24.09, FIN_HMAX = 44, BODY_TOP = 67.48;
+  function A3fitFinish(card){
+    var fin = card.querySelector('.pfin'); if(!fin) return FIN_BOTTOM - FIN_H0;
+    var j = fin.querySelector('.j'), e = fin.querySelector('.e');
+    var js = 13.5, es = 8.25, h = FIN_H0;
+    function apply(){
+      fin.style.height = h + 'mm'; fin.style.top = (FIN_BOTTOM - h) + 'mm';
+      if(j) j.style.fontSize = js + 'pt'; if(e) e.style.fontSize = es + 'pt';
+    }
+    function over(){ return fin.scrollHeight > fin.clientHeight + 1; }
+    apply();
+    while(over() && js > 10){ js -= 0.5; es = Math.max(6.5, es - 0.25); apply(); }
+    while(over() && h < FIN_HMAX){ h += 1; apply(); }
+    while(over() && js > 7.5){ js -= 0.5; es = Math.max(5.5, es - 0.25); apply(); }
+    return FIN_BOTTOM - h;
+  }
   function A3fit(root){
-    var LIMIT = mm(194.0);              /* 本文に使える高さ 67.48mm〜261.5mm */
-    [['.pfitl',79.39],['.pfitr',95.78]].forEach(function(t){
-      [].forEach.call(root.querySelectorAll(t[0]), function(c){
-        var k = 1;
-        c.style.zoom = ''; c.style.width = t[1] + 'mm';
-        for(var i = 0; i < 10; i++){
-          var h = c.getBoundingClientRect().height;
-          if(h <= LIMIT) break;
-          k = Math.max(0.5, k * (LIMIT - mm(1)) / h);
-          c.style.zoom = k;
-          c.style.width = (t[1] / k) + 'mm';
-        }
+    [].forEach.call(root.querySelectorAll('.pcard'), function(card){
+      var finTop = A3fitFinish(card);
+      var LIMIT = mm(finTop - BODY_TOP - 0.46);   /* 本文に使える高さ 67.48mm〜完成基準の枠の上 */
+      [['.pfitl',79.39],['.pfitr',95.78]].forEach(function(t){
+        [].forEach.call(card.querySelectorAll(t[0]), function(c){
+          var k = 1;
+          c.style.zoom = ''; c.style.width = t[1] + 'mm';
+          for(var i = 0; i < 10; i++){
+            var h = c.getBoundingClientRect().height;
+            if(h <= LIMIT) break;
+            k = Math.max(0.5, k * (LIMIT - mm(1)) / h);
+            c.style.zoom = k;
+            c.style.width = (t[1] / k) + 'mm';
+          }
+        });
       });
     });
     /* 品名が横幅に収まらないときだけ文字を詰める */
