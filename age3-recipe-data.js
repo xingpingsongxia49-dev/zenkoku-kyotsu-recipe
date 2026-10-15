@@ -30,7 +30,7 @@
    ========================================================================== */
 
 var RECIPE_META = {
-  assetVersion: '20261013a',
+  assetVersion: '20261015a',
   brand: 'Age.3',
   title: 'Age.3 レシピ',
   sub: '揚げサンド スタンダードレシピ',
@@ -265,6 +265,7 @@ var RECIPES = [
     ['レタス', 'Lettuce', '1', '枚'],
     ['唐揚げ', 'Fried chicken', '4', '個'],
     ['紅白なます', 'Pickled daikon & carrot', '20', 'g'],
+    ['ハム', 'Ham', '1', '枚'],
     ['パクチー（茎と葉に分けて使用）', 'Cilantro (stems and leaves used separately)', '10', 'g'],
     ['赤唐辛子（輪切り）', 'Red chili (sliced into rings)', '1', '本'],
     ['マヨネーズ', 'Mayonnaise', '10', 'g'],
@@ -281,9 +282,15 @@ var RECIPES = [
     { jp: '底に唐揚げを敷く：揚げた唐揚げ4個をそれぞれ4等分にする。そのうち唐揚げ1個分を、パンの底に偏りなく敷き詰める。',
       en: 'Chicken base: Cut each of the 4 fried chicken pieces into quarters. Spread 1 piece worth evenly over the bottom of the bread.',
       point: null },
-    { jp: '紅白なますと残りの唐揚げを盛る：紅白なます20gを、レタスより左側に、端から端までしっかり詰めて盛る。残りの唐揚げ3個分は右側に盛る。',
-      en: 'Pickles & chicken: Pack 20g of pickled daikon & carrot firmly end to end on the left, beside the lettuce. Place the remaining 3 pieces worth of chicken on the right.',
-      point: { jp: '紅白なますは人参が上に見えるように整える。左側のなますと右側の唐揚げがそれぞれ見えるように盛る。', en: 'Arrange the pickles so the carrot shows on top. Make both the pickles on the left and the chicken on the right visible.' } },
+    { jp: '紅白なますを盛る：紅白なます20gを、レタスより左側に、端から端までしっかり詰めて盛る。',
+      en: 'Pickles: Pack 20g of pickled daikon & carrot firmly end to end on the left, beside the lettuce.',
+      point: { jp: '紅白なますは人参が上に見えるように整える。', en: 'Arrange the pickles so the carrot shows on top.' } },
+    { jp: 'ハムを添える：なますを入れた後に、ハム1枚を左側に添える。',
+      en: 'Ham: After adding the pickles, set 1 slice of ham on the left side.',
+      point: null },
+    { jp: '残りの唐揚げを盛る：残りの唐揚げ3個分を右側に盛る。',
+      en: 'Chicken: Place the remaining 3 pieces worth of chicken on the right.',
+      point: { jp: '左側のなますと右側の唐揚げがそれぞれ見えるように盛る。', en: 'Make both the pickles on the left and the chicken on the right visible.' } },
     { jp: 'トッピングと仕上げ：輪切りにした赤唐辛子を散らす。残りのパクチーの葉を3か所に分けて盛り、最後にチリソース10gを全体にかける。',
       en: 'Topping & finish: Scatter the sliced red chili. Place the remaining cilantro leaves in 3 spots, then drizzle 10g of chili sauce over the whole piece.',
       point: { jp: 'パクチーの葉はそれぞれまとまりが出るように盛る。赤唐辛子とチリソースは一部分に偏らないようにする。', en: 'Keep each cluster of cilantro leaves together. Do not let the chili or chili sauce concentrate in one spot.' } }
