@@ -30,7 +30,7 @@
    ========================================================================== */
 
 var RECIPE_META = {
-  assetVersion: '20261015b',
+  assetVersion: '20261031a',
   brand: 'Age.3',
   title: 'Age.3 レシピ',
   sub: '揚げサンド スタンダードレシピ',
@@ -113,7 +113,8 @@ var RECIPE_NOTICE = {
       when: '12月〜 発売', tone: 'start',
       title: '12月の新商品', scope: null,
       items: [
-        { name: 'ミックスベリーオペラ', state: '揚げサンド', detail: null, recipe: 'mixberry-opera' }
+        { name: 'ミックスベリーオペラ', state: '揚げサンド', detail: null, recipe: 'mixberry-opera' },
+        { name: 'エクラドフェ アブラカタブラ', state: '揚げサンド', detail: '12月1日発売', recipe: 'eclat-abracadabra' }
       ]
     }
   ]
@@ -259,6 +260,7 @@ var RECIPES = [
   name: 'エクラドフェ アブラカタブラ', en: 'Éclat de Fée Abracadabra',
   serve: 'Sweets 提供 / SERVE', category: '揚げサンド', limited: false,
   top: true,
+  status: { tone: 'start', label: '12/1〜', detail: '12月1日発売' },
   yield: '1個分', kind: 'sweets',
   ing: [
     ['揚げパン', 'Fried bread', '1/2', '個'],
