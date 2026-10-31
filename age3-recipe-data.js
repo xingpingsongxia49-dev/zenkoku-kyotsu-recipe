@@ -283,7 +283,9 @@ var RECIPES = [
     { jp: 'ピックを刺す：左側の、真ん中よりやや上あたりにピックを刺して完成。',
       en: 'Pick: Insert the pick on the left side, slightly above the center, to finish.',
       point: null }
-  ]
+    ],
+  finish: { jp: 'いちご2枚が右上・左下の定位置に、とがった部分を上にして刺さっている／花や粉が全体にまんべんなくかかり、クリームの白い部分が見えすぎていない／ピックが刺さりすぎず、ロゴが見えている',
+            en: '2 strawberry slices in place (upper right / lower left), tips up / flowers and powder evenly cover the top without too much white cream showing / pick not pushed in too deep, logo visible' }
 },
 
 /* ---------------------------------------------------------------- チキンバインミー（ベトナム限定） */
