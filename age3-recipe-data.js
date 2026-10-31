@@ -253,6 +253,37 @@ var RECIPES = [
             en: 'Raspberries and blueberries are evenly balanced / the chocolate cream underneath does not bleed into the Nutella' }
 },
 
+/* ---------------------------------------------------------------- エクラドフェ アブラカタブラ */
+{
+  id: 'eclat-abracadabra', code: null, ver: null, issued: null,
+  name: 'エクラドフェ アブラカタブラ', en: 'Éclat de Fée Abracadabra',
+  serve: 'Sweets 提供 / SERVE', category: '揚げサンド', limited: false,
+  top: true,
+  yield: '1個分', kind: 'sweets',
+  ing: [
+    ['揚げパン', 'Fried bread', '1/2', '個'],
+    ['ホイップ', 'Whipped cream', '80', 'g'],
+    ['エクラドフェ（1パック）', 'Éclat de Fée (1 pack)', '10', 'g']
+  ],
+  steps: [
+    { jp: 'ホイップを詰める：揚げたパンにホイップ80gを詰める。',
+      en: 'Whip: Fill the fried bread with 80g of whipped cream.',
+      point: null },
+    { jp: 'バーガー袋に入れる：ホイップを詰めたパンをバーガー袋に入れる。',
+      en: 'Bag: Put the filled bread into a burger bag.',
+      point: null },
+    { jp: 'エクラドフェをかける：エクラドフェ1パック（10g）に入っているスライスいちご2枚を先に袋から取り出し、エクラドフェをかける。かけた後に、花の配置を軽く整える。',
+      en: 'Éclat de Fée: First take the 2 strawberry slices out of the Éclat de Fée pack (10g), then sprinkle it on. Afterwards, lightly arrange the flowers.',
+      point: null },
+    { jp: 'いちごを刺す：右上に1枚、左下に1枚、いちごのとがっている部分が上を向くように、クリームに1枚ずつ刺す。',
+      en: 'Strawberries: Insert one slice into the cream at the upper right and one at the lower left, pointed tip facing up.',
+      point: null },
+    { jp: 'ピックを刺す：左側の、真ん中よりやや上あたりにピックを刺して完成。',
+      en: 'Pick: Insert the pick on the left side, slightly above the center, to finish.',
+      point: null }
+  ]
+},
+
 /* ---------------------------------------------------------------- チキンバインミー（ベトナム限定） */
 {
   id: 'banhmi-sand', code: null, ver: null, issued: null,
