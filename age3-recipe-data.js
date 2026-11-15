@@ -261,6 +261,7 @@ var RECIPES = [
   serve: 'Sweets 提供 / SERVE', category: '揚げサンド', limited: false,
   top: true,
   status: { tone: 'start', label: '12/1〜', detail: '12月1日発売' },
+  video: '1jV_eFxldwk',
   yield: '1個分', kind: 'sweets',
   ing: [
     ['揚げパン', 'Fried bread', '1/2', '個'],
