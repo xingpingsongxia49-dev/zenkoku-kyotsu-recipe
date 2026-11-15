@@ -131,6 +131,79 @@ var RECIPE_QUESTIONS = [];
 
 var RECIPES = [
 
+/* 運用ルール：新しく追加した商品は top: true を付け、必ずこの位置（RECIPES の先頭）に入れる。→ 全店舗の一覧で左上に出る。 */
+
+/* ---------------------------------------------------------------- エクラドフェ アブラカタブラ */
+{
+  id: 'eclat-abracadabra', code: null, ver: null, issued: null,
+  name: 'エクラドフェ アブラカタブラ', en: 'Éclat de Fée Abracadabra',
+  serve: 'Sweets 提供 / SERVE', category: '揚げサンド', limited: false,
+  top: true,
+  status: { tone: 'start', label: '12/1〜', detail: '12月1日発売' },
+  video: '1jV_eFxldwk',
+  yield: '1個分', kind: 'sweets',
+  ing: [
+    ['揚げパン', 'Fried bread', '1/2', '個'],
+    ['ホイップ', 'Whipped cream', '80', 'g'],
+    ['エクラドフェ（1パック）', 'Éclat de Fée (1 pack)', '10', 'g']
+  ],
+  steps: [
+    { jp: 'ホイップを詰める：揚げたパンにホイップ80gを詰める。',
+      en: 'Whip: Fill the fried bread with 80g of whipped cream.',
+      point: null },
+    { jp: 'バーガー袋に入れる：ホイップを詰めたパンをバーガー袋に入れる。',
+      en: 'Bag: Put the filled bread into a burger bag.',
+      point: null },
+    { jp: 'エクラドフェをかける：エクラドフェ1パック（10g）に入っているスライスいちご2枚を先に袋から取り出し、エクラドフェをかける。かけた後に、花の配置を軽く整える。',
+      en: 'Éclat de Fée: First take the 2 strawberry slices out of the Éclat de Fée pack (10g), then sprinkle it on. Afterwards, lightly arrange the flowers.',
+      point: null },
+    { jp: 'いちごを刺す：右上に1枚、左下に1枚、いちごのとがっている部分が上を向くように、クリームに1枚ずつ刺す。',
+      en: 'Strawberries: Insert one slice into the cream at the upper right and one at the lower left, pointed tip facing up.',
+      point: null },
+    { jp: 'ピックを刺す：左側の、真ん中よりやや上あたりにピックを刺して完成。',
+      en: 'Pick: Insert the pick on the left side, slightly above the center, to finish.',
+      point: null }
+    ],
+  finish: { jp: 'いちご2枚が右上・左下の定位置に、とがった部分を上にして刺さっている／花や粉が全体にまんべんなくかかり、クリームの白い部分が見えすぎていない／ピックが刺さりすぎていない',
+            en: '2 strawberry slices in place (upper right / lower left), tips up / flowers and powder evenly cover the top without too much white cream showing / pick not pushed in too deep' }
+},
+
+/* ---------------------------------------------------------------- ミックスベリーオペラ */
+{
+  id: 'mixberry-opera', code: null, ver: null, issued: null,
+  name: 'ミックスベリーオペラ', en: 'Mixed Berry Opera',
+  serve: 'Sweets 提供 / SERVE', category: '揚げサンド', limited: false,
+  top: true,
+  status: { tone: 'start', label: '12月〜', detail: '12月発売' },
+  video: 'knhcRG_49Hw',
+  yield: '1個分', kind: 'sweets',
+  ing: [
+    ['パン・油・袋', 'Bread, oil, bag', null, null],
+    ['チョコクリーム', 'Chocolate cream', '80', 'g'],
+    ['ヌテラ', 'Nutella', '30', 'g'],
+    ['ラズベリー', 'Raspberry', '20', 'g'],
+    ['ブルーベリー', 'Blueberry', '8', 'g'],
+    ['ラズベリーソース', 'Raspberry sauce', '15', 'g'],
+    ['金箔（スプレー）', 'Gold leaf (spray)', '0.2', 'g']
+  ],
+  steps: [
+    { jp: 'ソースをかける：切ったパンの内側にラズベリーソースをかける。',
+      en: 'Sauce: Pour raspberry sauce on the inside of the sliced bread.',
+      point: null },
+    { jp: 'クリームを詰める：チョコクリーム（80g）を詰め、上からヌテラ（約30g）を塗る。',
+      en: 'Cream: Fill with chocolate cream (80g) and spread Nutella (about 30g) on top.',
+      point: null },
+    { jp: 'ベリーをのせる：ラズベリー5個を並べ、空いたところにソースで和えたブルーベリーを6個散らして置く。',
+      en: 'Berries: Arrange five raspberries and scatter six blueberries mixed with sauce in the empty spaces.',
+      point: null },
+    { jp: '仕上げる：ラズベリーソース、金箔をかけて完成。',
+      en: 'Finish: Drizzle with raspberry sauce and add gold leaf to finish.',
+      point: null }
+    ],
+  finish: { jp: 'ラズベリー・ブルーベリーがバランスよくのっている／ヌテラに下のチョコクリームがにじんでいない',
+            en: 'Raspberries and blueberries are evenly balanced / the chocolate cream underneath does not bleed into the Nutella' }
+},
+
 /* ---------------------------------------------------------------- ヤンニョムチキン */
 {
   id: 'yangnyeom-chicken', code: null, ver: null, issued: null,
@@ -216,77 +289,6 @@ var RECIPES = [
   ],
   finish: { jp: '豆腐が一番上に見えている／すき焼きの具に入っているネギ2個が、豆腐の近くの左側に見えるよう、きれいに整えられている／タレ・汁を入れすぎず、焼きおにぎりやパンがべちょべちょになっていない。パンのサクサクした食感が残るようにする／全体のバランスと盛り付けが、完成写真にそろっている',
             en: 'Tofu visible at the top / 2 leek pieces neatly visible on the left near the tofu / not too much sauce — rice ball and bread not soggy, bread stays crisp / overall balance and plating match the sample photo' }
-},
-
-/* ---------------------------------------------------------------- ミックスベリーオペラ */
-{
-  id: 'mixberry-opera', code: null, ver: null, issued: null,
-  name: 'ミックスベリーオペラ', en: 'Mixed Berry Opera',
-  serve: 'Sweets 提供 / SERVE', category: '揚げサンド', limited: false,
-  top: true,
-  status: { tone: 'start', label: '12月〜', detail: '12月発売' },
-  video: 'knhcRG_49Hw',
-  yield: '1個分', kind: 'sweets',
-  ing: [
-    ['パン・油・袋', 'Bread, oil, bag', null, null],
-    ['チョコクリーム', 'Chocolate cream', '80', 'g'],
-    ['ヌテラ', 'Nutella', '30', 'g'],
-    ['ラズベリー', 'Raspberry', '20', 'g'],
-    ['ブルーベリー', 'Blueberry', '8', 'g'],
-    ['ラズベリーソース', 'Raspberry sauce', '15', 'g'],
-    ['金箔（スプレー）', 'Gold leaf (spray)', '0.2', 'g']
-  ],
-  steps: [
-    { jp: 'ソースをかける：切ったパンの内側にラズベリーソースをかける。',
-      en: 'Sauce: Pour raspberry sauce on the inside of the sliced bread.',
-      point: null },
-    { jp: 'クリームを詰める：チョコクリーム（80g）を詰め、上からヌテラ（約30g）を塗る。',
-      en: 'Cream: Fill with chocolate cream (80g) and spread Nutella (about 30g) on top.',
-      point: null },
-    { jp: 'ベリーをのせる：ラズベリー5個を並べ、空いたところにソースで和えたブルーベリーを6個散らして置く。',
-      en: 'Berries: Arrange five raspberries and scatter six blueberries mixed with sauce in the empty spaces.',
-      point: null },
-    { jp: '仕上げる：ラズベリーソース、金箔をかけて完成。',
-      en: 'Finish: Drizzle with raspberry sauce and add gold leaf to finish.',
-      point: null }
-    ],
-  finish: { jp: 'ラズベリー・ブルーベリーがバランスよくのっている／ヌテラに下のチョコクリームがにじんでいない',
-            en: 'Raspberries and blueberries are evenly balanced / the chocolate cream underneath does not bleed into the Nutella' }
-},
-
-/* ---------------------------------------------------------------- エクラドフェ アブラカタブラ */
-{
-  id: 'eclat-abracadabra', code: null, ver: null, issued: null,
-  name: 'エクラドフェ アブラカタブラ', en: 'Éclat de Fée Abracadabra',
-  serve: 'Sweets 提供 / SERVE', category: '揚げサンド', limited: false,
-  top: true,
-  status: { tone: 'start', label: '12/1〜', detail: '12月1日発売' },
-  video: '1jV_eFxldwk',
-  yield: '1個分', kind: 'sweets',
-  ing: [
-    ['揚げパン', 'Fried bread', '1/2', '個'],
-    ['ホイップ', 'Whipped cream', '80', 'g'],
-    ['エクラドフェ（1パック）', 'Éclat de Fée (1 pack)', '10', 'g']
-  ],
-  steps: [
-    { jp: 'ホイップを詰める：揚げたパンにホイップ80gを詰める。',
-      en: 'Whip: Fill the fried bread with 80g of whipped cream.',
-      point: null },
-    { jp: 'バーガー袋に入れる：ホイップを詰めたパンをバーガー袋に入れる。',
-      en: 'Bag: Put the filled bread into a burger bag.',
-      point: null },
-    { jp: 'エクラドフェをかける：エクラドフェ1パック（10g）に入っているスライスいちご2枚を先に袋から取り出し、エクラドフェをかける。かけた後に、花の配置を軽く整える。',
-      en: 'Éclat de Fée: First take the 2 strawberry slices out of the Éclat de Fée pack (10g), then sprinkle it on. Afterwards, lightly arrange the flowers.',
-      point: null },
-    { jp: 'いちごを刺す：右上に1枚、左下に1枚、いちごのとがっている部分が上を向くように、クリームに1枚ずつ刺す。',
-      en: 'Strawberries: Insert one slice into the cream at the upper right and one at the lower left, pointed tip facing up.',
-      point: null },
-    { jp: 'ピックを刺す：左側の、真ん中よりやや上あたりにピックを刺して完成。',
-      en: 'Pick: Insert the pick on the left side, slightly above the center, to finish.',
-      point: null }
-    ],
-  finish: { jp: 'いちご2枚が右上・左下の定位置に、とがった部分を上にして刺さっている／花や粉が全体にまんべんなくかかり、クリームの白い部分が見えすぎていない／ピックが刺さりすぎていない',
-            en: '2 strawberry slices in place (upper right / lower left), tips up / flowers and powder evenly cover the top without too much white cream showing / pick not pushed in too deep' }
 },
 
 /* ---------------------------------------------------------------- チキンバインミー（ベトナム限定） */
